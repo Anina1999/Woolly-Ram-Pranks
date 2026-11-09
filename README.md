@@ -24,3 +24,4 @@
 - [x] Open the Rooms tab from Play Co-op
 - [x] Add the Waiting room screen and open it from Rooms with the room id
 - [x] Open the Profile tab from the player name in the Lobby
+- [x] Open Create room from Rooms

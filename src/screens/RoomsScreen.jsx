@@ -6,10 +6,15 @@ export default function RoomsScreen({ navigation }) {
         navigation.navigate('WaitingRoom', { roomId: 1 });
     };
 
+    const handlePressCreateRoom = () => {
+        navigation.navigate('CreateRoom');
+    }
+
     return (
         <SafeAreaView>
             <Text>Rooms</Text>
             <Button title='Join my room' onPress={handlePressRoom}/>
+            <Button title='Create room' onPress={handlePressCreateRoom}/>
         </SafeAreaView>
     );
 }
