@@ -9,10 +9,14 @@ export default function LobbyScreen({ navigation }) {
     const handlePressPlayCoop = () => {
         navigation.navigate('Rooms');
     };
+
+    const handlePressProfile = () => {
+        navigation.navigate('Profile');
+    }
     
     return (
         <SafeAreaView>
-            <Text>Lobby</Text>
+            <Button title='Name' onPress={handlePressProfile}/>
             <Button title='Play Co-op' onPress={handlePressPlayCoop}/>
             <Button title='Create a room' onPress={handlePressCreateRoom}/>
         </SafeAreaView>
