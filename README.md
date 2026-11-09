@@ -14,9 +14,12 @@
 - [x] Add the Lobby, Rooms, Profile and Leaderboard tabs
 - [x] Always show the tab labels
 - [x] Move the tabs to AppNavigator and make the RootNavigator a native stack
-- [x] Add the Create room screen and open it from the Lobby
-
 
 ### Steps to add the icons
 - [x] Install Feather icons for the screens "npx expo install @expo/vector-icons"
 - [x] Add PNG tab icons to the tabs
+
+### Steps to move between the screens
+- [x] Add the Create room screen and open it from the Lobby
+- [x] Open the Rooms tab from Play Co-op
+- [x] Add the Waiting room screen and open it from Rooms with the room id

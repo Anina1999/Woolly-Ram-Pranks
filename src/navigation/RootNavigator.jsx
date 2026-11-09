@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import AppNavigator from './AppNavigator';
 import CreateRoomScreen from '../screens/CreateRoomScreen';
+import WaitingRoomScreen from '../screens/WaitingRoomScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,11 @@ export default function RootNavigator() {
                 name='CreateRoom'
                 component={CreateRoomScreen}
                 options={{ title: 'Create room' }}
+            />
+            <Stack.Screen
+                name='WaitingRoom'
+                component={WaitingRoomScreen}
+                options={{ title: 'Waiting room' }}
             />
         </Stack.Navigator>
     );
