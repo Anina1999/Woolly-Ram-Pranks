@@ -9,9 +9,13 @@
 - [x] Install React Navigation "npm install @react-navigation/native"
 - [x] Install its native dependencies "npx expo install react-native-screens react-native-safe-area-context"
 - [x] Install the bottom tabs "npm install @react-navigation/bottom-tabs"
+- [x] Install the native stack "npm install @react-navigation/native-stack"
 - [x] Add the RootNavigator with native bottom tabs and render it in App
 - [x] Add the Lobby, Rooms, Profile and Leaderboard tabs
 - [x] Always show the tab labels
+- [x] Move the tabs to AppNavigator and make the RootNavigator a native stack
+- [x] Add the Create room screen and open it from the Lobby
+
 
 ### Steps to add the icons
 - [x] Install Feather icons for the screens "npx expo install @expo/vector-icons"

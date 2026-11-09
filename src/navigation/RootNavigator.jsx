@@ -1,50 +1,23 @@
-import { createNativeBottomTabNavigator } from '@react-navigation/bottom-tabs/unstable';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import LobbyScreen from '../screens/LobbyScreen';
-import RoomsScreen from '../screens/RoomsScreen';
-import ProfileScreen from '../screens/ProfileScreen';
-import LeaderboardScreen from '../screens/LeaderboardScreen';
+import AppNavigator from './AppNavigator';
+import CreateRoomScreen from '../screens/CreateRoomScreen';
 
-const Tabs = createNativeBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 export default function RootNavigator() {
-  return (
-    <>
-      <Tabs.Navigator
-        screenOptions={{
-          tabBarIconSize: 22,
-          tabBarLabelVisibilityMode: 'labeled',
-        }}
-      >
-        <Tabs.Screen
-          name='Lobby'
-          component={LobbyScreen}
-          options={{
-            tabBarIcon: { type: 'image', source: require('../assets/icons/lobby.png') },
-          }}
-        />
-        <Tabs.Screen
-          name='Rooms'
-          component={RoomsScreen}
-          options={{
-            tabBarIcon: { type: 'image', source: require('../assets/icons/rooms.png') },
-          }}
-        />
-        <Tabs.Screen
-          name='Profile'
-          component={ProfileScreen}
-          options={{
-            tabBarIcon: { type: 'image', source: require('../assets/icons/profile.png') },
-          }}
-        />
-        <Tabs.Screen
-          name='Leaderboard'
-          component={LeaderboardScreen}
-          options={{
-            tabBarIcon: { type: 'image', source: require('../assets/icons/leaderboard.png') },
-          }}
-        />
-      </Tabs.Navigator>
-    </>
-  );
+    return (
+        <Stack.Navigator>
+            <Stack.Screen
+                name='App'
+                component={AppNavigator}
+                options={{ headerShown: false }}
+            />
+            <Stack.Screen
+                name='CreateRoom'
+                component={CreateRoomScreen}
+                options={{ title: 'Create room' }}
+            />
+        </Stack.Navigator>
+    );
 }
