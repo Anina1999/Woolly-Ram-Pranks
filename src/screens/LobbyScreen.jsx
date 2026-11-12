@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
         textShadowRadius: 1,
     },
     modeCard: {
-        marginTop: 12,
+        marginTop: 16,
         padding: 4,
         paddingBottom: 8,
         borderRadius: 24,
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     lockedModes: {
         flexDirection: 'row',
         gap: 12,
-        marginTop: 20,
+        marginTop: 40,
     },
     buttons: {
         gap: 12,
