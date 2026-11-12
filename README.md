@@ -26,3 +26,4 @@
 - [x] Open the Profile tab from the player name in the Lobby
 - [x] Open Create room from Rooms
 - [x] Replace Create room with the Waiting room after Create
+- [x] Add the Settings screen and open it from the cog in the Lobby
