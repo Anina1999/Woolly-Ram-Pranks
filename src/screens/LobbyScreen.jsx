@@ -1,4 +1,4 @@
-import { Button } from 'react-native';
+import { Button, Pressable, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function LobbyScreen({ navigation }) {
@@ -16,7 +16,9 @@ export default function LobbyScreen({ navigation }) {
 
     return (
         <SafeAreaView>
-            <Button title='Name' onPress={handlePressProfile} />
+            <Pressable onPress={handlePressProfile}>
+                <Text>Name</Text>
+            </Pressable>
             <Button title='Play Co-op' onPress={handlePressPlayCoop} />
             <Button title='Create a room' onPress={handlePressCreateRoom} />
         </SafeAreaView>
