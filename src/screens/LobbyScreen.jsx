@@ -28,7 +28,9 @@ export default function LobbyScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Pressable style={styles.profileChip} onPress={handlePressProfile}>
-                    <View style={styles.avatar} />
+                    <View style={styles.avatar}>
+                        <Ram color='#E04436' pose='idle' size={48} />
+                    </View>
                     <Text style={styles.playerName}>Bramble</Text>
                 </Pressable>
                 <Pressable style={styles.settingsButton} onPress={handlePressSettings}>
@@ -41,10 +43,18 @@ export default function LobbyScreen({ navigation }) {
                     <View style={styles.modeArt}>
                         <View style={styles.modeArtTop} />
                         <View style={styles.modeArtBottom} />
-                        <Sheep size={92} />
-                        <Ram color='#3B7DDD' pose='walk1' size={104} />
-                        <Ram color='#E04436' pose='idle' size={122} />
-                        <Ram color='#F2C12E' pose='walk3' size={90} />
+                        <View style={styles.sheep}>
+                            <Sheep size={92} />
+                        </View>
+                        <View style={styles.beigeRam}>
+                            <Ram color='#3B7DDD' pose='walk1' size={104} />
+                        </View>
+                        <View style={styles.blackRam}>
+                            <Ram color='#E04436' pose='idle' size={122} />
+                        </View>
+                        <View style={styles.brownRam}>
+                            <Ram color='#F2C12E' pose='walk3' size={90} />
+                        </View>
                         <View style={styles.selectedBadge}>
                             <Feather name='check' size={12} color='#2E2117' />
                             <Text style={styles.selectedText}>SELECTED</Text>
@@ -108,8 +118,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#FBF3E2',
     },
     avatar: {
+        justifyContent: 'center',
+        alignItems: 'center',
         width: 38,
         height: 38,
+        overflow: 'hidden',
         borderRadius: 999,
         backgroundColor: '#8CC152',
     },
@@ -172,6 +185,26 @@ const styles = StyleSheet.create({
         right: 0,
         height: 46,
         backgroundColor: '#5FA445',
+    },
+    sheep: {
+        position: 'absolute',
+        top: 34,
+        left: 6,
+    },
+    beigeRam: {
+        position: 'absolute',
+        top: 22,
+        left: 76,
+    },
+    blackRam: {
+        position: 'absolute',
+        top: 12,
+        left: 156,
+    },
+    brownRam: {
+        position: 'absolute',
+        top: 36,
+        left: 246,
     },
     selectedBadge: {
         position: 'absolute',
