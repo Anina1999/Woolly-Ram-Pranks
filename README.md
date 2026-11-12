@@ -34,6 +34,7 @@
 - [x] Add the Waiting room screen and open it from Rooms with the room id
 - [x] Add the Settings screen and open it from the cog in the Lobby
 - [x] Add the Co-op mode card to the Lobby
+- [x] Add the LockedModeCard component for Competitive and Hybrid
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

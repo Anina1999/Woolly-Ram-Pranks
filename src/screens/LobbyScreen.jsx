@@ -2,6 +2,8 @@ import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
+import LockedModeCard from '../components/LockedModeCard';
+
 export default function LobbyScreen({ navigation }) {
     const handlePressProfile = () => {
         navigation.navigate('Profile');
@@ -51,6 +53,10 @@ export default function LobbyScreen({ navigation }) {
                         </Text>
                     </View>
                 </View>
+            </View>
+            <View>
+                <LockedModeCard title='Competitive' description='Ram vs ram' />
+                <LockedModeCard title='Hybrid' description='Team up, then betray' />
             </View>
             <Button title='Play Co-op' onPress={handlePressPlayCoop} />
             <Button title='Create a room' onPress={handlePressCreateRoom} />
