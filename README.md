@@ -20,13 +20,17 @@
 - [x] Add PNG tab icons to the tabs
 
 ### Steps to move between the screens
-- [x] Add the Create room screen and open it from the Lobby
 - [x] Open the Rooms tab from Play Co-op
-- [x] Add the Waiting room screen and open it from Rooms with the room id
 - [x] Open the Profile tab from the player name in the Lobby
 - [x] Open Create room from Rooms
 - [x] Replace Create room with the Waiting room after Create
+
+### Steps to add the screen content
+- [x] Add the Create room screen and open it from the Lobby
+- [x] Add the Waiting room screen and open it from Rooms with the room id
 - [x] Add the Settings screen and open it from the cog in the Lobby
+- [x] Add the Co-op mode card to the Lobby
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title
+- [ ] Add style to the Co-op mode card

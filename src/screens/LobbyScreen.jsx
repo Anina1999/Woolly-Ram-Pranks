@@ -31,6 +31,12 @@ export default function LobbyScreen({ navigation }) {
                 </Pressable>
             </View>
             <Text style={styles.title}>Choose a mode</Text>
+            <View>
+                <Text>SELECTED</Text>
+                <Text>Co-op</Text>
+                <Text>1–5 players</Text>
+                <Text>Charm every sheep, pull off the pranks, don’t get caught.</Text>
+            </View>
             <Button title='Play Co-op' onPress={handlePressPlayCoop} />
             <Button title='Create a room' onPress={handlePressCreateRoom} />
         </SafeAreaView>
