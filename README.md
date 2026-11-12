@@ -33,4 +33,4 @@
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title
-- [ ] Add style to the Co-op mode card
+- [x] Add style to the Co-op mode card
