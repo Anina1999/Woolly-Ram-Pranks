@@ -18,6 +18,8 @@
 ### Steps to add the icons
 - [x] Install Feather icons for the screens "npx expo install @expo/vector-icons"
 - [x] Add PNG tab icons to the tabs
+- [x] Install SVG support "npx expo install react-native-svg"
+- [x] Add LockIcon to the LockedModeCard
 
 ### Steps to add the fonts
 - [x] Install the fonts "npx expo install expo-font @expo-google-fonts/lilita-one @expo-google-fonts/nunito-sans"

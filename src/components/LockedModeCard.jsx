@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
-import { Feather } from '@expo/vector-icons';
+
+import LockIcon from './LockIcon';
 
 export default function LockedModeCard({ title, description }) {
     return (
@@ -7,7 +8,7 @@ export default function LockedModeCard({ title, description }) {
             <View style={styles.cardInner}>
                 <View style={styles.topRow}>
                     <View style={styles.lockCircle}>
-                        <Feather name='lock' size={18} color='#F3E4C3' />
+                        <LockIcon />
                     </View>
                     <View style={styles.badge}>
                         <Text style={styles.badgeText}>COMING SOON</Text>
