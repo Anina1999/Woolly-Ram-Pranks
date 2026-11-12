@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
@@ -7,7 +7,11 @@ import PlayIcon from '../components/PlayIcon';
 import Ram from '../components/Ram';
 import Sheep from '../components/Sheep';
 
+import useCardPulse from '../hooks/useCardPulse';
+
 export default function LobbyScreen({ navigation }) {
+    const { borderColor, scale } = useCardPulse();
+
     const handlePressProfile = () => {
         navigation.navigate('Profile');
     };
@@ -38,8 +42,8 @@ export default function LobbyScreen({ navigation }) {
                 </Pressable>
             </View>
             <Text style={styles.title}>Choose a mode</Text>
-            <View style={styles.modeCard}>
-                <View style={styles.modeCardInner}>
+            <Animated.View style={[styles.modeCard, { transform: [{ scale }] }]}>
+                <Animated.View style={[styles.modeCardInner, { borderColor }]}>
                     <View style={styles.modeArt}>
                         <View style={styles.modeArtTop} />
                         <View style={styles.modeArtBottom} />
@@ -69,8 +73,8 @@ export default function LobbyScreen({ navigation }) {
                             Charm every sheep, pull off the pranks, don’t get caught.
                         </Text>
                     </View>
-                </View>
-            </View>
+                </Animated.View>
+            </Animated.View>
             <View style={styles.lockedModes}>
                 <LockedModeCard title='Competitive' description='Ram vs ram' />
                 <LockedModeCard title='Hybrid' description='Team up, then betray' />
@@ -163,7 +167,6 @@ const styles = StyleSheet.create({
         overflow: 'hidden',
         borderRadius: 20,
         borderWidth: 3,
-        borderColor: '#F2B33D',
         backgroundColor: '#FBF3E2',
     },
     modeArt: {
