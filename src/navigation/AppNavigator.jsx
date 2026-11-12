@@ -1,3 +1,4 @@
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import TabIcon from '../components/TabIcon';
@@ -9,14 +10,44 @@ import LeaderboardScreen from '../screens/LeaderboardScreen';
 const Tabs = createBottomTabNavigator();
 
 export default function AppNavigator() {
+    const insets = useSafeAreaInsets();
+
     return (
-        <Tabs.Navigator screenOptions={{ headerShown: false }}>
+        <Tabs.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarActiveTintColor: '#F2B33D',
+                tabBarInactiveTintColor: '#D9C9A8',
+                tabBarStyle: {
+                    height: 76 + insets.bottom,
+                    borderTopWidth: 3,
+                    borderTopColor: '#5E3A1E',
+                    backgroundColor: '#3A2616',
+                },
+                tabBarItemStyle: {
+                    justifyContent: 'center',
+                    gap: 4,
+                },
+                tabBarIconStyle: {
+                    width: 64,
+                    height: 32,
+                },
+                tabBarLabelStyle: {
+                    fontFamily: 'NunitoSans_800ExtraBold',
+                    fontSize: 12,
+                },
+            }}
+        >
             <Tabs.Screen
                 name='Lobby'
                 component={LobbyScreen}
                 options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabIcon source={require('../assets/icons/lobby.png')} color={color} />
+                    tabBarIcon: ({ focused, color }) => (
+                        <TabIcon
+                            source={require('../assets/icons/lobby.png')}
+                            focused={focused}
+                            color={color}
+                        />
                     ),
                 }}
             />
@@ -24,8 +55,12 @@ export default function AppNavigator() {
                 name='Rooms'
                 component={RoomsScreen}
                 options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabIcon source={require('../assets/icons/rooms.png')} color={color} />
+                    tabBarIcon: ({ focused, color }) => (
+                        <TabIcon
+                            source={require('../assets/icons/rooms.png')}
+                            focused={focused}
+                            color={color}
+                        />
                     ),
                 }}
             />
@@ -33,8 +68,12 @@ export default function AppNavigator() {
                 name='Profile'
                 component={ProfileScreen}
                 options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabIcon source={require('../assets/icons/profile.png')} color={color} />
+                    tabBarIcon: ({ focused, color }) => (
+                        <TabIcon
+                            source={require('../assets/icons/profile.png')}
+                            focused={focused}
+                            color={color}
+                        />
                     ),
                 }}
             />
@@ -42,8 +81,12 @@ export default function AppNavigator() {
                 name='Leaderboard'
                 component={LeaderboardScreen}
                 options={{
-                    tabBarIcon: ({ color }) => (
-                        <TabIcon source={require('../assets/icons/leaderboard.png')} color={color} />
+                    tabBarIcon: ({ focused, color }) => (
+                        <TabIcon
+                            source={require('../assets/icons/leaderboard.png')}
+                            focused={focused}
+                            color={color}
+                        />
                     ),
                 }}
             />

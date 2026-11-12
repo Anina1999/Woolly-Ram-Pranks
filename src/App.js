@@ -13,7 +13,7 @@ export default function App() {
 
 	return (
 		<>
-			<StatusBar style="auto" />
+			<StatusBar style='dark' />
 			<NavigationContainer>
 				<RootNavigator />
 			</NavigationContainer>

@@ -44,3 +44,5 @@
 - [x] Use Lilita One and Nunito Sans in the Lobby
 - [x] Add style to the LockedModeCard
 - [x] Add style to the Play Co-op and Create a room buttons
+- [x] Add style to the tab bar
+- [x] Use dark status bar icons
