@@ -4,6 +4,8 @@ import { Feather } from '@expo/vector-icons';
 
 import LockedModeCard from '../components/LockedModeCard';
 import PlayIcon from '../components/PlayIcon';
+import Ram from '../components/Ram';
+import Sheep from '../components/Sheep';
 
 export default function LobbyScreen({ navigation }) {
     const handlePressProfile = () => {
@@ -39,6 +41,10 @@ export default function LobbyScreen({ navigation }) {
                     <View style={styles.modeArt}>
                         <View style={styles.modeArtTop} />
                         <View style={styles.modeArtBottom} />
+                        <Sheep size={92} />
+                        <Ram color='#3B7DDD' pose='walk1' size={104} />
+                        <Ram color='#E04436' pose='idle' size={122} />
+                        <Ram color='#F2C12E' pose='walk3' size={90} />
                         <View style={styles.selectedBadge}>
                             <Feather name='check' size={12} color='#2E2117' />
                             <Text style={styles.selectedText}>SELECTED</Text>
