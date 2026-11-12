@@ -54,7 +54,7 @@ export default function LobbyScreen({ navigation }) {
                     </View>
                 </View>
             </View>
-            <View>
+            <View style={styles.lockedModes}>
                 <LockedModeCard title='Competitive' description='Ram vs ram' />
                 <LockedModeCard title='Hybrid' description='Team up, then betray' />
             </View>
@@ -198,5 +198,10 @@ const styles = StyleSheet.create({
         fontSize: 14,
         lineHeight: 20,
         color: '#6E5D49',
+    },
+    lockedModes: {
+        flexDirection: 'row',
+        gap: 12,
+        marginTop: 20,
     },
 });
