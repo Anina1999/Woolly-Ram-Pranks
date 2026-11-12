@@ -89,8 +89,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#8CC152',
     },
     playerName: {
+        fontFamily: 'NunitoSans_800ExtraBold',
         fontSize: 15,
-        fontWeight: '800',
         color: '#2E2117',
     },
     settingsButton: {
@@ -105,9 +105,9 @@ const styles = StyleSheet.create({
     },
     title: {
         marginTop: 16,
+        fontFamily: 'LilitaOne_400Regular',
         fontSize: 28,
         lineHeight: 32,
-        fontWeight: 'bold',
         color: '#FFFFFF',
         textShadowColor: '#2E2117',
         textShadowOffset: { width: 0, height: 2 },
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F2B33D',
     },
     selectedText: {
+        fontFamily: 'NunitoSans_800ExtraBold',
         fontSize: 12,
-        fontWeight: '800',
         letterSpacing: 0.6,
         color: '#2E2117',
     },
@@ -178,16 +178,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modeTitle: {
+        fontFamily: 'LilitaOne_400Regular',
         fontSize: 26,
-        fontWeight: 'bold',
         color: '#2E2117',
     },
     modePlayers: {
+        fontFamily: 'NunitoSans_800ExtraBold',
         fontSize: 13,
-        fontWeight: '800',
         color: '#6E5D49',
     },
     modeDescription: {
+        fontFamily: 'NunitoSans_400Regular',
         fontSize: 14,
         lineHeight: 20,
         color: '#6E5D49',
