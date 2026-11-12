@@ -1,8 +1,9 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
 import LockedModeCard from '../components/LockedModeCard';
+import PlayIcon from '../components/PlayIcon';
 
 export default function LobbyScreen({ navigation }) {
     const handlePressProfile = () => {
@@ -58,8 +59,20 @@ export default function LobbyScreen({ navigation }) {
                 <LockedModeCard title='Competitive' description='Ram vs ram' />
                 <LockedModeCard title='Hybrid' description='Team up, then betray' />
             </View>
-            <Button title='Play Co-op' onPress={handlePressPlayCoop} />
-            <Button title='Create a room' onPress={handlePressCreateRoom} />
+            <View style={styles.buttons}>
+                <Pressable style={styles.playButton} onPress={handlePressPlayCoop}>
+                    <View style={styles.playButtonInner}>
+                        <View style={styles.playButtonShine} />
+                        <PlayIcon />
+                        <Text style={styles.playButtonText}>Play Co-op</Text>
+                    </View>
+                </Pressable>
+                <Pressable style={styles.createButton} onPress={handlePressCreateRoom}>
+                    <View style={styles.createButtonInner}>
+                        <Text style={styles.createButtonText}>Create a room</Text>
+                    </View>
+                </Pressable>
+            </View>
         </SafeAreaView>
     );
 }
@@ -203,5 +216,60 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         gap: 12,
         marginTop: 20,
+    },
+    buttons: {
+        gap: 12,
+        marginTop: 28,
+    },
+    playButton: {
+        paddingBottom: 4,
+        borderRadius: 16,
+        backgroundColor: '#24601F',
+    },
+    playButtonInner: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
+        height: 56,
+        overflow: 'hidden',
+        borderRadius: 16,
+        backgroundColor: '#3C8C35',
+    },
+    playButtonShine: {
+        position: 'absolute',
+        top: 4,
+        left: 8,
+        right: 8,
+        height: 20,
+        borderRadius: 12,
+        backgroundColor: 'rgba(255, 255, 255, 0.18)',
+    },
+    playButtonText: {
+        fontFamily: 'LilitaOne_400Regular',
+        fontSize: 22,
+        color: '#FFFFFF',
+        textShadowColor: 'rgba(0, 0, 0, 0.25)',
+        textShadowOffset: { width: 0, height: 2 },
+        textShadowRadius: 1,
+    },
+    createButton: {
+        paddingBottom: 4,
+        borderRadius: 16,
+        backgroundColor: '#8A5A34',
+    },
+    createButtonInner: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: 52,
+        borderRadius: 16,
+        borderWidth: 2,
+        borderColor: '#8A5A34',
+        backgroundColor: '#FBF3E2',
+    },
+    createButtonText: {
+        fontFamily: 'LilitaOne_400Regular',
+        fontSize: 20,
+        color: '#5E3A1E',
     },
 });
