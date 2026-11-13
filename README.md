@@ -54,3 +54,4 @@
 - [x] Add style to the Rooms panel and filter chips
 - [x] Add the RamAvatar component to the RoomCard
 - [x] Add Badge component for the WAITING and PLAYING status
+- [x] Add style to the RoomCard

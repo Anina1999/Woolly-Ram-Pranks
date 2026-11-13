@@ -37,6 +37,7 @@ export default function RoomsScreen({ navigation }) {
                     <FlatList
                         data={rooms}
                         keyExtractor={(room) => room.id}
+                        contentContainerStyle={styles.list}
                         renderItem={({ item }) => (
                             <RoomCard room={item} onPress={() => handlePressRoom(item.id)} />
                         )}
@@ -112,5 +113,11 @@ const styles = StyleSheet.create({
     },
     chipTextSelected: {
         color: '#FBF3E2',
+    },
+    list: {
+        gap: 10,
+        paddingTop: 2,
+        paddingHorizontal: 12,
+        paddingBottom: 12,
     },
 });
