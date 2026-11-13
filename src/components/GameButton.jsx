@@ -1,14 +1,24 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-export default function GameButton({ title, onPress, size, children }) {
+export default function GameButton({ title, onPress, size, variant, children }) {
     const isLarge = size === 'large';
+    const isSecondary = variant === 'secondary';
 
     return (
-        <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={onPress}>
-            <View style={[styles.face, isLarge && styles.faceLarge]}>
-                <View style={[styles.shine, isLarge && styles.shineLarge]} />
+        <Pressable
+            style={({ pressed }) => [
+                styles.button,
+                isSecondary && styles.buttonSecondary,
+                pressed && styles.buttonPressed,
+            ]}
+            onPress={onPress}
+        >
+            <View style={[styles.face, isLarge && styles.faceLarge, isSecondary && styles.faceSecondary]}>
+                {!isSecondary && <View style={[styles.shine, isLarge && styles.shineLarge]} />}
                 {children}
-                <Text style={[styles.title, isLarge && styles.titleLarge]}>{title}</Text>
+                <Text style={[styles.title, isLarge && styles.titleLarge, isSecondary && styles.titleSecondary]}>
+                    {title}
+                </Text>
             </View>
         </Pressable>
     );
@@ -19,6 +29,9 @@ const styles = StyleSheet.create({
         paddingBottom: 4,
         borderRadius: 16,
         backgroundColor: '#24601F',
+    },
+    buttonSecondary: {
+        backgroundColor: '#8A5A34',
     },
     buttonPressed: {
         marginTop: 4,
@@ -37,6 +50,11 @@ const styles = StyleSheet.create({
     faceLarge: {
         gap: 10,
         height: 56,
+    },
+    faceSecondary: {
+        borderWidth: 2,
+        borderColor: '#8A5A34',
+        backgroundColor: '#FBF3E2',
     },
     shine: {
         position: 'absolute',
@@ -60,5 +78,10 @@ const styles = StyleSheet.create({
     },
     titleLarge: {
         fontSize: 22,
+    },
+    titleSecondary: {
+        color: '#5E3A1E',
+        textShadowOffset: { width: 0, height: 0 },
+        textShadowRadius: 0,
     },
 });

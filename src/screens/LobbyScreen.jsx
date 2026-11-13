@@ -88,11 +88,7 @@ export default function LobbyScreen({ navigation }) {
                 <GameButton title='Play Co-op' size='large' onPress={handlePressPlayCoop}>
                     <PlayIcon />
                 </GameButton>
-                <Pressable style={styles.createButton} onPress={handlePressCreateRoom}>
-                    <View style={styles.createButtonInner}>
-                        <Text style={styles.createButtonText}>Create a room</Text>
-                    </View>
-                </Pressable>
+                <GameButton title='Create a room' variant='secondary' onPress={handlePressCreateRoom} />
             </View>
         </SafeAreaView>
     );
@@ -237,24 +233,5 @@ const styles = StyleSheet.create({
     buttons: {
         gap: 12,
         marginTop: 28,
-    },
-    createButton: {
-        paddingBottom: 4,
-        borderRadius: 16,
-        backgroundColor: '#8A5A34',
-    },
-    createButtonInner: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: 52,
-        borderRadius: 16,
-        borderWidth: 2,
-        borderColor: '#8A5A34',
-        backgroundColor: '#FBF3E2',
-    },
-    createButtonText: {
-        fontFamily: 'LilitaOne_400Regular',
-        fontSize: 20,
-        color: '#5E3A1E',
     },
 });
