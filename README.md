@@ -52,3 +52,4 @@
 - [x] Use dark status bar icons
 - [x] Add style to the Rooms header
 - [x] Add style to the Rooms panel and filter chips
+- [x] Add the RamAvatar component to the RoomCard

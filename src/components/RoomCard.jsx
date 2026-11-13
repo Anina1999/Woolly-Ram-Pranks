@@ -1,11 +1,11 @@
-import { Pressable, Text } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
-import Ram from './Ram';
+import RamAvatar from './RamAvatar';
 
 export default function RoomCard({ room, onPress }) {
     return (
         <Pressable onPress={onPress}>
-            <Ram wool={room.wool} bandana={room.bandana} pose='idle' size={54} />
+            <RamAvatar wool={room.wool} bandana={room.bandana} size={46} style={styles.avatar} />
             <Text>{room.name}</Text>
             <Text>Host: {room.host}</Text>
             <Text>{room.players}/{room.maxPlayers}</Text>
@@ -13,3 +13,10 @@ export default function RoomCard({ room, onPress }) {
         </Pressable>
     );
 }
+
+const styles = StyleSheet.create({
+    avatar: {
+        borderWidth: 2,
+        borderColor: '#5E3A1E',
+    },
+});
