@@ -1,6 +1,7 @@
 import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Feather } from '@expo/vector-icons';
+
+import IconButton from '../components/IconButton';
 
 export default function RoomsScreen({ navigation }) {
     const handlePressRoom = () => {
@@ -15,9 +16,7 @@ export default function RoomsScreen({ navigation }) {
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
-                <Pressable style={styles.refreshButton}>
-                    <Feather name='refresh-cw' size={22} color='#5E3A1E' />
-                </Pressable>
+                <IconButton icon='rotate-cw' />
             </View>
             <View style={styles.panel}>
                 <View style={styles.panelInner}>
@@ -60,16 +59,6 @@ const styles = StyleSheet.create({
         textShadowColor: '#2E2117',
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
-    },
-    refreshButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 48,
-        height: 48,
-        borderRadius: 999,
-        borderWidth: 3,
-        borderColor: '#8A5A34',
-        backgroundColor: '#FBF3E2',
     },
     panel: {
         flex: 1,

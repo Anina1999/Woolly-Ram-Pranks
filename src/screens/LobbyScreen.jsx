@@ -2,6 +2,7 @@ import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
+import IconButton from '../components/IconButton';
 import LockedModeCard from '../components/LockedModeCard';
 import PlayIcon from '../components/PlayIcon';
 import Ram from '../components/Ram';
@@ -37,9 +38,7 @@ export default function LobbyScreen({ navigation }) {
                     </View>
                     <Text style={styles.playerName}>Bramble</Text>
                 </Pressable>
-                <Pressable style={styles.settingsButton} onPress={handlePressSettings}>
-                    <Feather name='settings' size={22} color='#5E3A1E' />
-                </Pressable>
+                <IconButton icon='settings' onPress={handlePressSettings} />
             </View>
             <Text style={styles.title}>Choose a mode</Text>
             <Animated.View style={[styles.modeCard, { transform: [{ scale }] }]}>
@@ -134,16 +133,6 @@ const styles = StyleSheet.create({
         fontFamily: 'NunitoSans_800ExtraBold',
         fontSize: 15,
         color: '#2E2117',
-    },
-    settingsButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 48,
-        height: 48,
-        borderRadius: 999,
-        borderWidth: 3,
-        borderColor: '#8A5A34',
-        backgroundColor: '#FBF3E2',
     },
     title: {
         marginTop: 16,
