@@ -44,6 +44,7 @@
 - [x] Add the rooms list with the RoomCard component
 - [x] Add the Create room button at the bottom of Rooms
 - [x] Show the room name and host in the Waiting room
+- [x] Add the players list with the PlayerRow component to the Waiting room
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

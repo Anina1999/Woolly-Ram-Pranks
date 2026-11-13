@@ -1,5 +1,8 @@
-import { Text, View } from 'react-native';
+import { FlatList, Text, View } from 'react-native';
 
+import PlayerRow from '../components/PlayerRow';
+
+import players from '../data/players';
 import rooms from '../data/rooms';
 
 export default function WaitingRoomScreen({ route }) {
@@ -14,10 +17,18 @@ export default function WaitingRoomScreen({ route }) {
         );
     }
 
+    const roomPlayers = players.filter((player) => player.roomId === roomId);
+
     return (
         <View>
             <Text>{room.name}</Text>
             <Text>Host: {room.host}</Text>
+            <Text>The flock</Text>
+            <FlatList
+                data={roomPlayers}
+                keyExtractor={(player) => player.id}
+                renderItem={({ item }) => <PlayerRow player={item} />}
+            />
         </View>
     );
 }
