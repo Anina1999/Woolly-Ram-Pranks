@@ -9,11 +9,14 @@ import getStatusColors from '../utils/getStatusColors';
 export default function RoomCard({ room, onPress }) {
     const statusColors = getStatusColors(room.status);
     const isPlaying = room.status === 'PLAYING';
+    const isFull = room.players === room.maxPlayers;
+    const isClosed = isPlaying || isFull;
 
     return (
         <Pressable
-            style={({ pressed }) => [styles.card, isPlaying && styles.cardPlaying, pressed && styles.cardPressed]}
+            style={({ pressed }) => [styles.card, isClosed && styles.cardClosed, pressed && styles.cardPressed]}
             onPress={onPress}
+            disabled={isClosed}
         >
             <RamAvatar wool={room.wool} bandana={room.bandana} size={46} style={styles.avatar} />
             <View style={styles.info}>
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
         borderColor: '#D9C39A',
         backgroundColor: '#FFFBF2',
     },
-    cardPlaying: {
+    cardClosed: {
         opacity: 0.75,
         borderColor: '#D6CBB6',
         backgroundColor: '#F1EBDF',

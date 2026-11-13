@@ -30,6 +30,7 @@
 - [x] Open the Profile tab from the player name in the Lobby
 - [x] Open Create room from Rooms
 - [x] Replace Create room with the Waiting room after Create
+- [x] Open only the rooms that are waiting
 
 ### Steps to add the screen content
 - [x] Add the Create room screen and open it from the Lobby
