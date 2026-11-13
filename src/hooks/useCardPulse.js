@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { Animated } from 'react-native';
 
+import { colors } from '../styles/theme';
+
 export default function useCardPulse() {
     const pulse = useRef(new Animated.Value(0)).current;
 
@@ -27,7 +29,7 @@ export default function useCardPulse() {
 
     const borderColor = pulse.interpolate({
         inputRange: [0, 1],
-        outputRange: ['#F2B33D', '#F7E07A'],
+        outputRange: [colors.accent, colors.accentLight],
     });
 
     const scale = pulse.interpolate({

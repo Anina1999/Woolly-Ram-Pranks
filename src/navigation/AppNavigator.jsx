@@ -7,6 +7,8 @@ import RoomsScreen from '../screens/RoomsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
 import LeaderboardScreen from '../screens/LeaderboardScreen';
 
+import { colors, fonts } from '../styles/theme';
+
 const Tabs = createBottomTabNavigator();
 
 export default function AppNavigator() {
@@ -16,13 +18,13 @@ export default function AppNavigator() {
         <Tabs.Navigator
             screenOptions={{
                 headerShown: false,
-                tabBarActiveTintColor: '#F2B33D',
-                tabBarInactiveTintColor: '#D9C9A8',
+                tabBarActiveTintColor: colors.accent,
+                tabBarInactiveTintColor: colors.tabInactive,
                 tabBarStyle: {
                     height: 76 + insets.bottom,
                     borderTopWidth: 3,
-                    borderTopColor: '#5E3A1E',
-                    backgroundColor: '#3A2616',
+                    borderTopColor: colors.woodDark,
+                    backgroundColor: colors.woodDarkest,
                 },
                 tabBarItemStyle: {
                     justifyContent: 'center',
@@ -33,7 +35,7 @@ export default function AppNavigator() {
                     height: 32,
                 },
                 tabBarLabelStyle: {
-                    fontFamily: 'NunitoSans_800ExtraBold',
+                    fontFamily: fonts.extraBold,
                     fontSize: 12,
                 },
             }}

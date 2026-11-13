@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import { fonts } from '../styles/theme';
+
 export default function Badge({ label, backgroundColor, color, style, labelStyle, children }) {
     return (
         <View style={[styles.badge, { backgroundColor }, style]}>
@@ -19,7 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 999,
     },
     label: {
-        fontFamily: 'NunitoSans_800ExtraBold',
+        fontFamily: fonts.extraBold,
         fontSize: 11,
         letterSpacing: 0.6,
     },

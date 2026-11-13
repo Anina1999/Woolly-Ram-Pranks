@@ -6,6 +6,8 @@ import RamAvatar from './RamAvatar';
 
 import getStatusColors from '../utils/getStatusColors';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function RoomCard({ room, onPress }) {
     const statusColors = getStatusColors(room.status);
     const isPlaying = room.status === 'PLAYING';
@@ -47,35 +49,35 @@ const styles = StyleSheet.create({
         borderRadius: 18,
         borderWidth: 2,
         borderBottomWidth: 5,
-        borderColor: '#D9C39A',
-        backgroundColor: '#FFFBF2',
+        borderColor: colors.border,
+        backgroundColor: colors.surfaceLight,
     },
     cardClosed: {
         opacity: 0.75,
-        borderColor: '#D6CBB6',
-        backgroundColor: '#F1EBDF',
+        borderColor: colors.closedBorder,
+        backgroundColor: colors.closedSurface,
     },
     cardPressed: {
         borderBottomWidth: 2,
-        backgroundColor: '#F3E4C3',
+        backgroundColor: colors.surfaceAlt,
     },
     avatar: {
         borderWidth: 2,
-        borderColor: '#5E3A1E',
+        borderColor: colors.woodDark,
     },
     info: {
         flex: 1,
         gap: 2,
     },
     name: {
-        fontFamily: 'NunitoSans_800ExtraBold',
+        fontFamily: fonts.extraBold,
         fontSize: 16,
-        color: '#2E2117',
+        color: colors.text,
     },
     host: {
-        fontFamily: 'NunitoSans_400Regular',
+        fontFamily: fonts.regular,
         fontSize: 13,
-        color: '#6E5D49',
+        color: colors.muted,
     },
     side: {
         alignItems: 'flex-end',
@@ -87,9 +89,9 @@ const styles = StyleSheet.create({
         gap: 4,
     },
     playersText: {
-        fontFamily: 'LilitaOne_400Regular',
+        fontFamily: fonts.display,
         fontSize: 18,
-        color: '#2E2117',
+        color: colors.text,
     },
     statusDot: {
         width: 7,

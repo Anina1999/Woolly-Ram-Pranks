@@ -10,6 +10,8 @@ import RoomCard from '../components/RoomCard';
 
 import rooms from '../data/rooms';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function RoomsScreen({ navigation }) {
     const [selectedFilter, setSelectedFilter] = useState('all');
 
@@ -67,7 +69,7 @@ export default function RoomsScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#8FCDEE',
+        backgroundColor: colors.sky,
     },
     header: {
         flexDirection: 'row',
@@ -77,11 +79,11 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     title: {
-        fontFamily: 'LilitaOne_400Regular',
+        fontFamily: fonts.display,
         fontSize: 32,
         lineHeight: 36,
-        color: '#FFFFFF',
-        textShadowColor: '#2E2117',
+        color: colors.white,
+        textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
     },
@@ -92,14 +94,14 @@ const styles = StyleSheet.create({
         paddingHorizontal: 4,
         borderTopLeftRadius: 28,
         borderTopRightRadius: 28,
-        backgroundColor: '#8A5A34',
+        backgroundColor: colors.wood,
     },
     panelInner: {
         flex: 1,
         overflow: 'hidden',
         borderTopLeftRadius: 24,
         borderTopRightRadius: 24,
-        backgroundColor: '#FBF3E2',
+        backgroundColor: colors.surface,
     },
     chips: {
         flexDirection: 'row',
@@ -119,6 +121,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
         paddingBottom: 14,
         borderTopWidth: 2,
-        borderTopColor: '#EADBB8',
+        borderTopColor: colors.divider,
     },
 });

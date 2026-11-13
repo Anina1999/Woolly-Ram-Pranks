@@ -13,6 +13,8 @@ import Sheep from '../components/Sheep';
 
 import useCardPulse from '../hooks/useCardPulse';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function LobbyScreen({ navigation }) {
     const { borderColor, scale } = useCardPulse();
 
@@ -61,12 +63,12 @@ export default function LobbyScreen({ navigation }) {
                         </View>
                         <Badge
                             label='SELECTED'
-                            backgroundColor='#FFD43B'
-                            color='#2E2117'
+                            backgroundColor={colors.highlight}
+                            color={colors.text}
                             style={styles.selectedBadge}
                             labelStyle={styles.selectedText}
                         >
-                            <Feather name='check' size={12} color='#2E2117' />
+                            <Feather name='check' size={12} color={colors.text} />
                         </Badge>
                     </View>
                     <View style={styles.modeInfo}>
@@ -98,7 +100,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 16,
-        backgroundColor: '#8FCDEE',
+        backgroundColor: colors.sky,
     },
     header: {
         flexDirection: 'row',
@@ -115,21 +117,21 @@ const styles = StyleSheet.create({
         paddingRight: 14,
         borderRadius: 999,
         borderWidth: 3,
-        borderColor: '#8A5A34',
-        backgroundColor: '#FBF3E2',
+        borderColor: colors.wood,
+        backgroundColor: colors.surface,
     },
     playerName: {
-        fontFamily: 'NunitoSans_800ExtraBold',
+        fontFamily: fonts.extraBold,
         fontSize: 15,
-        color: '#2E2117',
+        color: colors.text,
     },
     title: {
         marginTop: 16,
-        fontFamily: 'LilitaOne_400Regular',
+        fontFamily: fonts.display,
         fontSize: 28,
         lineHeight: 32,
-        color: '#FFFFFF',
-        textShadowColor: '#2E2117',
+        color: colors.white,
+        textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
     },
@@ -138,18 +140,18 @@ const styles = StyleSheet.create({
         padding: 4,
         paddingBottom: 8,
         borderRadius: 24,
-        backgroundColor: '#5E3A1E',
+        backgroundColor: colors.woodDark,
         boxShadow: '0px 6px 12px rgba(46, 33, 23, 0.35)',
     },
     modeCardInner: {
         overflow: 'hidden',
         borderRadius: 20,
         borderWidth: 3,
-        backgroundColor: '#FBF3E2',
+        backgroundColor: colors.surface,
     },
     modeArt: {
         height: 140,
-        backgroundColor: '#7DBB4C',
+        backgroundColor: colors.meadow,
     },
     modeArtTop: {
         position: 'absolute',
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         height: 30,
-        backgroundColor: '#A9C95B',
+        backgroundColor: colors.dryGrass,
     },
     modeArtBottom: {
         position: 'absolute',
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
         left: 0,
         right: 0,
         height: 46,
-        backgroundColor: '#5FA445',
+        backgroundColor: colors.meadowDark,
     },
     sheep: {
         position: 'absolute',
@@ -210,20 +212,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     modeTitle: {
-        fontFamily: 'LilitaOne_400Regular',
+        fontFamily: fonts.display,
         fontSize: 26,
-        color: '#2E2117',
+        color: colors.text,
     },
     modePlayers: {
-        fontFamily: 'NunitoSans_800ExtraBold',
+        fontFamily: fonts.extraBold,
         fontSize: 13,
-        color: '#6E5D49',
+        color: colors.muted,
     },
     modeDescription: {
-        fontFamily: 'NunitoSans_400Regular',
+        fontFamily: fonts.regular,
         fontSize: 14,
         lineHeight: 20,
-        color: '#6E5D49',
+        color: colors.muted,
     },
     lockedModes: {
         flexDirection: 'row',

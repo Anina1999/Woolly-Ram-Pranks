@@ -1,6 +1,8 @@
+import { colors } from '../styles/theme';
+
 const STATUS_COLORS = {
-    WAITING: { background: '#DDF0E0', text: '#1F6B39', dot: '#2F8F4E' },
-    PLAYING: { background: '#FBE7C2', text: '#7A4B12', dot: '#E39B17' },
+    WAITING: { background: colors.waitingBackground, text: colors.waitingText, dot: colors.success },
+    PLAYING: { background: colors.playingBackground, text: colors.playingText, dot: colors.warning },
 };
 
 export default function getStatusColors(status) {

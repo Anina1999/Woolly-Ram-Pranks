@@ -1,6 +1,8 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { colors } from '../styles/theme';
+
 export default function ProfileScreen({ navigation }) {
     const handlePressLogOut = () => {
         // simulates log out by leading to lobby cause we don't have auth screens and logic yet
@@ -20,6 +22,6 @@ export default function ProfileScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     logOutText: {
-        color: '#A8402E',
+        color: colors.danger,
     },
 });

@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import Badge from './Badge';
 import LockIcon from './LockIcon';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function LockedModeCard({ title, description }) {
     return (
         <View style={styles.card}>
@@ -11,7 +13,7 @@ export default function LockedModeCard({ title, description }) {
                     <View style={styles.lockCircle}>
                         <LockIcon />
                     </View>
-                    <Badge label='COMING SOON' backgroundColor='#3A2616' color='#F3E4C3' />
+                    <Badge label='COMING SOON' backgroundColor={colors.woodDarkest} color={colors.surfaceAlt} />
                 </View>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.description}>{description}</Text>
@@ -26,14 +28,14 @@ const styles = StyleSheet.create({
         padding: 3,
         paddingBottom: 6,
         borderRadius: 20,
-        backgroundColor: '#8F8676',
+        backgroundColor: colors.lockedFrame,
     },
     cardInner: {
         gap: 8,
         height: 112,
         padding: 12,
         borderRadius: 17,
-        backgroundColor: '#EDE6D8',
+        backgroundColor: colors.lockedSurface,
     },
     topRow: {
         flexDirection: 'row',
@@ -46,16 +48,16 @@ const styles = StyleSheet.create({
         width: 36,
         height: 36,
         borderRadius: 999,
-        backgroundColor: '#3A2616',
+        backgroundColor: colors.woodDarkest,
     },
     title: {
-        fontFamily: 'LilitaOne_400Regular',
+        fontFamily: fonts.display,
         fontSize: 20,
-        color: '#5E5242',
+        color: colors.lockedText,
     },
     description: {
-        fontFamily: 'NunitoSans_400Regular',
+        fontFamily: fonts.regular,
         fontSize: 12,
-        color: '#5E5242',
+        color: colors.lockedText,
     },
 });

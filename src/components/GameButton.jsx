@@ -1,5 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function GameButton({ title, onPress, size, variant, children }) {
     const isLarge = size === 'large';
     const isSecondary = variant === 'secondary';
@@ -28,10 +30,10 @@ const styles = StyleSheet.create({
     button: {
         paddingBottom: 4,
         borderRadius: 16,
-        backgroundColor: '#24601F',
+        backgroundColor: colors.primaryEdge,
     },
     buttonSecondary: {
-        backgroundColor: '#8A5A34',
+        backgroundColor: colors.wood,
     },
     buttonPressed: {
         marginTop: 4,
@@ -45,7 +47,7 @@ const styles = StyleSheet.create({
         height: 52,
         overflow: 'hidden',
         borderRadius: 16,
-        backgroundColor: '#3C8C35',
+        backgroundColor: colors.primary,
     },
     faceLarge: {
         gap: 10,
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
     },
     faceSecondary: {
         borderWidth: 2,
-        borderColor: '#8A5A34',
-        backgroundColor: '#FBF3E2',
+        borderColor: colors.wood,
+        backgroundColor: colors.surface,
     },
     shine: {
         position: 'absolute',
@@ -69,9 +71,9 @@ const styles = StyleSheet.create({
         height: 20,
     },
     title: {
-        fontFamily: 'LilitaOne_400Regular',
+        fontFamily: fonts.display,
         fontSize: 20,
-        color: '#FFFFFF',
+        color: colors.white,
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
@@ -80,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
     },
     titleSecondary: {
-        color: '#5E3A1E',
+        color: colors.woodDark,
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 0,
     },

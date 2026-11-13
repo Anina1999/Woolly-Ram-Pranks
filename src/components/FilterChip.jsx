@@ -1,5 +1,7 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function FilterChip({ label, selected, onPress }) {
     return (
         <Pressable style={[styles.chip, selected && styles.chipSelected]} onPress={onPress}>
@@ -15,19 +17,19 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         borderRadius: 999,
         borderWidth: 2,
-        borderColor: '#D9C39A',
-        backgroundColor: '#FFFBF2',
+        borderColor: colors.border,
+        backgroundColor: colors.surfaceLight,
     },
     chipSelected: {
-        borderColor: '#5E3A1E',
-        backgroundColor: '#5E3A1E',
+        borderColor: colors.woodDark,
+        backgroundColor: colors.woodDark,
     },
     label: {
-        fontFamily: 'NunitoSans_800ExtraBold',
+        fontFamily: fonts.extraBold,
         fontSize: 14,
-        color: '#5E3A1E',
+        color: colors.woodDark,
     },
     labelSelected: {
-        color: '#FBF3E2',
+        color: colors.surface,
     },
 });
