@@ -57,3 +57,4 @@
 - [x] Add the RamAvatar component to the RoomCard
 - [x] Add Badge component for the WAITING and PLAYING status
 - [x] Add style to the RoomCard
+- [x] Add GameButton component for Create room in Rooms

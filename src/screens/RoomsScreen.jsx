@@ -1,8 +1,9 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Feather } from '@expo/vector-icons';
 
+import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
+import PlusIcon from '../components/PlusIcon';
 import RoomCard from '../components/RoomCard';
 
 import rooms from '../data/rooms';
@@ -43,11 +44,10 @@ export default function RoomsScreen({ navigation }) {
                             <RoomCard room={item} onPress={() => handlePressRoom(item.id)} />
                         )}
                     />
-                    <View>
-                        <Pressable onPress={handlePressCreateRoom}>
-                            <Feather name='plus' size={20} />
-                            <Text>Create room</Text>
-                        </Pressable>
+                    <View style={styles.bottomBar}>
+                        <GameButton title='Create room' onPress={handlePressCreateRoom}>
+                            <PlusIcon />
+                        </GameButton>
                     </View>
                 </View>
             </View>
@@ -125,5 +125,12 @@ const styles = StyleSheet.create({
         paddingTop: 2,
         paddingHorizontal: 12,
         paddingBottom: 12,
+    },
+    bottomBar: {
+        paddingTop: 10,
+        paddingHorizontal: 12,
+        paddingBottom: 14,
+        borderTopWidth: 2,
+        borderTopColor: '#EADBB8',
     },
 });
