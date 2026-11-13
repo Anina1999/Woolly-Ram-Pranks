@@ -1,5 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import Badge from './Badge';
 import LockIcon from './LockIcon';
 
 export default function LockedModeCard({ title, description }) {
@@ -10,9 +11,7 @@ export default function LockedModeCard({ title, description }) {
                     <View style={styles.lockCircle}>
                         <LockIcon />
                     </View>
-                    <View style={styles.badge}>
-                        <Text style={styles.badgeText}>COMING SOON</Text>
-                    </View>
+                    <Badge label='COMING SOON' backgroundColor='#3A2616' color='#F3E4C3' />
                 </View>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.description}>{description}</Text>
@@ -48,17 +47,6 @@ const styles = StyleSheet.create({
         height: 36,
         borderRadius: 999,
         backgroundColor: '#3A2616',
-    },
-    badge: {
-        paddingVertical: 3,
-        paddingHorizontal: 8,
-        borderRadius: 999,
-        backgroundColor: '#3A2616',
-    },
-    badgeText: {
-        fontFamily: 'NunitoSans_800ExtraBold',
-        fontSize: 11,
-        color: '#F3E4C3',
     },
     title: {
         fontFamily: 'LilitaOne_400Regular',
