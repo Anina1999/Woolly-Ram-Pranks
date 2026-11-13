@@ -12,23 +12,30 @@ export default function RoomsScreen({ navigation }) {
     };
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
                 <Pressable style={styles.refreshButton}>
                     <Feather name='refresh-cw' size={22} color='#5E3A1E' />
                 </Pressable>
             </View>
-            <View>
-                <Pressable>
-                    <Text>All · 6</Text>
-                </Pressable>
-                <Pressable>
-                    <Text>Waiting · 4</Text>
-                </Pressable>
+            <View style={styles.panel}>
+                <View style={styles.panelInner}>
+                    <View style={styles.chips}>
+                        <Pressable style={[styles.chip, styles.chipSelected]}>
+                            <Text style={[styles.chipText, styles.chipTextSelected]}>All · 6</Text>
+                        </Pressable>
+                        <Pressable style={styles.chip}>
+                            <Text style={styles.chipText}>Waiting · 4</Text>
+                        </Pressable>
+                        <Pressable style={styles.chip}>
+                            <Text style={styles.chipText}>Friends</Text>
+                        </Pressable>
+                    </View>
+                    <Button title='Join my room' onPress={handlePressRoom}/>
+                    <Button title='Create room' onPress={handlePressCreateRoom}/>
+                </View>
             </View>
-            <Button title='Join my room' onPress={handlePressRoom}/>
-            <Button title='Create room' onPress={handlePressCreateRoom}/>
         </SafeAreaView>
     );
 }
@@ -36,7 +43,6 @@ export default function RoomsScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingHorizontal: 16,
         backgroundColor: '#8FCDEE',
     },
     header: {
@@ -44,6 +50,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         marginTop: 8,
+        paddingHorizontal: 16,
     },
     title: {
         fontFamily: 'LilitaOne_400Regular',
@@ -63,5 +70,49 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: '#8A5A34',
         backgroundColor: '#FBF3E2',
+    },
+    panel: {
+        flex: 1,
+        marginTop: 16,
+        paddingTop: 4,
+        paddingHorizontal: 4,
+        borderTopLeftRadius: 28,
+        borderTopRightRadius: 28,
+        backgroundColor: '#8A5A34',
+    },
+    panelInner: {
+        flex: 1,
+        overflow: 'hidden',
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        backgroundColor: '#FBF3E2',
+    },
+    chips: {
+        flexDirection: 'row',
+        gap: 8,
+        paddingTop: 14,
+        paddingHorizontal: 12,
+        paddingBottom: 10,
+    },
+    chip: {
+        justifyContent: 'center',
+        height: 40,
+        paddingHorizontal: 16,
+        borderRadius: 999,
+        borderWidth: 2,
+        borderColor: '#D9C39A',
+        backgroundColor: '#FFFBF2',
+    },
+    chipSelected: {
+        borderColor: '#5E3A1E',
+        backgroundColor: '#5E3A1E',
+    },
+    chipText: {
+        fontFamily: 'NunitoSans_800ExtraBold',
+        fontSize: 14,
+        color: '#5E3A1E',
+    },
+    chipTextSelected: {
+        color: '#FBF3E2',
     },
 });
