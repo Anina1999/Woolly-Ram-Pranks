@@ -1,9 +1,9 @@
 import Svg, { Circle, Defs, Ellipse, G, LinearGradient, Path, RadialGradient, Stop } from 'react-native-svg';
 
 const WOOL_COLORS = {
-    '#E04436': { light: '#5E5868', middle: '#27232C', dark: '#0D0B0F', sheen: '#9A94A8' },
-    '#3B7DDD': { light: '#F0C48E', middle: '#C98A48', dark: '#7E4B1E', sheen: '#FBE0BC' },
-    '#F2C12E': { light: '#A6765A', middle: '#6E432A', dark: '#3A2014', sheen: '#D0A688' },
+    black: { light: '#5E5868', middle: '#27232C', dark: '#0D0B0F', sheen: '#9A94A8' },
+    beige: { light: '#F0C48E', middle: '#C98A48', dark: '#7E4B1E', sheen: '#FBE0BC' },
+    brown: { light: '#A6765A', middle: '#6E432A', dark: '#3A2014', sheen: '#D0A688' },
 };
 
 const LEG_OFFSETS = {
@@ -12,19 +12,19 @@ const LEG_OFFSETS = {
     walk3: { frontLeft: 2, backLeft: -3, backRight: -3, frontRight: 2 },
 };
 
-export default function Ram({ color, pose, size }) {
-    const wool = WOOL_COLORS[color];
+export default function Ram({ wool, bandana, pose, size }) {
+    const woolColors = WOOL_COLORS[wool];
     const legs = LEG_OFFSETS[pose];
-    const woolId = 'ramWool' + color.slice(1);
+    const woolId = 'ramWool-' + wool;
     const woolFill = `url(#${woolId})`;
 
     return (
         <Svg width={size} height={size} viewBox='0 0 120 120'>
             <Defs>
                 <RadialGradient id={woolId} cx='0.35' cy='0.25' r='0.85'>
-                    <Stop offset='0' stopColor={wool.light} />
-                    <Stop offset='0.55' stopColor={wool.middle} />
-                    <Stop offset='1' stopColor={wool.dark} />
+                    <Stop offset='0' stopColor={woolColors.light} />
+                    <Stop offset='0.55' stopColor={woolColors.middle} />
+                    <Stop offset='1' stopColor={woolColors.dark} />
                 </RadialGradient>
                 <LinearGradient id='ramSnout' x1='0' y1='0' x2='0' y2='1'>
                     <Stop offset='0' stopColor='#4A4550' />
@@ -62,7 +62,7 @@ export default function Ram({ color, pose, size }) {
                     <Circle cx={0} cy={-25} r={8.5} />
                     <Circle cx={15} cy={-28} r={8} />
                 </G>
-                <G fill='none' stroke={wool.sheen} strokeWidth={1.3} strokeLinecap='round' opacity={0.85}>
+                <G fill='none' stroke={woolColors.sheen} strokeWidth={1.3} strokeLinecap='round' opacity={0.85}>
                     <Path d='M-17 -53 a4 4 0 0 1 6 -2' />
                     <Path d='M-3 -57 a4 4 0 0 1 6 -1.5' />
                 </G>
@@ -85,17 +85,17 @@ export default function Ram({ color, pose, size }) {
                     <Circle cx={28} cy={-57} r={7} />
                     <Circle cx={22} cy={-60} r={5.5} />
                 </G>
-                <Path d='M21 -52 Q28 -45 37 -54 L38 -49 Q29 -40 21.5 -47 Z' fill={color} />
+                <Path d='M21 -52 Q28 -45 37 -54 L38 -49 Q29 -40 21.5 -47 Z' fill={bandana} />
                 <Path d='M21.5 -47 Q29 -40 38 -49 L38 -47.4 Q29 -38.4 21.5 -45.4 Z' fill='#000000' opacity={0.22} />
-                <Path d='M26 -45.6 L30 -35.6 L35 -47 Q30 -43.4 26 -45.6 Z' fill={color} />
+                <Path d='M26 -45.6 L30 -35.6 L35 -47 Q30 -43.4 26 -45.6 Z' fill={bandana} />
                 <Path d='M30 -43.8 L30 -35.6 L35 -47 Q32.4 -44.6 30 -43.8 Z' fill='#000000' opacity={0.2} />
                 <G fill='#FFFFFF' opacity={0.75}>
                     <Circle cx={25} cy={-48} r={0.7} />
                     <Circle cx={31} cy={-47} r={0.7} />
                     <Circle cx={30.4} cy={-40} r={0.7} />
                 </G>
-                <Circle cx={21} cy={-49.6} r={2.3} fill={color} />
-                <Path d='M20.2 -48.6 L16.4 -44.6 L19.6 -44 Z' fill={color} />
+                <Circle cx={21} cy={-49.6} r={2.3} fill={bandana} />
+                <Path d='M20.2 -48.6 L16.4 -44.6 L19.6 -44 Z' fill={bandana} />
                 <G transform='translate(26, 34)'>
                     <Circle cx={6} cy={-88} r={8} fill={woolFill} />
                     <G transform='translate(12, -98) scale(1.25) translate(-12, 98)'>

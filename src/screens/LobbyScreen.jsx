@@ -33,7 +33,7 @@ export default function LobbyScreen({ navigation }) {
             <View style={styles.header}>
                 <Pressable style={styles.profileChip} onPress={handlePressProfile}>
                     <View style={styles.avatar}>
-                        <Ram color='#E04436' pose='idle' size={48} />
+                        <Ram wool='black' bandana='#E04436' pose='idle' size={48} />
                     </View>
                     <Text style={styles.playerName}>Bramble</Text>
                 </Pressable>
@@ -51,13 +51,13 @@ export default function LobbyScreen({ navigation }) {
                             <Sheep size={92} />
                         </View>
                         <View style={styles.beigeRam}>
-                            <Ram color='#3B7DDD' pose='walk1' size={104} />
+                            <Ram wool='beige' bandana='#3B7DDD' pose='walk1' size={104} />
                         </View>
                         <View style={styles.blackRam}>
-                            <Ram color='#E04436' pose='idle' size={122} />
+                            <Ram wool='black' bandana='#E04436' pose='idle' size={122} />
                         </View>
                         <View style={styles.brownRam}>
-                            <Ram color='#F2C12E' pose='walk3' size={90} />
+                            <Ram wool='brown' bandana='#F2C12E' pose='walk3' size={90} />
                         </View>
                         <View style={styles.selectedBadge}>
                             <Feather name='check' size={12} color='#2E2117' />
