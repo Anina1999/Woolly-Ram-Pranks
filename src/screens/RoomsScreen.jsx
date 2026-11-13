@@ -1,11 +1,14 @@
-import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import IconButton from '../components/IconButton';
+import RoomCard from '../components/RoomCard';
+
+import rooms from '../data/rooms';
 
 export default function RoomsScreen({ navigation }) {
-    const handlePressRoom = () => {
-        navigation.navigate('WaitingRoom', { roomId: 1 });
+    const handlePressRoom = (roomId) => {
+        navigation.navigate('WaitingRoom', { roomId });
     };
 
     const handlePressCreateRoom = () => {
@@ -31,7 +34,13 @@ export default function RoomsScreen({ navigation }) {
                             <Text style={styles.chipText}>Friends</Text>
                         </Pressable>
                     </View>
-                    <Button title='Join my room' onPress={handlePressRoom}/>
+                    <FlatList
+                        data={rooms}
+                        keyExtractor={(room) => room.id}
+                        renderItem={({ item }) => (
+                            <RoomCard room={item} onPress={() => handlePressRoom(item.id)} />
+                        )}
+                    />
                     <Button title='Create room' onPress={handlePressCreateRoom}/>
                 </View>
             </View>
