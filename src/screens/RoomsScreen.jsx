@@ -1,5 +1,6 @@
-import { Button, FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Feather } from '@expo/vector-icons';
 
 import IconButton from '../components/IconButton';
 import RoomCard from '../components/RoomCard';
@@ -42,7 +43,12 @@ export default function RoomsScreen({ navigation }) {
                             <RoomCard room={item} onPress={() => handlePressRoom(item.id)} />
                         )}
                     />
-                    <Button title='Create room' onPress={handlePressCreateRoom}/>
+                    <View>
+                        <Pressable onPress={handlePressCreateRoom}>
+                            <Feather name='plus' size={20} />
+                            <Text>Create room</Text>
+                        </Pressable>
+                    </View>
                 </View>
             </View>
         </SafeAreaView>

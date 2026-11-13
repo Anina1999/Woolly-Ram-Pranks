@@ -42,6 +42,7 @@
 - [x] Add the All and Waiting filter chips to Rooms
 - [x] Add the Friends filter chip to Rooms
 - [x] Add the rooms list with the RoomCard component
+- [x] Add the Create room button at the bottom of Rooms
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title
