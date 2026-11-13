@@ -1,6 +1,8 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { useState } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import FilterChip from '../components/FilterChip';
 import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
 import PlusIcon from '../components/PlusIcon';
@@ -9,6 +11,11 @@ import RoomCard from '../components/RoomCard';
 import rooms from '../data/rooms';
 
 export default function RoomsScreen({ navigation }) {
+    const [selectedFilter, setSelectedFilter] = useState('all');
+
+    const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
+    const shownRooms = selectedFilter === 'waiting' ? waitingRooms : rooms;
+
     const handlePressRoom = (roomId) => {
         navigation.navigate('WaitingRoom', { roomId });
     };
@@ -26,18 +33,20 @@ export default function RoomsScreen({ navigation }) {
             <View style={styles.panel}>
                 <View style={styles.panelInner}>
                     <View style={styles.chips}>
-                        <Pressable style={[styles.chip, styles.chipSelected]}>
-                            <Text style={[styles.chipText, styles.chipTextSelected]}>All · 6</Text>
-                        </Pressable>
-                        <Pressable style={styles.chip}>
-                            <Text style={styles.chipText}>Waiting · 4</Text>
-                        </Pressable>
-                        <Pressable style={styles.chip}>
-                            <Text style={styles.chipText}>Friends</Text>
-                        </Pressable>
+                        <FilterChip
+                            label={`All · ${rooms.length}`}
+                            selected={selectedFilter === 'all'}
+                            onPress={() => setSelectedFilter('all')}
+                        />
+                        <FilterChip
+                            label={`Waiting · ${waitingRooms.length}`}
+                            selected={selectedFilter === 'waiting'}
+                            onPress={() => setSelectedFilter('waiting')}
+                        />
+                        <FilterChip label='Friends' />
                     </View>
                     <FlatList
-                        data={rooms}
+                        data={shownRooms}
                         keyExtractor={(room) => room.id}
                         contentContainerStyle={styles.list}
                         renderItem={({ item }) => (
@@ -98,27 +107,6 @@ const styles = StyleSheet.create({
         paddingTop: 14,
         paddingHorizontal: 12,
         paddingBottom: 10,
-    },
-    chip: {
-        justifyContent: 'center',
-        height: 40,
-        paddingHorizontal: 16,
-        borderRadius: 999,
-        borderWidth: 2,
-        borderColor: '#D9C39A',
-        backgroundColor: '#FFFBF2',
-    },
-    chipSelected: {
-        borderColor: '#5E3A1E',
-        backgroundColor: '#5E3A1E',
-    },
-    chipText: {
-        fontFamily: 'NunitoSans_800ExtraBold',
-        fontSize: 14,
-        color: '#5E3A1E',
-    },
-    chipTextSelected: {
-        color: '#FBF3E2',
     },
     list: {
         gap: 10,
