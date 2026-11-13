@@ -38,6 +38,7 @@
 - [x] Add the Co-op mode card to the Lobby
 - [x] Add the LockedModeCard component for Competitive and Hybrid
 - [x] Add the Rooms header with the refresh button
+- [x] Add the All and Waiting filter chips to Rooms
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

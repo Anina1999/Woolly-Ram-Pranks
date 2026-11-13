@@ -19,6 +19,14 @@ export default function RoomsScreen({ navigation }) {
                     <Feather name='refresh-cw' size={22} color='#5E3A1E' />
                 </Pressable>
             </View>
+            <View>
+                <Pressable>
+                    <Text>All · 6</Text>
+                </Pressable>
+                <Pressable>
+                    <Text>Waiting · 4</Text>
+                </Pressable>
+            </View>
             <Button title='Join my room' onPress={handlePressRoom}/>
             <Button title='Create room' onPress={handlePressCreateRoom}/>
         </SafeAreaView>
