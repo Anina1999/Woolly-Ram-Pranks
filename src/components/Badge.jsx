@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-export default function Badge({ label, backgroundColor, color, children }) {
+export default function Badge({ label, backgroundColor, color, style, labelStyle, children }) {
     return (
-        <View style={[styles.badge, { backgroundColor }]}>
+        <View style={[styles.badge, { backgroundColor }, style]}>
             {children}
-            <Text style={[styles.label, { color }]}>{label}</Text>
+            <Text style={[styles.label, { color }, labelStyle]}>{label}</Text>
         </View>
     );
 }

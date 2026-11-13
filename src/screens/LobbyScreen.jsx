@@ -2,10 +2,12 @@ import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
+import Badge from '../components/Badge';
 import IconButton from '../components/IconButton';
 import LockedModeCard from '../components/LockedModeCard';
 import PlayIcon from '../components/PlayIcon';
 import Ram from '../components/Ram';
+import RamAvatar from '../components/RamAvatar';
 import Sheep from '../components/Sheep';
 
 import useCardPulse from '../hooks/useCardPulse';
@@ -33,9 +35,7 @@ export default function LobbyScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Pressable style={styles.profileChip} onPress={handlePressProfile}>
-                    <View style={styles.avatar}>
-                        <Ram wool='black' bandana='#E04436' pose='idle' size={48} />
-                    </View>
+                    <RamAvatar wool='black' bandana='#E04436' size={38} />
                     <Text style={styles.playerName}>Bramble</Text>
                 </Pressable>
                 <IconButton icon='settings' onPress={handlePressSettings} />
@@ -58,10 +58,15 @@ export default function LobbyScreen({ navigation }) {
                         <View style={styles.brownRam}>
                             <Ram wool='brown' bandana='#F2C12E' pose='walk3' size={90} />
                         </View>
-                        <View style={styles.selectedBadge}>
+                        <Badge
+                            label='SELECTED'
+                            backgroundColor='#FFD43B'
+                            color='#2E2117'
+                            style={styles.selectedBadge}
+                            labelStyle={styles.selectedText}
+                        >
                             <Feather name='check' size={12} color='#2E2117' />
-                            <Text style={styles.selectedText}>SELECTED</Text>
-                        </View>
+                        </Badge>
                     </View>
                     <View style={styles.modeInfo}>
                         <View style={styles.modeTitleRow}>
@@ -119,15 +124,6 @@ const styles = StyleSheet.create({
         borderWidth: 3,
         borderColor: '#8A5A34',
         backgroundColor: '#FBF3E2',
-    },
-    avatar: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 38,
-        height: 38,
-        overflow: 'hidden',
-        borderRadius: 999,
-        backgroundColor: '#8CC152',
     },
     playerName: {
         fontFamily: 'NunitoSans_800ExtraBold',
@@ -202,19 +198,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 10,
         left: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
         gap: 4,
         paddingVertical: 4,
         paddingHorizontal: 10,
-        borderRadius: 999,
-        backgroundColor: '#F2B33D',
     },
     selectedText: {
-        fontFamily: 'NunitoSans_800ExtraBold',
         fontSize: 12,
-        letterSpacing: 0.6,
-        color: '#2E2117',
     },
     modeInfo: {
         gap: 4,
