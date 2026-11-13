@@ -1,4 +1,4 @@
-import { Button, Pressable, Text, View } from 'react-native';
+import { Button, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
@@ -12,11 +12,11 @@ export default function RoomsScreen({ navigation }) {
     };
 
     return (
-        <SafeAreaView>
-            <View>
-                <Text>Rooms</Text>
-                <Pressable>
-                    <Feather name='refresh-cw' size={22} />
+        <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+                <Text style={styles.title}>Rooms</Text>
+                <Pressable style={styles.refreshButton}>
+                    <Feather name='refresh-cw' size={22} color='#5E3A1E' />
                 </Pressable>
             </View>
             <Button title='Join my room' onPress={handlePressRoom}/>
@@ -24,3 +24,36 @@ export default function RoomsScreen({ navigation }) {
         </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        paddingHorizontal: 16,
+        backgroundColor: '#8FCDEE',
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    title: {
+        fontFamily: 'LilitaOne_400Regular',
+        fontSize: 32,
+        lineHeight: 36,
+        color: '#FFFFFF',
+        textShadowColor: '#2E2117',
+        textShadowOffset: { width: 0, height: 2 },
+        textShadowRadius: 1,
+    },
+    refreshButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 48,
+        height: 48,
+        borderRadius: 999,
+        borderWidth: 3,
+        borderColor: '#8A5A34',
+        backgroundColor: '#FBF3E2',
+    },
+});

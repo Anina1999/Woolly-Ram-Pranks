@@ -47,3 +47,4 @@
 - [x] Add style to the Play Co-op and Create a room buttons
 - [x] Add style to the tab bar
 - [x] Use dark status bar icons
+- [x] Add style to the Rooms header
