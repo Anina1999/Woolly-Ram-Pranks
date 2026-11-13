@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
         paddingRight: 14,
         borderRadius: 999,
         borderWidth: 3,
-        borderColor: colors.wood,
+        borderColor: colors.frame,
         backgroundColor: colors.surface,
     },
     playerName: {
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.display,
         fontSize: 28,
         lineHeight: 32,
-        color: colors.white,
+        color: colors.textOnScene,
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
         padding: 4,
         paddingBottom: 8,
         borderRadius: 24,
-        backgroundColor: colors.woodDark,
+        backgroundColor: colors.frameDark,
         boxShadow: '0px 6px 12px rgba(46, 33, 23, 0.35)',
     },
     modeCardInner: {

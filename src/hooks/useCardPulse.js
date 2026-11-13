@@ -29,7 +29,7 @@ export default function useCardPulse() {
 
     const borderColor = pulse.interpolate({
         inputRange: [0, 1],
-        outputRange: [colors.accent, colors.accentLight],
+        outputRange: [colors.accent, colors.accentGlow],
     });
 
     const scale = pulse.interpolate({

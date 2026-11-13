@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primaryEdge,
     },
     buttonSecondary: {
-        backgroundColor: colors.wood,
+        backgroundColor: colors.frame,
     },
     buttonPressed: {
         marginTop: 4,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     },
     faceSecondary: {
         borderWidth: 2,
-        borderColor: colors.wood,
+        borderColor: colors.frame,
         backgroundColor: colors.surface,
     },
     shine: {
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     title: {
         fontFamily: fonts.display,
         fontSize: 20,
-        color: colors.white,
+        color: colors.textOnPrimary,
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         fontSize: 22,
     },
     titleSecondary: {
-        color: colors.woodDark,
+        color: colors.actionText,
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 0,
     },

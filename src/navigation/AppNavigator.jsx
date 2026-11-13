@@ -23,8 +23,8 @@ export default function AppNavigator() {
                 tabBarStyle: {
                     height: 76 + insets.bottom,
                     borderTopWidth: 3,
-                    borderTopColor: colors.woodDark,
-                    backgroundColor: colors.woodDarkest,
+                    borderTopColor: colors.frameDark,
+                    backgroundColor: colors.surfaceDark,
                 },
                 tabBarItemStyle: {
                     justifyContent: 'center',

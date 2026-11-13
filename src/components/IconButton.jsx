@@ -6,7 +6,7 @@ import { colors } from '../styles/theme';
 export default function IconButton({ icon, onPress }) {
     return (
         <Pressable style={styles.button} onPress={onPress}>
-            <Feather name={icon} size={22} color={colors.woodDark} />
+            <Feather name={icon} size={22} color={colors.actionText} />
         </Pressable>
     );
 }
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         height: 48,
         borderRadius: 999,
         borderWidth: 3,
-        borderColor: colors.wood,
+        borderColor: colors.frame,
         backgroundColor: colors.surface,
     },
 });

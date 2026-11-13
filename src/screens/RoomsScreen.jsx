@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.display,
         fontSize: 32,
         lineHeight: 36,
-        color: colors.white,
+        color: colors.textOnScene,
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 4,
         borderTopLeftRadius: 28,
         borderTopRightRadius: 28,
-        backgroundColor: colors.wood,
+        backgroundColor: colors.frame,
     },
     panelInner: {
         flex: 1,

@@ -18,16 +18,16 @@ const styles = StyleSheet.create({
         borderRadius: 999,
         borderWidth: 2,
         borderColor: colors.border,
-        backgroundColor: colors.surfaceLight,
+        backgroundColor: colors.card,
     },
     chipSelected: {
-        borderColor: colors.woodDark,
-        backgroundColor: colors.woodDark,
+        borderColor: colors.frameDark,
+        backgroundColor: colors.frameDark,
     },
     label: {
         fontFamily: fonts.extraBold,
         fontSize: 14,
-        color: colors.woodDark,
+        color: colors.actionText,
     },
     labelSelected: {
         color: colors.surface,

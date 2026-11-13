@@ -50,20 +50,20 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderBottomWidth: 5,
         borderColor: colors.border,
-        backgroundColor: colors.surfaceLight,
+        backgroundColor: colors.card,
     },
     cardClosed: {
         opacity: 0.75,
-        borderColor: colors.closedBorder,
-        backgroundColor: colors.closedSurface,
+        borderColor: colors.disabledBorder,
+        backgroundColor: colors.disabledSurface,
     },
     cardPressed: {
         borderBottomWidth: 2,
-        backgroundColor: colors.surfaceAlt,
+        backgroundColor: colors.surfacePressed,
     },
     avatar: {
         borderWidth: 2,
-        borderColor: colors.woodDark,
+        borderColor: colors.frameDark,
     },
     info: {
         flex: 1,

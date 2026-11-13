@@ -13,7 +13,7 @@ export default function LockedModeCard({ title, description }) {
                     <View style={styles.lockCircle}>
                         <LockIcon />
                     </View>
-                    <Badge label='COMING SOON' backgroundColor={colors.woodDarkest} color={colors.surfaceAlt} />
+                    <Badge label='COMING SOON' backgroundColor={colors.surfaceDark} color={colors.textOnDark} />
                 </View>
                 <Text style={styles.title}>{title}</Text>
                 <Text style={styles.description}>{description}</Text>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         padding: 3,
         paddingBottom: 6,
         borderRadius: 20,
-        backgroundColor: colors.lockedFrame,
+        backgroundColor: colors.lockedEdge,
     },
     cardInner: {
         gap: 8,
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
         width: 36,
         height: 36,
         borderRadius: 999,
-        backgroundColor: colors.woodDarkest,
+        backgroundColor: colors.surfaceDark,
     },
     title: {
         fontFamily: fonts.display,
