@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
 import Badge from '../components/Badge';
+import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
 import LockedModeCard from '../components/LockedModeCard';
 import PlayIcon from '../components/PlayIcon';
@@ -84,13 +85,9 @@ export default function LobbyScreen({ navigation }) {
                 <LockedModeCard title='Hybrid' description='Team up, then betray' />
             </View>
             <View style={styles.buttons}>
-                <Pressable style={styles.playButton} onPress={handlePressPlayCoop}>
-                    <View style={styles.playButtonInner}>
-                        <View style={styles.playButtonShine} />
-                        <PlayIcon />
-                        <Text style={styles.playButtonText}>Play Co-op</Text>
-                    </View>
-                </Pressable>
+                <GameButton title='Play Co-op' size='large' onPress={handlePressPlayCoop}>
+                    <PlayIcon />
+                </GameButton>
                 <Pressable style={styles.createButton} onPress={handlePressCreateRoom}>
                     <View style={styles.createButtonInner}>
                         <Text style={styles.createButtonText}>Create a room</Text>
@@ -240,38 +237,6 @@ const styles = StyleSheet.create({
     buttons: {
         gap: 12,
         marginTop: 28,
-    },
-    playButton: {
-        paddingBottom: 4,
-        borderRadius: 16,
-        backgroundColor: '#24601F',
-    },
-    playButtonInner: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 10,
-        height: 56,
-        overflow: 'hidden',
-        borderRadius: 16,
-        backgroundColor: '#3C8C35',
-    },
-    playButtonShine: {
-        position: 'absolute',
-        top: 4,
-        left: 8,
-        right: 8,
-        height: 20,
-        borderRadius: 12,
-        backgroundColor: 'rgba(255, 255, 255, 0.18)',
-    },
-    playButtonText: {
-        fontFamily: 'LilitaOne_400Regular',
-        fontSize: 22,
-        color: '#FFFFFF',
-        textShadowColor: 'rgba(0, 0, 0, 0.25)',
-        textShadowOffset: { width: 0, height: 2 },
-        textShadowRadius: 1,
     },
     createButton: {
         paddingBottom: 4,

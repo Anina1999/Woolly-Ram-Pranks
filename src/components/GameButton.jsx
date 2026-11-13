@@ -1,12 +1,14 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-export default function GameButton({ title, onPress, children }) {
+export default function GameButton({ title, onPress, size, children }) {
+    const isLarge = size === 'large';
+
     return (
         <Pressable style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]} onPress={onPress}>
-            <View style={styles.face}>
-                <View style={styles.shine} />
+            <View style={[styles.face, isLarge && styles.faceLarge]}>
+                <View style={[styles.shine, isLarge && styles.shineLarge]} />
                 {children}
-                <Text style={styles.title}>{title}</Text>
+                <Text style={[styles.title, isLarge && styles.titleLarge]}>{title}</Text>
             </View>
         </Pressable>
     );
@@ -32,6 +34,10 @@ const styles = StyleSheet.create({
         borderRadius: 16,
         backgroundColor: '#3C8C35',
     },
+    faceLarge: {
+        gap: 10,
+        height: 56,
+    },
     shine: {
         position: 'absolute',
         top: 4,
@@ -41,6 +47,9 @@ const styles = StyleSheet.create({
         borderRadius: 12,
         backgroundColor: 'rgba(255, 255, 255, 0.18)',
     },
+    shineLarge: {
+        height: 20,
+    },
     title: {
         fontFamily: 'LilitaOne_400Regular',
         fontSize: 20,
@@ -48,5 +57,8 @@ const styles = StyleSheet.create({
         textShadowColor: 'rgba(0, 0, 0, 0.25)',
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
+    },
+    titleLarge: {
+        fontSize: 22,
     },
 });
