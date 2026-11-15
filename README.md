@@ -47,6 +47,7 @@
 - [x] Add the players list with the PlayerRow component to the Waiting room
 - [x] Add Invite a friend row to the Waiting room
 - [x] Add Leave room, Ready and Start game buttons to the Waiting room
+- [x] Show different buttons for the host and the guest in the Waiting room
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

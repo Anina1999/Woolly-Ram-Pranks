@@ -28,6 +28,8 @@ export default function WaitingRoomScreen({ route }) {
     }
 
     const roomPlayers = players.filter((player) => player.roomId === roomId);
+    const me = roomPlayers.find((player) => player.you);
+    const isHost = me?.host;
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -54,14 +56,17 @@ export default function WaitingRoomScreen({ route }) {
             />
             <Text>Waiting for Fleecy to be ready…</Text>
             <Pressable>
-                <Text>Leave room</Text>
+                <Text>Leave</Text>
             </Pressable>
-            <Pressable>
-                <Text>Ready!</Text>
-            </Pressable>
-            <Pressable>
-                <Text>Start game</Text>
-            </Pressable>
+            {isHost ? (
+                <Pressable>
+                    <Text>Start game</Text>
+                </Pressable>
+            ) : (
+                <Pressable>
+                    <Text>Ready!</Text>
+                </Pressable>
+            )}
         </SafeAreaView>
     );
 }
