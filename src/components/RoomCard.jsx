@@ -4,12 +4,14 @@ import Badge from './Badge';
 import PlayersIcon from './PlayersIcon';
 import RamAvatar from './RamAvatar';
 
+import getDifficulty from '../utils/getDifficulty';
 import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomCard({ room, onPress }) {
     const statusColors = getStatusColors(room.status);
+    const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
     const isFull = room.players === room.maxPlayers;
     const isClosed = isPlaying || isFull;
@@ -24,6 +26,7 @@ export default function RoomCard({ room, onPress }) {
             <View style={styles.info}>
                 <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
                 <Text style={styles.host}>Host: {room.host}</Text>
+                <Text>{difficulty.name}</Text>
             </View>
             <View style={styles.side}>
                 <View style={styles.players}>
