@@ -57,6 +57,7 @@
 - [x] Add style to the tab bar
 - [x] Use dark status bar icons
 - [x] Add style to the Rooms header
+- [x] Add the own header with the back button to the Waiting room
 - [x] Add style to the Rooms panel and filter chips
 - [x] Add the RamAvatar component to the RoomCard
 - [x] Add Badge component for the WAITING and PLAYING status

@@ -3,10 +3,10 @@ import { Feather } from '@expo/vector-icons';
 
 import { colors } from '../styles/theme';
 
-export default function IconButton({ icon, onPress }) {
+export default function IconButton({ icon, onPress, children }) {
     return (
         <Pressable style={styles.button} onPress={onPress}>
-            <Feather name={icon} size={22} color={colors.actionText} />
+            {children || <Feather name={icon} size={22} color={colors.actionText} />}
         </Pressable>
     );
 }

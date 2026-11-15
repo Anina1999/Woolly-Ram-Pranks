@@ -23,7 +23,7 @@ export default function RootNavigator() {
             <Stack.Screen
                 name='WaitingRoom'
                 component={WaitingRoomScreen}
-                options={{ title: 'Waiting room' }}
+                options={{ headerShown: false }}
             />
             <Stack.Screen
                 name='Settings'

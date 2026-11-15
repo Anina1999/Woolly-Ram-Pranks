@@ -45,5 +45,6 @@ export const colors = {
 export const fonts = {
     display: 'LilitaOne_400Regular',
     regular: 'NunitoSans_400Regular',
+    bold: 'NunitoSans_700Bold',
     extraBold: 'NunitoSans_800ExtraBold',
 };
