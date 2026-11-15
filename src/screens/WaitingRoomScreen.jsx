@@ -6,6 +6,7 @@ import DifficultySetting from '../components/DifficultySetting';
 import IconButton from '../components/IconButton';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
+import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
 import SlotRow from '../components/SlotRow';
@@ -79,23 +80,27 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     </Text>
                 </View>
             </View>
-            <View>
-                <Text>The flock</Text>
-                <Text>{readyCount} of {roomPlayers.length} ready</Text>
-            </View>
-            <FlatList
-                data={slots}
-                keyExtractor={(slot) => slot.id}
-                renderItem={renderSlot}
-            />
+            <Panel style={[styles.panel, styles.playersPanel]}>
+                <View style={styles.playersHeader}>
+                    <Text style={styles.playersTitle}>The flock</Text>
+                    <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
+                </View>
+                <FlatList
+                    data={slots}
+                    keyExtractor={(slot) => slot.id}
+                    renderItem={renderSlot}
+                    contentContainerStyle={styles.slots}
+                    scrollEnabled={false}
+                />
+            </Panel>
             {isHost ? (
-                <View style={[styles.panel, styles.hostPanel]}>
+                <Panel style={[styles.panel, styles.hostPanel]}>
                     <MaxPlayersSetting maxPlayers={room.maxPlayers} />
                     <View style={styles.divider} />
                     <DifficultySetting difficulty={room.difficulty} />
-                </View>
+                </Panel>
             ) : (
-                <View style={[styles.panel, styles.guestPanel]}>
+                <Panel style={[styles.panel, styles.guestPanel]}>
                     <View style={styles.guestRow}>
                         <Text style={styles.guestLabel}>Max players</Text>
                         <Text style={styles.guestValue}>{room.maxPlayers}</Text>
@@ -107,7 +112,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                             {difficulty.name}
                         </Text>
                     </View>
-                </View>
+                </Panel>
             )}
             <Text>Waiting for Fleecy to be ready…</Text>
             <Pressable>
@@ -156,11 +161,32 @@ const styles = StyleSheet.create({
         color: colors.textOnDark,
     },
     panel: {
+        marginTop: 12,
         marginHorizontal: 16,
-        borderRadius: 22,
-        borderWidth: 4,
-        borderColor: colors.frame,
-        backgroundColor: colors.surface,
+    },
+    playersPanel: {
+        gap: 6,
+        padding: 10,
+    },
+    playersHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 4,
+        paddingBottom: 2,
+    },
+    playersTitle: {
+        fontFamily: fonts.display,
+        fontSize: 20,
+        color: colors.text,
+    },
+    playersReady: {
+        fontFamily: fonts.extraBold,
+        fontSize: 13,
+        color: colors.muted,
+    },
+    slots: {
+        gap: 6,
     },
     hostPanel: {
         gap: 8,
