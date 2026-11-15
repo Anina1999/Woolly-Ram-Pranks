@@ -80,6 +80,7 @@
 - [x] Add style to the open and closed player slots
 - [x] Add style to the players card in the Waiting room
 - [x] Add style to the Leave, Start game and Ready buttons 
+- [x] Add difficulty colour to the RoomCard
 
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips

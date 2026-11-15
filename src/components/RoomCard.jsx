@@ -29,7 +29,7 @@ export default function RoomCard({ room, onPress }) {
                 <Text style={styles.host}>Host: {room.host}</Text>
                 <View style={styles.difficulty}>
                     <DifficultyPips difficulty={room.difficulty} size='small' />
-                    <Text>{difficulty.name}</Text>
+                    <Text style={[styles.difficultyName, { color: difficulty.text }]}>{difficulty.name}</Text>
                 </View>
             </View>
             <View style={styles.side}>
@@ -90,6 +90,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 6,
+    },
+    difficultyName: {
+        fontFamily: fonts.extraBold,
+        fontSize: 12,
     },
     side: {
         alignItems: 'flex-end',
