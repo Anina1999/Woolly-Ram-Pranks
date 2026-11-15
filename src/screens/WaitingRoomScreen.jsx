@@ -34,6 +34,16 @@ export default function WaitingRoomScreen({ route }) {
                     </Pressable>
                 }
             />
+            <Text>Waiting for Fleecy to be ready…</Text>
+            <Pressable>
+                <Text>Leave room</Text>
+            </Pressable>
+            <Pressable>
+                <Text>Ready!</Text>
+            </Pressable>
+            <Pressable>
+                <Text>Start game</Text>
+            </Pressable>
         </View>
     );
 }
