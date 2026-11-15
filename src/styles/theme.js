@@ -5,6 +5,9 @@ export const colors = {
     accentGlow: '#F7E07A',
     highlight: '#FFD43B',
     danger: '#A8402E',
+    dangerButton: '#C2412D',
+    dangerButtonEdge: '#7E2416',
+    readyBorder: '#A8E0B6',
 
     success: '#2F8F4E',
     warning: '#E39B17',

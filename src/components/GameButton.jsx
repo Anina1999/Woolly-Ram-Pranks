@@ -2,20 +2,32 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function GameButton({ title, onPress, size, variant, children }) {
+export default function GameButton({ title, onPress, size, variant, style, children }) {
     const isLarge = size === 'large';
     const isSecondary = variant === 'secondary';
+    const isDanger = variant === 'danger';
+    const isReady = variant === 'ready';
 
     return (
         <Pressable
             style={({ pressed }) => [
                 styles.button,
                 isSecondary && styles.buttonSecondary,
+                isDanger && styles.buttonDanger,
                 pressed && styles.buttonPressed,
+                style,
             ]}
             onPress={onPress}
         >
-            <View style={[styles.face, isLarge && styles.faceLarge, isSecondary && styles.faceSecondary]}>
+            <View
+                style={[
+                    styles.face,
+                    isLarge && styles.faceLarge,
+                    isSecondary && styles.faceSecondary,
+                    isDanger && styles.faceDanger,
+                    isReady && styles.faceReady,
+                ]}
+            >
                 {!isSecondary && <View style={[styles.shine, isLarge && styles.shineLarge]} />}
                 {children}
                 <Text style={[styles.title, isLarge && styles.titleLarge, isSecondary && styles.titleSecondary]}>
@@ -34,6 +46,9 @@ const styles = StyleSheet.create({
     },
     buttonSecondary: {
         backgroundColor: colors.frame,
+    },
+    buttonDanger: {
+        backgroundColor: colors.dangerButtonEdge,
     },
     buttonPressed: {
         marginTop: 4,
@@ -57,6 +72,14 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.frame,
         backgroundColor: colors.surface,
+    },
+    faceDanger: {
+        backgroundColor: colors.dangerButton,
+    },
+    faceReady: {
+        borderWidth: 3,
+        borderColor: colors.readyBorder,
+        backgroundColor: colors.success,
     },
     shine: {
         position: 'absolute',

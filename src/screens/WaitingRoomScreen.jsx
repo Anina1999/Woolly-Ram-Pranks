@@ -1,8 +1,10 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackIcon from '../components/BackIcon';
+import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
+import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -114,19 +116,19 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     </View>
                 </Panel>
             )}
-            <Text>Waiting for Fleecy to be ready…</Text>
-            <Pressable>
-                <Text>Leave</Text>
-            </Pressable>
-            {isHost ? (
-                <Pressable>
-                    <Text>Start game</Text>
-                </Pressable>
-            ) : (
-                <Pressable>
-                    <Text>Ready!</Text>
-                </Pressable>
-            )}
+            <View style={styles.footer}>
+                <View style={styles.buttons}>
+                    <GameButton title='Leave' variant='danger' style={styles.leaveButton} />
+                    {isHost ? (
+                        <GameButton title='Start game' style={styles.mainButton} />
+                    ) : (
+                        <GameButton title='Ready!' variant='ready' style={styles.mainButton}>
+                            <CheckIcon />
+                        </GameButton>
+                    )}
+                </View>
+                <Text style={styles.status}>Waiting for Fleecy to be ready…</Text>
+            </View>
         </SafeAreaView>
     );
 }
@@ -161,10 +163,12 @@ const styles = StyleSheet.create({
         color: colors.textOnDark,
     },
     panel: {
-        marginTop: 12,
+        marginTop: 24,
         marginHorizontal: 16,
     },
     playersPanel: {
+        // room for the Private code bar, it comes after the MVP
+        marginTop: 84,
         gap: 6,
         padding: 10,
     },
@@ -219,5 +223,30 @@ const styles = StyleSheet.create({
     divider: {
         height: 2,
         backgroundColor: colors.divider,
+    },
+    footer: {
+        gap: 8,
+        marginTop: 'auto',
+        paddingHorizontal: 16,
+        paddingBottom: 18,
+    },
+    buttons: {
+        flexDirection: 'row',
+        gap: 10,
+    },
+    leaveButton: {
+        flex: 1,
+    },
+    mainButton: {
+        flex: 1.8,
+    },
+    status: {
+        textAlign: 'center',
+        fontFamily: fonts.bold,
+        fontSize: 13,
+        color: colors.textOnScene,
+        textShadowColor: colors.text,
+        textShadowOffset: { width: 0, height: 1 },
+        textShadowRadius: 1,
     },
 });
