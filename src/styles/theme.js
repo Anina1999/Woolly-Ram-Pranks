@@ -30,6 +30,12 @@ export const colors = {
     disabledBorder: '#D6CBB6',
     lockedSurface: '#EDE6D8',
     lockedEdge: '#8F8676',
+    openSlotBorder: '#C9B48A',
+    openSlotCircle: '#F3E4C3',
+    closedSlotSurface: '#EDE4D2',
+    closedSlotBorder: '#DCCFB5',
+    closedSlotCircle: '#DCCFB5',
+    closedSlotIcon: '#7A6D58',
 
     text: '#2E2117',
     muted: '#6E5D49',

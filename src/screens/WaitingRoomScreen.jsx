@@ -4,8 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BackIcon from '../components/BackIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import IconButton from '../components/IconButton';
+import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import PlayerRow from '../components/PlayerRow';
+import PlusIcon from '../components/PlusIcon';
+import SlotRow from '../components/SlotRow';
 
 import players from '../data/players';
 import rooms from '../data/rooms';
@@ -45,16 +48,16 @@ export default function WaitingRoomScreen({ route }) {
 
         if (item.type === 'open') {
             return (
-                <Pressable>
-                    <Text>Invite a friend</Text>
-                </Pressable>
+                <SlotRow title='Invite a friend'>
+                    <PlusIcon color={colors.frame} />
+                </SlotRow>
             );
         }
 
         return (
-            <View>
-                <Text>Player slot closed by host</Text>
-            </View>
+            <SlotRow title='Player slot closed by host' variant='closed'>
+                <LockIcon color={colors.closedSlotIcon} />
+            </SlotRow>
         );
     };
 
