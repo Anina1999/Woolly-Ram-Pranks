@@ -4,14 +4,29 @@ import Stepper from './Stepper';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function MaxPlayersSetting({ maxPlayers }) {
+const MIN_PLAYERS = 2;
+const MAX_PLAYERS = 5;
+
+export default function MaxPlayersSetting({ maxPlayers, onChange }) {
+    const handlePressDecrease = () => {
+        if (maxPlayers > MIN_PLAYERS) {
+            onChange?.(maxPlayers - 1);
+        }
+    };
+
+    const handlePressIncrease = () => {
+        if (maxPlayers < MAX_PLAYERS) {
+            onChange?.(maxPlayers + 1);
+        }
+    };
+
     return (
         <View style={styles.row}>
             <View style={styles.labels}>
                 <Text style={styles.title}>Max players</Text>
                 <Text style={styles.hint}>Up to 5 players</Text>
             </View>
-            <Stepper>
+            <Stepper onDecrease={handlePressDecrease} onIncrease={handlePressIncrease}>
                 <Text style={styles.value}>{maxPlayers}</Text>
             </Stepper>
         </View>

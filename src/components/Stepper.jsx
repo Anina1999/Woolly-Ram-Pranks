@@ -7,16 +7,19 @@ import PlusIcon from './PlusIcon';
 
 import { colors } from '../styles/theme';
 
-export default function Stepper({ variant, children }) {
+export default function Stepper({ variant, onDecrease, onIncrease, children }) {
     const isArrows = variant === 'arrows';
 
     return (
         <View style={styles.stepper}>
-            <Pressable style={[styles.button, styles.buttonLeft]}>
+            <Pressable style={[styles.button, styles.buttonLeft]} onPress={onDecrease}>
                 {isArrows ? <BackIcon size={16} /> : <MinusIcon />}
             </Pressable>
             <View style={styles.value}>{children}</View>
-            <Pressable style={[styles.button, styles.buttonRight, !isArrows && styles.buttonPlus]}>
+            <Pressable
+                style={[styles.button, styles.buttonRight, !isArrows && styles.buttonPlus]}
+                onPress={onIncrease}
+            >
                 {isArrows ? <ForwardIcon /> : <PlusIcon size={16} />}
             </Pressable>
         </View>

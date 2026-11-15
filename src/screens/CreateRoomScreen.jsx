@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -9,6 +10,8 @@ import Panel from '../components/Panel';
 import { colors, fonts } from '../styles/theme';
 
 export default function CreateRoomScreen({ navigation}) {
+    const [maxPlayers, setMaxPlayers] = useState(5);
+
     const handlePressCreate = () => {
         navigation.replace('WaitingRoom', { roomId: '2' });
     };
@@ -17,7 +20,7 @@ export default function CreateRoomScreen({ navigation}) {
         <SafeAreaView style={styles.container} edges={['top']}>
             <Text style={styles.title}>Create room</Text>
             <Panel style={styles.panel}>
-                <MaxPlayersSetting maxPlayers={5} />
+                <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty='normal' />
                 <GameButton title='Create' onPress={handlePressCreate} />
             </Panel>
