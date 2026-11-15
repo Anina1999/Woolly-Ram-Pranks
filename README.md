@@ -55,6 +55,7 @@
 - [x] Add Max players and Difficulty panel 
 - [x] Add Max players and Difficulty to Create room
 - [x] Show ram avatar in the Waiting room players
+- [x] Show how many rams are ready in the Waiting room
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

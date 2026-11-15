@@ -42,6 +42,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const roomPlayers = players.filter((player) => player.roomId === roomId);
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
+    const readyCount = roomPlayers.filter((player) => player.ready).length;
     const difficulty = getDifficulty(room.difficulty);
     const slots = getPlayerSlots(roomPlayers, room.maxPlayers);
 
@@ -78,8 +79,10 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     </Text>
                 </View>
             </View>
-            <Text>Host: {room.host}</Text>
-            <Text>The flock</Text>
+            <View>
+                <Text>The flock</Text>
+                <Text>{readyCount} of {roomPlayers.length} ready</Text>
+            </View>
             <FlatList
                 data={slots}
                 keyExtractor={(slot) => slot.id}
