@@ -31,6 +31,7 @@
 - [x] Open Create room from Rooms
 - [x] Replace Create room with the Waiting room after Create
 - [x] Open only the rooms that are waiting
+- [x] Connect the back button to navigation in the Waiting room
 
 ### Steps to add the screen content
 - [x] Add the Create room screen and open it from the Lobby

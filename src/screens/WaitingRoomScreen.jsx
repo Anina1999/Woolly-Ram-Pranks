@@ -18,15 +18,19 @@ import getPlayerSlots from '../utils/getPlayerSlots';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function WaitingRoomScreen({ route }) {
+export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
     const room = rooms.find((item) => item.id === roomId);
+
+    const handlePressBack = () => {
+        navigation.goBack();
+    };
 
     if (!room) {
         return (
             <SafeAreaView style={styles.container} edges={['top']}>
                 <View style={styles.header}>
-                    <IconButton>
+                    <IconButton onPress={handlePressBack}>
                         <BackIcon />
                     </IconButton>
                     <Text>Room not found</Text>
@@ -64,7 +68,7 @@ export default function WaitingRoomScreen({ route }) {
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
-                <IconButton>
+                <IconButton onPress={handlePressBack}>
                     <BackIcon />
                 </IconButton>
                 <View style={styles.headerText}>
