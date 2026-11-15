@@ -4,6 +4,8 @@ const WOOL_COLORS = {
     black: { light: '#5E5868', middle: '#27232C', dark: '#0D0B0F', sheen: '#9A94A8' },
     beige: { light: '#F0C48E', middle: '#C98A48', dark: '#7E4B1E', sheen: '#FBE0BC' },
     brown: { light: '#A6765A', middle: '#6E432A', dark: '#3A2014', sheen: '#D0A688' },
+    grey: { light: '#C4CAD4', middle: '#868E9C', dark: '#4A505C', sheen: '#E8ECF2' },
+    rust: { light: '#DA9670', middle: '#A2522E', dark: '#55240F', sheen: '#F0BC9C' },
 };
 
 const LEG_OFFSETS = {
