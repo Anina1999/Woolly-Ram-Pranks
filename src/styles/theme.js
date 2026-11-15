@@ -49,6 +49,7 @@ export const colors = {
     lockedText: '#5E5242',
     tabInactive: '#D9C9A8',
 
+    shadow: '#0A140C',
     sky: '#8FCDEE',
     grass: '#8CC152',
     dryGrass: '#A9C95B',

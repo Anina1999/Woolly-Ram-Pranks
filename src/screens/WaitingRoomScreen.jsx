@@ -198,6 +198,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 12,
     },
     guestPanel: {
+        marginTop: 56,
         paddingVertical: 4,
         paddingHorizontal: 16,
     },

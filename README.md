@@ -81,6 +81,8 @@
 - [x] Add style to the players card in the Waiting room
 - [x] Add style to the Leave, Start game and Ready buttons 
 - [x] Add difficulty colour to the RoomCard
+- [x] Add style to the Create room screen
+- [x] Add a shadow to the cards in both Waiting room and Create room
 
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips

@@ -12,5 +12,10 @@ const styles = StyleSheet.create({
         borderWidth: 4,
         borderColor: colors.frame,
         backgroundColor: colors.surface,
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 0, height: 12 },
+        shadowOpacity: 0.35,
+        shadowRadius: 12,
+        elevation: 8,
     },
 });
