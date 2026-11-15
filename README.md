@@ -74,6 +74,7 @@
 - [x] Add style to the Stepper
 - [x] Add style to the Max players and Difficulty settings
 - [x] Add style to the host and guest panels in Waiting room
+- [x] Add style to the PlayerRow
 
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips

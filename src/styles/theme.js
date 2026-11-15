@@ -12,6 +12,8 @@ export const colors = {
     waitingText: '#1F6B39',
     playingBackground: '#FBE7C2',
     playingText: '#7A4B12',
+    notReadyBackground: '#E6DDCB',
+    notReadyText: '#5E5242',
 
     surface: '#FBF3E2',
     surfacePressed: '#F3E4C3',
@@ -19,6 +21,7 @@ export const colors = {
     surfaceDark: '#3A2616',
     card: '#FFFBF2',
     border: '#D9C39A',
+    rowBorder: '#E2CFA6',
     divider: '#EADBB8',
     pipEmpty: '#E2D5BB',
     frame: '#8A5A34',
