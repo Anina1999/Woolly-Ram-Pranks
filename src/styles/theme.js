@@ -15,6 +15,7 @@ export const colors = {
 
     surface: '#FBF3E2',
     surfacePressed: '#F3E4C3',
+    stepperButton: '#F3E4C3',
     surfaceDark: '#3A2616',
     card: '#FFFBF2',
     border: '#D9C39A',

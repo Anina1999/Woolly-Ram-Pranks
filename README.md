@@ -70,6 +70,7 @@
 - [x] Add style to the RoomCard
 - [x] Add GameButton component for Create room in Rooms
 - [x] Add difficulty pips to both Waiting room and RoomCard
+- [x] Add style to the Stepper
 
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips

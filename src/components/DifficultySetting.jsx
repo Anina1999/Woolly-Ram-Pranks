@@ -11,7 +11,7 @@ export default function DifficultySetting({ difficulty }) {
     return (
         <View>
             <Text>Difficulty</Text>
-            <Stepper>
+            <Stepper variant='arrows'>
                 <Text>{name}</Text>
                 <DifficultyPips difficulty={difficulty} />
             </Stepper>
