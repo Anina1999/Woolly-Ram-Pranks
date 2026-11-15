@@ -79,19 +79,23 @@ export default function WaitingRoomScreen({ route }) {
                 renderItem={renderSlot}
             />
             {isHost ? (
-                <View>
+                <View style={[styles.panel, styles.hostPanel]}>
                     <MaxPlayersSetting maxPlayers={room.maxPlayers} />
+                    <View style={styles.divider} />
                     <DifficultySetting difficulty={room.difficulty} />
                 </View>
             ) : (
-                <View>
-                    <View>
-                        <Text>Max players</Text>
-                        <Text>{room.maxPlayers}</Text>
+                <View style={[styles.panel, styles.guestPanel]}>
+                    <View style={styles.guestRow}>
+                        <Text style={styles.guestLabel}>Max players</Text>
+                        <Text style={styles.guestValue}>{room.maxPlayers}</Text>
                     </View>
-                    <View>
-                        <Text>Difficulty</Text>
-                        <Text>{difficulty.name}</Text>
+                    <View style={styles.divider} />
+                    <View style={styles.guestRow}>
+                        <Text style={styles.guestLabel}>Difficulty</Text>
+                        <Text style={[styles.guestValue, styles.guestDifficulty, { color: difficulty.text }]}>
+                            {difficulty.name}
+                        </Text>
                     </View>
                 </View>
             )}
@@ -140,5 +144,44 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 13,
         color: colors.textOnDark,
+    },
+    panel: {
+        marginHorizontal: 16,
+        borderRadius: 22,
+        borderWidth: 4,
+        borderColor: colors.frame,
+        backgroundColor: colors.surface,
+    },
+    hostPanel: {
+        gap: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+    },
+    guestPanel: {
+        paddingVertical: 4,
+        paddingHorizontal: 16,
+    },
+    guestRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 44,
+    },
+    guestLabel: {
+        fontFamily: fonts.extraBold,
+        fontSize: 15,
+        color: colors.text,
+    },
+    guestValue: {
+        fontFamily: fonts.display,
+        fontSize: 20,
+        color: colors.text,
+    },
+    guestDifficulty: {
+        fontSize: 18,
+    },
+    divider: {
+        height: 2,
+        backgroundColor: colors.divider,
     },
 });
