@@ -49,6 +49,7 @@
 - [x] Add Leave room, Ready and Start game buttons to the Waiting room
 - [x] Show different buttons for the host and the guest in the Waiting room
 - [x] Show mode, map and difficulty in the Waiting room header
+- [x] Show open and closed seats in the Waiting room
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

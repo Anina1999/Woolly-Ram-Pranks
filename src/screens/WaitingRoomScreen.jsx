@@ -9,6 +9,7 @@ import players from '../data/players';
 import rooms from '../data/rooms';
 
 import getDifficulty from '../utils/getDifficulty';
+import getSeats from '../utils/getSeats';
 
 import { colors, fonts } from '../styles/theme';
 
@@ -33,6 +34,27 @@ export default function WaitingRoomScreen({ route }) {
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
     const difficulty = getDifficulty(room.difficulty);
+    const seats = getSeats(roomPlayers, room.maxPlayers);
+
+    const renderSeat = ({ item }) => {
+        if (item.type === 'player') {
+            return <PlayerRow player={item.player} />;
+        }
+
+        if (item.type === 'open') {
+            return (
+                <Pressable>
+                    <Text>Invite a friend</Text>
+                </Pressable>
+            );
+        }
+
+        return (
+            <View>
+                <Text>Seat closed by host</Text>
+            </View>
+        );
+    };
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -50,14 +72,9 @@ export default function WaitingRoomScreen({ route }) {
             <Text>Host: {room.host}</Text>
             <Text>The flock</Text>
             <FlatList
-                data={roomPlayers}
-                keyExtractor={(player) => player.id}
-                renderItem={({ item }) => <PlayerRow player={item} />}
-                ListFooterComponent={
-                    <Pressable>
-                        <Text>Invite a friend</Text>
-                    </Pressable>
-                }
+                data={seats}
+                keyExtractor={(seat) => seat.id}
+                renderItem={renderSeat}
             />
             <Text>Waiting for Fleecy to be ready…</Text>
             <Pressable>
