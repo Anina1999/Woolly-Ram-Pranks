@@ -51,6 +51,7 @@
 - [x] Show mode, map and difficulty in the Waiting room header
 - [x] Show open and closed seats in the Waiting room
 - [x] Show the difficulty on the RoomCard
+- [x] Add Max players and Difficulty panel 
 
 ### Steps to style the screens
 - [x] Add style to the Lobby header and title

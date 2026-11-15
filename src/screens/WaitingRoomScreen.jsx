@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BackIcon from '../components/BackIcon';
 import IconButton from '../components/IconButton';
 import PlayerRow from '../components/PlayerRow';
+import Stepper from '../components/Stepper';
 
 import players from '../data/players';
 import rooms from '../data/rooms';
@@ -76,6 +77,34 @@ export default function WaitingRoomScreen({ route }) {
                 keyExtractor={(seat) => seat.id}
                 renderItem={renderSeat}
             />
+            {isHost ? (
+                <View>
+                    <View>
+                        <Text>Max players</Text>
+                        <Text>Up to 5 seats</Text>
+                        <Stepper>
+                            <Text>{room.maxPlayers}</Text>
+                        </Stepper>
+                    </View>
+                    <View>
+                        <Text>Difficulty</Text>
+                        <Stepper>
+                            <Text>{difficulty.name}</Text>
+                        </Stepper>
+                    </View>
+                </View>
+            ) : (
+                <View>
+                    <View>
+                        <Text>Max players</Text>
+                        <Text>{room.maxPlayers}</Text>
+                    </View>
+                    <View>
+                        <Text>Difficulty</Text>
+                        <Text>{difficulty.name}</Text>
+                    </View>
+                </View>
+            )}
             <Text>Waiting for Fleecy to be ready…</Text>
             <Pressable>
                 <Text>Leave</Text>
