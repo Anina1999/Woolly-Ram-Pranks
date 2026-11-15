@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Pressable, Text, View } from 'react-native';
 
 import PlayerRow from '../components/PlayerRow';
 
@@ -28,6 +28,11 @@ export default function WaitingRoomScreen({ route }) {
                 data={roomPlayers}
                 keyExtractor={(player) => player.id}
                 renderItem={({ item }) => <PlayerRow player={item} />}
+                ListFooterComponent={
+                    <Pressable>
+                        <Text>Invite a friend</Text>
+                    </Pressable>
+                }
             />
         </View>
     );
