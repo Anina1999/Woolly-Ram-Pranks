@@ -11,7 +11,7 @@ import players from '../data/players';
 import rooms from '../data/rooms';
 
 import getDifficulty from '../utils/getDifficulty';
-import getSeats from '../utils/getSeats';
+import getPlayerSlots from '../utils/getPlayerSlots';
 
 import { colors, fonts } from '../styles/theme';
 
@@ -36,9 +36,9 @@ export default function WaitingRoomScreen({ route }) {
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
     const difficulty = getDifficulty(room.difficulty);
-    const seats = getSeats(roomPlayers, room.maxPlayers);
+    const slots = getPlayerSlots(roomPlayers, room.maxPlayers);
 
-    const renderSeat = ({ item }) => {
+    const renderSlot = ({ item }) => {
         if (item.type === 'player') {
             return <PlayerRow player={item.player} />;
         }
@@ -53,7 +53,7 @@ export default function WaitingRoomScreen({ route }) {
 
         return (
             <View>
-                <Text>Seat closed by host</Text>
+                <Text>Player slot closed by host</Text>
             </View>
         );
     };
@@ -74,9 +74,9 @@ export default function WaitingRoomScreen({ route }) {
             <Text>Host: {room.host}</Text>
             <Text>The flock</Text>
             <FlatList
-                data={seats}
-                keyExtractor={(seat) => seat.id}
-                renderItem={renderSeat}
+                data={slots}
+                keyExtractor={(slot) => slot.id}
+                renderItem={renderSlot}
             />
             {isHost ? (
                 <View>

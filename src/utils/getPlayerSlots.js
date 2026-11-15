@@ -1,7 +1,7 @@
-const SEATS = 5;
+const PLAYER_SLOTS = 5;
 
-export default function getSeats(players, maxPlayers) {
-    return Array.from({ length: SEATS }, (_, index) => {
+export default function getPlayerSlots(players, maxPlayers) {
+    return Array.from({ length: PLAYER_SLOTS }, (_, index) => {
         const id = String(index);
 
         if (index < players.length) {
