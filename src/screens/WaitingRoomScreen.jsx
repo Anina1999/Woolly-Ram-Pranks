@@ -2,10 +2,10 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackIcon from '../components/BackIcon';
-import DifficultyPips from '../components/DifficultyPips';
+import DifficultySetting from '../components/DifficultySetting';
 import IconButton from '../components/IconButton';
+import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import PlayerRow from '../components/PlayerRow';
-import Stepper from '../components/Stepper';
 
 import players from '../data/players';
 import rooms from '../data/rooms';
@@ -80,20 +80,8 @@ export default function WaitingRoomScreen({ route }) {
             />
             {isHost ? (
                 <View>
-                    <View>
-                        <Text>Max players</Text>
-                        <Text>Up to 5 seats</Text>
-                        <Stepper>
-                            <Text>{room.maxPlayers}</Text>
-                        </Stepper>
-                    </View>
-                    <View>
-                        <Text>Difficulty</Text>
-                        <Stepper>
-                            <Text>{difficulty.name}</Text>
-                            <DifficultyPips difficulty={room.difficulty} />
-                        </Stepper>
-                    </View>
+                    <MaxPlayersSetting maxPlayers={room.maxPlayers} />
+                    <DifficultySetting difficulty={room.difficulty} />
                 </View>
             ) : (
                 <View>
