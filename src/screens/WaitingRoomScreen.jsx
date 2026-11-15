@@ -8,6 +8,8 @@ import PlayerRow from '../components/PlayerRow';
 import players from '../data/players';
 import rooms from '../data/rooms';
 
+import getDifficulty from '../utils/getDifficulty';
+
 import { colors, fonts } from '../styles/theme';
 
 export default function WaitingRoomScreen({ route }) {
@@ -30,6 +32,7 @@ export default function WaitingRoomScreen({ route }) {
     const roomPlayers = players.filter((player) => player.roomId === roomId);
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
+    const difficulty = getDifficulty(room.difficulty);
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -39,7 +42,9 @@ export default function WaitingRoomScreen({ route }) {
                 </IconButton>
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
-                    <Text style={styles.subtitle}>{room.players}/{room.maxPlayers} rams</Text>
+                    <Text style={styles.subtitle}>
+                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} rams · {difficulty.name}
+                    </Text>
                 </View>
             </View>
             <Text>Host: {room.host}</Text>
