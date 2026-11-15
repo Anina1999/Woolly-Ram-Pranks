@@ -19,6 +19,7 @@ export const colors = {
     card: '#FFFBF2',
     border: '#D9C39A',
     divider: '#EADBB8',
+    pipEmpty: '#E2D5BB',
     frame: '#8A5A34',
     frameDark: '#5E3A1E',
     disabledSurface: '#F1EBDF',

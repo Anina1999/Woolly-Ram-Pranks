@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import Badge from './Badge';
+import DifficultyPips from './DifficultyPips';
 import PlayersIcon from './PlayersIcon';
 import RamAvatar from './RamAvatar';
 
@@ -26,7 +27,10 @@ export default function RoomCard({ room, onPress }) {
             <View style={styles.info}>
                 <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
                 <Text style={styles.host}>Host: {room.host}</Text>
-                <Text>{difficulty.name}</Text>
+                <View style={styles.difficulty}>
+                    <DifficultyPips difficulty={room.difficulty} size='small' />
+                    <Text>{difficulty.name}</Text>
+                </View>
             </View>
             <View style={styles.side}>
                 <View style={styles.players}>
@@ -81,6 +85,11 @@ const styles = StyleSheet.create({
         fontFamily: fonts.regular,
         fontSize: 13,
         color: colors.muted,
+    },
+    difficulty: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
     },
     side: {
         alignItems: 'flex-end',

@@ -68,6 +68,7 @@
 - [x] Add Badge component for the WAITING and PLAYING status
 - [x] Add style to the RoomCard
 - [x] Add GameButton component for Create room in Rooms
+- [x] Add difficulty pips to both Waiting room and RoomCard
 
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips

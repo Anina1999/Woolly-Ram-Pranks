@@ -2,6 +2,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackIcon from '../components/BackIcon';
+import DifficultyPips from '../components/DifficultyPips';
 import IconButton from '../components/IconButton';
 import PlayerRow from '../components/PlayerRow';
 import Stepper from '../components/Stepper';
@@ -90,6 +91,7 @@ export default function WaitingRoomScreen({ route }) {
                         <Text>Difficulty</Text>
                         <Stepper>
                             <Text>{difficulty.name}</Text>
+                            <DifficultyPips difficulty={room.difficulty} />
                         </Stepper>
                     </View>
                 </View>
