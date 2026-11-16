@@ -42,11 +42,15 @@ export default function CreateRoomScreen({ navigation }) {
                         <Text style={styles.levelName}>{newRoom.map}</Text>
                     </View>
                 </View>
-                <View>
-                    <Text>Room name</Text>
-                    <View>
-                        <TextInput placeholder='e.g. Woolly Rebels' />
-                        <Text>0/{MAX_NAME_LENGTH}</Text>
+                <View style={styles.field}>
+                    <Text style={styles.fieldLabel}>Room name</Text>
+                    <View style={styles.fieldBox}>
+                        <TextInput
+                            placeholder='e.g. Woolly Rebels'
+                            placeholderTextColor={colors.placeholder}
+                            style={styles.fieldInput}
+                        />
+                        <Text style={styles.fieldCounter}>0/{MAX_NAME_LENGTH}</Text>
                     </View>
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
@@ -110,5 +114,35 @@ const styles = StyleSheet.create({
         fontFamily: fonts.display,
         fontSize: 20,
         color: colors.text,
+    },
+    field: {
+        gap: 6,
+    },
+    fieldLabel: {
+        fontFamily: fonts.bold,
+        fontSize: 14,
+        color: colors.text,
+    },
+    fieldBox: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        height: 52,
+        paddingHorizontal: 14,
+        borderRadius: 14,
+        borderWidth: 2,
+        borderColor: colors.border,
+        backgroundColor: colors.card,
+    },
+    fieldInput: {
+        flex: 1,
+        padding: 0,
+        fontFamily: fonts.regular,
+        fontSize: 16,
+        color: colors.text,
+    },
+    fieldCounter: {
+        fontFamily: fonts.bold,
+        fontSize: 12,
+        color: colors.muted,
     },
 });

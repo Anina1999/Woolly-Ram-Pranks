@@ -54,6 +54,7 @@ export const colors = {
     textOnDark: '#F3E4C3',
     lockedText: '#5E5242',
     levelLabel: '#24601F',
+    placeholder: '#8A7F6C',
     stepperIconDisabled: '#B3A78F',
     disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
