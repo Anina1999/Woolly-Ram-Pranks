@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import BackHeader from '../components/BackHeader';
 import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -9,9 +10,13 @@ import Panel from '../components/Panel';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function CreateRoomScreen({ navigation}) {
+export default function CreateRoomScreen({ navigation }) {
     const [maxPlayers, setMaxPlayers] = useState(5);
     const [difficulty, setDifficulty] = useState('normal');
+
+    const handlePressBack = () => {
+        navigation.goBack();
+    };
 
     const handlePressCreate = () => {
         navigation.replace('WaitingRoom', { roomId: '2' });
@@ -19,7 +24,9 @@ export default function CreateRoomScreen({ navigation}) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
-            <Text style={styles.title}>Create room</Text>
+            <BackHeader onBack={handlePressBack}>
+                <Text style={styles.title}>Create room</Text>
+            </BackHeader>
             <Panel style={styles.panel}>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
@@ -35,8 +42,6 @@ const styles = StyleSheet.create({
         backgroundColor: colors.sky,
     },
     title: {
-        marginTop: 8,
-        paddingHorizontal: 16,
         fontFamily: fonts.display,
         fontSize: 28,
         lineHeight: 32,

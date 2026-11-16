@@ -2,11 +2,10 @@ import { useState } from 'react';
 import { FlatList, Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import BackIcon from '../components/BackIcon';
+import BackHeader from '../components/BackHeader';
 import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
-import IconButton from '../components/IconButton';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -60,12 +59,9 @@ export default function WaitingRoomScreen({ route, navigation }) {
     if (!room) {
         return (
             <SafeAreaView style={styles.container} edges={['top']}>
-                <View style={styles.header}>
-                    <IconButton onPress={handlePressBack}>
-                        <BackIcon />
-                    </IconButton>
+                <BackHeader onBack={handlePressBack}>
                     <Text>Room not found</Text>
-                </View>
+                </BackHeader>
             </SafeAreaView>
         );
     }
@@ -102,17 +98,14 @@ export default function WaitingRoomScreen({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
-            <View style={styles.header}>
-                <IconButton onPress={handlePressBack}>
-                    <BackIcon />
-                </IconButton>
+            <BackHeader onBack={handlePressBack}>
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
                     <Text style={styles.subtitle}>
                         {room.mode} · {room.map} · {roomPlayers.length}/{maxPlayers} rams · {difficultyInfo.name}
                     </Text>
                 </View>
-            </View>
+            </BackHeader>
             <Panel style={[styles.panel, styles.playersPanel]}>
                 <View style={styles.playersHeader}>
                     <Text style={styles.playersTitle}>The flock</Text>
@@ -199,13 +192,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.sky,
-    },
-    header: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 12,
-        marginTop: 8,
-        paddingHorizontal: 16,
     },
     headerText: {
         flex: 1,
