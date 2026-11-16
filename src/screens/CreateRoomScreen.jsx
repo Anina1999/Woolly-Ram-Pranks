@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
+import BarnIcon from '../components/BarnIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -30,9 +31,14 @@ export default function CreateRoomScreen({ navigation }) {
                 <Text style={styles.title}>Create room</Text>
             </BackHeader>
             <Panel style={styles.panel}>
-                <View>
-                    <Text>{newRoom.mode} · Level {newRoom.level}</Text>
-                    <Text>{newRoom.map}</Text>
+                <View style={styles.levelCard}>
+                    <View style={styles.levelIcon}>
+                        <BarnIcon />
+                    </View>
+                    <View>
+                        <Text style={styles.levelLabel}>{newRoom.mode} · Level {newRoom.level}</Text>
+                        <Text style={styles.levelName}>{newRoom.map}</Text>
+                    </View>
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
@@ -64,5 +70,36 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingBottom: 16,
         borderRadius: 24,
+    },
+    levelCard: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+        padding: 10,
+        borderRadius: 16,
+        borderWidth: 2,
+        borderColor: colors.levelCardBorder,
+        backgroundColor: colors.levelCard,
+    },
+    levelIcon: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 52,
+        height: 52,
+        borderRadius: 12,
+        overflow: 'hidden',
+        backgroundColor: colors.meadow,
+    },
+    levelLabel: {
+        fontFamily: fonts.extraBold,
+        fontSize: 12,
+        letterSpacing: 0.6,
+        textTransform: 'uppercase',
+        color: colors.levelLabel,
+    },
+    levelName: {
+        fontFamily: fonts.display,
+        fontSize: 20,
+        color: colors.text,
     },
 });

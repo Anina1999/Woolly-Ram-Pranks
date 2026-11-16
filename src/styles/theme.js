@@ -43,6 +43,8 @@ export const colors = {
     closedSlotBorder: '#DCCFB5',
     closedSlotCircle: '#DCCFB5',
     closedSlotIcon: '#7A6D58',
+    levelCard: '#E5EED5',
+    levelCardBorder: '#B9D59A',
 
     text: '#2E2117',
     muted: '#6E5D49',
@@ -51,6 +53,7 @@ export const colors = {
     textOnScene: '#FFFFFF',
     textOnDark: '#F3E4C3',
     lockedText: '#5E5242',
+    levelLabel: '#24601F',
     stepperIconDisabled: '#B3A78F',
     disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
