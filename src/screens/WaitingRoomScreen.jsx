@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { FlatList, Modal, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -9,6 +9,7 @@ import GameButton from '../components/GameButton';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
+import ModalPanel from '../components/ModalPanel';
 import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
@@ -188,23 +189,14 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 </View>
                 <Text style={styles.status}>{status}</Text>
             </View>
-            <Modal
-                visible={isLeaveModalVisible}
-                transparent
-                animationType='fade'
-                onRequestClose={handleCloseLeaveModal}
-            >
-                <View style={styles.overlay}>
-                    <Panel style={styles.dialog}>
-                        {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
-                        <Text style={styles.dialogTitle}>{leaveTitle}</Text>
-                        <View style={styles.dialogButtons}>
-                            <GameButton title='Leave' variant='danger' onPress={handleConfirmLeave} />
-                            <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
-                        </View>
-                    </Panel>
+            <ModalPanel visible={isLeaveModalVisible} onClose={handleCloseLeaveModal}>
+                {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
+                <Text style={styles.dialogTitle}>{leaveTitle}</Text>
+                <View style={styles.dialogButtons}>
+                    <GameButton title='Leave' variant='danger' onPress={handleConfirmLeave} />
+                    <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
                 </View>
-            </Modal>
+            </ModalPanel>
         </SafeAreaView>
     );
 }
@@ -318,22 +310,6 @@ const styles = StyleSheet.create({
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 1 },
         textShadowRadius: 1,
-    },
-    overlay: {
-        flex: 1,
-        justifyContent: 'center',
-        paddingHorizontal: 22,
-        backgroundColor: colors.backdrop,
-    },
-    dialog: {
-        alignItems: 'center',
-        gap: 10,
-        padding: 18,
-        borderRadius: 24,
-        shadowOffset: { width: 0, height: 16 },
-        shadowOpacity: 0.4,
-        shadowRadius: 16,
-        elevation: 16,
     },
     dialogTitle: {
         textAlign: 'center',
