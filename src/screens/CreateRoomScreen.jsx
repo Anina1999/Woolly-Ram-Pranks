@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import BackHeader from '../components/BackHeader';
 import BarnIcon from '../components/BarnIcon';
 import DifficultySetting from '../components/DifficultySetting';
+import ErrorIcon from '../components/ErrorIcon';
 import GameButton from '../components/GameButton';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import Panel from '../components/Panel';
@@ -55,8 +56,8 @@ export default function CreateRoomScreen({ navigation }) {
                     </View>
                 </View>
                 <View style={styles.field}>
-                    <Text style={styles.fieldLabel}>Room name</Text>
-                    <View style={styles.fieldBox}>
+                    <Text style={[styles.fieldLabel, isNameErrorVisible && styles.fieldLabelError]}>Room name</Text>
+                    <View style={[styles.fieldBox, isNameErrorVisible && styles.fieldBoxError]}>
                         <TextInput
                             value={roomName}
                             onChangeText={setRoomName}
@@ -68,7 +69,12 @@ export default function CreateRoomScreen({ navigation }) {
                         <Text style={styles.fieldCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
                     </View>
                     {isNameErrorVisible && (
-                        <Text>Name must be {MIN_NAME_LENGTH}–{MAX_NAME_LENGTH} characters.</Text>
+                        <View style={styles.fieldError}>
+                            <ErrorIcon />
+                            <Text style={styles.fieldErrorText}>
+                                Name must be {MIN_NAME_LENGTH}–{MAX_NAME_LENGTH} characters.
+                            </Text>
+                        </View>
                     )}
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
@@ -141,6 +147,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.text,
     },
+    fieldLabelError: {
+        color: colors.errorText,
+    },
     fieldBox: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -150,6 +159,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.border,
         backgroundColor: colors.card,
+    },
+    fieldBoxError: {
+        borderColor: colors.errorBorder,
+        backgroundColor: colors.errorSurface,
     },
     fieldInput: {
         flex: 1,
@@ -162,5 +175,15 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 12,
         color: colors.muted,
+    },
+    fieldError: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+    },
+    fieldErrorText: {
+        fontFamily: fonts.bold,
+        fontSize: 13,
+        color: colors.errorText,
     },
 });

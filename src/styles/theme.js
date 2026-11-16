@@ -19,6 +19,8 @@ export const colors = {
     playingText: '#7A4B12',
     notReadyBackground: '#E6DDCB',
     notReadyText: '#5E5242',
+    errorIcon: '#C8352B',
+    errorIconMark: '#FFFFFF',
 
     surface: '#FBF3E2',
     surfacePressed: '#F3E4C3',
@@ -45,6 +47,8 @@ export const colors = {
     closedSlotIcon: '#7A6D58',
     levelCard: '#E5EED5',
     levelCardBorder: '#B9D59A',
+    errorSurface: '#FFF4F1',
+    errorBorder: '#C8352B',
 
     text: '#2E2117',
     muted: '#6E5D49',
@@ -55,6 +59,7 @@ export const colors = {
     lockedText: '#5E5242',
     levelLabel: '#24601F',
     placeholder: '#8A7F6C',
+    errorText: '#C8352B',
     stepperIconDisabled: '#B3A78F',
     disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
