@@ -61,6 +61,9 @@ export const colors = {
     myRoomBorder: '#F2B33D',
     myRoomCard: '#FFF6DE',
     detailsCorner: '#8A5A34',
+    searchTabs: '#EADBB8',
+    selectedTabEdge: '#2E2117',
+    searchFieldBorder: '#5E3A1E',
 
     text: '#2E2117',
     muted: '#6E5D49',
@@ -79,6 +82,7 @@ export const colors = {
     disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
     detailsCornerIcon: '#FBF3E2',
+    searchIcon: '#5E3A1E',
 
     shadow: '#0A140C',
     sky: '#8FCDEE',

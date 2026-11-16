@@ -183,7 +183,7 @@ export default function RoomsScreen({ navigation }) {
                     </View>
                 </View>
             </View>
-            <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch}>
+            <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch} style={styles.searchPanel}>
                 <FindRoom onClose={handleCloseSearch} />
             </ModalPanel>
             <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
@@ -360,6 +360,14 @@ const styles = StyleSheet.create({
         alignItems: 'stretch',
         marginHorizontal: 2,
         padding: 14,
+        borderRadius: 22,
+    },
+    searchPanel: {
+        alignItems: 'stretch',
+        gap: 14,
+        marginHorizontal: -2,
+        paddingVertical: 16,
+        paddingHorizontal: 14,
         borderRadius: 22,
     },
 });
