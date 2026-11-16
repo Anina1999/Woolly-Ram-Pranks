@@ -32,18 +32,26 @@
 - [x] Replace Create room with the Waiting room after Create
 - [x] Open only the rooms that are waiting
 - [x] Connect the back button to navigation in the Waiting room
+- [x] Go back with Leave in the Waiting room
 
-### Steps to add the screen content
-- [x] Add the Create room screen and open it from the Lobby
-- [x] Add the Waiting room screen and open it from Rooms with the room id
-- [x] Add the Settings screen and open it from the cog in the Lobby
+### Steps to add the Lobby content
 - [x] Add the Co-op mode card to the Lobby
 - [x] Add the LockedModeCard component for Competitive and Hybrid
+
+### Steps to add the Rooms content
 - [x] Add the Rooms header with the refresh button
 - [x] Add the All and Waiting filter chips to Rooms
 - [x] Add the Friends filter chip to Rooms
 - [x] Add the rooms list with the RoomCard component
 - [x] Add the Create room button at the bottom of Rooms
+- [x] Show the difficulty on the RoomCard
+
+### Steps to add the Create room content
+- [x] Add the Create room screen and open it from the Lobby
+- [x] Add Max players and Difficulty to Create room
+
+### Steps to add the Waiting room content
+- [x] Add the Waiting room screen and open it from Rooms with the room id
 - [x] Show the room name and host in the Waiting room
 - [x] Add the players list with the PlayerRow component to the Waiting room
 - [x] Add Invite a friend row to the Waiting room
@@ -51,27 +59,37 @@
 - [x] Show different buttons for the host and the guest in the Waiting room
 - [x] Show mode, map and difficulty in the Waiting room header
 - [x] Show open and closed seats in the Waiting room
-- [x] Show the difficulty on the RoomCard
-- [x] Add Max players and Difficulty panel 
-- [x] Add Max players and Difficulty to Create room
+- [x] Add Max players and Difficulty panel
 - [x] Show ram avatar in the Waiting room players
 - [x] Show how many rams are ready in the Waiting room
 
-### Steps to style the screens
+### Steps to add the Settings content
+- [x] Add the Settings screen and open it from the cog in the Lobby
+
+### Styling
+
+#### Lobby
 - [x] Add style to the Lobby header and title
 - [x] Add style to the Co-op mode card
 - [x] Use Lilita One and Nunito Sans in the Lobby
 - [x] Add style to the LockedModeCard
 - [x] Add style to the Play Co-op and Create a room buttons
+
+#### Tab bar and status bar
 - [x] Add style to the tab bar
 - [x] Use dark status bar icons
+
+#### Rooms
 - [x] Add style to the Rooms header
-- [x] Add the own header with the back button to the Waiting room
 - [x] Add style to the Rooms panel and filter chips
 - [x] Add the RamAvatar component to the RoomCard
 - [x] Add Badge component for the WAITING and PLAYING status
 - [x] Add style to the RoomCard
 - [x] Add GameButton component for Create room in Rooms
+- [x] Add difficulty colour to the RoomCard
+
+#### Waiting room
+- [x] Add the own header with the back button to the Waiting room
 - [x] Add difficulty pips to both Waiting room and RoomCard
 - [x] Add style to the Stepper
 - [x] Add style to the Max players and Difficulty settings
@@ -79,8 +97,9 @@
 - [x] Add style to the PlayerRow
 - [x] Add style to the open and closed player slots
 - [x] Add style to the players card in the Waiting room
-- [x] Add style to the Leave, Start game and Ready buttons 
-- [x] Add difficulty colour to the RoomCard
+- [x] Add style to the Leave, Start game and Ready buttons
+
+#### Create room
 - [x] Add style to the Create room screen
 - [x] Add a shadow to the cards in both Waiting room and Create room
 

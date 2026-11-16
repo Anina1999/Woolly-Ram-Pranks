@@ -125,7 +125,12 @@ export default function WaitingRoomScreen({ route, navigation }) {
             )}
             <View style={styles.footer}>
                 <View style={styles.buttons}>
-                    <GameButton title='Leave' variant='danger' style={styles.leaveButton} />
+                    <GameButton
+                        title='Leave'
+                        variant='danger'
+                        style={styles.leaveButton}
+                        onPress={handlePressBack}
+                    />
                     {isHost ? (
                         <GameButton title='Start game' style={styles.mainButton} />
                     ) : (
