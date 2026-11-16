@@ -87,3 +87,4 @@
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips
 - [x] Change Max players with the stepper in Create room
+- [x] Change the difficulty with the arrows in Create room

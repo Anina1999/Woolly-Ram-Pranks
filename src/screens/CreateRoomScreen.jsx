@@ -11,6 +11,7 @@ import { colors, fonts } from '../styles/theme';
 
 export default function CreateRoomScreen({ navigation}) {
     const [maxPlayers, setMaxPlayers] = useState(5);
+    const [difficulty, setDifficulty] = useState('normal');
 
     const handlePressCreate = () => {
         navigation.replace('WaitingRoom', { roomId: '2' });
@@ -21,7 +22,7 @@ export default function CreateRoomScreen({ navigation}) {
             <Text style={styles.title}>Create room</Text>
             <Panel style={styles.panel}>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
-                <DifficultySetting difficulty='normal' />
+                <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
                 <GameButton title='Create' onPress={handlePressCreate} />
             </Panel>
         </SafeAreaView>
