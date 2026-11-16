@@ -49,6 +49,7 @@
 - [x] Add the "You're in a room" bar to Rooms
 - [x] Show YOU'RE IN on the card of my room
 - [x] Add the Already in a room window to Rooms
+- [x] Add the Room details button and window to Rooms
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby
@@ -98,6 +99,7 @@
 - [x] Add style to the You're in a room bar
 - [x] Add gold border and YOU'RE IN badge to the card of my room
 - [x] Add style to the Already in a room window
+- [x] Add the brown corner with "i" to the RoomCard
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
@@ -142,3 +144,4 @@
 - [x] Keep the card of my room open when it is full
 - [x] Go to my room from the Already in a room window
 - [x] Disable Create room while in a room
+- [x] Close the windows by tapping outside

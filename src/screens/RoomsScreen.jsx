@@ -23,6 +23,7 @@ export default function RoomsScreen({ navigation }) {
     const { rooms, players } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
+    const [detailsRoom, setDetailsRoom] = useState(null);
 
     const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
     const shownRooms = selectedFilter === 'waiting' ? waitingRooms : rooms;
@@ -45,6 +46,14 @@ export default function RoomsScreen({ navigation }) {
 
     const handleCloseBlockedModal = () => {
         setBlockedRoom(null);
+    };
+
+    const handlePressDetails = (room) => {
+        setDetailsRoom(room);
+    };
+
+    const handleCloseDetails = () => {
+        setDetailsRoom(null);
     };
 
     const handlePressReturn = () => {
@@ -71,6 +80,7 @@ export default function RoomsScreen({ navigation }) {
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
                 onPress={() => handlePressRoom(item)}
+                onPressDetails={() => handlePressDetails(item)}
             />
         );
     };
@@ -136,6 +146,9 @@ export default function RoomsScreen({ navigation }) {
                     <GameButton title='Go to my room' onPress={handlePressGoToMyRoom} />
                     <GameButton title='Stay here' variant='secondary' onPress={handleCloseBlockedModal} />
                 </View>
+            </ModalPanel>
+            <ModalPanel visible={detailsRoom !== null} onClose={handleCloseDetails}>
+                <IconButton icon='x' accessibilityLabel='Close' onPress={handleCloseDetails} />
             </ModalPanel>
         </SafeAreaView>
     );

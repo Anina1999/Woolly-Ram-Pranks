@@ -56,6 +56,7 @@ export const colors = {
     myRoomBar: 'rgba(24, 36, 27, 0.9)',
     myRoomBorder: '#F2B33D',
     myRoomCard: '#FFF6DE',
+    detailsCorner: '#8A5A34',
 
     text: '#2E2117',
     muted: '#6E5D49',
@@ -73,6 +74,7 @@ export const colors = {
     stepperIconDisabled: '#B3A78F',
     disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
+    detailsCornerIcon: '#FBF3E2',
 
     shadow: '#0A140C',
     sky: '#8FCDEE',

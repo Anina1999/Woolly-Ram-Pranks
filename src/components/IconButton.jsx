@@ -3,9 +3,14 @@ import { Feather } from '@expo/vector-icons';
 
 import { colors } from '../styles/theme';
 
-export default function IconButton({ icon, onPress, children }) {
+export default function IconButton({ icon, accessibilityLabel, onPress, children }) {
     return (
-        <Pressable style={styles.button} onPress={onPress}>
+        <Pressable
+            style={styles.button}
+            accessibilityRole='button'
+            accessibilityLabel={accessibilityLabel}
+            onPress={onPress}
+        >
             {children || <Feather name={icon} size={22} color={colors.actionText} />}
         </Pressable>
     );

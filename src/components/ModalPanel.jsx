@@ -1,4 +1,4 @@
-import { Modal, StyleSheet, View } from 'react-native';
+import { Modal, Pressable, StyleSheet, View } from 'react-native';
 
 import Panel from './Panel';
 
@@ -8,6 +8,12 @@ export default function ModalPanel({ visible, onClose, style, children }) {
     return (
         <Modal visible={visible} transparent animationType='fade' onRequestClose={onClose}>
             <View style={styles.overlay}>
+                <Pressable
+                    style={StyleSheet.absoluteFill}
+                    accessibilityRole='button'
+                    accessibilityLabel='Close'
+                    onPress={onClose}
+                />
                 <Panel style={[styles.panel, style]}>{children}</Panel>
             </View>
         </Modal>
