@@ -111,3 +111,4 @@
 - [x] Disable the stepper buttons at the end of the range
 - [x] Toggle ready with the Ready button in the Waiting room
 - [x] Show room status from the players in the Waiting room
+- [x] Disable Start game until everyone is ready

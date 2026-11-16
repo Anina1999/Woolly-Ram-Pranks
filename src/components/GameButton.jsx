@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function GameButton({ title, onPress, size, variant, style, children }) {
+export default function GameButton({ title, onPress, size, variant, isDisabled, style, children }) {
     const isLarge = size === 'large';
     const isSecondary = variant === 'secondary';
     const isDanger = variant === 'danger';
@@ -14,9 +14,11 @@ export default function GameButton({ title, onPress, size, variant, style, child
                 styles.button,
                 isSecondary && styles.buttonSecondary,
                 isDanger && styles.buttonDanger,
+                isDisabled && styles.buttonDisabled,
                 pressed && styles.buttonPressed,
                 style,
             ]}
+            disabled={isDisabled}
             onPress={onPress}
         >
             <View
@@ -26,11 +28,19 @@ export default function GameButton({ title, onPress, size, variant, style, child
                     isSecondary && styles.faceSecondary,
                     isDanger && styles.faceDanger,
                     isReady && styles.faceReady,
+                    isDisabled && styles.faceDisabled,
                 ]}
             >
-                {!isSecondary && <View style={[styles.shine, isLarge && styles.shineLarge]} />}
+                {!isSecondary && !isDisabled && <View style={[styles.shine, isLarge && styles.shineLarge]} />}
                 {children}
-                <Text style={[styles.title, isLarge && styles.titleLarge, isSecondary && styles.titleSecondary]}>
+                <Text
+                    style={[
+                        styles.title,
+                        isLarge && styles.titleLarge,
+                        isSecondary && styles.titleSecondary,
+                        isDisabled && styles.titleDisabled,
+                    ]}
+                >
                     {title}
                 </Text>
             </View>
@@ -49,6 +59,9 @@ const styles = StyleSheet.create({
     },
     buttonDanger: {
         backgroundColor: colors.dangerButtonEdge,
+    },
+    buttonDisabled: {
+        backgroundColor: colors.disabledButtonEdge,
     },
     buttonPressed: {
         marginTop: 4,
@@ -81,6 +94,9 @@ const styles = StyleSheet.create({
         borderColor: colors.readyBorder,
         backgroundColor: colors.success,
     },
+    faceDisabled: {
+        backgroundColor: colors.disabledButton,
+    },
     shine: {
         position: 'absolute',
         top: 4,
@@ -106,6 +122,11 @@ const styles = StyleSheet.create({
     },
     titleSecondary: {
         color: colors.actionText,
+        textShadowOffset: { width: 0, height: 0 },
+        textShadowRadius: 0,
+    },
+    titleDisabled: {
+        color: colors.disabledButtonText,
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 0,
     },

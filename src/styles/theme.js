@@ -8,6 +8,8 @@ export const colors = {
     dangerButton: '#C2412D',
     dangerButtonEdge: '#7E2416',
     readyBorder: '#A8E0B6',
+    disabledButton: '#CFC4AF',
+    disabledButtonEdge: '#B3A78F',
 
     success: '#2F8F4E',
     warning: '#E39B17',
@@ -49,6 +51,7 @@ export const colors = {
     textOnDark: '#F3E4C3',
     lockedText: '#5E5242',
     stepperIconDisabled: '#B3A78F',
+    disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
 
     shadow: '#0A140C',

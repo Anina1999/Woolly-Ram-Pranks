@@ -143,7 +143,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         onPress={handlePressBack}
                     />
                     {isHost ? (
-                        <GameButton title='Start game' style={styles.mainButton} />
+                        <GameButton title='Start game' isDisabled={!canStart} style={styles.mainButton} />
                     ) : (
                         <GameButton
                             title='Ready!'
