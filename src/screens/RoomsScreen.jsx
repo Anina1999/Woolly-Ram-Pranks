@@ -33,6 +33,10 @@ export default function RoomsScreen({ navigation }) {
         navigation.navigate('WaitingRoom', { roomId });
     };
 
+    const handlePressReturn = () => {
+        navigation.navigate('WaitingRoom', { roomId: myRoom.id });
+    };
+
     const handlePressCreateRoom = () => {
         navigation.navigate('CreateRoom');
     };
@@ -67,7 +71,7 @@ export default function RoomsScreen({ navigation }) {
                             {myRoomPlayers.length}/{myRoom.maxPlayers} · {getDifficulty(myRoom.difficulty).name} · {myReadyCount} of {myRoomPlayers.length} ready
                         </Text>
                     </View>
-                    <Pressable style={styles.returnButton}>
+                    <Pressable style={styles.returnButton} onPress={handlePressReturn}>
                         <Text style={styles.returnText}>Return</Text>
                         <ForwardIcon size={18} color={colors.textOnAccent} />
                     </Pressable>
