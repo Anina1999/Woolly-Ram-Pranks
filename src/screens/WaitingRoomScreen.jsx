@@ -40,7 +40,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     };
 
     const handlePressBack = () => {
-        navigation.goBack();
+        navigation.popTo('App', { screen: 'Rooms' });
     };
 
     const handlePressLeave = () => {

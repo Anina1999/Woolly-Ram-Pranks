@@ -33,6 +33,7 @@
 - [x] Open only the rooms that are waiting
 - [x] Connect the back button to navigation in the Waiting room
 - [x] Go back with Leave in the Waiting room
+- [x] Go back to Rooms from the Waiting room
 
 ### Steps to add the Lobby content
 - [x] Add the Co-op mode card to the Lobby
