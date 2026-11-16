@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
@@ -11,12 +12,18 @@ import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import Sheep from '../components/Sheep';
 
+import { RoomsContext } from '../contexts/RoomsContext';
+
 import useCardPulse from '../hooks/useCardPulse';
 
 import { colors, fonts } from '../styles/theme';
 
 export default function LobbyScreen({ navigation }) {
+    const { players } = useContext(RoomsContext);
     const { borderColor, scale } = useCardPulse();
+
+    const me = players.find((player) => player.you);
+    const isInRoom = me !== undefined;
 
     const handlePressProfile = () => {
         navigation.navigate('Profile');
@@ -90,7 +97,12 @@ export default function LobbyScreen({ navigation }) {
                 <GameButton title='Play Co-op' size='large' onPress={handlePressPlayCoop}>
                     <PlayIcon />
                 </GameButton>
-                <GameButton title='Create a room' variant='secondary' onPress={handlePressCreateRoom} />
+                <GameButton
+                    title='Create a room'
+                    variant='secondary'
+                    isDisabled={isInRoom}
+                    onPress={handlePressCreateRoom}
+                />
             </View>
         </SafeAreaView>
     );

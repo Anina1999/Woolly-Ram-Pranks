@@ -31,6 +31,8 @@ export default function RoomsScreen({ navigation }) {
     const myRoom = rooms.find((room) => room.id === me?.roomId);
     const myRoomPlayers = getRoomPlayers(players, me?.roomId);
     const myReadyCount = myRoomPlayers.filter((player) => player.ready).length;
+    const isInRoom = me !== undefined;
+    const plusIconColor = isInRoom ? colors.disabledButtonText : colors.textOnPrimary;
 
     const handlePressRoom = (room) => {
         if (myRoom && room.id !== myRoom.id) {
@@ -117,8 +119,8 @@ export default function RoomsScreen({ navigation }) {
                         renderItem={renderRoom}
                     />
                     <View style={styles.bottomBar}>
-                        <GameButton title='Create room' onPress={handlePressCreateRoom}>
-                            <PlusIcon />
+                        <GameButton title='Create room' isDisabled={isInRoom} onPress={handlePressCreateRoom}>
+                            <PlusIcon color={plusIconColor} />
                         </GameButton>
                     </View>
                 </View>

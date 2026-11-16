@@ -141,3 +141,4 @@
 - [x] Go back to my room with Return in Rooms
 - [x] Keep the card of my room open when it is full
 - [x] Go to my room from the Already in a room window
+- [x] Disable Create room while in a room

@@ -95,6 +95,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.success,
     },
     faceDisabled: {
+        borderColor: colors.disabledButtonEdge,
         backgroundColor: colors.disabledButton,
     },
     shine: {
