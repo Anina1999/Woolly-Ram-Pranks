@@ -7,20 +7,48 @@ import PlusIcon from './PlusIcon';
 
 import { colors } from '../styles/theme';
 
-export default function Stepper({ variant, onDecrease, onIncrease, children }) {
+export default function Stepper({
+    variant,
+    isDecreaseDisabled,
+    isIncreaseDisabled,
+    onDecrease,
+    onIncrease,
+    children,
+}) {
     const isArrows = variant === 'arrows';
+    const decreaseIconColor = isDecreaseDisabled ? colors.stepperIconDisabled : colors.actionText;
+    const forwardIconColor = isIncreaseDisabled ? colors.stepperIconDisabled : colors.actionText;
+    const plusIconColor = isIncreaseDisabled ? colors.stepperIconDisabled : colors.textOnPrimary;
 
     return (
         <View style={styles.stepper}>
-            <Pressable style={[styles.button, styles.buttonLeft]} onPress={onDecrease}>
-                {isArrows ? <BackIcon size={16} /> : <MinusIcon />}
+            <Pressable
+                style={[styles.button, styles.buttonLeft, isDecreaseDisabled && styles.buttonDisabled]}
+                disabled={isDecreaseDisabled}
+                onPress={onDecrease}
+            >
+                {isArrows ? (
+                    <BackIcon size={16} color={decreaseIconColor} />
+                ) : (
+                    <MinusIcon color={decreaseIconColor} />
+                )}
             </Pressable>
             <View style={styles.value}>{children}</View>
             <Pressable
-                style={[styles.button, styles.buttonRight, !isArrows && styles.buttonPlus]}
+                style={[
+                    styles.button,
+                    styles.buttonRight,
+                    !isArrows && styles.buttonPlus,
+                    isIncreaseDisabled && styles.buttonDisabled,
+                ]}
+                disabled={isIncreaseDisabled}
                 onPress={onIncrease}
             >
-                {isArrows ? <ForwardIcon /> : <PlusIcon size={16} />}
+                {isArrows ? (
+                    <ForwardIcon color={forwardIconColor} />
+                ) : (
+                    <PlusIcon size={16} color={plusIconColor} />
+                )}
             </Pressable>
         </View>
     );
@@ -52,6 +80,9 @@ const styles = StyleSheet.create({
     },
     buttonPlus: {
         backgroundColor: colors.primary,
+    },
+    buttonDisabled: {
+        backgroundColor: colors.stepperButtonDisabled,
     },
     value: {
         justifyContent: 'center',

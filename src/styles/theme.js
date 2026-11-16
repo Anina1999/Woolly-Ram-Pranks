@@ -21,6 +21,7 @@ export const colors = {
     surface: '#FBF3E2',
     surfacePressed: '#F3E4C3',
     stepperButton: '#F3E4C3',
+    stepperButtonDisabled: '#EFE6D3',
     surfaceDark: '#3A2616',
     card: '#FFFBF2',
     border: '#D9C39A',
@@ -47,6 +48,7 @@ export const colors = {
     textOnScene: '#FFFFFF',
     textOnDark: '#F3E4C3',
     lockedText: '#5E5242',
+    stepperIconDisabled: '#B3A78F',
     tabInactive: '#D9C9A8',
 
     shadow: '#0A140C',

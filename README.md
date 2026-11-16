@@ -89,3 +89,4 @@
 - [x] Change Max players with the stepper in Create room
 - [x] Change the difficulty with the arrows in Create room
 - [x] Let the host change Max players and difficulty in the Waiting room
+- [x] Disable the stepper buttons at the end of the range

@@ -11,15 +11,11 @@ export default function MaxPlayersSetting({ maxPlayers, playerCount = 0, onChang
     const minPlayers = Math.max(MIN_PLAYERS, playerCount);
 
     const handlePressDecrease = () => {
-        if (maxPlayers > minPlayers) {
-            onChange(maxPlayers - 1);
-        }
+        onChange(maxPlayers - 1);
     };
 
     const handlePressIncrease = () => {
-        if (maxPlayers < MAX_PLAYERS) {
-            onChange(maxPlayers + 1);
-        }
+        onChange(maxPlayers + 1);
     };
 
     return (
@@ -28,7 +24,12 @@ export default function MaxPlayersSetting({ maxPlayers, playerCount = 0, onChang
                 <Text style={styles.title}>Max players</Text>
                 <Text style={styles.hint}>Up to 5 players</Text>
             </View>
-            <Stepper onDecrease={handlePressDecrease} onIncrease={handlePressIncrease}>
+            <Stepper
+                isDecreaseDisabled={maxPlayers <= minPlayers}
+                isIncreaseDisabled={maxPlayers >= MAX_PLAYERS}
+                onDecrease={handlePressDecrease}
+                onIncrease={handlePressIncrease}
+            >
                 <Text style={styles.value}>{maxPlayers}</Text>
             </Stepper>
         </View>
