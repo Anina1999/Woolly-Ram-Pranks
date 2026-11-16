@@ -27,9 +27,16 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const room = rooms.find((item) => item.id === roomId);
     const [maxPlayers, setMaxPlayers] = useState(room?.maxPlayers);
     const [difficulty, setDifficulty] = useState(room?.difficulty);
+    const [roomPlayers, setRoomPlayers] = useState(players.filter((player) => player.roomId === roomId));
 
     const handlePressBack = () => {
         navigation.goBack();
+    };
+
+    const handlePressReady = () => {
+        setRoomPlayers(roomPlayers.map((player) =>
+            player.you ? { ...player, ready: !player.ready } : player
+        ));
     };
 
     if (!room) {
@@ -45,7 +52,6 @@ export default function WaitingRoomScreen({ route, navigation }) {
         );
     }
 
-    const roomPlayers = players.filter((player) => player.roomId === roomId);
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
     const readyCount = roomPlayers.filter((player) => player.ready).length;
@@ -134,7 +140,12 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     {isHost ? (
                         <GameButton title='Start game' style={styles.mainButton} />
                     ) : (
-                        <GameButton title='Ready!' variant='ready' style={styles.mainButton}>
+                        <GameButton
+                            title='Ready!'
+                            variant='ready'
+                            style={styles.mainButton}
+                            onPress={handlePressReady}
+                        >
                             <CheckIcon />
                         </GameButton>
                     )}
