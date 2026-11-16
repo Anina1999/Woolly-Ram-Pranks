@@ -157,3 +157,4 @@
 - [x] Join a room with Join room in Room details
 - [x] Join a room by tapping its card, or open its details when it can't be joined
 - [x] Search the rooms by name in the Find a room window
+- [x] Join a room or open its details from the Find a room results

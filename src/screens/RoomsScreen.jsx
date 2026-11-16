@@ -42,6 +42,8 @@ export default function RoomsScreen({ navigation }) {
     const plusIconColor = isInRoom ? colors.disabledButtonText : colors.textOnPrimary;
 
     const handlePressRoom = (room) => {
+        setIsSearchVisible(false);
+
         if (room.id === me?.roomId) {
             handlePressReturn();
             return;
@@ -55,6 +57,7 @@ export default function RoomsScreen({ navigation }) {
     };
 
     const handlePressDetails = (room) => {
+        setIsSearchVisible(false);
         setDetailsRoom(room);
     };
 
@@ -184,7 +187,14 @@ export default function RoomsScreen({ navigation }) {
                 </View>
             </View>
             <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch} style={styles.searchPanel}>
-                <FindRoom rooms={rooms} players={players} myRoomId={me?.roomId} onClose={handleCloseSearch} />
+                <FindRoom
+                    rooms={rooms}
+                    players={players}
+                    myRoomId={me?.roomId}
+                    onClose={handleCloseSearch}
+                    onPressRoom={handlePressRoom}
+                    onPressDetails={handlePressDetails}
+                />
             </ModalPanel>
             <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
                 {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={110} />}

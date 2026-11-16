@@ -9,7 +9,7 @@ import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomRow({ room, host, playerCount, isMyRoom }) {
+export default function RoomRow({ room, host, playerCount, isMyRoom, onPress, onPressDetails }) {
     const badgeLabel = isMyRoom ? 'YOU’RE IN' : room.status;
     const statusColors = getStatusColors(badgeLabel);
     const difficulty = getDifficulty(room.difficulty);
@@ -19,7 +19,15 @@ export default function RoomRow({ room, host, playerCount, isMyRoom }) {
 
     return (
         <View style={[styles.wrapper, isClosed && styles.wrapperClosed]}>
-            <Pressable style={[styles.row, isMyRoom && styles.rowMyRoom, isClosed && styles.rowClosed]}>
+            <Pressable
+                style={({ pressed }) => [
+                    styles.row,
+                    isMyRoom && styles.rowMyRoom,
+                    isClosed && styles.rowClosed,
+                    pressed && styles.rowPressed,
+                ]}
+                onPress={isClosed ? onPressDetails : onPress}
+            >
                 <RamAvatar wool={host.wool} bandana={host.bandana} size={44} style={styles.avatar} />
                 <View style={styles.info}>
                     <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
@@ -41,7 +49,7 @@ export default function RoomRow({ room, host, playerCount, isMyRoom }) {
                     </Badge>
                 </View>
             </Pressable>
-            <DetailsCornerButton roomName={room.name} />
+            <DetailsCornerButton roomName={room.name} onPress={onPressDetails} />
         </View>
     );
 }
@@ -75,6 +83,10 @@ const styles = StyleSheet.create({
     rowClosed: {
         borderColor: colors.disabledBorder,
         backgroundColor: colors.disabledSurface,
+    },
+    rowPressed: {
+        borderBottomWidth: 2,
+        backgroundColor: colors.surfacePressed,
     },
     avatar: {
         borderWidth: 2,

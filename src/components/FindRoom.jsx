@@ -10,7 +10,7 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function FindRoom({ rooms, players, myRoomId, onClose }) {
+export default function FindRoom({ rooms, players, myRoomId, onClose, onPressRoom, onPressDetails }) {
     const [searchText, setSearchText] = useState('');
 
     const query = searchText.trim().toLowerCase();
@@ -28,6 +28,8 @@ export default function FindRoom({ rooms, players, myRoomId, onClose }) {
                 host={host}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === myRoomId}
+                onPress={() => onPressRoom(item)}
+                onPressDetails={() => onPressDetails(item)}
             />
         );
     };
