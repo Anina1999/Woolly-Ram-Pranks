@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import Badge from './Badge';
+import DetailsCornerButton from './DetailsCornerButton';
 import DifficultyPips from './DifficultyPips';
-import InfoCornerIcon from './InfoCornerIcon';
 import PlayersIcon from './PlayersIcon';
 import RamAvatar from './RamAvatar';
 
@@ -52,14 +52,7 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, onPress, o
                     </Badge>
                 </View>
             </Pressable>
-            <Pressable
-                style={styles.details}
-                accessibilityRole='button'
-                accessibilityLabel={`Room details: ${room.name}`}
-                onPress={onPressDetails}
-            >
-                <InfoCornerIcon />
-            </Pressable>
+            <DetailsCornerButton roomName={room.name} onPress={onPressDetails} />
         </View>
     );
 }
@@ -147,12 +140,5 @@ const styles = StyleSheet.create({
         width: 7,
         height: 7,
         borderRadius: 999,
-    },
-    details: {
-        position: 'absolute',
-        top: 2,
-        right: 2,
-        width: 44,
-        height: 44,
     },
 });
