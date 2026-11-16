@@ -13,15 +13,33 @@ const LEG_OFFSETS = {
     walk1: { frontLeft: -3, backLeft: 2, backRight: 2, frontRight: -3 },
     walk3: { frontLeft: 2, backLeft: -3, backRight: -3, frontRight: 2 },
     dizzy: { frontLeft: 0, backLeft: 0, backRight: 0, frontRight: 0 },
+    readyToLeave: { frontLeft: 0, backLeft: 0, backRight: -4, frontRight: -4 },
+};
+
+const LEG_ANGLES = {
+    idle: { frontLeft: 0, backLeft: 0, backRight: 0, frontRight: 0 },
+    walk1: { frontLeft: 0, backLeft: 0, backRight: 0, frontRight: 0 },
+    walk3: { frontLeft: 0, backLeft: 0, backRight: 0, frontRight: 0 },
+    dizzy: { frontLeft: 0, backLeft: 0, backRight: 0, frontRight: 0 },
+    readyToLeave: { frontLeft: 38, backLeft: 30, backRight: -62, frontRight: -72 },
+};
+
+const BODY_TILTS = {
+    dizzy: 'rotate(-6 60 70)',
+    readyToLeave: 'rotate(-16 46 96)',
 };
 
 export default function Ram({ wool, bandana, pose, size }) {
     const woolColors = WOOL_COLORS[wool];
     const legs = LEG_OFFSETS[pose];
+    const legAngles = LEG_ANGLES[pose];
     const woolId = 'ramWool-' + wool;
     const woolFill = `url(#${woolId})`;
     const isDizzy = pose === 'dizzy';
-    const tilt = isDizzy ? -6 : 0;
+    const isReadyToLeave = pose === 'readyToLeave';
+    const hasNormalEyes = !isDizzy && !isReadyToLeave;
+    const tilt = BODY_TILTS[pose] || 'rotate(0)';
+    const lift = isReadyToLeave ? -3 : 0;
 
     return (
         <Svg width={size} height={size} viewBox='0 0 120 120'>
@@ -46,12 +64,26 @@ export default function Ram({ wool, bandana, pose, size }) {
                 </RadialGradient>
             </Defs>
             <Ellipse cx={54} cy={103} rx={42} ry={7} fill='url(#ramShadow)' />
-            <G transform={`rotate(${tilt} 60 70) translate(46, 102)`}>
-                <G transform={`translate(0, ${legs.backLeft})`}>
+            {isReadyToLeave && (
+                <G>
+                    <G fill='#E9DCC0' stroke='#B9A27A' strokeWidth={0.8} opacity={0.9}>
+                        <Circle cx={14} cy={100} r={4.5} />
+                        <Circle cx={7} cy={97} r={3.2} />
+                        <Circle cx={22} cy={102} r={3} />
+                    </G>
+                    <G fill='none' stroke='#8A7350' strokeWidth={2} strokeLinecap='round' opacity={0.7}>
+                        <Path d='M4 62 L16 60' />
+                        <Path d='M2 72 L14 71' />
+                        <Path d='M6 82 L15 82' />
+                    </G>
+                </G>
+            )}
+            <G transform={`${tilt} translate(46, 102) translate(0, ${lift})`}>
+                <G transform={`translate(0, ${legs.backLeft}) rotate(${legAngles.backLeft} -9 -26)`}>
                     <Path d='M-9 -26 L-9 -3' stroke='#221E21' strokeWidth={5.5} strokeLinecap='round' />
                     <Ellipse cx={-9} cy={-2} rx={3.6} ry={2.4} fill='#4A3828' />
                 </G>
-                <G transform={`translate(0, ${legs.backRight})`}>
+                <G transform={`translate(0, ${legs.backRight}) rotate(${legAngles.backRight} 12 -26)`}>
                     <Path d='M12 -26 L13 -3' stroke='#221E21' strokeWidth={5.5} strokeLinecap='round' />
                     <Ellipse cx={13} cy={-2} rx={3.6} ry={2.4} fill='#4A3828' />
                 </G>
@@ -76,11 +108,11 @@ export default function Ram({ wool, bandana, pose, size }) {
                     <Path d='M6 -34 a3.5 3.5 0 0 0 5 1.6' />
                     <Path d='M-4 -26 a3.5 3.5 0 0 0 5 1' />
                 </G>
-                <G transform={`translate(0, ${legs.frontLeft})`}>
+                <G transform={`translate(0, ${legs.frontLeft}) rotate(${legAngles.frontLeft} -17 -26)`}>
                     <Path d='M-17 -26 L-18 -3' stroke='#2A2426' strokeWidth={5.5} strokeLinecap='round' />
                     <Ellipse cx={-18} cy={-2} rx={3.6} ry={2.4} fill='#4A3828' />
                 </G>
-                <G transform={`translate(0, ${legs.frontRight})`}>
+                <G transform={`translate(0, ${legs.frontRight}) rotate(${legAngles.frontRight} 19 -26)`}>
                     <Path d='M19 -26 L20 -3' stroke='#2A2426' strokeWidth={5.5} strokeLinecap='round' />
                     <Ellipse cx={20} cy={-2} rx={3.6} ry={2.4} fill='#4A3828' />
                 </G>
@@ -160,7 +192,7 @@ export default function Ram({ wool, bandana, pose, size }) {
                         strokeWidth={0.5}
                     />
                     <Ellipse cx={26.9} cy={-84.9} rx={0.9} ry={0.5} transform='rotate(-20 26.9 -84.9)' fill='#000000' />
-                    {isDizzy ? (
+                    {isDizzy && (
                         <G>
                             <Ellipse
                                 cx={21.2}
@@ -197,7 +229,57 @@ export default function Ram({ wool, bandana, pose, size }) {
                             <Path d='M20.8 -81.4 Q23.8 -76.8 27 -80.8 Z' fill='#2A1210' />
                             <Path d='M22.9 -80 Q24.1 -77.6 25.5 -79.8 Z' fill='#E8848F' />
                         </G>
-                    ) : (
+                    )}
+                    {isReadyToLeave && (
+                        <G>
+                            <Ellipse
+                                cx={21.2}
+                                cy={-93.4}
+                                rx={3}
+                                ry={3.8}
+                                transform='rotate(-10 21.2 -93.4)'
+                                fill='#FFFFFF'
+                                stroke='#000000'
+                                strokeWidth={0.7}
+                            />
+                            <Circle cx={20.6} cy={-92.6} r={1.9} fill='#000000' />
+                            <Circle cx={21.2} cy={-93.4} r={0.65} fill='#FFFFFF' />
+                            <Path
+                                d='M18.6 -98.4 Q21.6 -101.4 24.4 -98'
+                                fill='none'
+                                stroke='#000000'
+                                strokeWidth={1.1}
+                                strokeLinecap='round'
+                            />
+                            <Ellipse
+                                cx={14.4}
+                                cy={-92.4}
+                                rx={3.9}
+                                ry={4.5}
+                                transform='rotate(-10 14.4 -92.4)'
+                                fill='#FFFFFF'
+                                stroke='#000000'
+                                strokeWidth={0.7}
+                            />
+                            <Circle cx={13.6} cy={-91.4} r={2.3} fill='#000000' />
+                            <Circle cx={14.3} cy={-92.4} r={0.8} fill='#FFFFFF' />
+                            <Path
+                                d='M10.4 -96.6 Q13.6 -99 17.8 -97.4'
+                                fill='none'
+                                stroke='#000000'
+                                strokeWidth={1.2}
+                                strokeLinecap='round'
+                            />
+                            <Path
+                                d='M22.4 -81.2 Q24.4 -80.2 26.4 -81.4'
+                                fill='none'
+                                stroke='#000000'
+                                strokeWidth={1}
+                                strokeLinecap='round'
+                            />
+                        </G>
+                    )}
+                    {hasNormalEyes && (
                         <G>
                             <Ellipse
                                 cx={21.2}
