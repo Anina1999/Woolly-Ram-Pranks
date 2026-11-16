@@ -8,8 +8,6 @@ import IconButton from '../components/IconButton';
 import PlusIcon from '../components/PlusIcon';
 import RoomCard from '../components/RoomCard';
 
-import rooms from '../data/rooms';
-
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import getRoomPlayers from '../utils/getRoomPlayers';
@@ -17,7 +15,7 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomsScreen({ navigation }) {
-    const { players } = useContext(RoomsContext);
+    const { rooms, players } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
 
     const waitingRooms = rooms.filter((room) => room.status === 'WAITING');

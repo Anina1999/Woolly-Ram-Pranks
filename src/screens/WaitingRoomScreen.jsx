@@ -14,8 +14,6 @@ import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
 import SlotRow from '../components/SlotRow';
 
-import rooms from '../data/rooms';
-
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import getDifficulty from '../utils/getDifficulty';
@@ -29,13 +27,17 @@ const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
-    const room = rooms.find((item) => item.id === roomId);
-    const { players, setPlayers } = useContext(RoomsContext);
-    const [maxPlayers, setMaxPlayers] = useState(room?.maxPlayers);
-    const [difficulty, setDifficulty] = useState(room?.difficulty);
+    const { rooms, setRooms, players, setPlayers } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
 
+    const room = rooms.find((item) => item.id === roomId);
     const roomPlayers = getRoomPlayers(players, roomId);
+
+    const updateRoom = (changes) => {
+        setRooms(rooms.map((item) =>
+            item.id === roomId ? { ...item, ...changes } : item
+        ));
+    };
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -76,8 +78,8 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const hasEnoughPlayers = roomPlayers.length >= MIN_PLAYERS;
     const canStart = hasEnoughPlayers && readyCount === roomPlayers.length;
     const status = getRoomStatus(roomPlayers, isHost, hasEnoughPlayers);
-    const difficultyInfo = getDifficulty(difficulty);
-    const slots = getPlayerSlots(roomPlayers, maxPlayers);
+    const difficultyInfo = getDifficulty(room.difficulty);
+    const slots = getPlayerSlots(roomPlayers, room.maxPlayers);
     const leaveTitle = isHost ? `Leave ${room.name}?` : `Are you sure you want to leave ${room.name}?`;
 
     const renderSlot = ({ item }) => {
@@ -106,7 +108,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
                     <Text style={styles.subtitle}>
-                        {room.mode} · {room.map} · {roomPlayers.length}/{maxPlayers} rams · {difficultyInfo.name}
+                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} rams · {difficultyInfo.name}
                     </Text>
                 </View>
             </BackHeader>
@@ -126,18 +128,21 @@ export default function WaitingRoomScreen({ route, navigation }) {
             {isHost ? (
                 <Panel style={[styles.panel, styles.hostPanel]}>
                     <MaxPlayersSetting
-                        maxPlayers={maxPlayers}
+                        maxPlayers={room.maxPlayers}
                         playerCount={roomPlayers.length}
-                        onChange={setMaxPlayers}
+                        onChange={(value) => updateRoom({ maxPlayers: value })}
                     />
                     <View style={styles.divider} />
-                    <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
+                    <DifficultySetting
+                        difficulty={room.difficulty}
+                        onChange={(value) => updateRoom({ difficulty: value })}
+                    />
                 </Panel>
             ) : (
                 <Panel style={[styles.panel, styles.guestPanel]}>
                     <View style={styles.guestRow}>
                         <Text style={styles.guestLabel}>Max players</Text>
-                        <Text style={styles.guestValue}>{maxPlayers}</Text>
+                        <Text style={styles.guestValue}>{room.maxPlayers}</Text>
                     </View>
                     <View style={styles.divider} />
                     <View style={styles.guestRow}>
