@@ -98,6 +98,7 @@
 - [x] Add style to the open and closed player slots
 - [x] Add style to the players card in the Waiting room
 - [x] Add style to the Leave, Start game and Ready buttons
+- [x] Add dizzy pose to the Ram
 
 #### Create room
 - [x] Add style to the Create room screen
