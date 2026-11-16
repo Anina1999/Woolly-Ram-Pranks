@@ -19,8 +19,11 @@ import rooms from '../data/rooms';
 
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';
+import getRoomStatus from '../utils/getRoomStatus';
 
 import { colors, fonts } from '../styles/theme';
+
+const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
@@ -55,6 +58,8 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
     const readyCount = roomPlayers.filter((player) => player.ready).length;
+    const canStart = readyCount === roomPlayers.length && roomPlayers.length >= MIN_PLAYERS;
+    const status = getRoomStatus(roomPlayers, isHost, canStart);
     const difficultyInfo = getDifficulty(difficulty);
     const slots = getPlayerSlots(roomPlayers, maxPlayers);
 
@@ -150,7 +155,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         </GameButton>
                     )}
                 </View>
-                <Text style={styles.status}>Waiting for Fleecy to be ready…</Text>
+                <Text style={styles.status}>{status}</Text>
             </View>
         </SafeAreaView>
     );
