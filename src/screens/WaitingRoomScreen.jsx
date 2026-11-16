@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackIcon from '../components/BackIcon';
@@ -12,6 +12,7 @@ import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
+import Ram from '../components/Ram';
 import SlotRow from '../components/SlotRow';
 
 import players from '../data/players';
@@ -31,9 +32,18 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const [maxPlayers, setMaxPlayers] = useState(room?.maxPlayers);
     const [difficulty, setDifficulty] = useState(room?.difficulty);
     const [roomPlayers, setRoomPlayers] = useState(players.filter((player) => player.roomId === roomId));
+    const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
 
     const handlePressBack = () => {
         navigation.goBack();
+    };
+
+    const handlePressLeave = () => {
+        setIsLeaveModalVisible(true);
+    };
+
+    const handleCloseLeaveModal = () => {
+        setIsLeaveModalVisible(false);
     };
 
     const handlePressReady = () => {
@@ -63,6 +73,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const status = getRoomStatus(roomPlayers, isHost, hasEnoughPlayers);
     const difficultyInfo = getDifficulty(difficulty);
     const slots = getPlayerSlots(roomPlayers, maxPlayers);
+    const leaveTitle = isHost ? `Leave ${room.name}?` : `Are you sure you want to leave ${room.name}?`;
 
     const renderSlot = ({ item }) => {
         if (item.type === 'player') {
@@ -141,7 +152,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         title='Leave'
                         variant='danger'
                         style={styles.leaveButton}
-                        onPress={handlePressBack}
+                        onPress={handlePressLeave}
                     />
                     {isHost ? (
                         <GameButton title='Start game' isDisabled={!canStart} style={styles.mainButton} />
@@ -158,6 +169,14 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 </View>
                 <Text style={styles.status}>{status}</Text>
             </View>
+            <Modal visible={isLeaveModalVisible} animationType='fade' onRequestClose={handleCloseLeaveModal}>
+                <View>
+                    {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={100} />}
+                    <Text>{leaveTitle}</Text>
+                    <GameButton title='Leave' variant='danger' />
+                    <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
+                </View>
+            </Modal>
         </SafeAreaView>
     );
 }

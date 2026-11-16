@@ -62,6 +62,7 @@
 - [x] Add Max players and Difficulty panel
 - [x] Show ram avatar in the Waiting room players
 - [x] Show how many rams are ready in the Waiting room
+- [x] Ask before leaving the room
 
 ### Steps to add the Settings content
 - [x] Add the Settings screen and open it from the cog in the Lobby
