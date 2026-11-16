@@ -169,12 +169,21 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 </View>
                 <Text style={styles.status}>{status}</Text>
             </View>
-            <Modal visible={isLeaveModalVisible} animationType='fade' onRequestClose={handleCloseLeaveModal}>
-                <View>
-                    {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={100} />}
-                    <Text>{leaveTitle}</Text>
-                    <GameButton title='Leave' variant='danger' />
-                    <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
+            <Modal
+                visible={isLeaveModalVisible}
+                transparent
+                animationType='fade'
+                onRequestClose={handleCloseLeaveModal}
+            >
+                <View style={styles.overlay}>
+                    <Panel style={styles.dialog}>
+                        {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={100} />}
+                        <Text style={styles.dialogTitle}>{leaveTitle}</Text>
+                        <View style={styles.dialogButtons}>
+                            <GameButton title='Leave' variant='danger' />
+                            <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
+                        </View>
+                    </Panel>
                 </View>
             </Modal>
         </SafeAreaView>
@@ -297,5 +306,33 @@ const styles = StyleSheet.create({
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 1 },
         textShadowRadius: 1,
+    },
+    overlay: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingHorizontal: 22,
+        backgroundColor: colors.backdrop,
+    },
+    dialog: {
+        alignItems: 'center',
+        gap: 10,
+        padding: 18,
+        borderRadius: 24,
+        shadowOffset: { width: 0, height: 16 },
+        shadowOpacity: 0.4,
+        shadowRadius: 16,
+        elevation: 16,
+    },
+    dialogTitle: {
+        textAlign: 'center',
+        fontFamily: fonts.display,
+        fontSize: 24,
+        lineHeight: 28,
+        color: colors.text,
+    },
+    dialogButtons: {
+        alignSelf: 'stretch',
+        gap: 10,
+        marginTop: 6,
     },
 });

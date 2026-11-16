@@ -25,6 +25,7 @@ export const colors = {
     stepperButton: '#F3E4C3',
     stepperButtonDisabled: '#EFE6D3',
     surfaceDark: '#3A2616',
+    backdrop: 'rgba(20, 30, 22, 0.62)',
     card: '#FFFBF2',
     border: '#D9C39A',
     rowBorder: '#E2CFA6',
