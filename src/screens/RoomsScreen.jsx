@@ -12,6 +12,7 @@ import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import RoomCard from '../components/RoomCard';
 import RoomDetails from '../components/RoomDetails';
+import SearchIcon from '../components/SearchIcon';
 
 import profile from '../data/profile';
 
@@ -166,7 +167,9 @@ export default function RoomsScreen({ navigation }) {
                         renderItem={renderRoom}
                     />
                     <View style={styles.bottomBar}>
-                        <GameButton title='Find a room' />
+                        <GameButton title='Find a room' variant='accent'>
+                            <SearchIcon />
+                        </GameButton>
                     </View>
                 </View>
             </View>

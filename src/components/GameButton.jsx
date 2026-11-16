@@ -7,6 +7,7 @@ export default function GameButton({ title, onPress, size, variant, isDisabled, 
     const isSecondary = variant === 'secondary';
     const isDanger = variant === 'danger';
     const isReady = variant === 'ready';
+    const isAccent = variant === 'accent';
 
     return (
         <Pressable
@@ -14,6 +15,7 @@ export default function GameButton({ title, onPress, size, variant, isDisabled, 
                 styles.button,
                 isSecondary && styles.buttonSecondary,
                 isDanger && styles.buttonDanger,
+                isAccent && styles.buttonAccent,
                 isDisabled && styles.buttonDisabled,
                 pressed && styles.buttonPressed,
                 style,
@@ -28,16 +30,20 @@ export default function GameButton({ title, onPress, size, variant, isDisabled, 
                     isSecondary && styles.faceSecondary,
                     isDanger && styles.faceDanger,
                     isReady && styles.faceReady,
+                    isAccent && styles.faceAccent,
                     isDisabled && styles.faceDisabled,
                 ]}
             >
-                {!isSecondary && !isDisabled && <View style={[styles.shine, isLarge && styles.shineLarge]} />}
+                {!isSecondary && !isDisabled && (
+                    <View style={[styles.shine, isLarge && styles.shineLarge, isAccent && styles.shineAccent]} />
+                )}
                 {children}
                 <Text
                     style={[
                         styles.title,
                         isLarge && styles.titleLarge,
                         isSecondary && styles.titleSecondary,
+                        isAccent && styles.titleAccent,
                         isDisabled && styles.titleDisabled,
                     ]}
                 >
@@ -59,6 +65,9 @@ const styles = StyleSheet.create({
     },
     buttonDanger: {
         backgroundColor: colors.dangerButtonEdge,
+    },
+    buttonAccent: {
+        backgroundColor: colors.accentButtonEdge,
     },
     buttonDisabled: {
         backgroundColor: colors.disabledButtonEdge,
@@ -94,6 +103,10 @@ const styles = StyleSheet.create({
         borderColor: colors.readyBorder,
         backgroundColor: colors.success,
     },
+    faceAccent: {
+        gap: 10,
+        backgroundColor: colors.accentButton,
+    },
     faceDisabled: {
         borderColor: colors.disabledButtonEdge,
         backgroundColor: colors.disabledButton,
@@ -110,6 +123,9 @@ const styles = StyleSheet.create({
     shineLarge: {
         height: 20,
     },
+    shineAccent: {
+        backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    },
     title: {
         fontFamily: fonts.display,
         fontSize: 20,
@@ -123,6 +139,11 @@ const styles = StyleSheet.create({
     },
     titleSecondary: {
         color: colors.actionText,
+        textShadowOffset: { width: 0, height: 0 },
+        textShadowRadius: 0,
+    },
+    titleAccent: {
+        color: colors.textOnAccent,
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 0,
     },

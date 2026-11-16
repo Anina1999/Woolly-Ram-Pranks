@@ -104,6 +104,7 @@
 - [x] Add the brown corner with "i" to the RoomCard
 - [x] Add style to the Room details window
 - [x] Add the green round Create room button to the Rooms header
+- [x] Add the yellow Find a room button with a magnifier to Rooms
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
