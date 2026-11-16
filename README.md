@@ -50,6 +50,7 @@
 - [x] Add the Create room screen and open it from the Lobby
 - [x] Add Max players and Difficulty to Create room
 - [x] Add Meadow Farm level card
+- [x] Add Room name field
 
 ### Steps to add the Waiting room content
 - [x] Add the Waiting room screen and open it from Rooms with the room id

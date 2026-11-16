@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -12,6 +12,8 @@ import Panel from '../components/Panel';
 import newRoom from '../data/newRoom';
 
 import { colors, fonts } from '../styles/theme';
+
+const MAX_NAME_LENGTH = 24;
 
 export default function CreateRoomScreen({ navigation }) {
     const [maxPlayers, setMaxPlayers] = useState(5);
@@ -38,6 +40,13 @@ export default function CreateRoomScreen({ navigation }) {
                     <View>
                         <Text style={styles.levelLabel}>{newRoom.mode} · Level {newRoom.level}</Text>
                         <Text style={styles.levelName}>{newRoom.map}</Text>
+                    </View>
+                </View>
+                <View>
+                    <Text>Room name</Text>
+                    <View>
+                        <TextInput placeholder='e.g. Woolly Rebels' />
+                        <Text>0/{MAX_NAME_LENGTH}</Text>
                     </View>
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
