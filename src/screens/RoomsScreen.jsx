@@ -116,10 +116,15 @@ export default function RoomsScreen({ navigation }) {
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
-                <View>
+                <View style={styles.headerButtons}>
                     <IconButton icon='rotate-cw' />
-                    <IconButton isDisabled={isInRoom} accessibilityLabel='Create room' onPress={handlePressCreateRoom}>
-                        <PlusIcon color={plusIconColor} />
+                    <IconButton
+                        variant='primary'
+                        isDisabled={isInRoom}
+                        accessibilityLabel='Create room'
+                        onPress={handlePressCreateRoom}
+                    >
+                        <PlusIcon size={24} color={plusIconColor} strokeWidth={3.6} />
                     </IconButton>
                 </View>
             </View>
@@ -213,6 +218,11 @@ const styles = StyleSheet.create({
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
+    },
+    headerButtons: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
     },
     myRoomBar: {
         flexDirection: 'row',

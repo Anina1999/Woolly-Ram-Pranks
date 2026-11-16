@@ -103,6 +103,7 @@
 - [x] Add style to the Already in a room window
 - [x] Add the brown corner with "i" to the RoomCard
 - [x] Add style to the Room details window
+- [x] Add the green round Create room button to the Rooms header
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
