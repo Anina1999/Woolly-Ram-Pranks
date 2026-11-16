@@ -58,18 +58,18 @@ export default function RoomsScreen({ navigation }) {
                 <IconButton icon='rotate-cw' />
             </View>
             {myRoom && (
-                <View>
-                    <RamAvatar wool={me.wool} bandana={me.bandana} size={44} />
-                    <View>
-                        <Text>YOU’RE IN A ROOM</Text>
-                        <Text numberOfLines={1}>{myRoom.name}</Text>
-                        <Text>
+                <View style={styles.myRoomBar}>
+                    <RamAvatar wool={me.wool} bandana={me.bandana} size={44} style={styles.myRoomAvatar} />
+                    <View style={styles.myRoomInfo}>
+                        <Text style={styles.myRoomLabel}>YOU’RE IN A ROOM</Text>
+                        <Text style={styles.myRoomName} numberOfLines={1}>{myRoom.name}</Text>
+                        <Text style={styles.myRoomDetails} numberOfLines={1}>
                             {myRoomPlayers.length}/{myRoom.maxPlayers} · {getDifficulty(myRoom.difficulty).name} · {myReadyCount} of {myRoomPlayers.length} ready
                         </Text>
                     </View>
-                    <Pressable>
-                        <Text>Return</Text>
-                        <ForwardIcon />
+                    <Pressable style={styles.returnButton}>
+                        <Text style={styles.returnText}>Return</Text>
+                        <ForwardIcon size={18} color={colors.textOnAccent} />
                     </Pressable>
                 </View>
             )}
@@ -125,6 +125,63 @@ const styles = StyleSheet.create({
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
+    },
+    myRoomBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        height: 64,
+        marginTop: 12,
+        marginHorizontal: 16,
+        paddingHorizontal: 8,
+        borderRadius: 18,
+        borderWidth: 2,
+        borderColor: colors.myRoomBorder,
+        backgroundColor: colors.myRoomBar,
+        shadowColor: colors.shadow,
+        shadowOffset: { width: 0, height: 6 },
+        shadowOpacity: 0.35,
+        shadowRadius: 7,
+        elevation: 6,
+    },
+    myRoomAvatar: {
+        borderWidth: 2,
+        borderColor: colors.myRoomBorder,
+    },
+    myRoomInfo: {
+        flex: 1,
+    },
+    myRoomLabel: {
+        fontFamily: fonts.extraBold,
+        fontSize: 11,
+        letterSpacing: 0.8,
+        color: colors.myRoomLabel,
+    },
+    myRoomName: {
+        fontFamily: fonts.extraBold,
+        fontSize: 16,
+        lineHeight: 20,
+        color: colors.textOnScene,
+    },
+    myRoomDetails: {
+        fontFamily: fonts.bold,
+        fontSize: 12,
+        color: colors.textOnDark,
+    },
+    returnButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 2,
+        height: 44,
+        paddingLeft: 14,
+        paddingRight: 10,
+        borderRadius: 12,
+        backgroundColor: colors.accentButton,
+    },
+    returnText: {
+        fontFamily: fonts.extraBold,
+        fontSize: 14,
+        color: colors.textOnAccent,
     },
     panel: {
         flex: 1,

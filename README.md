@@ -93,6 +93,7 @@
 - [x] Add GameButton component for Create room in Rooms
 - [x] Add difficulty colour to the RoomCard
 - [x] Match the RoomCard spacing, host line and max players text to the design
+- [x] Add style to the You're in a room bar
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
