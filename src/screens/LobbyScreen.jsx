@@ -12,6 +12,8 @@ import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import Sheep from '../components/Sheep';
 
+import profile from '../data/profile';
+
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import useCardPulse from '../hooks/useCardPulse';
@@ -45,8 +47,8 @@ export default function LobbyScreen({ navigation }) {
         <SafeAreaView style={styles.container}>
             <View style={styles.header}>
                 <Pressable style={styles.profileChip} onPress={handlePressProfile}>
-                    <RamAvatar wool='black' bandana='#E04436' size={38} />
-                    <Text style={styles.playerName}>Bramble</Text>
+                    <RamAvatar wool={profile.wool} bandana={profile.bandana} size={38} />
+                    <Text style={styles.playerName}>{profile.name}</Text>
                 </Pressable>
                 <IconButton icon='settings' onPress={handlePressSettings} />
             </View>

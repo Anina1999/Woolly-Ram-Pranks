@@ -147,3 +147,4 @@
 - [x] Go to my room from the Already in a room window
 - [x] Disable Create room while in a room
 - [x] Close the windows by tapping outside
+- [x] Join a room with Join room in Room details

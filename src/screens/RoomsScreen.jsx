@@ -13,6 +13,8 @@ import RamAvatar from '../components/RamAvatar';
 import RoomCard from '../components/RoomCard';
 import RoomDetails from '../components/RoomDetails';
 
+import profile from '../data/profile';
+
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import getDifficulty from '../utils/getDifficulty';
@@ -21,7 +23,7 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomsScreen({ navigation }) {
-    const { rooms, players } = useContext(RoomsContext);
+    const { rooms, players, setPlayers } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
     const [detailsRoom, setDetailsRoom] = useState(null);
@@ -65,6 +67,29 @@ export default function RoomsScreen({ navigation }) {
         setBlockedRoom(null);
         setDetailsRoom(null);
         handlePressReturn();
+    };
+
+    const handleJoinRoom = (room) => {
+        setDetailsRoom(null);
+
+        if (isInRoom) {
+            setBlockedRoom(room);
+            return;
+        }
+
+        const newPlayer = {
+            id: String(Date.now()),
+            roomId: room.id,
+            name: profile.name,
+            host: false,
+            you: true,
+            ready: false,
+            wool: profile.wool,
+            bandana: profile.bandana,
+        };
+
+        setPlayers([...players, newPlayer]);
+        navigation.navigate('WaitingRoom', { roomId: room.id });
     };
 
     const handlePressCreateRoom = () => {
@@ -157,6 +182,7 @@ export default function RoomsScreen({ navigation }) {
                         isMyRoom={detailsRoom.id === me?.roomId}
                         onClose={handleCloseDetails}
                         onPressGoToMyRoom={handlePressGoToMyRoom}
+                        onPressJoin={() => handleJoinRoom(detailsRoom)}
                     />
                 )}
             </ModalPanel>
