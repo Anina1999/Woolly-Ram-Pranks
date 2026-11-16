@@ -12,11 +12,11 @@ export default function DifficultySetting({ difficulty, onChange }) {
     const { name, text } = getDifficulty(difficulty);
 
     const handlePressEasier = () => {
-        onChange?.(getNextDifficulty(difficulty, -1));
+        onChange(getNextDifficulty(difficulty, -1));
     };
 
     const handlePressHarder = () => {
-        onChange?.(getNextDifficulty(difficulty, 1));
+        onChange(getNextDifficulty(difficulty, 1));
     };
 
     return (

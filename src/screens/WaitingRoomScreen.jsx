@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -24,6 +25,8 @@ import { colors, fonts } from '../styles/theme';
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
     const room = rooms.find((item) => item.id === roomId);
+    const [maxPlayers, setMaxPlayers] = useState(room?.maxPlayers);
+    const [difficulty, setDifficulty] = useState(room?.difficulty);
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -46,8 +49,8 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
     const readyCount = roomPlayers.filter((player) => player.ready).length;
-    const difficulty = getDifficulty(room.difficulty);
-    const slots = getPlayerSlots(roomPlayers, room.maxPlayers);
+    const difficultyInfo = getDifficulty(difficulty);
+    const slots = getPlayerSlots(roomPlayers, maxPlayers);
 
     const renderSlot = ({ item }) => {
         if (item.type === 'player') {
@@ -78,7 +81,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
                     <Text style={styles.subtitle}>
-                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} rams · {difficulty.name}
+                        {room.mode} · {room.map} · {roomPlayers.length}/{maxPlayers} rams · {difficultyInfo.name}
                     </Text>
                 </View>
             </View>
@@ -97,21 +100,25 @@ export default function WaitingRoomScreen({ route, navigation }) {
             </Panel>
             {isHost ? (
                 <Panel style={[styles.panel, styles.hostPanel]}>
-                    <MaxPlayersSetting maxPlayers={room.maxPlayers} />
+                    <MaxPlayersSetting
+                        maxPlayers={maxPlayers}
+                        playerCount={roomPlayers.length}
+                        onChange={setMaxPlayers}
+                    />
                     <View style={styles.divider} />
-                    <DifficultySetting difficulty={room.difficulty} />
+                    <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
                 </Panel>
             ) : (
                 <Panel style={[styles.panel, styles.guestPanel]}>
                     <View style={styles.guestRow}>
                         <Text style={styles.guestLabel}>Max players</Text>
-                        <Text style={styles.guestValue}>{room.maxPlayers}</Text>
+                        <Text style={styles.guestValue}>{maxPlayers}</Text>
                     </View>
                     <View style={styles.divider} />
                     <View style={styles.guestRow}>
                         <Text style={styles.guestLabel}>Difficulty</Text>
-                        <Text style={[styles.guestValue, styles.guestDifficulty, { color: difficulty.text }]}>
-                            {difficulty.name}
+                        <Text style={[styles.guestValue, styles.guestDifficulty, { color: difficultyInfo.text }]}>
+                            {difficultyInfo.name}
                         </Text>
                     </View>
                 </Panel>

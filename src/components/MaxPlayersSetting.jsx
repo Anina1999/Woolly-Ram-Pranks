@@ -7,16 +7,18 @@ import { colors, fonts } from '../styles/theme';
 const MIN_PLAYERS = 2;
 const MAX_PLAYERS = 5;
 
-export default function MaxPlayersSetting({ maxPlayers, onChange }) {
+export default function MaxPlayersSetting({ maxPlayers, playerCount = 0, onChange }) {
+    const minPlayers = Math.max(MIN_PLAYERS, playerCount);
+
     const handlePressDecrease = () => {
-        if (maxPlayers > MIN_PLAYERS) {
-            onChange?.(maxPlayers - 1);
+        if (maxPlayers > minPlayers) {
+            onChange(maxPlayers - 1);
         }
     };
 
     const handlePressIncrease = () => {
         if (maxPlayers < MAX_PLAYERS) {
-            onChange?.(maxPlayers + 1);
+            onChange(maxPlayers + 1);
         }
     };
 
