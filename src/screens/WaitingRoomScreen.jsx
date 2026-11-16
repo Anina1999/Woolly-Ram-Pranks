@@ -58,8 +58,9 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
     const readyCount = roomPlayers.filter((player) => player.ready).length;
-    const canStart = readyCount === roomPlayers.length && roomPlayers.length >= MIN_PLAYERS;
-    const status = getRoomStatus(roomPlayers, isHost, canStart);
+    const hasEnoughPlayers = roomPlayers.length >= MIN_PLAYERS;
+    const canStart = hasEnoughPlayers && readyCount === roomPlayers.length;
+    const status = getRoomStatus(roomPlayers, isHost, hasEnoughPlayers);
     const difficultyInfo = getDifficulty(difficulty);
     const slots = getPlayerSlots(roomPlayers, maxPlayers);
 

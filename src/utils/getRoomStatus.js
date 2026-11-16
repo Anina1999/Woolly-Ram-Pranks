@@ -1,13 +1,13 @@
-export default function getRoomStatus(players, isHost, canStart) {
-    if (!canStart) {
-        const notReadyNames = players
-            .filter((player) => !player.ready)
-            .map((player) => player.name);
+export default function getRoomStatus(players, isHost, hasEnoughPlayers) {
+    if (!hasEnoughPlayers) {
+        return 'Invite at least one friend to start.';
+    }
 
-        if (notReadyNames.length === 0) {
-            return 'Waiting for more rams to join…';
-        }
+    const notReadyNames = players
+        .filter((player) => !player.ready)
+        .map((player) => player.name);
 
+    if (notReadyNames.length > 0) {
         return `Waiting for ${notReadyNames.join(', ')} to be ready…`;
     }
 
