@@ -50,6 +50,7 @@ export default function RoomsScreen({ navigation }) {
                 room={item}
                 host={host}
                 playerCount={roomPlayers.length}
+                isMyRoom={item.id === me?.roomId}
                 onPress={() => handlePressRoom(item.id)}
             />
         );

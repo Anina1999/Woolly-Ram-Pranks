@@ -10,7 +10,8 @@ import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomCard({ room, host, playerCount, onPress }) {
+export default function RoomCard({ room, host, playerCount, isMyRoom, onPress }) {
+    const badgeLabel = isMyRoom ? 'YOU’RE IN' : room.status;
     const statusColors = getStatusColors(room.status);
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
@@ -40,7 +41,7 @@ export default function RoomCard({ room, host, playerCount, onPress }) {
                         <Text style={styles.maxPlayers}>/{room.maxPlayers}</Text>
                     </Text>
                 </View>
-                <Badge label={room.status} backgroundColor={statusColors.background} color={statusColors.text}>
+                <Badge label={badgeLabel} backgroundColor={statusColors.background} color={statusColors.text}>
                     <View style={[styles.statusDot, { backgroundColor: statusColors.dot }]} />
                 </Badge>
             </View>
