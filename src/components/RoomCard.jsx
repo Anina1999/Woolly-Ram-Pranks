@@ -26,7 +26,7 @@ export default function RoomCard({ room, onPress }) {
             <RamAvatar wool={room.wool} bandana={room.bandana} size={46} style={styles.avatar} />
             <View style={styles.info}>
                 <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
-                <Text style={styles.host}>Host: {room.host}</Text>
+                <Text style={styles.host} numberOfLines={1}>Host: {room.host}</Text>
                 <View style={styles.difficulty}>
                     <DifficultyPips difficulty={room.difficulty} size='small' />
                     <Text style={[styles.difficultyName, { color: difficulty.text }]}>{difficulty.name}</Text>
@@ -35,7 +35,10 @@ export default function RoomCard({ room, onPress }) {
             <View style={styles.side}>
                 <View style={styles.players}>
                     <PlayersIcon />
-                    <Text style={styles.playersText}>{room.players}/{room.maxPlayers}</Text>
+                    <Text style={styles.playersText}>
+                        {room.players}
+                        <Text style={styles.maxPlayers}>/{room.maxPlayers}</Text>
+                    </Text>
                 </View>
                 <Badge label={room.status} backgroundColor={statusColors.background} color={statusColors.text}>
                     <View style={[styles.statusDot, { backgroundColor: statusColors.dot }]} />
@@ -50,8 +53,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 12,
-        minHeight: 72,
-        paddingVertical: 10,
+        minHeight: 76,
+        paddingVertical: 8,
         paddingHorizontal: 12,
         borderRadius: 18,
         borderWidth: 2,
@@ -108,6 +111,10 @@ const styles = StyleSheet.create({
         fontFamily: fonts.display,
         fontSize: 18,
         color: colors.text,
+    },
+    maxPlayers: {
+        fontSize: 14,
+        color: colors.muted,
     },
     statusDot: {
         width: 7,
