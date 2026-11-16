@@ -32,6 +32,8 @@ export default function WaitingRoomScreen({ route, navigation }) {
 
     const room = rooms.find((item) => item.id === roomId);
     const roomPlayers = getRoomPlayers(players, roomId);
+    const me = roomPlayers.find((player) => player.you);
+    const isHost = me?.host;
 
     const updateRoom = (changes) => {
         setRooms(rooms.map((item) =>
@@ -52,8 +54,20 @@ export default function WaitingRoomScreen({ route, navigation }) {
     };
 
     const handleConfirmLeave = () => {
+        const nextHost = roomPlayers.find((player) => !player.you);
+
         setIsLeaveModalVisible(false);
-        navigation.goBack();
+        setPlayers(players
+            .filter((player) => player.id !== me?.id)
+            .map((player) =>
+                isHost && player.id === nextHost?.id ? { ...player, host: true } : player
+            ));
+
+        if (isHost && !nextHost) {
+            setRooms(rooms.filter((item) => item.id !== roomId));
+        }
+
+        navigation.popTo('App', { screen: 'Rooms' });
     };
 
     const handlePressReady = () => {
@@ -72,8 +86,6 @@ export default function WaitingRoomScreen({ route, navigation }) {
         );
     }
 
-    const me = roomPlayers.find((player) => player.you);
-    const isHost = me?.host;
     const readyCount = roomPlayers.filter((player) => player.ready).length;
     const hasEnoughPlayers = roomPlayers.length >= MIN_PLAYERS;
     const canStart = hasEnoughPlayers && readyCount === roomPlayers.length;

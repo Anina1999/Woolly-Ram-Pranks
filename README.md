@@ -129,3 +129,5 @@
 - [x] Go back after confirming Leave
 - [x] Count the Room name characters up to 24
 - [x] Check the Room name length on Create
+- [x] Remove the player from the room after confirming Leave
+- [x] Pass the host to the next player or delete the room when the host leaves if no other players
