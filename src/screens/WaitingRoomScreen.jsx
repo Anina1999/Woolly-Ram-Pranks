@@ -120,13 +120,13 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
                     <Text style={styles.subtitle}>
-                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} rams · {difficultyInfo.name}
+                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players ·{difficultyInfo.name}
                     </Text>
                 </View>
             </BackHeader>
             <Panel style={[styles.panel, styles.playersPanel]}>
                 <View style={styles.playersHeader}>
-                    <Text style={styles.playersTitle}>The flock</Text>
+                    <Text style={styles.playersTitle}>Players</Text>
                     <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
                 </View>
                 <FlatList

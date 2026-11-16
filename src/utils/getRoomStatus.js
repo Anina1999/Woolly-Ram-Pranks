@@ -12,7 +12,7 @@ export default function getRoomStatus(players, isHost, hasEnoughPlayers) {
     }
 
     if (isHost) {
-        return `Everyone is ready. Start with ${players.length} rams!`;
+        return `Everyone is ready. Start with ${players.length} players!`;
     }
 
     const host = players.find((player) => player.host);
