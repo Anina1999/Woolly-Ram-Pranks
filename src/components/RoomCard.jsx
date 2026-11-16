@@ -16,7 +16,7 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, onPress })
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
     const isFull = playerCount === room.maxPlayers;
-    const isClosed = isPlaying || isFull;
+    const isClosed = !isMyRoom && (isPlaying || isFull);
 
     return (
         <Pressable
