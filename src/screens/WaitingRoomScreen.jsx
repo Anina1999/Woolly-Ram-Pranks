@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FlatList, Modal, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,8 +14,9 @@ import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
 import SlotRow from '../components/SlotRow';
 
-import players from '../data/players';
 import rooms from '../data/rooms';
+
+import { RoomsContext } from '../contexts/RoomsContext';
 
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';
@@ -29,10 +30,12 @@ const MIN_PLAYERS = 2;
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
     const room = rooms.find((item) => item.id === roomId);
+    const { players, setPlayers } = useContext(RoomsContext);
     const [maxPlayers, setMaxPlayers] = useState(room?.maxPlayers);
     const [difficulty, setDifficulty] = useState(room?.difficulty);
-    const [roomPlayers, setRoomPlayers] = useState(getRoomPlayers(players, roomId));
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
+
+    const roomPlayers = getRoomPlayers(players, roomId);
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -52,7 +55,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     };
 
     const handlePressReady = () => {
-        setRoomPlayers(roomPlayers.map((player) =>
+        setPlayers(players.map((player) =>
             player.you ? { ...player, ready: !player.ready } : player
         ));
     };

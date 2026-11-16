@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import RootNavigator from './navigation/RootNavigator';
+import RoomsProvider from './contexts/RoomsContext';
 import useGameFonts from './hooks/useGameFonts';
 
 
@@ -14,9 +15,11 @@ export default function App() {
 	return (
 		<>
 			<StatusBar style='dark' />
-			<NavigationContainer>
-				<RootNavigator />
-			</NavigationContainer>
+			<RoomsProvider>
+				<NavigationContainer>
+					<RootNavigator />
+				</NavigationContainer>
+			</RoomsProvider>
 		</>
 	);
 }

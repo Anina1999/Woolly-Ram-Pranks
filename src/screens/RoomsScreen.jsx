@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -8,14 +8,16 @@ import IconButton from '../components/IconButton';
 import PlusIcon from '../components/PlusIcon';
 import RoomCard from '../components/RoomCard';
 
-import players from '../data/players';
 import rooms from '../data/rooms';
+
+import { RoomsContext } from '../contexts/RoomsContext';
 
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomsScreen({ navigation }) {
+    const { players } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
 
     const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
