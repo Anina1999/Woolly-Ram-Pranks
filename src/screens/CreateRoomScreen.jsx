@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -7,6 +7,8 @@ import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import Panel from '../components/Panel';
+
+import newRoom from '../data/newRoom';
 
 import { colors, fonts } from '../styles/theme';
 
@@ -28,6 +30,10 @@ export default function CreateRoomScreen({ navigation }) {
                 <Text style={styles.title}>Create room</Text>
             </BackHeader>
             <Panel style={styles.panel}>
+                <View>
+                    <Text>{newRoom.mode} · Level {newRoom.level}</Text>
+                    <Text>{newRoom.map}</Text>
+                </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
                 <GameButton title='Create' onPress={handlePressCreate} />
