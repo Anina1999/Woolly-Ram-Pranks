@@ -45,12 +45,15 @@ export default function FindRoom({ rooms, players, myRoomId, onClose }) {
                     style={styles.input}
                 />
             </View>
-            <Text>{rooms.length} {roomWord} FOUND</Text>
-            <FlatList
-                data={rooms}
-                keyExtractor={(room) => room.id}
-                renderItem={renderRoom}
-            />
+            <View style={styles.results}>
+                <Text style={styles.resultsLabel}>{rooms.length} {roomWord} FOUND</Text>
+                <FlatList
+                    data={rooms}
+                    keyExtractor={(room) => room.id}
+                    contentContainerStyle={styles.list}
+                    renderItem={renderRoom}
+                />
+            </View>
         </>
     );
 }
@@ -92,5 +95,18 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 16,
         color: colors.text,
+    },
+    results: {
+        flexShrink: 1,
+        gap: 8,
+    },
+    resultsLabel: {
+        fontFamily: fonts.extraBold,
+        fontSize: 12,
+        letterSpacing: 0.6,
+        color: colors.muted,
+    },
+    list: {
+        gap: 8,
     },
 });

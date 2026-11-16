@@ -108,6 +108,7 @@
 - [x] Add the green round Create room button to the Rooms header
 - [x] Add the yellow Find a room button with a magnifier to Rooms
 - [x] Add style to the Find a room window
+- [x] Add style to the room rows in the Find a room window
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room

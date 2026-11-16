@@ -363,6 +363,7 @@ const styles = StyleSheet.create({
         borderRadius: 22,
     },
     searchPanel: {
+        maxHeight: '85%',
         alignItems: 'stretch',
         gap: 14,
         marginHorizontal: -2,
