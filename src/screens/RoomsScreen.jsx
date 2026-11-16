@@ -116,7 +116,12 @@ export default function RoomsScreen({ navigation }) {
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
-                <IconButton icon='rotate-cw' />
+                <View>
+                    <IconButton icon='rotate-cw' />
+                    <IconButton isDisabled={isInRoom} accessibilityLabel='Create room' onPress={handlePressCreateRoom}>
+                        <PlusIcon color={plusIconColor} />
+                    </IconButton>
+                </View>
             </View>
             {myRoom && (
                 <View style={styles.myRoomBar}>
@@ -156,9 +161,7 @@ export default function RoomsScreen({ navigation }) {
                         renderItem={renderRoom}
                     />
                     <View style={styles.bottomBar}>
-                        <GameButton title='Create room' isDisabled={isInRoom} onPress={handlePressCreateRoom}>
-                            <PlusIcon color={plusIconColor} />
-                        </GameButton>
+                        <GameButton title='Find a room' />
                     </View>
                 </View>
             </View>
