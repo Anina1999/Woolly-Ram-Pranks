@@ -13,18 +13,29 @@ import newRoom from '../data/newRoom';
 
 import { colors, fonts } from '../styles/theme';
 
+const MIN_NAME_LENGTH = 3;
 const MAX_NAME_LENGTH = 24;
 
 export default function CreateRoomScreen({ navigation }) {
     const [roomName, setRoomName] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
     const [maxPlayers, setMaxPlayers] = useState(5);
     const [difficulty, setDifficulty] = useState('normal');
+
+    const isNameValid = roomName.trim().length >= MIN_NAME_LENGTH;
+    const isNameErrorVisible = isSubmitted && !isNameValid;
 
     const handlePressBack = () => {
         navigation.goBack();
     };
 
     const handlePressCreate = () => {
+        setIsSubmitted(true);
+
+        if (!isNameValid) {
+            return;
+        }
+
         navigation.replace('WaitingRoom', { roomId: '2' });
     };
 
@@ -56,6 +67,9 @@ export default function CreateRoomScreen({ navigation }) {
                         />
                         <Text style={styles.fieldCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
                     </View>
+                    {isNameErrorVisible && (
+                        <Text>Name must be {MIN_NAME_LENGTH}–{MAX_NAME_LENGTH} characters.</Text>
+                    )}
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
