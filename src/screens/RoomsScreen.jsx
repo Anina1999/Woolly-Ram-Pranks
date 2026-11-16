@@ -184,7 +184,7 @@ export default function RoomsScreen({ navigation }) {
                 </View>
             </View>
             <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch} style={styles.searchPanel}>
-                <FindRoom onClose={handleCloseSearch} />
+                <FindRoom rooms={rooms} players={players} myRoomId={me?.roomId} onClose={handleCloseSearch} />
             </ModalPanel>
             <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
                 {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={110} />}

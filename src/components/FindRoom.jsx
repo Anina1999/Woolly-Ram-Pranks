@@ -1,12 +1,31 @@
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import IconButton from './IconButton';
+import RoomRow from './RoomRow';
 import SearchIcon from './SearchIcon';
 import SearchTab from './SearchTab';
 
+import getRoomPlayers from '../utils/getRoomPlayers';
+
 import { colors, fonts } from '../styles/theme';
 
-export default function FindRoom({ onClose }) {
+export default function FindRoom({ rooms, players, myRoomId, onClose }) {
+    const roomWord = rooms.length === 1 ? 'ROOM' : 'ROOMS';
+
+    const renderRoom = ({ item }) => {
+        const roomPlayers = getRoomPlayers(players, item.id);
+        const host = roomPlayers.find((player) => player.host);
+
+        return (
+            <RoomRow
+                room={item}
+                host={host}
+                playerCount={roomPlayers.length}
+                isMyRoom={item.id === myRoomId}
+            />
+        );
+    };
+
     return (
         <>
             <View style={styles.header}>
@@ -26,6 +45,12 @@ export default function FindRoom({ onClose }) {
                     style={styles.input}
                 />
             </View>
+            <Text>{rooms.length} {roomWord} FOUND</Text>
+            <FlatList
+                data={rooms}
+                keyExtractor={(room) => room.id}
+                renderItem={renderRoom}
+            />
         </>
     );
 }
