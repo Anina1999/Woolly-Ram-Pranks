@@ -46,6 +46,7 @@
 - [x] Add the rooms list with the RoomCard component
 - [x] Add the Create room button at the bottom of Rooms
 - [x] Show the difficulty on the RoomCard
+- [x] Add the "You're in a room" bar to Rooms
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby

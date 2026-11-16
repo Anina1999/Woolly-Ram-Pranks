@@ -1,15 +1,18 @@
 import { useContext, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FilterChip from '../components/FilterChip';
+import ForwardIcon from '../components/ForwardIcon';
 import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
 import PlusIcon from '../components/PlusIcon';
+import RamAvatar from '../components/RamAvatar';
 import RoomCard from '../components/RoomCard';
 
 import { RoomsContext } from '../contexts/RoomsContext';
 
+import getDifficulty from '../utils/getDifficulty';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
@@ -20,6 +23,11 @@ export default function RoomsScreen({ navigation }) {
 
     const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
     const shownRooms = selectedFilter === 'waiting' ? waitingRooms : rooms;
+
+    const me = players.find((player) => player.you);
+    const myRoom = rooms.find((room) => room.id === me?.roomId);
+    const myRoomPlayers = getRoomPlayers(players, me?.roomId);
+    const myReadyCount = myRoomPlayers.filter((player) => player.ready).length;
 
     const handlePressRoom = (roomId) => {
         navigation.navigate('WaitingRoom', { roomId });
@@ -49,6 +57,22 @@ export default function RoomsScreen({ navigation }) {
                 <Text style={styles.title}>Rooms</Text>
                 <IconButton icon='rotate-cw' />
             </View>
+            {myRoom && (
+                <View>
+                    <RamAvatar wool={me.wool} bandana={me.bandana} size={44} />
+                    <View>
+                        <Text>YOU’RE IN A ROOM</Text>
+                        <Text numberOfLines={1}>{myRoom.name}</Text>
+                        <Text>
+                            {myRoomPlayers.length}/{myRoom.maxPlayers} · {getDifficulty(myRoom.difficulty).name} · {myReadyCount} of {myRoomPlayers.length} ready
+                        </Text>
+                    </View>
+                    <Pressable>
+                        <Text>Return</Text>
+                        <ForwardIcon />
+                    </Pressable>
+                </View>
+            )}
             <View style={styles.panel}>
                 <View style={styles.panelInner}>
                     <View style={styles.chips}>
