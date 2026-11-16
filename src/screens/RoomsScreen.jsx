@@ -39,12 +39,12 @@ export default function RoomsScreen({ navigation }) {
     const plusIconColor = isInRoom ? colors.disabledButtonText : colors.textOnPrimary;
 
     const handlePressRoom = (room) => {
-        if (myRoom && room.id !== myRoom.id) {
-            setBlockedRoom(room);
+        if (room.id === me?.roomId) {
+            handlePressReturn();
             return;
         }
 
-        navigation.navigate('WaitingRoom', { roomId: room.id });
+        handleJoinRoom(room);
     };
 
     const handleCloseBlockedModal = () => {

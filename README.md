@@ -148,3 +148,4 @@
 - [x] Disable Create room while in a room
 - [x] Close the windows by tapping outside
 - [x] Join a room with Join room in Room details
+- [x] Join a room by tapping its card, or open its details when it can't be joined

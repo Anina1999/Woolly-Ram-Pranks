@@ -28,8 +28,7 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, onPress, o
                     isClosed && styles.cardClosed,
                     pressed && styles.cardPressed,
                 ]}
-                onPress={onPress}
-                disabled={isClosed}
+                onPress={isClosed ? onPressDetails : onPress}
             >
                 <RamAvatar wool={host.wool} bandana={host.bandana} size={46} style={styles.avatar} />
                 <View style={styles.info}>
