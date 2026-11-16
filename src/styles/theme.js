@@ -65,6 +65,7 @@ export const colors = {
     textOnDark: '#F3E4C3',
     textOnAccent: '#2E2117',
     myRoomLabel: '#F2B33D',
+    modalText: '#5E5242',
     lockedText: '#5E5242',
     levelLabel: '#24601F',
     placeholder: '#8A7F6C',

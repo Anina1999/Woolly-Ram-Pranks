@@ -48,6 +48,7 @@
 - [x] Show the difficulty on the RoomCard
 - [x] Add the "You're in a room" bar to Rooms
 - [x] Show YOU'RE IN on the card of my room
+- [x] Add the Already in a room window to Rooms
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby
@@ -96,6 +97,7 @@
 - [x] Match the RoomCard spacing, host line and max players text to the design
 - [x] Add style to the You're in a room bar
 - [x] Add gold border and YOU'RE IN badge to the card of my room
+- [x] Add style to the Already in a room window
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
@@ -138,3 +140,4 @@
 - [x] Show the current host and their ram on the RoomCard
 - [x] Go back to my room with Return in Rooms
 - [x] Keep the card of my room open when it is full
+- [x] Go to my room from the Already in a room window

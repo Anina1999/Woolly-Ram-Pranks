@@ -6,7 +6,9 @@ import FilterChip from '../components/FilterChip';
 import ForwardIcon from '../components/ForwardIcon';
 import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
+import ModalPanel from '../components/ModalPanel';
 import PlusIcon from '../components/PlusIcon';
+import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import RoomCard from '../components/RoomCard';
 
@@ -20,6 +22,7 @@ import { colors, fonts } from '../styles/theme';
 export default function RoomsScreen({ navigation }) {
     const { rooms, players } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
+    const [blockedRoom, setBlockedRoom] = useState(null);
 
     const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
     const shownRooms = selectedFilter === 'waiting' ? waitingRooms : rooms;
@@ -29,12 +32,26 @@ export default function RoomsScreen({ navigation }) {
     const myRoomPlayers = getRoomPlayers(players, me?.roomId);
     const myReadyCount = myRoomPlayers.filter((player) => player.ready).length;
 
-    const handlePressRoom = (roomId) => {
-        navigation.navigate('WaitingRoom', { roomId });
+    const handlePressRoom = (room) => {
+        if (myRoom && room.id !== myRoom.id) {
+            setBlockedRoom(room);
+            return;
+        }
+
+        navigation.navigate('WaitingRoom', { roomId: room.id });
+    };
+
+    const handleCloseBlockedModal = () => {
+        setBlockedRoom(null);
     };
 
     const handlePressReturn = () => {
         navigation.navigate('WaitingRoom', { roomId: myRoom.id });
+    };
+
+    const handlePressGoToMyRoom = () => {
+        setBlockedRoom(null);
+        handlePressReturn();
     };
 
     const handlePressCreateRoom = () => {
@@ -51,7 +68,7 @@ export default function RoomsScreen({ navigation }) {
                 host={host}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
-                onPress={() => handlePressRoom(item.id)}
+                onPress={() => handlePressRoom(item)}
             />
         );
     };
@@ -106,6 +123,18 @@ export default function RoomsScreen({ navigation }) {
                     </View>
                 </View>
             </View>
+            <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
+                {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={110} />}
+                <Text style={styles.dialogTitle}>Already in a room</Text>
+                <Text style={styles.dialogMessage}>
+                    You’re in <Text style={styles.dialogRoomName}>{myRoom?.name}</Text>. To join{' '}
+                    <Text style={styles.dialogRoomName}>{blockedRoom?.name}</Text>, go back to your room and leave it first.
+                </Text>
+                <View style={styles.dialogButtons}>
+                    <GameButton title='Go to my room' onPress={handlePressGoToMyRoom} />
+                    <GameButton title='Stay here' variant='secondary' onPress={handleCloseBlockedModal} />
+                </View>
+            </ModalPanel>
         </SafeAreaView>
     );
 }
@@ -223,5 +252,28 @@ const styles = StyleSheet.create({
         paddingBottom: 14,
         borderTopWidth: 2,
         borderTopColor: colors.divider,
+    },
+    dialogTitle: {
+        textAlign: 'center',
+        fontFamily: fonts.display,
+        fontSize: 24,
+        lineHeight: 28,
+        color: colors.text,
+    },
+    dialogMessage: {
+        textAlign: 'center',
+        fontFamily: fonts.regular,
+        fontSize: 15,
+        lineHeight: 22,
+        color: colors.modalText,
+    },
+    dialogRoomName: {
+        fontFamily: fonts.bold,
+        color: colors.text,
+    },
+    dialogButtons: {
+        alignSelf: 'stretch',
+        gap: 10,
+        marginTop: 6,
     },
 });
