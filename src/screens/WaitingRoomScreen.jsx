@@ -7,12 +7,12 @@ import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
+import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
-import Ram from '../components/Ram';
 import SlotRow from '../components/SlotRow';
 
 import players from '../data/players';
@@ -177,7 +177,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
             >
                 <View style={styles.overlay}>
                     <Panel style={styles.dialog}>
-                        {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={100} />}
+                        {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
                         <Text style={styles.dialogTitle}>{leaveTitle}</Text>
                         <View style={styles.dialogButtons}>
                             <GameButton title='Leave' variant='danger' />

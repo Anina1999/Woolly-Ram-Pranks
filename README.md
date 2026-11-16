@@ -102,6 +102,7 @@
 - [x] Add dizzy pose to the Ram
 - [x] Add style to the Leave confirm window
 - [x] Add ready to leave pose to the Ram
+- [x] Add LeaveRoomPicture to the Leave confirm window
 
 #### Create room
 - [x] Add style to the Create room screen
