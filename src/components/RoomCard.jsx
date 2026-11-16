@@ -10,7 +10,7 @@ import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomCard({ room, playerCount, onPress }) {
+export default function RoomCard({ room, host, playerCount, onPress }) {
     const statusColors = getStatusColors(room.status);
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
@@ -23,10 +23,10 @@ export default function RoomCard({ room, playerCount, onPress }) {
             onPress={onPress}
             disabled={isClosed}
         >
-            <RamAvatar wool={room.wool} bandana={room.bandana} size={46} style={styles.avatar} />
+            <RamAvatar wool={host.wool} bandana={host.bandana} size={46} style={styles.avatar} />
             <View style={styles.info}>
                 <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
-                <Text style={styles.host} numberOfLines={1}>Host: {room.host}</Text>
+                <Text style={styles.host} numberOfLines={1}>Host: {host.name}</Text>
                 <View style={styles.difficulty}>
                     <DifficultyPips difficulty={room.difficulty} size='small' />
                     <Text style={[styles.difficultyName, { color: difficulty.text }]}>{difficulty.name}</Text>

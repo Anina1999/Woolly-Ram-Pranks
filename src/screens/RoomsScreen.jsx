@@ -29,6 +29,20 @@ export default function RoomsScreen({ navigation }) {
         navigation.navigate('CreateRoom');
     };
 
+    const renderRoom = ({ item }) => {
+        const roomPlayers = getRoomPlayers(players, item.id);
+        const host = roomPlayers.find((player) => player.host);
+
+        return (
+            <RoomCard
+                room={item}
+                host={host}
+                playerCount={roomPlayers.length}
+                onPress={() => handlePressRoom(item.id)}
+            />
+        );
+    };
+
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
@@ -54,13 +68,7 @@ export default function RoomsScreen({ navigation }) {
                         data={shownRooms}
                         keyExtractor={(room) => room.id}
                         contentContainerStyle={styles.list}
-                        renderItem={({ item }) => (
-                            <RoomCard
-                                room={item}
-                                playerCount={getRoomPlayers(players, item.id).length}
-                                onPress={() => handlePressRoom(item.id)}
-                            />
-                        )}
+                        renderItem={renderRoom}
                     />
                     <View style={styles.bottomBar}>
                         <GameButton title='Create room' onPress={handlePressCreateRoom}>
