@@ -3,6 +3,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import FilterChip from '../components/FilterChip';
+import FindRoom from '../components/FindRoom';
 import ForwardIcon from '../components/ForwardIcon';
 import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
@@ -28,6 +29,7 @@ export default function RoomsScreen({ navigation }) {
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
     const [detailsRoom, setDetailsRoom] = useState(null);
+    const [isSearchVisible, setIsSearchVisible] = useState(false);
 
     const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
     const shownRooms = selectedFilter === 'waiting' ? waitingRooms : rooms;
@@ -58,6 +60,14 @@ export default function RoomsScreen({ navigation }) {
 
     const handleCloseDetails = () => {
         setDetailsRoom(null);
+    };
+
+    const handlePressFindRoom = () => {
+        setIsSearchVisible(true);
+    };
+
+    const handleCloseSearch = () => {
+        setIsSearchVisible(false);
     };
 
     const handlePressReturn = () => {
@@ -167,12 +177,15 @@ export default function RoomsScreen({ navigation }) {
                         renderItem={renderRoom}
                     />
                     <View style={styles.bottomBar}>
-                        <GameButton title='Find a room' variant='accent'>
+                        <GameButton title='Find a room' variant='accent' onPress={handlePressFindRoom}>
                             <SearchIcon />
                         </GameButton>
                     </View>
                 </View>
             </View>
+            <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch}>
+                <FindRoom onClose={handleCloseSearch} />
+            </ModalPanel>
             <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
                 {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={110} />}
                 <Text style={styles.dialogTitle}>Already in a room</Text>

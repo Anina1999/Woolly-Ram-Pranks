@@ -52,6 +52,7 @@
 - [x] Add the Room details button and window to Rooms
 - [x] Show the room, its players and Join room in Room details
 - [x] Move Create room to the Rooms header and add Find a room at the bottom
+- [x] Add the Find a room window with the search tabs and a room name field
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby
