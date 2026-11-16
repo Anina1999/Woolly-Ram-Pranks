@@ -118,3 +118,4 @@
 - [x] Show room status from the players in the Waiting room
 - [x] Disable Start game until everyone is ready
 - [x] Ask to invite a friend when the host is alone in the Waiting room
+- [x] Go back after confirming Leave

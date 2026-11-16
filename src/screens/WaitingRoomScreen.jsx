@@ -46,6 +46,11 @@ export default function WaitingRoomScreen({ route, navigation }) {
         setIsLeaveModalVisible(false);
     };
 
+    const handleConfirmLeave = () => {
+        setIsLeaveModalVisible(false);
+        navigation.goBack();
+    };
+
     const handlePressReady = () => {
         setRoomPlayers(roomPlayers.map((player) =>
             player.you ? { ...player, ready: !player.ready } : player
@@ -180,7 +185,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
                         <Text style={styles.dialogTitle}>{leaveTitle}</Text>
                         <View style={styles.dialogButtons}>
-                            <GameButton title='Leave' variant='danger' />
+                            <GameButton title='Leave' variant='danger' onPress={handleConfirmLeave} />
                             <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
                         </View>
                     </Panel>
