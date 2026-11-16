@@ -95,6 +95,7 @@
 - [x] Add difficulty colour to the RoomCard
 - [x] Match the RoomCard spacing, host line and max players text to the design
 - [x] Add style to the You're in a room bar
+- [x] Add gold border and YOU'RE IN badge to the card of my room
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room

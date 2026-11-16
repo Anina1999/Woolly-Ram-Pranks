@@ -12,7 +12,7 @@ import { colors, fonts } from '../styles/theme';
 
 export default function RoomCard({ room, host, playerCount, isMyRoom, onPress }) {
     const badgeLabel = isMyRoom ? 'YOU’RE IN' : room.status;
-    const statusColors = getStatusColors(room.status);
+    const statusColors = getStatusColors(badgeLabel);
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
     const isFull = playerCount === room.maxPlayers;
@@ -20,7 +20,12 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, onPress })
 
     return (
         <Pressable
-            style={({ pressed }) => [styles.card, isClosed && styles.cardClosed, pressed && styles.cardPressed]}
+            style={({ pressed }) => [
+                styles.card,
+                isMyRoom && styles.cardMyRoom,
+                isClosed && styles.cardClosed,
+                pressed && styles.cardPressed,
+            ]}
             onPress={onPress}
             disabled={isClosed}
         >
@@ -62,6 +67,10 @@ const styles = StyleSheet.create({
         borderBottomWidth: 5,
         borderColor: colors.border,
         backgroundColor: colors.card,
+    },
+    cardMyRoom: {
+        borderColor: colors.myRoomBorder,
+        backgroundColor: colors.myRoomCard,
     },
     cardClosed: {
         opacity: 0.75,

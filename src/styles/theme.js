@@ -18,6 +18,9 @@ export const colors = {
     waitingText: '#1F6B39',
     playingBackground: '#FBE7C2',
     playingText: '#7A4B12',
+    inRoomBackground: '#F2B33D',
+    inRoomText: '#2E2117',
+    inRoomDot: '#2E2117',
     notReadyBackground: '#E6DDCB',
     notReadyText: '#5E5242',
     errorIcon: '#C8352B',
@@ -52,6 +55,7 @@ export const colors = {
     errorBorder: '#C8352B',
     myRoomBar: 'rgba(24, 36, 27, 0.9)',
     myRoomBorder: '#F2B33D',
+    myRoomCard: '#FFF6DE',
 
     text: '#2E2117',
     muted: '#6E5D49',
