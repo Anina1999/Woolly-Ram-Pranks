@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import IconButton from './IconButton';
@@ -10,7 +11,12 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 import { colors, fonts } from '../styles/theme';
 
 export default function FindRoom({ rooms, players, myRoomId, onClose }) {
-    const roomWord = rooms.length === 1 ? 'ROOM' : 'ROOMS';
+    const [searchText, setSearchText] = useState('');
+
+    const query = searchText.trim().toLowerCase();
+    const hasQuery = query !== '';
+    const foundRooms = rooms.filter((room) => room.name.toLowerCase().startsWith(query));
+    const roomWord = foundRooms.length === 1 ? 'ROOM' : 'ROOMS';
 
     const renderRoom = ({ item }) => {
         const roomPlayers = getRoomPlayers(players, item.id);
@@ -42,18 +48,26 @@ export default function FindRoom({ rooms, players, myRoomId, onClose }) {
                     placeholder='Room name'
                     placeholderTextColor={colors.placeholder}
                     accessibilityLabel='Room name'
+                    value={searchText}
+                    onChangeText={setSearchText}
                     style={styles.input}
                 />
             </View>
-            <View style={styles.results}>
-                <Text style={styles.resultsLabel}>{rooms.length} {roomWord} FOUND</Text>
-                <FlatList
-                    data={rooms}
-                    keyExtractor={(room) => room.id}
-                    contentContainerStyle={styles.list}
-                    renderItem={renderRoom}
-                />
-            </View>
+            {hasQuery && (
+                <View style={styles.results}>
+                    <Text style={styles.resultsLabel}>{foundRooms.length} {roomWord} FOUND</Text>
+                    {foundRooms.length === 0 ? (
+                        <Text style={styles.emptyText}>No rooms match that name. Try another one.</Text>
+                    ) : (
+                        <FlatList
+                            data={foundRooms}
+                            keyExtractor={(room) => room.id}
+                            contentContainerStyle={styles.list}
+                            renderItem={renderRoom}
+                        />
+                    )}
+                </View>
+            )}
         </>
     );
 }
@@ -108,5 +122,12 @@ const styles = StyleSheet.create({
     },
     list: {
         gap: 8,
+    },
+    emptyText: {
+        textAlign: 'center',
+        fontFamily: fonts.regular,
+        fontSize: 12,
+        lineHeight: 17,
+        color: colors.muted,
     },
 });

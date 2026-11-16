@@ -156,3 +156,4 @@
 - [x] Close the windows by tapping outside
 - [x] Join a room with Join room in Room details
 - [x] Join a room by tapping its card, or open its details when it can't be joined
+- [x] Search the rooms by name in the Find a room window
