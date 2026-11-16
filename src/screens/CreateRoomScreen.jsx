@@ -16,6 +16,7 @@ import { colors, fonts } from '../styles/theme';
 const MAX_NAME_LENGTH = 24;
 
 export default function CreateRoomScreen({ navigation }) {
+    const [roomName, setRoomName] = useState('');
     const [maxPlayers, setMaxPlayers] = useState(5);
     const [difficulty, setDifficulty] = useState('normal');
 
@@ -46,11 +47,14 @@ export default function CreateRoomScreen({ navigation }) {
                     <Text style={styles.fieldLabel}>Room name</Text>
                     <View style={styles.fieldBox}>
                         <TextInput
+                            value={roomName}
+                            onChangeText={setRoomName}
+                            maxLength={MAX_NAME_LENGTH}
                             placeholder='e.g. Woolly Rebels'
                             placeholderTextColor={colors.placeholder}
                             style={styles.fieldInput}
                         />
-                        <Text style={styles.fieldCounter}>0/{MAX_NAME_LENGTH}</Text>
+                        <Text style={styles.fieldCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
                     </View>
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />

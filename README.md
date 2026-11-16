@@ -125,3 +125,4 @@
 - [x] Disable Start game until everyone is ready
 - [x] Ask to invite a friend when the host is alone in the Waiting room
 - [x] Go back after confirming Leave
+- [x] Count the Room name characters up to 24
