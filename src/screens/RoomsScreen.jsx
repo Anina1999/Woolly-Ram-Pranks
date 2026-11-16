@@ -8,7 +8,10 @@ import IconButton from '../components/IconButton';
 import PlusIcon from '../components/PlusIcon';
 import RoomCard from '../components/RoomCard';
 
+import players from '../data/players';
 import rooms from '../data/rooms';
+
+import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
 
@@ -52,7 +55,11 @@ export default function RoomsScreen({ navigation }) {
                         keyExtractor={(room) => room.id}
                         contentContainerStyle={styles.list}
                         renderItem={({ item }) => (
-                            <RoomCard room={item} onPress={() => handlePressRoom(item.id)} />
+                            <RoomCard
+                                room={item}
+                                playerCount={getRoomPlayers(players, item.id).length}
+                                onPress={() => handlePressRoom(item.id)}
+                            />
                         )}
                     />
                     <View style={styles.bottomBar}>

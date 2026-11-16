@@ -10,11 +10,11 @@ import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomCard({ room, onPress }) {
+export default function RoomCard({ room, playerCount, onPress }) {
     const statusColors = getStatusColors(room.status);
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
-    const isFull = room.players === room.maxPlayers;
+    const isFull = playerCount === room.maxPlayers;
     const isClosed = isPlaying || isFull;
 
     return (
@@ -36,7 +36,7 @@ export default function RoomCard({ room, onPress }) {
                 <View style={styles.players}>
                     <PlayersIcon />
                     <Text style={styles.playersText}>
-                        {room.players}
+                        {playerCount}
                         <Text style={styles.maxPlayers}>/{room.maxPlayers}</Text>
                     </Text>
                 </View>

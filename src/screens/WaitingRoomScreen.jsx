@@ -19,6 +19,7 @@ import rooms from '../data/rooms';
 
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';
+import getRoomPlayers from '../utils/getRoomPlayers';
 import getRoomStatus from '../utils/getRoomStatus';
 
 import { colors, fonts } from '../styles/theme';
@@ -30,7 +31,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const room = rooms.find((item) => item.id === roomId);
     const [maxPlayers, setMaxPlayers] = useState(room?.maxPlayers);
     const [difficulty, setDifficulty] = useState(room?.difficulty);
-    const [roomPlayers, setRoomPlayers] = useState(players.filter((player) => player.roomId === roomId));
+    const [roomPlayers, setRoomPlayers] = useState(getRoomPlayers(players, roomId));
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
 
     const handlePressBack = () => {
