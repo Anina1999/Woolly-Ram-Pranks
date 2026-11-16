@@ -50,6 +50,7 @@
 - [x] Show YOU'RE IN on the card of my room
 - [x] Add the Already in a room window to Rooms
 - [x] Add the Room details button and window to Rooms
+- [x] Show the room, its players and Join room in Room details
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby
@@ -100,6 +101,7 @@
 - [x] Add gold border and YOU'RE IN badge to the card of my room
 - [x] Add style to the Already in a room window
 - [x] Add the brown corner with "i" to the RoomCard
+- [x] Add style to the Room details window
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room

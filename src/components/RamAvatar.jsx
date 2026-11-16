@@ -4,10 +4,13 @@ import Ram from './Ram';
 
 import { colors } from '../styles/theme';
 
-export default function RamAvatar({ wool, bandana, size, style }) {
+export default function RamAvatar({ wool, bandana, size, crop, style }) {
+    const isWhole = crop === 'whole';
+    const ramSize = isWhole ? size * 0.9 : size * 1.2;
+
     return (
         <View style={[styles.avatar, { width: size, height: size }, style]}>
-            <Ram wool={wool} bandana={bandana} pose='idle' size={size * 1.2} />
+            <Ram wool={wool} bandana={bandana} pose='idle' size={ramSize} />
         </View>
     );
 }

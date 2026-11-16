@@ -11,6 +11,7 @@ import PlusIcon from '../components/PlusIcon';
 import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import RoomCard from '../components/RoomCard';
+import RoomDetails from '../components/RoomDetails';
 
 import { RoomsContext } from '../contexts/RoomsContext';
 
@@ -62,6 +63,7 @@ export default function RoomsScreen({ navigation }) {
 
     const handlePressGoToMyRoom = () => {
         setBlockedRoom(null);
+        setDetailsRoom(null);
         handlePressReturn();
     };
 
@@ -147,8 +149,16 @@ export default function RoomsScreen({ navigation }) {
                     <GameButton title='Stay here' variant='secondary' onPress={handleCloseBlockedModal} />
                 </View>
             </ModalPanel>
-            <ModalPanel visible={detailsRoom !== null} onClose={handleCloseDetails}>
-                <IconButton icon='x' accessibilityLabel='Close' onPress={handleCloseDetails} />
+            <ModalPanel visible={detailsRoom !== null} onClose={handleCloseDetails} style={styles.detailsPanel}>
+                {detailsRoom && (
+                    <RoomDetails
+                        room={detailsRoom}
+                        players={players}
+                        isMyRoom={detailsRoom.id === me?.roomId}
+                        onClose={handleCloseDetails}
+                        onPressGoToMyRoom={handlePressGoToMyRoom}
+                    />
+                )}
             </ModalPanel>
         </SafeAreaView>
     );
@@ -290,5 +300,11 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         gap: 10,
         marginTop: 6,
+    },
+    detailsPanel: {
+        alignItems: 'stretch',
+        marginHorizontal: 2,
+        padding: 14,
+        borderRadius: 22,
     },
 });
