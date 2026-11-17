@@ -22,6 +22,7 @@ import profile from '../data/profile';
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import getDifficulty from '../utils/getDifficulty';
+import getRoomHost from '../utils/getRoomHost';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
@@ -36,7 +37,7 @@ export default function RoomsScreen({ navigation }) {
     const publicRooms = rooms.filter((room) => !room.isPrivate);
     const waitingRooms = publicRooms.filter((room) => room.status === 'WAITING');
     const friendsRooms = rooms.filter((room) => {
-        const host = getRoomPlayers(players, room.id).find((player) => player.host);
+        const host = getRoomHost(players, room.id);
         return friends.includes(host.name);
     });
     const friendsLabel = friendsRooms.length > 0 ? `Friends · ${friendsRooms.length}` : 'Friends';
@@ -141,7 +142,7 @@ export default function RoomsScreen({ navigation }) {
 
     const renderRoom = ({ item }) => {
         const roomPlayers = getRoomPlayers(players, item.id);
-        const host = roomPlayers.find((player) => player.host);
+        const host = getRoomHost(players, item.id);
 
         return (
             <RoomCard
