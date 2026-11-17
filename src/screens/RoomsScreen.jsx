@@ -50,10 +50,18 @@ export default function RoomsScreen({ navigation }) {
     }
 
     const isFriendsFilter = selectedFilter === 'friends';
-    const emptyTitle = isFriendsFilter ? "No friends' rooms" : 'No rooms yet';
-    const emptyText = isFriendsFilter
-        ? 'None of your friends are hosting right now. Tap + to create a room and invite them.'
-        : 'Even the dog is asleep. Be the first — create a room and invite your friends.';
+    const isEveryRoomPlaying = selectedFilter === 'waiting' && publicRooms.length > 0;
+
+    let emptyTitle = 'No rooms yet';
+    let emptyText = 'Even the dog is asleep. Be the first — create a room and invite your friends.';
+    if (isFriendsFilter) {
+        emptyTitle = "No friends' rooms";
+        emptyText = 'None of your friends are hosting right now. Tap + to create a room and invite them.';
+    }
+    if (isEveryRoomPlaying) {
+        emptyTitle = 'No waiting rooms';
+        emptyText = 'Every room is already playing. Tap + to create a room and invite your friends.';
+    }
 
     const me = players.find((player) => player.you);
     const myRoom = rooms.find((room) => room.id === me?.roomId);
