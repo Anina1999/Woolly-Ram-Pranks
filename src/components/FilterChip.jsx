@@ -4,7 +4,12 @@ import { colors, fonts } from '../styles/theme';
 
 export default function FilterChip({ label, selected, onPress }) {
     return (
-        <Pressable style={[styles.chip, selected && styles.chipSelected]} onPress={onPress}>
+        <Pressable
+            style={[styles.chip, selected && styles.chipSelected]}
+            accessibilityRole='button'
+            accessibilityState={{ selected }}
+            onPress={onPress}
+        >
             <Text style={[styles.label, selected && styles.labelSelected]}>{label}</Text>
         </Pressable>
     );

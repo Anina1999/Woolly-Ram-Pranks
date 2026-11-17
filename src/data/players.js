@@ -16,6 +16,8 @@ const players = [
     { id: '15', roomId: '5', name: 'Woolverine', host: false, you: false, ready: true, wool: 'rust', bandana: '#9558D3' },
     { id: '16', roomId: '6', name: 'Lambo', host: true, you: false, ready: true, wool: 'black', bandana: '#E04436' },
     { id: '17', roomId: '6', name: 'Mutton_Mo', host: false, you: false, ready: false, wool: 'rust', bandana: '#9558D3' },
+    { id: '18', roomId: '7', name: 'Baabara', host: true, you: false, ready: true, wool: 'brown', bandana: '#F2C12E' },
+    { id: '19', roomId: '7', name: 'Shearlock', host: false, you: false, ready: false, wool: 'beige', bandana: '#3B7DDD' },
 ];
 
 export default players;

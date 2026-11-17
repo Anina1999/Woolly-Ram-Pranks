@@ -15,6 +15,7 @@ import RoomCard from '../components/RoomCard';
 import RoomDetails from '../components/RoomDetails';
 import SearchIcon from '../components/SearchIcon';
 
+import friends from '../data/friends';
 import profile from '../data/profile';
 
 import { RoomsContext } from '../contexts/RoomsContext';
@@ -31,8 +32,21 @@ export default function RoomsScreen({ navigation }) {
     const [detailsRoom, setDetailsRoom] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
-    const waitingRooms = rooms.filter((room) => room.status === 'WAITING');
-    const shownRooms = selectedFilter === 'waiting' ? waitingRooms : rooms;
+    const publicRooms = rooms.filter((room) => !room.isPrivate);
+    const waitingRooms = publicRooms.filter((room) => room.status === 'WAITING');
+    const friendsRooms = rooms.filter((room) => {
+        const host = getRoomPlayers(players, room.id).find((player) => player.host);
+        return friends.includes(host.name);
+    });
+    const friendsLabel = friendsRooms.length > 0 ? `Friends · ${friendsRooms.length}` : 'Friends';
+
+    let shownRooms = publicRooms;
+    if (selectedFilter === 'waiting') {
+        shownRooms = waitingRooms;
+    }
+    if (selectedFilter === 'friends') {
+        shownRooms = friendsRooms;
+    }
 
     const me = players.find((player) => player.you);
     const myRoom = rooms.find((room) => room.id === me?.roomId);
@@ -162,7 +176,7 @@ export default function RoomsScreen({ navigation }) {
                 <View style={styles.panelInner}>
                     <View style={styles.chips}>
                         <FilterChip
-                            label={`All · ${rooms.length}`}
+                            label={`All · ${publicRooms.length}`}
                             selected={selectedFilter === 'all'}
                             onPress={() => setSelectedFilter('all')}
                         />
@@ -171,7 +185,11 @@ export default function RoomsScreen({ navigation }) {
                             selected={selectedFilter === 'waiting'}
                             onPress={() => setSelectedFilter('waiting')}
                         />
-                        <FilterChip label='Friends' />
+                        <FilterChip
+                            label={friendsLabel}
+                            selected={selectedFilter === 'friends'}
+                            onPress={() => setSelectedFilter('friends')}
+                        />
                     </View>
                     <FlatList
                         data={shownRooms}
@@ -188,7 +206,7 @@ export default function RoomsScreen({ navigation }) {
             </View>
             <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch} style={styles.searchPanel}>
                 <FindRoom
-                    rooms={rooms}
+                    rooms={publicRooms}
                     players={players}
                     myRoomId={me?.roomId}
                     onClose={handleCloseSearch}
