@@ -1,10 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import Dog from './Dog';
+
 import { colors, fonts } from '../styles/theme';
 
 export default function EmptyRooms({ title, text }) {
     return (
         <View style={styles.container}>
+            <Dog size={180} />
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.text}>{text}</Text>
         </View>
