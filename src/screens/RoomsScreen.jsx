@@ -357,6 +357,7 @@ const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     list: {
+        flexGrow: 1,
         gap: 10,
         paddingTop: 2,
         paddingHorizontal: 12,
