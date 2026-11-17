@@ -56,6 +56,7 @@
 - [x] Add the Find a room window with the search tabs and a room name field
 - [x] Show the rooms as rows in the Find a room window
 - [x] Add empty state for no rooms and no friends' rooms
+- [x] Show FRIEND next to the host on the RoomCard
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby

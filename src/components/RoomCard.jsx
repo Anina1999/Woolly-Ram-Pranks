@@ -12,7 +12,7 @@ import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomCard({ room, host, playerCount, isMyRoom, onPress, onPressDetails }) {
+export default function RoomCard({ room, host, playerCount, isMyRoom, isFriend, onPress, onPressDetails }) {
     const badgeLabel = isMyRoom ? "YOU'RE IN" : room.status;
     const statusColors = getStatusColors(badgeLabel);
     const difficulty = getDifficulty(room.difficulty);
@@ -41,7 +41,10 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, onPress, o
                         )}
                         <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
                     </View>
-                    <Text style={styles.host} numberOfLines={1}>Host: {host.name}</Text>
+                    <View>
+                        <Text style={styles.host} numberOfLines={1}>Host: {host.name}</Text>
+                        {isFriend && <Text>FRIEND</Text>}
+                    </View>
                     <View style={styles.difficulty}>
                         <DifficultyPips difficulty={room.difficulty} size='small' />
                         <Text style={[styles.difficultyName, { color: difficulty.text }]}>{difficulty.name}</Text>

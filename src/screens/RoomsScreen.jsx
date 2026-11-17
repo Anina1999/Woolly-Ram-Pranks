@@ -141,6 +141,7 @@ export default function RoomsScreen({ navigation }) {
                 host={host}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
+                isFriend={!isFriendsFilter && friends.includes(host.name)}
                 onPress={() => handlePressRoom(item)}
                 onPressDetails={() => handlePressDetails(item)}
             />
