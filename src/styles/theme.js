@@ -24,6 +24,8 @@ export const colors = {
     inRoomDot: '#2E2117',
     notReadyBackground: '#E6DDCB',
     notReadyText: '#5E5242',
+    friendBackground: '#E3EEFB',
+    friendText: '#1F4F99',
     errorIcon: '#C8352B',
     errorIconMark: '#FFFFFF',
     hostCrown: '#F2B33D',

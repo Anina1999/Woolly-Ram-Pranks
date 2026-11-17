@@ -41,9 +41,17 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, isFriend, 
                         )}
                         <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
                     </View>
-                    <View>
+                    <View style={styles.hostRow}>
                         <Text style={styles.host} numberOfLines={1}>Host: {host.name}</Text>
-                        {isFriend && <Text>FRIEND</Text>}
+                        {isFriend && (
+                            <Badge
+                                label='FRIEND'
+                                backgroundColor={colors.friendBackground}
+                                color={colors.friendText}
+                                style={styles.friendBadge}
+                                labelStyle={styles.friendLabel}
+                            />
+                        )}
                     </View>
                     <View style={styles.difficulty}>
                         <DifficultyPips difficulty={room.difficulty} size='small' />
@@ -121,10 +129,25 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: colors.text,
     },
+    hostRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+    },
     host: {
+        flexShrink: 1,
         fontFamily: fonts.regular,
         fontSize: 13,
         color: colors.muted,
+    },
+    friendBadge: {
+        flexShrink: 0,
+        paddingVertical: 1,
+        paddingHorizontal: 6,
+    },
+    friendLabel: {
+        fontSize: 10,
+        letterSpacing: 0.5,
     },
     difficulty: {
         flexDirection: 'row',
