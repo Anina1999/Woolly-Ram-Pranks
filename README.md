@@ -26,6 +26,9 @@
 - [x] Install the fonts "npx expo install expo-font @expo-google-fonts/lilita-one @expo-google-fonts/nunito-sans"
 - [x] Create useGameFonts hook for loading Lilita One and Nunito Sans fonts
 
+### Steps to connect Supabase
+- [x] Install Supabase "npx expo install @supabase/supabase-js"
+
 ### Steps to move between the screens
 - [x] Open the Rooms tab from Play Co-op
 - [x] Open the Profile tab from the player name in the Lobby
