@@ -83,6 +83,7 @@ export const colors = {
     tabInactive: '#D9C9A8',
     detailsCornerIcon: '#FBF3E2',
     searchIcon: '#5E3A1E',
+    privateIcon: '#5E3A1E',
 
     shadow: '#0A140C',
     sky: '#8FCDEE',

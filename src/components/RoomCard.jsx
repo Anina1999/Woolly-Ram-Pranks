@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Badge from './Badge';
 import DetailsCornerButton from './DetailsCornerButton';
 import DifficultyPips from './DifficultyPips';
+import LockIcon from './LockIcon';
 import PlayersIcon from './PlayersIcon';
 import RamAvatar from './RamAvatar';
 
@@ -32,7 +33,14 @@ export default function RoomCard({ room, host, playerCount, isMyRoom, onPress, o
             >
                 <RamAvatar wool={host.wool} bandana={host.bandana} size={46} style={styles.avatar} />
                 <View style={styles.info}>
-                    <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
+                    <View style={styles.nameRow}>
+                        {room.isPrivate && (
+                            <View accessible accessibilityRole='image' accessibilityLabel='Private room'>
+                                <LockIcon size={14} color={colors.privateIcon} />
+                            </View>
+                        )}
+                        <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
+                    </View>
                     <Text style={styles.host} numberOfLines={1}>Host: {host.name}</Text>
                     <View style={styles.difficulty}>
                         <DifficultyPips difficulty={room.difficulty} size='small' />
@@ -99,7 +107,13 @@ const styles = StyleSheet.create({
         flex: 1,
         gap: 2,
     },
+    nameRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
+    },
     name: {
+        flexShrink: 1,
         fontFamily: fonts.extraBold,
         fontSize: 16,
         color: colors.text,
