@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import EmptyRooms from '../components/EmptyRooms';
 import FilterChip from '../components/FilterChip';
 import FindRoom from '../components/FindRoom';
 import ForwardIcon from '../components/ForwardIcon';
@@ -47,6 +48,12 @@ export default function RoomsScreen({ navigation }) {
     if (selectedFilter === 'friends') {
         shownRooms = friendsRooms;
     }
+
+    const isFriendsFilter = selectedFilter === 'friends';
+    const emptyTitle = isFriendsFilter ? "No friends' rooms" : 'No rooms yet';
+    const emptyText = isFriendsFilter
+        ? 'None of your friends are hosting right now. Tap + to create a room and invite them.'
+        : 'Even the dog is asleep. Be the first — create a room and invite your friends.';
 
     const me = players.find((player) => player.you);
     const myRoom = rooms.find((room) => room.id === me?.roomId);
@@ -160,7 +167,7 @@ export default function RoomsScreen({ navigation }) {
                 <View style={styles.myRoomBar}>
                     <RamAvatar wool={me.wool} bandana={me.bandana} size={44} style={styles.myRoomAvatar} />
                     <View style={styles.myRoomInfo}>
-                        <Text style={styles.myRoomLabel}>YOU’RE IN A ROOM</Text>
+                        <Text style={styles.myRoomLabel}>YOU'RE IN A ROOM</Text>
                         <Text style={styles.myRoomName} numberOfLines={1}>{myRoom.name}</Text>
                         <Text style={styles.myRoomDetails} numberOfLines={1}>
                             {myRoomPlayers.length}/{myRoom.maxPlayers} · {getDifficulty(myRoom.difficulty).name} · {myReadyCount} of {myRoomPlayers.length} ready
@@ -196,6 +203,7 @@ export default function RoomsScreen({ navigation }) {
                         keyExtractor={(room) => room.id}
                         contentContainerStyle={styles.list}
                         renderItem={renderRoom}
+                        ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
                     />
                     <View style={styles.bottomBar}>
                         <GameButton title='Find a room' variant='accent' onPress={handlePressFindRoom}>
@@ -218,7 +226,7 @@ export default function RoomsScreen({ navigation }) {
                 {me && <Ram wool={me.wool} bandana={me.bandana} pose='dizzy' size={110} />}
                 <Text style={styles.dialogTitle}>Already in a room</Text>
                 <Text style={styles.dialogMessage}>
-                    You’re in <Text style={styles.dialogRoomName}>{myRoom?.name}</Text>. To join{' '}
+                    You're in <Text style={styles.dialogRoomName}>{myRoom?.name}</Text>. To join{' '}
                     <Text style={styles.dialogRoomName}>{blockedRoom?.name}</Text>, go back to your room and leave it first.
                 </Text>
                 <View style={styles.dialogButtons}>

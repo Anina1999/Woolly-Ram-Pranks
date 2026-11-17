@@ -10,7 +10,7 @@ import getStatusColors from '../utils/getStatusColors';
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomRow({ room, host, playerCount, isMyRoom, onPress, onPressDetails }) {
-    const badgeLabel = isMyRoom ? 'YOU’RE IN' : room.status;
+    const badgeLabel = isMyRoom ? "YOU'RE IN" : room.status;
     const statusColors = getStatusColors(badgeLabel);
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';

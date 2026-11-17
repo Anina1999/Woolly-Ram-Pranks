@@ -86,7 +86,7 @@ export default function LobbyScreen({ navigation }) {
                             <Text style={styles.modePlayers}>1–5 players</Text>
                         </View>
                         <Text style={styles.modeDescription}>
-                            Charm every sheep, pull off the pranks, don’t get caught.
+                            Charm every sheep, pull off the pranks, don't get caught.
                         </Text>
                     </View>
                 </Animated.View>

@@ -59,7 +59,7 @@ export default function RoomDetails({ room, players, isMyRoom, onClose, onPressG
         if (isPlaying || isFull) {
             return (
                 <View style={styles.cantJoin}>
-                    <GameButton title='Can’t join right now' isDisabled />
+                    <GameButton title="Can't join right now" isDisabled />
                     <Text style={styles.reason}>
                         {isPlaying ? 'This game is already running. You can join when it ends.' : 'This room is full.'}
                     </Text>
