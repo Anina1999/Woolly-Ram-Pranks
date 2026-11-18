@@ -25,6 +25,7 @@ export async function createRoom(room) {
             name: room.name,
             max_players: room.maxPlayers,
             difficulty: room.difficulty,
+            is_private: room.isPrivate,
             host_id: room.hostId,
         })
         .select('id')

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -28,6 +28,7 @@ export default function CreateRoomScreen({ navigation }) {
     const { players, reloadData } = useContext(RoomsContext);
     const [roomName, setRoomName] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isPrivate, setIsPrivate] = useState(false);
     const [maxPlayers, setMaxPlayers] = useState(5);
     const [difficulty, setDifficulty] = useState('normal');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -63,6 +64,7 @@ export default function CreateRoomScreen({ navigation }) {
                 name: roomName.trim(),
                 maxPlayers: maxPlayers,
                 difficulty: difficulty,
+                isPrivate: isPrivate,
                 hostId: host.id,
             });
 
@@ -110,6 +112,13 @@ export default function CreateRoomScreen({ navigation }) {
                     {isNameErrorVisible && (
                         <FormError message={`Name must be ${MIN_NAME_LENGTH}–${MAX_NAME_LENGTH} characters.`} />
                     )}
+                </View>
+                <View>
+                    <View>
+                        <Text>Private room</Text>
+                        <Text>Hidden from the list. Friends join with a 5-letter code.</Text>
+                    </View>
+                    <Switch value={isPrivate} accessibilityLabel='Private room' onValueChange={setIsPrivate} />
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />

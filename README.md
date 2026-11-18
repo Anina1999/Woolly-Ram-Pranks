@@ -74,6 +74,7 @@
 - [x] Add Max players and Difficulty to Create room
 - [x] Add Meadow Farm level card
 - [x] Add Room name field
+- [x] Add the Private room switch to Create room
 
 ### Steps to add the Waiting room content
 - [x] Add the Waiting room screen and open it from Rooms with the room id
@@ -193,3 +194,4 @@
 - [x] Players cannot join private rooms
 - [x] Show friends' private rooms only in the Private tab, not in Friends
 - [x] Save the player in the room on Join and show Couldn't join on error
+- [x] Create a private room with the Private room switch
