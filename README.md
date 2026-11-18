@@ -88,6 +88,7 @@
 - [x] Show how many rams are ready in the Waiting room
 - [x] Ask before leaving the room
 - [x] Show an error message when the room can't refresh
+- [x] Add refresh button and error message to Room not found
 
 ### Steps to add the Settings content
 - [x] Add the Settings screen and open it from the cog in the Lobby

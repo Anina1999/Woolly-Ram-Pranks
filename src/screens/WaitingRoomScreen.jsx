@@ -14,6 +14,7 @@ import ModalPanel from '../components/ModalPanel';
 import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
+import RefreshError from '../components/RefreshError';
 import SlotRow from '../components/SlotRow';
 
 import { RoomsContext } from '../contexts/RoomsContext';
@@ -82,8 +83,17 @@ export default function WaitingRoomScreen({ route, navigation }) {
         return (
             <SafeAreaView style={styles.container} edges={['top']}>
                 <BackHeader onBack={handlePressBack}>
-                    <Text>Room not found</Text>
+                    <View style={styles.headerText}>
+                        {!error && <Text>Room not found</Text>}
+                    </View>
+                    <IconButton
+                        icon='rotate-cw'
+                        isDisabled={isLoading}
+                        accessibilityLabel='Refresh room'
+                        onPress={reloadData}
+                    />
                 </BackHeader>
+                {error && <RefreshError />}
             </SafeAreaView>
         );
     }
@@ -132,13 +142,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     onPress={reloadData}
                 />
             </BackHeader>
-            {error && (
-                <View style={styles.error}>
-                    <Text style={styles.errorText}>
-                        Couldn't refresh the room. Check your connection and tap refresh.
-                    </Text>
-                </View>
-            )}
+            {error && <RefreshError />}
             <Panel style={[styles.panel, styles.playersPanel]}>
                 <View style={styles.playersHeader}>
                     <Text style={styles.playersTitle}>Players</Text>
@@ -236,21 +240,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 13,
         color: colors.textOnDark,
-    },
-    error: {
-        marginTop: 16,
-        marginHorizontal: 16,
-        paddingVertical: 8,
-        paddingHorizontal: 12,
-        borderRadius: 14,
-        borderWidth: 2,
-        borderColor: colors.errorBorder,
-        backgroundColor: colors.errorSurface,
-    },
-    errorText: {
-        fontFamily: fonts.bold,
-        fontSize: 13,
-        color: colors.errorTitle,
     },
     panel: {
         marginTop: 24,
