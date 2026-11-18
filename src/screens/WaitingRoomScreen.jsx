@@ -29,7 +29,7 @@ const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
-    const { rooms, setRooms, players, setPlayers, isLoading, reloadData } = useContext(RoomsContext);
+    const { rooms, setRooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
 
     const room = rooms.find((item) => item.id === roomId);
@@ -132,6 +132,9 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     onPress={reloadData}
                 />
             </BackHeader>
+            {error && (
+                <Text>Couldn't refresh the room. Check your connection and tap refresh.</Text>
+            )}
             <Panel style={[styles.panel, styles.playersPanel]}>
                 <View style={styles.playersHeader}>
                     <Text style={styles.playersTitle}>Players</Text>

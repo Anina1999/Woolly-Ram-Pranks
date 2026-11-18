@@ -87,6 +87,7 @@
 - [x] Show ram avatar in the Waiting room players
 - [x] Show how many rams are ready in the Waiting room
 - [x] Ask before leaving the room
+- [x] Show an error message when the room can't refresh
 
 ### Steps to add the Settings content
 - [x] Add the Settings screen and open it from the cog in the Lobby
