@@ -178,3 +178,4 @@
 - [x] Show the rooms hosted by friends with the Friends chip, private rooms included
 - [x] Refresh the rooms by pulling the list down
 - [x] Refresh the rooms with the refresh button
+- [x] Ask to leave the current room first on Create

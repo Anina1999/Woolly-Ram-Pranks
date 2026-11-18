@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -12,17 +12,23 @@ import Panel from '../components/Panel';
 
 import newRoom from '../data/newRoom';
 
+import { RoomsContext } from '../contexts/RoomsContext';
+
 import { colors, fonts } from '../styles/theme';
 
 const MIN_NAME_LENGTH = 3;
 const MAX_NAME_LENGTH = 24;
 
 export default function CreateRoomScreen({ navigation }) {
+    const { players } = useContext(RoomsContext);
     const [roomName, setRoomName] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [maxPlayers, setMaxPlayers] = useState(5);
     const [difficulty, setDifficulty] = useState('normal');
+    const [submitError, setSubmitError] = useState('');
 
+    const me = players.find((player) => player.you);
+    const isInRoom = me !== undefined;
     const isNameValid = roomName.trim().length >= MIN_NAME_LENGTH;
     const isNameErrorVisible = isSubmitted && !isNameValid;
 
@@ -32,8 +38,14 @@ export default function CreateRoomScreen({ navigation }) {
 
     const handlePressCreate = () => {
         setIsSubmitted(true);
+        setSubmitError('');
 
         if (!isNameValid) {
+            return;
+        }
+
+        if (isInRoom) {
+            setSubmitError('Leave your room first');
             return;
         }
 
@@ -80,6 +92,7 @@ export default function CreateRoomScreen({ navigation }) {
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
                 <GameButton title='Create' onPress={handlePressCreate} />
+                {submitError !== '' && <Text>{submitError}</Text>}
             </Panel>
         </SafeAreaView>
     );
