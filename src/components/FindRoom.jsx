@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
+import FormError from './FormError';
+import GameButton from './GameButton';
 import IconButton from './IconButton';
 import RoomRow from './RoomRow';
 import SearchIcon from './SearchIcon';
@@ -10,9 +12,23 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function FindRoom({ rooms, players, myRoomId, onClose, onPressRoom, onPressDetails }) {
-    const [searchText, setSearchText] = useState('');
+const ROOM_CODE_LENGTH = 5;
 
+export default function FindRoom({
+    rooms,
+    players,
+    myRoomId,
+    codeError,
+    onClose,
+    onPressRoom,
+    onPressDetails,
+    onJoinByCode,
+}) {
+    const [searchMode, setSearchMode] = useState('name');
+    const [searchText, setSearchText] = useState('');
+    const [code, setCode] = useState('');
+
+    const isCodeMode = searchMode === 'code';
     const query = searchText.trim().toLowerCase();
     const hasQuery = query !== '';
     const foundRooms = rooms.filter((room) => room.name.toLowerCase().startsWith(query));
@@ -39,34 +55,56 @@ export default function FindRoom({ rooms, players, myRoomId, onClose, onPressRoo
                 <IconButton icon='x' size='small' accessibilityLabel='Close' onPress={onClose} />
             </View>
             <View style={styles.tabs}>
-                <SearchTab label='By name' selected />
-                <SearchTab label='Code' />
+                <SearchTab label='By name' selected={!isCodeMode} onPress={() => setSearchMode('name')} />
+                <SearchTab label='Code' selected={isCodeMode} onPress={() => setSearchMode('code')} />
             </View>
-            <View style={styles.field}>
-                <SearchIcon size={20} color={colors.searchIcon} />
-                <TextInput
-                    placeholder='Room name'
-                    placeholderTextColor={colors.placeholder}
-                    accessibilityLabel='Room name'
-                    value={searchText}
-                    onChangeText={setSearchText}
-                    style={styles.input}
-                />
-            </View>
-            {hasQuery && (
-                <View style={styles.results}>
-                    <Text style={styles.resultsLabel}>{foundRooms.length} {roomWord} FOUND</Text>
-                    {foundRooms.length === 0 ? (
-                        <Text style={styles.emptyText}>No rooms match that name. Try another one.</Text>
-                    ) : (
-                        <FlatList
-                            data={foundRooms}
-                            keyExtractor={(room) => room.id}
-                            contentContainerStyle={styles.list}
-                            renderItem={renderRoom}
-                        />
-                    )}
+            {isCodeMode ? (
+                <View>
+                    <Text>Got a code from a friend? Type it in to jump straight into their private room.</Text>
+                    <Text>ROOM CODE</Text>
+                    <TextInput
+                        placeholder='ABC12'
+                        placeholderTextColor={colors.placeholder}
+                        accessibilityLabel='Room code'
+                        autoCapitalize='characters'
+                        autoCorrect={false}
+                        maxLength={ROOM_CODE_LENGTH}
+                        value={code}
+                        onChangeText={setCode}
+                    />
+                    {codeError !== '' && <FormError message={codeError} />}
+                    <GameButton title='Join room' onPress={() => onJoinByCode(code)} />
                 </View>
+            ) : (
+                <>
+                    <View style={styles.field}>
+                        <SearchIcon size={20} color={colors.searchIcon} />
+                        <TextInput
+                            placeholder='Room name'
+                            placeholderTextColor={colors.placeholder}
+                            accessibilityLabel='Room name'
+                            value={searchText}
+                            onChangeText={setSearchText}
+                            style={styles.input}
+                        />
+                    </View>
+                    {hasQuery && (
+                        <View style={styles.results}>
+                            <Text style={styles.resultsLabel}>{foundRooms.length} {roomWord} FOUND</Text>
+                            {foundRooms.length === 0 ? (
+                                <Text style={styles.emptyText}>No rooms match that name. Try another one.</Text>
+                            ) : (
+                                <FlatList
+                                    data={foundRooms}
+                                    keyExtractor={(room) => room.id}
+                                    contentContainerStyle={styles.list}
+                                    renderItem={renderRoom}
+                                />
+                            )}
+                            <Text>Private rooms don't show up here — use Code.</Text>
+                        </View>
+                    )}
+                </>
             )}
         </>
     );

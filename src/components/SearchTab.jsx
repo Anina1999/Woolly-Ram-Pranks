@@ -2,12 +2,13 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function SearchTab({ label, selected }) {
+export default function SearchTab({ label, selected, onPress }) {
     return (
         <Pressable
             style={[styles.tab, selected && styles.tabSelected]}
             accessibilityRole='button'
             accessibilityState={{ selected }}
+            onPress={onPress}
         >
             <Text style={[styles.label, selected && styles.labelSelected]}>{label}</Text>
         </Pressable>

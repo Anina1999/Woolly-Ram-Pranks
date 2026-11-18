@@ -164,11 +164,14 @@
 
 - [x] Add the window with the search tabs and a room name field
 - [x] Show the rooms as rows
+- [x] Add the Code tab with the room code field and Join room
 - [x] Add the yellow Find a room button with a magnifier
 - [x] Add style to the window
 - [x] Add style to the room rows
 - [x] Search the rooms by name
 - [x] Join a room or open its details from the results
+- [x] Join a private room with its code
+- [x] Disable Find a room while I am in a room
 
 </details>
 

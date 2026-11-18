@@ -27,6 +27,7 @@ import { RoomsContext } from '../contexts/RoomsContext';
 
 import { getProfileByUsername } from '../services/profilesService';
 import { addRoomPlayer } from '../services/roomPlayersService';
+import { getRoomByCode } from '../services/roomsService';
 
 import getDifficulty from '../utils/getDifficulty';
 import getRoomPlayers from '../utils/getRoomPlayers';
@@ -34,6 +35,7 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 import { colors, fonts } from '../styles/theme';
 
 const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
+const ROOM_CODE_LENGTH = 5;
 
 export default function RoomsScreen({ navigation }) {
     const { rooms, players, isLoading, error, reloadData } = useContext(RoomsContext);
@@ -43,6 +45,7 @@ export default function RoomsScreen({ navigation }) {
     const [joinError, setJoinError] = useState('');
     const [detailsRoom, setDetailsRoom] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
+    const [codeError, setCodeError] = useState('');
 
     const isFirstLoad = isLoading && rooms.length === 0;
 
@@ -101,6 +104,7 @@ export default function RoomsScreen({ navigation }) {
     const myReadyCount = myRoomPlayers.filter((player) => player.ready).length;
     const isInRoom = me !== undefined;
     const plusIconColor = isInRoom ? colors.disabledButtonText : colors.textOnPrimary;
+    const searchIconColor = isInRoom ? colors.disabledButtonText : colors.textOnAccent;
 
     const handlePressRoom = (room) => {
         setIsSearchVisible(false);
@@ -132,6 +136,7 @@ export default function RoomsScreen({ navigation }) {
 
     const handleCloseSearch = () => {
         setIsSearchVisible(false);
+        setCodeError('');
     };
 
     const handlePressReturn = () => {
@@ -172,6 +177,50 @@ export default function RoomsScreen({ navigation }) {
         } finally {
             setIsJoining(false);
         }
+    };
+
+    const handleJoinByCode = async (code) => {
+        const roomCode = code.trim().toUpperCase();
+
+        if (isJoining) {
+            return;
+        }
+
+        if (roomCode.length < ROOM_CODE_LENGTH) {
+            setCodeError('Enter the 5-character room code.');
+            return;
+        }
+
+        setCodeError('');
+        setIsJoining(true);
+
+        let room = null;
+
+        try {
+            room = await getRoomByCode(roomCode);
+        } catch {
+            setCodeError("Couldn't reach the farm. Check your connection and try again.");
+            return;
+        } finally {
+            setIsJoining(false);
+        }
+
+        if (room === null) {
+            setCodeError('No room with that code. Check it and try again.');
+            return;
+        }
+
+        if (room.status === 'PLAYING') {
+            setCodeError('This game is already running. You can join when it ends.');
+            return;
+        }
+
+        if (getRoomPlayers(players, room.id).length >= room.maxPlayers) {
+            setCodeError('This room is full.');
+            return;
+        }
+
+        handlePressRoom(room);
     };
 
     const handleCloseJoinError = () => {
@@ -293,8 +342,13 @@ export default function RoomsScreen({ navigation }) {
                     )}
                     {!error && (
                         <View style={styles.bottomBar}>
-                            <GameButton title='Find a room' variant='accent' onPress={handlePressFindRoom}>
-                                <SearchIcon />
+                            <GameButton
+                                title='Find a room'
+                                variant='accent'
+                                isDisabled={isInRoom}
+                                onPress={handlePressFindRoom}
+                            >
+                                <SearchIcon color={searchIconColor} />
                             </GameButton>
                         </View>
                     )}
@@ -305,9 +359,11 @@ export default function RoomsScreen({ navigation }) {
                     rooms={publicRooms}
                     players={players}
                     myRoomId={me?.roomId}
+                    codeError={codeError}
                     onClose={handleCloseSearch}
                     onPressRoom={handlePressRoom}
                     onPressDetails={handlePressDetails}
+                    onJoinByCode={handleJoinByCode}
                 />
             </ModalPanel>
             <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
