@@ -8,11 +8,10 @@ import RoomRow from './RoomRow';
 import SearchIcon from './SearchIcon';
 import SearchTab from './SearchTab';
 
+import formatRoomCode, { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
-
-const ROOM_CODE_LENGTH = 5;
 
 export default function FindRoom({
     rooms,
@@ -63,14 +62,14 @@ export default function FindRoom({
                     <Text>Got a code from a friend? Type it in to jump straight into their private room.</Text>
                     <Text>ROOM CODE</Text>
                     <TextInput
-                        placeholder='ABC12'
+                        placeholder='ABC-1234'
                         placeholderTextColor={colors.placeholder}
                         accessibilityLabel='Room code'
                         autoCapitalize='characters'
                         autoCorrect={false}
                         maxLength={ROOM_CODE_LENGTH}
                         value={code}
-                        onChangeText={setCode}
+                        onChangeText={(text) => setCode(formatRoomCode(text))}
                     />
                     {codeError !== '' && <FormError message={codeError} />}
                     <GameButton title='Join room' onPress={() => onJoinByCode(code)} />

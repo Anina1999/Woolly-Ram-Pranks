@@ -116,7 +116,7 @@ export default function CreateRoomScreen({ navigation }) {
                 <View>
                     <View>
                         <Text>Private room</Text>
-                        <Text>Hidden from the list. Friends join with a 5-letter code.</Text>
+                        <Text>Hidden from the list. Friends join with a room code.</Text>
                     </View>
                     <Switch value={isPrivate} accessibilityLabel='Private room' onValueChange={setIsPrivate} />
                 </View>

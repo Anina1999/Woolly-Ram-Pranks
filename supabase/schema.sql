@@ -12,8 +12,11 @@ returns text
 language sql
 set search_path = ''
 as $$
-    select string_agg(substr('ABCDEFGHJKLMNPQRSTUVWXYZ23456789', floor(random() * 32)::int + 1, 1), '')
-    from generate_series(1, 5);
+    select substr(characters, 1, 3) || '-' || substr(characters, 4)
+    from (
+        select string_agg(substr('ABCDEFGHJKLMNPQRSTUVWXYZ23456789', floor(random() * 32)::int + 1, 1), '') as characters
+        from generate_series(1, 7)
+    ) as random_code;
 $$;
 
 create table rooms (

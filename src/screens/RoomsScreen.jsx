@@ -29,13 +29,13 @@ import { getProfileByUsername } from '../services/profilesService';
 import { addRoomPlayer } from '../services/roomPlayersService';
 import { getRoomByCode } from '../services/roomsService';
 
+import { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';
 import getDifficulty from '../utils/getDifficulty';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
 
 const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
-const ROOM_CODE_LENGTH = 5;
 
 export default function RoomsScreen({ navigation }) {
     const { rooms, players, isLoading, error, reloadData } = useContext(RoomsContext);
@@ -180,14 +180,12 @@ export default function RoomsScreen({ navigation }) {
     };
 
     const handleJoinByCode = async (code) => {
-        const roomCode = code.trim().toUpperCase();
-
         if (isJoining) {
             return;
         }
 
-        if (roomCode.length < ROOM_CODE_LENGTH) {
-            setCodeError('Enter the 5-character room code.');
+        if (code.length < ROOM_CODE_LENGTH) {
+            setCodeError('Enter the full room code, like ABC-1234.');
             return;
         }
 
@@ -197,7 +195,7 @@ export default function RoomsScreen({ navigation }) {
         let room = null;
 
         try {
-            room = await getRoomByCode(roomCode);
+            room = await getRoomByCode(code);
         } catch {
             setCodeError("Couldn't reach the farm. Check your connection and try again.");
             return;

@@ -172,6 +172,7 @@
 - [x] Join a room or open its details from the results
 - [x] Join a private room with its code
 - [x] Disable Find a room while I am in a room
+- [x] Change the room code to the ABC-1234 format
 
 </details>
 
