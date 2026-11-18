@@ -169,7 +169,12 @@ export default function RoomsScreen({ navigation }) {
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
                 <View style={styles.headerButtons}>
-                    <IconButton icon='rotate-cw' />
+                    <IconButton
+                        icon='rotate-cw'
+                        isDisabled={isLoading}
+                        accessibilityLabel='Refresh rooms'
+                        onPress={reloadData}
+                    />
                     <IconButton
                         variant='primary'
                         isDisabled={isInRoom}

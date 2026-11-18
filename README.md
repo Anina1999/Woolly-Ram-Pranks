@@ -177,3 +177,4 @@
 - [x] Join a room or open its details from the Find a room results
 - [x] Show the rooms hosted by friends with the Friends chip, private rooms included
 - [x] Refresh the rooms by pulling the list down
+- [x] Refresh the rooms with the refresh button
