@@ -28,6 +28,8 @@
 
 ### Steps to connect Supabase
 - [x] Install Supabase "npx expo install @supabase/supabase-js"
+- [x] Create profiles, rooms and room_players tables in Supabase
+- [x] Add sample players and rooms to Supabase
 
 ### Steps to move between the screens
 - [x] Open the Rooms tab from Play Co-op
