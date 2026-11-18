@@ -153,6 +153,7 @@
 - [x] Add style and the barn icon to the Meadow Farm card
 - [x] Add style to the Room name field
 - [x] Add the error state with ErrorIcon to the Room name field
+- [x] Style the error message under Create
 
 ### Steps to add the screen behaviour
 - [x] Filter the rooms with the All and Waiting chips
