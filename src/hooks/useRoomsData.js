@@ -19,11 +19,16 @@ export default function useRoomsData() {
             const [loadedRooms, loadedPlayers] = await Promise.all([getRooms(), getPlayers()]);
 
             setRooms(loadedRooms);
-            setPlayers(loadedPlayers.map((player) => ({
-                ...player,
-                host: loadedRooms.some((room) => room.id === player.roomId && room.hostId === player.profileId),
-                you: player.name === profile.name,
-            })));
+            setPlayers(loadedPlayers.map((player) => {
+                const isHost = loadedRooms.some((room) => room.id === player.roomId && room.hostId === player.profileId);
+
+                return {
+                    ...player,
+                    host: isHost,
+                    ready: isHost || player.ready,
+                    you: player.name === profile.name,
+                };
+            }));
         } catch (loadError) {
             setError(loadError);
         } finally {

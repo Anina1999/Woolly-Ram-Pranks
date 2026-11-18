@@ -12,3 +12,13 @@ export async function getPlayers() {
 
     return data;
 }
+
+export async function addRoomPlayer(roomId, profileId) {
+    const { error } = await supabase
+        .from('room_players')
+        .insert({ room_id: roomId, profile_id: profileId });
+
+    if (error) {
+        throw error;
+    }
+}

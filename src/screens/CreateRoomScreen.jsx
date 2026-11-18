@@ -11,20 +11,26 @@ import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import Panel from '../components/Panel';
 
 import newRoom from '../data/newRoom';
+import profile from '../data/profile';
 
 import { RoomsContext } from '../contexts/RoomsContext';
+
+import { getProfileByUsername } from '../services/profilesService';
+import { createRoom } from '../services/roomsService';
 
 import { colors, fonts } from '../styles/theme';
 
 const MIN_NAME_LENGTH = 3;
 const MAX_NAME_LENGTH = 24;
+const LEAVE_ROOM_MESSAGE = 'Leave your room first';
 
 export default function CreateRoomScreen({ navigation }) {
-    const { players } = useContext(RoomsContext);
+    const { players, reloadData } = useContext(RoomsContext);
     const [roomName, setRoomName] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [maxPlayers, setMaxPlayers] = useState(5);
     const [difficulty, setDifficulty] = useState('normal');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
 
     const me = players.find((player) => player.you);
@@ -36,7 +42,7 @@ export default function CreateRoomScreen({ navigation }) {
         navigation.goBack();
     };
 
-    const handlePressCreate = () => {
+    const handlePressCreate = async () => {
         setIsSubmitted(true);
         setSubmitError('');
 
@@ -45,11 +51,32 @@ export default function CreateRoomScreen({ navigation }) {
         }
 
         if (isInRoom) {
-            setSubmitError('Leave your room first');
+            setSubmitError(LEAVE_ROOM_MESSAGE);
             return;
         }
 
-        navigation.replace('WaitingRoom', { roomId: '2' });
+        setIsSubmitting(true);
+
+        try {
+            const host = await getProfileByUsername(profile.name);
+            const createdRoom = await createRoom({
+                name: roomName.trim(),
+                maxPlayers: maxPlayers,
+                difficulty: difficulty,
+                hostId: host.id,
+            });
+
+            await reloadData();
+            navigation.replace('WaitingRoom', { roomId: createdRoom.id });
+        } catch (createError) {
+            if (createError.code === '23505') {
+                setSubmitError(LEAVE_ROOM_MESSAGE);
+            } else {
+                setSubmitError("Couldn't create the room. Try again.");
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -91,7 +118,7 @@ export default function CreateRoomScreen({ navigation }) {
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
-                <GameButton title='Create' onPress={handlePressCreate} />
+                <GameButton title='Create' isDisabled={isSubmitting} onPress={handlePressCreate} />
                 {submitError !== '' && <Text>{submitError}</Text>}
             </Panel>
         </SafeAreaView>

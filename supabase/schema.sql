@@ -48,3 +48,22 @@ create policy "Everyone can read room players"
     on room_players for select
     to anon, authenticated
     using (true);
+
+-- Temporary write rights for anon, tightened when auth is added
+grant insert, delete on rooms to anon;
+grant insert on room_players to anon;
+
+create policy "Temporary: anon can create rooms"
+    on rooms for insert
+    to anon
+    with check (true);
+
+create policy "Temporary: anon can delete rooms"
+    on rooms for delete
+    to anon
+    using (true);
+
+create policy "Temporary: anon can add room players"
+    on room_players for insert
+    to anon
+    with check (true);

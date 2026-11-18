@@ -31,6 +31,7 @@
 - [x] Create profiles, rooms and room_players tables in Supabase
 - [x] Add sample players and rooms
 - [x] Load rooms and players
+- [x] Create a room and join it as the host
 
 ### Steps to move between the screens
 - [x] Open the Rooms tab from Play Co-op
