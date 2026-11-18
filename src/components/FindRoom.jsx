@@ -6,7 +6,6 @@ import RoomRow from './RoomRow';
 import SearchIcon from './SearchIcon';
 import SearchTab from './SearchTab';
 
-import getRoomHost from '../utils/getRoomHost';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
@@ -21,12 +20,10 @@ export default function FindRoom({ rooms, players, myRoomId, onClose, onPressRoo
 
     const renderRoom = ({ item }) => {
         const roomPlayers = getRoomPlayers(players, item.id);
-        const host = getRoomHost(players, item.id);
 
         return (
             <RoomRow
                 room={item}
-                host={host}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === myRoomId}
                 onPress={() => onPressRoom(item)}

@@ -1,4 +1,4 @@
-export default function getRoomStatus(players, isHost, hasEnoughPlayers) {
+export default function getRoomStatus(players, host, isHost, hasEnoughPlayers) {
     if (!hasEnoughPlayers) {
         return 'Invite at least one friend to start.';
     }
@@ -14,8 +14,6 @@ export default function getRoomStatus(players, isHost, hasEnoughPlayers) {
     if (isHost) {
         return `Everyone is ready. Start with ${players.length} players!`;
     }
-
-    const host = players.find((player) => player.host);
 
     return `Waiting for ${host.name} to start…`;
 }

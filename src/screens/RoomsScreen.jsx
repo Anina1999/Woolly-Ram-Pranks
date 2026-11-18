@@ -25,7 +25,6 @@ import profile from '../data/profile';
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import getDifficulty from '../utils/getDifficulty';
-import getRoomHost from '../utils/getRoomHost';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
@@ -43,10 +42,7 @@ export default function RoomsScreen({ navigation }) {
 
     const publicRooms = rooms.filter((room) => !room.isPrivate);
     const waitingRooms = publicRooms.filter((room) => room.status === 'WAITING');
-    const friendsRooms = rooms.filter((room) => {
-        const host = getRoomHost(players, room.id);
-        return friends.includes(host.name);
-    });
+    const friendsRooms = rooms.filter((room) => friends.includes(room.host.name));
     const friendsLabel = friendsRooms.length > 0 ? `Friends · ${friendsRooms.length}` : 'Friends';
 
     let shownRooms = publicRooms;
@@ -149,15 +145,13 @@ export default function RoomsScreen({ navigation }) {
 
     const renderRoom = ({ item }) => {
         const roomPlayers = getRoomPlayers(players, item.id);
-        const host = getRoomHost(players, item.id);
 
         return (
             <RoomCard
                 room={item}
-                host={host}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
-                isFriend={!isFriendsFilter && friends.includes(host.name)}
+                isFriend={!isFriendsFilter && friends.includes(item.host.name)}
                 onPress={() => handlePressRoom(item)}
                 onPressDetails={() => handlePressDetails(item)}
             />

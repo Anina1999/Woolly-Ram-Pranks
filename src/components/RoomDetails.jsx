@@ -8,7 +8,6 @@ import RamAvatar from './RamAvatar';
 
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';
-import getRoomHost from '../utils/getRoomHost';
 import getRoomPlayers from '../utils/getRoomPlayers';
 import getStatusColors from '../utils/getStatusColors';
 
@@ -16,7 +15,6 @@ import { colors, fonts } from '../styles/theme';
 
 export default function RoomDetails({ room, players, isMyRoom, onClose, onPressGoToMyRoom, onPressJoin }) {
     const roomPlayers = getRoomPlayers(players, room.id);
-    const host = getRoomHost(players, room.id);
     const difficulty = getDifficulty(room.difficulty);
     const statusColors = getStatusColors(room.status);
     const slots = getPlayerSlots(roomPlayers, room.maxPlayers).filter((slot) => slot.type !== 'closed');
@@ -78,7 +76,7 @@ export default function RoomDetails({ room, players, isMyRoom, onClose, onPressG
                     <Text style={styles.label}>{room.mode} · {room.map}</Text>
                     <Text style={styles.title}>{room.name}</Text>
                     <Text style={styles.host}>
-                        Host: <Text style={styles.hostName}>{host.name}</Text>
+                        Host: <Text style={styles.hostName}>{room.host.name}</Text>
                     </Text>
                 </View>
                 <IconButton icon='x' size='small' accessibilityLabel='Close' onPress={onClose} />
