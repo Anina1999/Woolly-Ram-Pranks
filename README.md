@@ -1,11 +1,51 @@
 ## Development log
 
-### Steps to set up the project
+### Setup
+
+<details>
+<summary>Steps to set up the project</summary>
+
 - [x] Create the Expo app "npx create-expo-app@latest . --template blank@latest"
 - [x] Add the README
 - [x] Rename the app to Woolly Ram Pranks
 
-### Steps to add navigation with React Navigation
+</details>
+
+<details>
+<summary>Steps to add the icons</summary>
+
+- [x] Install Feather icons for the screens "npx expo install @expo/vector-icons"
+- [x] Add PNG tab icons to the tabs
+- [x] Install SVG support "npx expo install react-native-svg"
+- [x] Add LockIcon to the LockedModeCard
+- [x] Add LockIcon before the name of a private room on the RoomCard
+
+</details>
+
+<details>
+<summary>Steps to add the fonts</summary>
+
+- [x] Install the fonts "npx expo install expo-font @expo-google-fonts/lilita-one @expo-google-fonts/nunito-sans"
+- [x] Create useGameFonts hook for loading Lilita One and Nunito Sans fonts
+
+</details>
+
+<details>
+<summary>Steps to connect Supabase</summary>
+
+- [x] Install Supabase "npx expo install @supabase/supabase-js"
+- [x] Create profiles, rooms and room_players tables in Supabase
+- [x] Add sample players and rooms
+- [x] Load rooms and players
+- [x] Create a room and join it as the host
+
+</details>
+
+### Navigation
+
+<details>
+<summary>Steps to add navigation with React Navigation</summary>
+
 - [x] Install React Navigation "npm install @react-navigation/native"
 - [x] Install its native dependencies "npx expo install react-native-screens react-native-safe-area-context"
 - [x] Install the bottom tabs "npm install @react-navigation/bottom-tabs"
@@ -15,25 +55,19 @@
 - [x] Always show the tab labels
 - [x] Move the tabs to AppNavigator and make the RootNavigator a native stack
 
-### Steps to add the icons
-- [x] Install Feather icons for the screens "npx expo install @expo/vector-icons"
-- [x] Add PNG tab icons to the tabs
-- [x] Install SVG support "npx expo install react-native-svg"
-- [x] Add LockIcon to the LockedModeCard
-- [x] Add LockIcon before the name of a private room on the RoomCard
+</details>
 
-### Steps to add the fonts
-- [x] Install the fonts "npx expo install expo-font @expo-google-fonts/lilita-one @expo-google-fonts/nunito-sans"
-- [x] Create useGameFonts hook for loading Lilita One and Nunito Sans fonts
+<details>
+<summary>Steps to style the tab bar and status bar</summary>
 
-### Steps to connect Supabase
-- [x] Install Supabase "npx expo install @supabase/supabase-js"
-- [x] Create profiles, rooms and room_players tables in Supabase
-- [x] Add sample players and rooms
-- [x] Load rooms and players
-- [x] Create a room and join it as the host
+- [x] Add style to the tab bar
+- [x] Use dark status bar icons
 
-### Steps to move between the screens
+</details>
+
+<details>
+<summary>Steps to move between the screens</summary>
+
 - [x] Open the Rooms tab from Play Co-op
 - [x] Open the Profile tab from the player name in the Lobby
 - [x] Open Create room from Rooms
@@ -43,155 +77,245 @@
 - [x] Go back with Leave in the Waiting room
 - [x] Go back to Rooms from the Waiting room
 
-### Steps to add the Lobby content
-- [x] Add the Co-op mode card to the Lobby
+</details>
+
+### Lobby
+
+<details>
+<summary>Steps to add the mode cards and buttons</summary>
+
+- [x] Add the Co-op mode card
 - [x] Add the LockedModeCard component for Competitive and Hybrid
-
-### Steps to add the Rooms content
-- [x] Add the Rooms header with the refresh button
-- [x] Add the All and Waiting filter chips to Rooms
-- [x] Add the Friends filter chip to Rooms
-- [x] Add the rooms list with the RoomCard component
-- [x] Add the Create room button at the bottom of Rooms
-- [x] Show the difficulty on the RoomCard
-- [x] Add the "You're in a room" bar to Rooms
-- [x] Show YOU'RE IN on the card of my room
-- [x] Add the Already in a room window to Rooms
-- [x] Add the Room details button and window to Rooms
-- [x] Show the room, its players and Join room in Room details
-- [x] Move Create room to the Rooms header and add Find a room at the bottom
-- [x] Add the Find a room window with the search tabs and a room name field
-- [x] Show the rooms as rows in the Find a room window
-- [x] Add empty state for no rooms and no friends' rooms
-- [x] Show FRIEND next to the host on the RoomCard
-- [x] Show empty state for no waiting rooms
-- [x] Show a loading message while the rooms load
-- [x] Show an error message with Try again when the rooms can't load
-- [x] Add the Private tab and its empty state to Rooms
-
-### Steps to add the Create room content
-- [x] Add the Create room screen and open it from the Lobby
-- [x] Add Max players and Difficulty to Create room
-- [x] Add Meadow Farm level card
-- [x] Add Room name field
-- [x] Add the Private room switch to Create room
-
-### Steps to add the Waiting room content
-- [x] Add the Waiting room screen and open it from Rooms with the room id
-- [x] Show the room name and host in the Waiting room
-- [x] Add the players list with the PlayerRow component to the Waiting room
-- [x] Add Invite a friend row to the Waiting room
-- [x] Add Leave room, Ready and Start game buttons to the Waiting room
-- [x] Show different buttons for the host and the guest in the Waiting room
-- [x] Show mode, map and difficulty in the Waiting room header
-- [x] Show open and closed seats in the Waiting room
-- [x] Add Max players and Difficulty panel
-- [x] Show ram avatar in the Waiting room players
-- [x] Show how many rams are ready in the Waiting room
-- [x] Ask before leaving the room
-- [x] Show an error message when the room can't refresh
-- [x] Add refresh button and error message to Room not found
-
-### Steps to add the Settings content
-- [x] Add the Settings screen and open it from the cog in the Lobby
-
-### Styling
-
-#### Lobby
-- [x] Add style to the Lobby header and title
+- [x] Add style to the header and title
 - [x] Add style to the Co-op mode card
-- [x] Use Lilita One and Nunito Sans in the Lobby
+- [x] Use Lilita One and Nunito Sans
 - [x] Add style to the LockedModeCard
 - [x] Add style to the Play Co-op and Create a room buttons
 
-#### Tab bar and status bar
-- [x] Add style to the tab bar
-- [x] Use dark status bar icons
+</details>
 
-#### Rooms
-- [x] Add style to the Rooms header
-- [x] Add style to the Rooms panel and filter chips
+### Rooms
+
+<details>
+<summary>Steps to add the header and tabs</summary>
+
+- [x] Add the header with the refresh button
+- [x] Add the All and Waiting filter chips
+- [x] Add the Create room button at the bottom
+- [x] Add style to the header
+- [x] Add style to the panel and filter chips
+- [x] Add GameButton component for Create room
+- [x] Filter the rooms with the All and Waiting chips
+- [x] Refresh the rooms by pulling the list down
+- [x] Refresh the rooms with the refresh button
+- [x] Move Create room to the header and add Find a room at the bottom
+- [x] Add the green round Create room button to the header
+- [x] Fit the four tabs on one row and show the rooms count above the list
+
+</details>
+
+<details>
+<summary>Steps to add the RoomCard</summary>
+
+- [x] Add the rooms list with the RoomCard component
+- [x] Show the difficulty on the RoomCard
 - [x] Add the RamAvatar component to the RoomCard
 - [x] Add Badge component for the WAITING and PLAYING status
 - [x] Add style to the RoomCard
-- [x] Add GameButton component for Create room in Rooms
 - [x] Add difficulty colour to the RoomCard
 - [x] Match the RoomCard spacing, host line and max players text to the design
+- [x] Add the brown corner with "i" to the RoomCard
+- [x] Show the current host and their ram on the RoomCard
+
+</details>
+
+<details>
+<summary>Steps to show my room</summary>
+
+- [x] Add the "You're in a room" bar
+- [x] Show YOU'RE IN on the card of my room
+- [x] Add the Already in a room window
 - [x] Add style to the You're in a room bar
 - [x] Add gold border and YOU'RE IN badge to the card of my room
-- [x] Add style to the Already in a room window
-- [x] Add the brown corner with "i" to the RoomCard
-- [x] Add style to the Room details window
-- [x] Add the green round Create room button to the Rooms header
-- [x] Add the yellow Find a room button with a magnifier to Rooms
-- [x] Add style to the Find a room window
-- [x] Add style to the room rows in the Find a room window
-- [x] Add style empty state in Rooms
-- [x] Add sleeping dog to the empty state
-- [x] Style FRIEND badge on RoomCard
-- [x] Add a spinner and skeleton cards to the loading state
-- [x] Add style to the error state with dizzy ram and Try again
-- [x] Make the private room cards light purple
-- [x] Fit the four tabs on one row and show the rooms count above the list
-
-#### Waiting room
-- [x] Add the own header with the back button to the Waiting room
-- [x] Add difficulty pips to both Waiting room and RoomCard
-- [x] Add style to the Stepper
-- [x] Add style to the Max players and Difficulty settings
-- [x] Add style to the host and guest panels in Waiting room
-- [x] Add style to the PlayerRow
-- [x] Add style to the open and closed player slots
-- [x] Add style to the players card in the Waiting room
-- [x] Add style to the Leave, Start game and Ready buttons
 - [x] Add dizzy pose to the Ram
-- [x] Add style to the Leave confirm window
-- [x] Add ready to leave pose to the Ram
-- [x] Add LeaveRoomPicture to the Leave confirm window
-- [x] Add style to the refresh error message
-- [x] Add ErrorIcon to the refresh error message
-
-#### Create room
-- [x] Add style to the Create room screen
-- [x] Add a shadow to the cards in both Waiting room and Create room
-- [x] Add the own header with the back button
-- [x] Add style and the barn icon to the Meadow Farm card
-- [x] Add style to the Room name field
-- [x] Add the error state with ErrorIcon to the Room name field
-- [x] Style the error message under Create
-
-### Steps to add the screen behaviour
-- [x] Filter the rooms with the All and Waiting chips
-- [x] Change Max players with the stepper in Create room
-- [x] Change the difficulty with the arrows in Create room
-- [x] Let the host change Max players and difficulty in the Waiting room
-- [x] Disable the stepper buttons at the end of the range
-- [x] Toggle ready with the Ready button in the Waiting room
-- [x] Show room status from the players in the Waiting room
-- [x] Disable Start game until everyone is ready
-- [x] Ask to invite a friend when the host is alone in the Waiting room
-- [x] Go back after confirming Leave
-- [x] Count the Room name characters up to 24
-- [x] Check the Room name length on Create
-- [x] Remove the player from the room after confirming Leave
-- [x] Pass the host to the next player or delete the room when the host leaves if no other players
-- [x] Show the current host and their ram on the RoomCard
-- [x] Go back to my room with Return in Rooms
+- [x] Add style to the Already in a room window
+- [x] Go back to my room with Return
 - [x] Keep the card of my room open when it is full
 - [x] Go to my room from the Already in a room window
 - [x] Disable Create room while in a room
+
+</details>
+
+<details>
+<summary>Steps to add Room details and join a room</summary>
+
+- [x] Add the Room details button and window
+- [x] Show the room, its players and Join room in Room details
+- [x] Add style to the Room details window
 - [x] Close the windows by tapping outside
 - [x] Join a room with Join room in Room details
 - [x] Join a room by tapping its card, or open its details when it can't be joined
-- [x] Search the rooms by name in the Find a room window
-- [x] Join a room or open its details from the Find a room results
+- [x] Save the player in the room on Join and show Couldn't join on error
+
+</details>
+
+<details>
+<summary>Steps to add the Find a room window</summary>
+
+- [x] Add the window with the search tabs and a room name field
+- [x] Show the rooms as rows
+- [x] Add the yellow Find a room button with a magnifier
+- [x] Add style to the window
+- [x] Add style to the room rows
+- [x] Search the rooms by name
+- [x] Join a room or open its details from the results
+
+</details>
+
+<details>
+<summary>Steps to add friends' and private rooms</summary>
+
+- [x] Add the Friends filter chip
+- [x] Show FRIEND next to the host on the RoomCard
+- [x] Style FRIEND badge on RoomCard
 - [x] Show the rooms hosted by friends with the Friends chip, private rooms included
-- [x] Refresh the rooms by pulling the list down
-- [x] Refresh the rooms with the refresh button
-- [x] Ask to leave the current room first on Create
-- [x] Refresh Waiting room with the refresh button
-- [x] Refresh Waiting room by pulling it down
+- [x] Add the Private tab and its empty state
+- [x] Make the private room cards light purple
 - [x] Players cannot join private rooms
 - [x] Show friends' private rooms only in the Private tab, not in Friends
-- [x] Save the player in the room on Join and show Couldn't join on error
+
+</details>
+
+<details>
+<summary>Steps to add the loading, empty and error states</summary>
+
+- [x] Add empty state for no rooms and no friends' rooms
+- [x] Show empty state for no waiting rooms
+- [x] Show a loading message while the rooms load
+- [x] Show an error message with Try again when the rooms can't load
+- [x] Add style to the empty state
+- [x] Add sleeping dog to the empty state
+- [x] Add a spinner and skeleton cards to the loading state
+- [x] Add style to the error state with dizzy ram and Try again
+
+</details>
+
+### Create room
+
+<details>
+<summary>Steps to add the room settings</summary>
+
+- [x] Add the Create room screen and open it from the Lobby
+- [x] Add Max players and Difficulty
+- [x] Add the Meadow Farm level card
+- [x] Add style to the screen
+- [x] Add the own header with the back button
+- [x] Add a shadow to the cards in both Waiting room and Create room
+- [x] Add style and the barn icon to the Meadow Farm card
+- [x] Change Max players with the stepper
+- [x] Change the difficulty with the arrows
+- [x] Disable the stepper buttons at the end of the range
+
+</details>
+
+<details>
+<summary>Steps to add the room name and Create</summary>
+
+- [x] Add the Room name field
+- [x] Add the Private room switch
+- [x] Add style to the Room name field
+- [x] Add the error state with ErrorIcon to the Room name field
+- [x] Style the error message under Create
+- [x] Count the Room name characters up to 24
+- [x] Check the Room name length on Create
+- [x] Ask to leave the current room first on Create
 - [x] Create a private room with the Private room switch
+
+</details>
+
+### Waiting room
+
+<details>
+<summary>Steps to add the header</summary>
+
+- [x] Add the Waiting room screen and open it from Rooms with the room id
+- [x] Show the room name and host
+- [x] Show mode, map and difficulty in the header
+- [x] Add the own header with the back button
+- [x] Add difficulty pips to both Waiting room and RoomCard
+- [x] Install the clipboard "npx expo install expo-clipboard"
+- [x] Show the code of a private room with a Copy button
+
+</details>
+
+<details>
+<summary>Steps to add the room settings</summary>
+
+- [x] Add the Max players and Difficulty panel
+- [x] Add style to the Stepper
+- [x] Add style to the Max players and Difficulty settings
+- [x] Add style to the host and guest panels
+- [x] Let the host change Max players and difficulty
+
+</details>
+
+<details>
+<summary>Steps to add the players list</summary>
+
+- [x] Add the players list with the PlayerRow component
+- [x] Add Invite a friend row
+- [x] Show open and closed seats
+- [x] Show the ram avatar of each player
+- [x] Add style to the PlayerRow
+- [x] Add style to the open and closed player slots
+- [x] Add style to the players card
+- [x] Ask to invite a friend when the host is alone
+
+</details>
+
+<details>
+<summary>Steps to add Ready and Start game</summary>
+
+- [x] Add Leave room, Ready and Start game buttons
+- [x] Show different buttons for the host and the guest
+- [x] Show how many rams are ready
+- [x] Add style to the Leave, Start game and Ready buttons
+- [x] Toggle ready with the Ready button
+- [x] Show room status from the players
+- [x] Disable Start game until everyone is ready
+
+</details>
+
+<details>
+<summary>Steps to leave the room</summary>
+
+- [x] Ask before leaving the room
+- [x] Add style to the Leave confirm window
+- [x] Add ready to leave pose to the Ram
+- [x] Add LeaveRoomPicture to the Leave confirm window
+- [x] Go back after confirming Leave
+- [x] Remove the player from the room after confirming Leave
+- [x] Pass the host to the next player or delete the room when the host leaves if no other players
+
+</details>
+
+<details>
+<summary>Steps to refresh the room</summary>
+
+- [x] Show an error message when the room can't refresh
+- [x] Add refresh button and error message to Room not found
+- [x] Add style to the refresh error message
+- [x] Add ErrorIcon to the refresh error message
+- [x] Refresh with the refresh button
+- [x] Refresh by pulling it down
+
+</details>
+
+### Settings
+
+<details>
+<summary>Steps to add the Settings screen</summary>
+
+- [x] Add the Settings screen and open it from the cog in the Lobby
+
+</details>

@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react';
-import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as Clipboard from 'expo-clipboard';
 
 import BackHeader from '../components/BackHeader';
 import CheckIcon from '../components/CheckIcon';
@@ -32,6 +33,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
     const { rooms, setRooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
+    const [isCopied, setIsCopied] = useState(false);
 
     const room = rooms.find((item) => item.id === roomId);
     const roomPlayers = getRoomPlayers(players, roomId);
@@ -71,6 +73,12 @@ export default function WaitingRoomScreen({ route, navigation }) {
         }
 
         navigation.popTo('App', { screen: 'Rooms' });
+    };
+
+    const handlePressCopy = async () => {
+        await Clipboard.setStringAsync(room.code);
+        setIsCopied(true);
+        setTimeout(() => setIsCopied(false), 2000);
     };
 
     const handlePressReady = () => {
@@ -137,6 +145,19 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={reloadData} />}
             >
                 {error && <RefreshError />}
+                {room.isPrivate && (
+                    <View>
+                        <LockIcon />
+                        <Text>Private · code {room.code}</Text>
+                        <Pressable
+                            accessibilityRole='button'
+                            accessibilityLabel='Copy room code'
+                            onPress={handlePressCopy}
+                        >
+                            <Text>{isCopied ? 'Copied' : 'Copy'}</Text>
+                        </Pressable>
+                    </View>
+                )}
                 <Panel style={[styles.panel, styles.playersPanel]}>
                     <View style={styles.playersHeader}>
                         <Text style={styles.playersTitle}>Players</Text>
