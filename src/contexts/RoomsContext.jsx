@@ -1,16 +1,14 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
 
-import initialPlayers from '../data/players';
-import initialRooms from '../data/rooms';
+import useRoomsData from '../hooks/useRoomsData';
 
 export const RoomsContext = createContext();
 
 export default function RoomsProvider({ children }) {
-    const [rooms, setRooms] = useState(initialRooms);
-    const [players, setPlayers] = useState(initialPlayers);
+    const roomsData = useRoomsData();
 
     return (
-        <RoomsContext.Provider value={{ rooms, setRooms, players, setPlayers }}>
+        <RoomsContext.Provider value={roomsData}>
             {children}
         </RoomsContext.Provider>
     );
