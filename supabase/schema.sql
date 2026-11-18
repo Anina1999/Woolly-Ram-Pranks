@@ -80,3 +80,50 @@ create policy "Temporary: anon can add room players"
     on room_players for insert
     to anon
     with check (true);
+
+-- Joins a room by id (public rooms) or by code (private rooms) and returns the room id.
+-- Temporary: p_profile_id comes from the app until auth, then it becomes auth.uid().
+create function join_room(p_profile_id uuid, p_room_id uuid default null, p_code text default null)
+returns uuid
+language plpgsql
+security definer
+set search_path = ''
+as $$
+declare
+    target_room public.rooms;
+    player_count int;
+begin
+    if p_code is null then
+        select * into target_room from public.rooms where id = p_room_id for update;
+    else
+        select * into target_room from public.rooms where code = p_code and is_private for update;
+    end if;
+
+    if not found then
+        if p_code is null then
+            raise exception 'ROOM_NOT_FOUND';
+        end if;
+        raise exception 'CODE_NOT_FOUND';
+    end if;
+
+    if target_room.is_private and p_code is null then
+        raise exception 'ROOM_PRIVATE';
+    end if;
+
+    if target_room.status = 'PLAYING' then
+        raise exception 'ROOM_PLAYING';
+    end if;
+
+    select count(*) into player_count from public.room_players where room_id = target_room.id;
+
+    if player_count >= target_room.max_players then
+        raise exception 'ROOM_FULL';
+    end if;
+
+    insert into public.room_players (room_id, profile_id) values (target_room.id, p_profile_id);
+
+    return target_room.id;
+end;
+$$;
+
+grant execute on function join_room(uuid, uuid, text) to anon;
