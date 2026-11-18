@@ -66,6 +66,12 @@ export const colors = {
     searchTabs: '#EADBB8',
     selectedTabEdge: '#2E2117',
     searchFieldBorder: '#5E3A1E',
+    skeleton: '#F3E8D0',
+    skeletonBorder: '#EADBB8',
+    skeletonShape: '#E6D6B3',
+    skeletonShapeLight: '#EADBB8',
+    spinnerTrack: '#E2CFA6',
+    spinnerArc: '#3C8C35',
 
     text: '#2E2117',
     muted: '#6E5D49',

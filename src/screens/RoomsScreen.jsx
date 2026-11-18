@@ -13,8 +13,10 @@ import PlusIcon from '../components/PlusIcon';
 import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import RoomCard from '../components/RoomCard';
+import RoomCardSkeleton from '../components/RoomCardSkeleton';
 import RoomDetails from '../components/RoomDetails';
 import SearchIcon from '../components/SearchIcon';
+import Spinner from '../components/Spinner';
 
 import friends from '../data/friends';
 import profile from '../data/profile';
@@ -26,6 +28,8 @@ import getRoomHost from '../utils/getRoomHost';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
+
+const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
 
 export default function RoomsScreen({ navigation }) {
     const { rooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
@@ -208,7 +212,17 @@ export default function RoomsScreen({ navigation }) {
                             onPress={() => setSelectedFilter('friends')}
                         />
                     </View>
-                    {isLoading && <Text>Rounding up rooms…</Text>}
+                    {isLoading && (
+                        <View style={styles.loading}>
+                            <View style={styles.loadingMessage}>
+                                <Spinner />
+                                <Text style={styles.loadingText}>Rounding up rooms…</Text>
+                            </View>
+                            {SKELETON_OPACITIES.map((opacity) => (
+                                <RoomCardSkeleton key={opacity} opacity={opacity} />
+                            ))}
+                        </View>
+                    )}
                     {error && (
                         <View>
                             <Text>Couldn't load rooms</Text>
@@ -377,6 +391,25 @@ const styles = StyleSheet.create({
         paddingTop: 14,
         paddingHorizontal: 12,
         paddingBottom: 10,
+    },
+    loading: {
+        flex: 1,
+        gap: 10,
+        paddingTop: 2,
+        paddingHorizontal: 12,
+        paddingBottom: 12,
+    },
+    loadingMessage: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 8,
+        padding: 6,
+    },
+    loadingText: {
+        fontFamily: fonts.bold,
+        fontSize: 14,
+        color: colors.muted,
     },
     list: {
         flexGrow: 1,

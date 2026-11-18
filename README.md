@@ -124,6 +124,7 @@
 - [x] Add style empty state in Rooms
 - [x] Add sleeping dog to the empty state
 - [x] Style FRIEND badge on RoomCard
+- [x] Add a spinner and skeleton cards to the loading state
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
