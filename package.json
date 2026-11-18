@@ -1,6 +1,7 @@
 {
   "name": "woolly-ram-pranks",
   "version": "1.0.0",
+  "license": "UNLICENSED",
   "main": "src/index.js",
   "dependencies": {
     "@expo-google-fonts/lilita-one": "^0.4.1",
