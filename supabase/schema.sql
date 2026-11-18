@@ -7,6 +7,15 @@ create table profiles (
     created_at timestamptz not null default now()
 );
 
+create function generate_room_code()
+returns text
+language sql
+set search_path = ''
+as $$
+    select string_agg(substr('ABCDEFGHJKLMNPQRSTUVWXYZ23456789', floor(random() * 32)::int + 1, 1), '')
+    from generate_series(1, 5);
+$$;
+
 create table rooms (
     id uuid primary key default gen_random_uuid(),
     name text not null check (char_length(trim(name)) between 3 and 24),
@@ -16,6 +25,7 @@ create table rooms (
     mode text not null default 'Co-op',
     map text not null default 'Meadow Farm',
     is_private boolean not null default false,
+    code text not null unique default generate_room_code(),
     host_id uuid not null references profiles (id) on delete cascade,
     created_at timestamptz not null default now()
 );
