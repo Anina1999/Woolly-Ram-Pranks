@@ -6,7 +6,6 @@ import BackHeader from '../components/BackHeader';
 import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
-import IconButton from '../components/IconButton';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -14,6 +13,7 @@ import ModalPanel from '../components/ModalPanel';
 import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
+import RefreshButton from '../components/RefreshButton';
 import RefreshError from '../components/RefreshError';
 import SlotRow from '../components/SlotRow';
 
@@ -86,12 +86,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     <View style={styles.headerText}>
                         {!error && <Text>Room not found</Text>}
                     </View>
-                    <IconButton
-                        icon='rotate-cw'
-                        isDisabled={isLoading}
-                        accessibilityLabel='Refresh room'
-                        onPress={reloadData}
-                    />
+                    <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh room' onPress={reloadData} />
                 </BackHeader>
                 {error && <RefreshError />}
             </SafeAreaView>
@@ -135,12 +130,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players ·{difficultyInfo.name}
                     </Text>
                 </View>
-                <IconButton
-                    icon='rotate-cw'
-                    isDisabled={isLoading}
-                    accessibilityLabel='Refresh room'
-                    onPress={reloadData}
-                />
+                <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh room' onPress={reloadData} />
             </BackHeader>
             <ScrollView
                 contentContainerStyle={styles.content}

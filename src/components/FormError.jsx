@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
         gap: 6,
     },
     errorText: {
+        flexShrink: 1,
         fontFamily: fonts.bold,
         fontSize: 13,
         color: colors.errorText,

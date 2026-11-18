@@ -145,6 +145,7 @@
 - [x] Add ready to leave pose to the Ram
 - [x] Add LeaveRoomPicture to the Leave confirm window
 - [x] Add style to the refresh error message
+- [x] Add ErrorIcon to the refresh error message
 
 #### Create room
 - [x] Add style to the Create room screen

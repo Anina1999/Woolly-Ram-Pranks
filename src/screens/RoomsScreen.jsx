@@ -12,6 +12,7 @@ import ModalPanel from '../components/ModalPanel';
 import PlusIcon from '../components/PlusIcon';
 import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
+import RefreshButton from '../components/RefreshButton';
 import RefreshIcon from '../components/RefreshIcon';
 import RoomCard from '../components/RoomCard';
 import RoomCardSkeleton from '../components/RoomCardSkeleton';
@@ -163,12 +164,7 @@ export default function RoomsScreen({ navigation }) {
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
                 <View style={styles.headerButtons}>
-                    <IconButton
-                        icon='rotate-cw'
-                        isDisabled={isLoading}
-                        accessibilityLabel='Refresh rooms'
-                        onPress={reloadData}
-                    />
+                    <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh rooms' onPress={reloadData} />
                     <IconButton
                         variant='primary'
                         isDisabled={isInRoom}
