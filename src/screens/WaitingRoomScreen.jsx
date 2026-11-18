@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -142,71 +142,76 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     onPress={reloadData}
                 />
             </BackHeader>
-            {error && <RefreshError />}
-            <Panel style={[styles.panel, styles.playersPanel]}>
-                <View style={styles.playersHeader}>
-                    <Text style={styles.playersTitle}>Players</Text>
-                    <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
-                </View>
-                <FlatList
-                    data={slots}
-                    keyExtractor={(slot) => slot.id}
-                    renderItem={renderSlot}
-                    contentContainerStyle={styles.slots}
-                    scrollEnabled={false}
-                />
-            </Panel>
-            {isHost ? (
-                <Panel style={[styles.panel, styles.hostPanel]}>
-                    <MaxPlayersSetting
-                        maxPlayers={room.maxPlayers}
-                        playerCount={roomPlayers.length}
-                        onChange={(value) => updateRoom({ maxPlayers: value })}
-                    />
-                    <View style={styles.divider} />
-                    <DifficultySetting
-                        difficulty={room.difficulty}
-                        onChange={(value) => updateRoom({ difficulty: value })}
+            <ScrollView
+                contentContainerStyle={styles.content}
+                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={reloadData} />}
+            >
+                {error && <RefreshError />}
+                <Panel style={[styles.panel, styles.playersPanel]}>
+                    <View style={styles.playersHeader}>
+                        <Text style={styles.playersTitle}>Players</Text>
+                        <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
+                    </View>
+                    <FlatList
+                        data={slots}
+                        keyExtractor={(slot) => slot.id}
+                        renderItem={renderSlot}
+                        contentContainerStyle={styles.slots}
+                        scrollEnabled={false}
                     />
                 </Panel>
-            ) : (
-                <Panel style={[styles.panel, styles.guestPanel]}>
-                    <View style={styles.guestRow}>
-                        <Text style={styles.guestLabel}>Max players</Text>
-                        <Text style={styles.guestValue}>{room.maxPlayers}</Text>
-                    </View>
-                    <View style={styles.divider} />
-                    <View style={styles.guestRow}>
-                        <Text style={styles.guestLabel}>Difficulty</Text>
-                        <Text style={[styles.guestValue, styles.guestDifficulty, { color: difficultyInfo.text }]}>
-                            {difficultyInfo.name}
-                        </Text>
-                    </View>
-                </Panel>
-            )}
-            <View style={styles.footer}>
-                <View style={styles.buttons}>
-                    <GameButton
-                        title='Leave'
-                        variant='danger'
-                        style={styles.leaveButton}
-                        onPress={handlePressLeave}
-                    />
-                    {isHost ? (
-                        <GameButton title='Start game' isDisabled={!canStart} style={styles.mainButton} />
-                    ) : (
+                {isHost ? (
+                    <Panel style={[styles.panel, styles.hostPanel]}>
+                        <MaxPlayersSetting
+                            maxPlayers={room.maxPlayers}
+                            playerCount={roomPlayers.length}
+                            onChange={(value) => updateRoom({ maxPlayers: value })}
+                        />
+                        <View style={styles.divider} />
+                        <DifficultySetting
+                            difficulty={room.difficulty}
+                            onChange={(value) => updateRoom({ difficulty: value })}
+                        />
+                    </Panel>
+                ) : (
+                    <Panel style={[styles.panel, styles.guestPanel]}>
+                        <View style={styles.guestRow}>
+                            <Text style={styles.guestLabel}>Max players</Text>
+                            <Text style={styles.guestValue}>{room.maxPlayers}</Text>
+                        </View>
+                        <View style={styles.divider} />
+                        <View style={styles.guestRow}>
+                            <Text style={styles.guestLabel}>Difficulty</Text>
+                            <Text style={[styles.guestValue, styles.guestDifficulty, { color: difficultyInfo.text }]}>
+                                {difficultyInfo.name}
+                            </Text>
+                        </View>
+                    </Panel>
+                )}
+                <View style={styles.footer}>
+                    <View style={styles.buttons}>
                         <GameButton
-                            title='Ready!'
-                            variant='ready'
-                            style={styles.mainButton}
-                            onPress={handlePressReady}
-                        >
-                            <CheckIcon />
-                        </GameButton>
-                    )}
+                            title='Leave'
+                            variant='danger'
+                            style={styles.leaveButton}
+                            onPress={handlePressLeave}
+                        />
+                        {isHost ? (
+                            <GameButton title='Start game' isDisabled={!canStart} style={styles.mainButton} />
+                        ) : (
+                            <GameButton
+                                title='Ready!'
+                                variant='ready'
+                                style={styles.mainButton}
+                                onPress={handlePressReady}
+                            >
+                                <CheckIcon />
+                            </GameButton>
+                        )}
+                    </View>
+                    <Text style={styles.status}>{status}</Text>
                 </View>
-                <Text style={styles.status}>{status}</Text>
-            </View>
+            </ScrollView>
             <ModalPanel visible={isLeaveModalVisible} onClose={handleCloseLeaveModal}>
                 {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
                 <Text style={styles.dialogTitle}>{leaveTitle}</Text>
@@ -240,6 +245,9 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 13,
         color: colors.textOnDark,
+    },
+    content: {
+        flexGrow: 1,
     },
     panel: {
         marginTop: 24,
