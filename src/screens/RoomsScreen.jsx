@@ -39,6 +39,8 @@ export default function RoomsScreen({ navigation }) {
     const [detailsRoom, setDetailsRoom] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
+    const isFirstLoad = isLoading && rooms.length === 0;
+
     const publicRooms = rooms.filter((room) => !room.isPrivate);
     const waitingRooms = publicRooms.filter((room) => room.status === 'WAITING');
     const friendsRooms = rooms.filter((room) => {
@@ -213,7 +215,7 @@ export default function RoomsScreen({ navigation }) {
                             onPress={() => setSelectedFilter('friends')}
                         />
                     </View>
-                    {isLoading && (
+                    {isFirstLoad && (
                         <View style={styles.loading}>
                             <View style={styles.loadingMessage}>
                                 <Spinner />
@@ -236,12 +238,14 @@ export default function RoomsScreen({ navigation }) {
                             </GameButton>
                         </View>
                     )}
-                    {!isLoading && !error && (
+                    {!isFirstLoad && !error && (
                         <FlatList
                             data={shownRooms}
                             keyExtractor={(room) => room.id}
                             contentContainerStyle={styles.list}
                             renderItem={renderRoom}
+                            refreshing={isLoading}
+                            onRefresh={reloadData}
                             ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
                         />
                     )}

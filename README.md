@@ -176,3 +176,4 @@
 - [x] Search the rooms by name in the Find a room window
 - [x] Join a room or open its details from the Find a room results
 - [x] Show the rooms hosted by friends with the Friends chip, private rooms included
+- [x] Refresh the rooms by pulling the list down
