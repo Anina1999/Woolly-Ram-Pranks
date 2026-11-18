@@ -6,6 +6,7 @@ import BackHeader from '../components/BackHeader';
 import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import GameButton from '../components/GameButton';
+import IconButton from '../components/IconButton';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -28,7 +29,7 @@ const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
-    const { rooms, setRooms, players, setPlayers } = useContext(RoomsContext);
+    const { rooms, setRooms, players, setPlayers, isLoading, reloadData } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
 
     const room = rooms.find((item) => item.id === roomId);
@@ -124,6 +125,12 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players ·{difficultyInfo.name}
                     </Text>
                 </View>
+                <IconButton
+                    icon='rotate-cw'
+                    isDisabled={isLoading}
+                    accessibilityLabel='Refresh room'
+                    onPress={reloadData}
+                />
             </BackHeader>
             <Panel style={[styles.panel, styles.playersPanel]}>
                 <View style={styles.playersHeader}>

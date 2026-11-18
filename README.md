@@ -180,3 +180,4 @@
 - [x] Refresh the rooms by pulling the list down
 - [x] Refresh the rooms with the refresh button
 - [x] Ask to leave the current room first on Create
+- [x] Refresh Waiting room with the refresh button
