@@ -64,6 +64,7 @@
 - [x] Add empty state for no rooms and no friends' rooms
 - [x] Show FRIEND next to the host on the RoomCard
 - [x] Show empty state for no waiting rooms
+- [x] Show a loading message while the rooms load
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby

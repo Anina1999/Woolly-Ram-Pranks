@@ -28,7 +28,7 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomsScreen({ navigation }) {
-    const { rooms, players, setPlayers } = useContext(RoomsContext);
+    const { rooms, players, setPlayers, isLoading } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
     const [detailsRoom, setDetailsRoom] = useState(null);
@@ -208,13 +208,17 @@ export default function RoomsScreen({ navigation }) {
                             onPress={() => setSelectedFilter('friends')}
                         />
                     </View>
-                    <FlatList
-                        data={shownRooms}
-                        keyExtractor={(room) => room.id}
-                        contentContainerStyle={styles.list}
-                        renderItem={renderRoom}
-                        ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
-                    />
+                    {isLoading ? (
+                        <Text>Rounding up rooms…</Text>
+                    ) : (
+                        <FlatList
+                            data={shownRooms}
+                            keyExtractor={(room) => room.id}
+                            contentContainerStyle={styles.list}
+                            renderItem={renderRoom}
+                            ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
+                        />
+                    )}
                     <View style={styles.bottomBar}>
                         <GameButton title='Find a room' variant='accent' onPress={handlePressFindRoom}>
                             <SearchIcon />
