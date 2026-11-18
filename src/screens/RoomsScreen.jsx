@@ -25,6 +25,9 @@ import profile from '../data/profile';
 
 import { RoomsContext } from '../contexts/RoomsContext';
 
+import { getProfileByUsername } from '../services/profilesService';
+import { addRoomPlayer } from '../services/roomPlayersService';
+
 import getDifficulty from '../utils/getDifficulty';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
@@ -33,9 +36,11 @@ import { colors, fonts } from '../styles/theme';
 const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
 
 export default function RoomsScreen({ navigation }) {
-    const { rooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
+    const { rooms, players, isLoading, error, reloadData } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
+    const [isJoining, setIsJoining] = useState(false);
+    const [joinError, setJoinError] = useState('');
     const [detailsRoom, setDetailsRoom] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
 
@@ -139,27 +144,38 @@ export default function RoomsScreen({ navigation }) {
         handlePressReturn();
     };
 
-    const handleJoinRoom = (room) => {
+    const handleJoinRoom = async (room) => {
         setDetailsRoom(null);
+
+        if (isJoining) {
+            return;
+        }
 
         if (isInRoom) {
             setBlockedRoom(room);
             return;
         }
 
-        const newPlayer = {
-            id: String(Date.now()),
-            roomId: room.id,
-            name: profile.name,
-            host: false,
-            you: true,
-            ready: false,
-            wool: profile.wool,
-            bandana: profile.bandana,
-        };
+        setIsJoining(true);
 
-        setPlayers([...players, newPlayer]);
-        navigation.navigate('WaitingRoom', { roomId: room.id });
+        try {
+            const player = await getProfileByUsername(profile.name);
+            await addRoomPlayer(room.id, player.id);
+            await reloadData();
+            navigation.navigate('WaitingRoom', { roomId: room.id });
+        } catch (requestError) {
+            if (requestError.code === '23505') {
+                setJoinError("You're already in a room. Leave it first, then try again.");
+            } else {
+                setJoinError("Couldn't reach the farm. Check your connection and try again.");
+            }
+        } finally {
+            setIsJoining(false);
+        }
+    };
+
+    const handleCloseJoinError = () => {
+        setJoinError('');
     };
 
     const handlePressCreateRoom = () => {
@@ -304,6 +320,14 @@ export default function RoomsScreen({ navigation }) {
                 <View style={styles.dialogButtons}>
                     <GameButton title='Go to my room' onPress={handlePressGoToMyRoom} />
                     <GameButton title='Stay here' variant='secondary' onPress={handleCloseBlockedModal} />
+                </View>
+            </ModalPanel>
+            <ModalPanel visible={joinError !== ''} onClose={handleCloseJoinError}>
+                <Ram wool={profile.wool} bandana={profile.bandana} pose='dizzy' size={110} />
+                <Text style={styles.dialogTitle}>Couldn't join</Text>
+                <Text style={styles.dialogMessage}>{joinError}</Text>
+                <View style={styles.dialogButtons}>
+                    <GameButton title='OK' onPress={handleCloseJoinError} />
                 </View>
             </ModalPanel>
             <ModalPanel visible={detailsRoom !== null} onClose={handleCloseDetails} style={styles.detailsPanel}>

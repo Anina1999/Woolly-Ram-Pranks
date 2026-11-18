@@ -192,3 +192,4 @@
 - [x] Refresh Waiting room by pulling it down
 - [x] Players cannot join private rooms
 - [x] Show friends' private rooms only in the Private tab, not in Friends
+- [x] Save the player in the room on Join and show Couldn't join on error
