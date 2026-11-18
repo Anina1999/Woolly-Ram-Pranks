@@ -21,6 +21,14 @@ export default function RoomDetails({ room, players, isMyRoom, onClose, onPressG
     const isPlaying = room.status === 'PLAYING';
     const isFull = roomPlayers.length === room.maxPlayers;
 
+    let cantJoinReason = 'This room is full.';
+    if (room.isPrivate) {
+        cantJoinReason = 'This room is private.';
+    }
+    if (isPlaying) {
+        cantJoinReason = 'This game is already running. You can join when it ends.';
+    }
+
     const renderSlot = ({ item }) => {
         if (item.type === 'open') {
             return (
@@ -55,13 +63,11 @@ export default function RoomDetails({ room, players, isMyRoom, onClose, onPressG
             return <GameButton title='Go to my room' onPress={onPressGoToMyRoom} />;
         }
 
-        if (isPlaying || isFull) {
+        if (isPlaying || isFull || room.isPrivate) {
             return (
                 <View style={styles.cantJoin}>
                     <GameButton title="Can't join right now" isDisabled />
-                    <Text style={styles.reason}>
-                        {isPlaying ? 'This game is already running. You can join when it ends.' : 'This room is full.'}
-                    </Text>
+                    <Text style={styles.reason}>{cantJoinReason}</Text>
                 </View>
             );
         }

@@ -187,3 +187,4 @@
 - [x] Ask to leave the current room first on Create
 - [x] Refresh Waiting room with the refresh button
 - [x] Refresh Waiting room by pulling it down
+- [x] Players cannot join private rooms

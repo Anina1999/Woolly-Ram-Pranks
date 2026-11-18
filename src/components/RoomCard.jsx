@@ -18,7 +18,7 @@ export default function RoomCard({ room, playerCount, isMyRoom, isFriend, onPres
     const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
     const isFull = playerCount === room.maxPlayers;
-    const isClosed = !isMyRoom && (isPlaying || isFull);
+    const isClosed = !isMyRoom && (isPlaying || isFull || room.isPrivate);
 
     return (
         <View style={[styles.wrapper, isClosed && styles.wrapperClosed]}>
