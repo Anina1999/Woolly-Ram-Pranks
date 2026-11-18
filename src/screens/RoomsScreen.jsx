@@ -28,7 +28,7 @@ import getRoomPlayers from '../utils/getRoomPlayers';
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomsScreen({ navigation }) {
-    const { rooms, players, setPlayers, isLoading } = useContext(RoomsContext);
+    const { rooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
     const [detailsRoom, setDetailsRoom] = useState(null);
@@ -208,9 +208,15 @@ export default function RoomsScreen({ navigation }) {
                             onPress={() => setSelectedFilter('friends')}
                         />
                     </View>
-                    {isLoading ? (
-                        <Text>Rounding up rooms…</Text>
-                    ) : (
+                    {isLoading && <Text>Rounding up rooms…</Text>}
+                    {error && (
+                        <View>
+                            <Text>Couldn't load rooms</Text>
+                            <Text>The farm's signal got tangled in a fence. Check your connection.</Text>
+                            <GameButton title='Try again' onPress={reloadData} />
+                        </View>
+                    )}
+                    {!isLoading && !error && (
                         <FlatList
                             data={shownRooms}
                             keyExtractor={(room) => room.id}
@@ -219,11 +225,13 @@ export default function RoomsScreen({ navigation }) {
                             ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
                         />
                     )}
-                    <View style={styles.bottomBar}>
-                        <GameButton title='Find a room' variant='accent' onPress={handlePressFindRoom}>
-                            <SearchIcon />
-                        </GameButton>
-                    </View>
+                    {!error && (
+                        <View style={styles.bottomBar}>
+                            <GameButton title='Find a room' variant='accent' onPress={handlePressFindRoom}>
+                                <SearchIcon />
+                            </GameButton>
+                        </View>
+                    )}
                 </View>
             </View>
             <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch} style={styles.searchPanel}>
