@@ -12,6 +12,7 @@ import ModalPanel from '../components/ModalPanel';
 import PlusIcon from '../components/PlusIcon';
 import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
+import RefreshIcon from '../components/RefreshIcon';
 import RoomCard from '../components/RoomCard';
 import RoomCardSkeleton from '../components/RoomCardSkeleton';
 import RoomDetails from '../components/RoomDetails';
@@ -224,10 +225,15 @@ export default function RoomsScreen({ navigation }) {
                         </View>
                     )}
                     {error && (
-                        <View>
-                            <Text>Couldn't load rooms</Text>
-                            <Text>The farm's signal got tangled in a fence. Check your connection.</Text>
-                            <GameButton title='Try again' onPress={reloadData} />
+                        <View style={styles.error}>
+                            <Ram wool={profile.wool} bandana={profile.bandana} pose='dizzy' size={150} />
+                            <Text style={styles.errorTitle}>Couldn't load rooms</Text>
+                            <Text style={styles.errorText}>
+                                The farm's signal got tangled in a fence. Check your connection.
+                            </Text>
+                            <GameButton title='Try again' style={styles.tryAgain} onPress={reloadData}>
+                                <RefreshIcon />
+                            </GameButton>
                         </View>
                     )}
                     {!isLoading && !error && (
@@ -410,6 +416,32 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         fontSize: 14,
         color: colors.muted,
+    },
+    error: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 10,
+        paddingHorizontal: 28,
+        paddingBottom: 20,
+    },
+    errorTitle: {
+        textAlign: 'center',
+        fontFamily: fonts.display,
+        fontSize: 26,
+        lineHeight: 30,
+        color: colors.errorTitle,
+    },
+    errorText: {
+        textAlign: 'center',
+        fontFamily: fonts.regular,
+        fontSize: 15,
+        lineHeight: 22,
+        color: colors.muted,
+    },
+    tryAgain: {
+        width: 200,
+        marginTop: 6,
     },
     list: {
         flexGrow: 1,

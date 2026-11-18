@@ -86,6 +86,7 @@ export const colors = {
     levelLabel: '#24601F',
     placeholder: '#8A7F6C',
     errorText: '#C8352B',
+    errorTitle: '#8E2116',
     stepperIconDisabled: '#B3A78F',
     disabledButtonText: '#5E5242',
     tabInactive: '#D9C9A8',
