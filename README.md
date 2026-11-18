@@ -67,6 +67,7 @@
 - [x] Show empty state for no waiting rooms
 - [x] Show a loading message while the rooms load
 - [x] Show an error message with Try again when the rooms can't load
+- [x] Add the Private tab and its empty state to Rooms
 
 ### Steps to add the Create room content
 - [x] Add the Create room screen and open it from the Lobby
@@ -129,6 +130,8 @@
 - [x] Style FRIEND badge on RoomCard
 - [x] Add a spinner and skeleton cards to the loading state
 - [x] Add style to the error state with dizzy ram and Try again
+- [x] Make the private room cards light purple
+- [x] Fit the four tabs on one row and show the rooms count above the list
 
 #### Waiting room
 - [x] Add the own header with the back button to the Waiting room
@@ -188,3 +191,4 @@
 - [x] Refresh Waiting room with the refresh button
 - [x] Refresh Waiting room by pulling it down
 - [x] Players cannot join private rooms
+- [x] Show friends' private rooms only in the Private tab, not in Friends

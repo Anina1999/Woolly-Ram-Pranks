@@ -13,12 +13,14 @@ import getStatusColors from '../utils/getStatusColors';
 import { colors, fonts } from '../styles/theme';
 
 export default function RoomCard({ room, playerCount, isMyRoom, isFriend, onPress, onPressDetails }) {
-    const badgeLabel = isMyRoom ? "YOU'RE IN" : room.status;
-    const statusColors = getStatusColors(badgeLabel);
-    const difficulty = getDifficulty(room.difficulty);
     const isPlaying = room.status === 'PLAYING';
     const isFull = playerCount === room.maxPlayers;
-    const isClosed = !isMyRoom && (isPlaying || isFull || room.isPrivate);
+    const isPrivate = !isMyRoom && room.isPrivate;
+    const isClosed = !isMyRoom && (isPlaying || isFull);
+    const canJoin = !isClosed && !isPrivate;
+    const difficulty = getDifficulty(room.difficulty);
+    const badgeLabel = isMyRoom ? "YOU'RE IN" : room.status;
+    const statusColors = getStatusColors(badgeLabel);
 
     return (
         <View style={[styles.wrapper, isClosed && styles.wrapperClosed]}>
@@ -27,19 +29,23 @@ export default function RoomCard({ room, playerCount, isMyRoom, isFriend, onPres
                     styles.card,
                     isMyRoom && styles.cardMyRoom,
                     isClosed && styles.cardClosed,
+                    isPrivate && styles.cardPrivate,
                     pressed && styles.cardPressed,
+                    pressed && isPrivate && styles.cardPrivatePressed,
                 ]}
-                onPress={isClosed ? onPressDetails : onPress}
+                onPress={canJoin ? onPress : onPressDetails}
             >
                 <RamAvatar wool={room.host.wool} bandana={room.host.bandana} size={46} style={styles.avatar} />
                 <View style={styles.info}>
                     <View style={styles.nameRow}>
                         {room.isPrivate && (
                             <View accessible accessibilityRole='image' accessibilityLabel='Private room'>
-                                <LockIcon size={14} color={colors.privateIcon} />
+                                <LockIcon size={18} color={isPrivate ? colors.privateLock : colors.privateIcon} />
                             </View>
                         )}
-                        <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
+                        <Text style={styles.name} numberOfLines={1} adjustsFontSizeToFit={isPrivate}>
+                            {room.name}
+                        </Text>
                     </View>
                     <View style={styles.hostRow}>
                         <Text style={styles.host} numberOfLines={1}>Host: {room.host.name}</Text>
@@ -106,9 +112,16 @@ const styles = StyleSheet.create({
         borderColor: colors.disabledBorder,
         backgroundColor: colors.disabledSurface,
     },
+    cardPrivate: {
+        borderColor: colors.privateBorder,
+        backgroundColor: colors.privateSurface,
+    },
     cardPressed: {
         borderBottomWidth: 2,
         backgroundColor: colors.surfacePressed,
+    },
+    cardPrivatePressed: {
+        backgroundColor: colors.privateSurfacePressed,
     },
     avatar: {
         borderWidth: 2,
@@ -121,7 +134,7 @@ const styles = StyleSheet.create({
     nameRow: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5,
+        gap: 4,
     },
     name: {
         flexShrink: 1,

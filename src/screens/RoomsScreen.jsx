@@ -43,25 +43,47 @@ export default function RoomsScreen({ navigation }) {
 
     const publicRooms = rooms.filter((room) => !room.isPrivate);
     const waitingRooms = publicRooms.filter((room) => room.status === 'WAITING');
-    const friendsRooms = rooms.filter((room) => friends.includes(room.host.name));
-    const friendsLabel = friendsRooms.length > 0 ? `Friends · ${friendsRooms.length}` : 'Friends';
+    const friendsRooms = publicRooms.filter((room) => friends.includes(room.host.name));
+    const privateRooms = rooms.filter((room) => room.isPrivate && friends.includes(room.host.name));
+
+    const isFriendsFilter = selectedFilter === 'friends';
+    const isPrivateFilter = selectedFilter === 'private';
+    const isEveryRoomPlaying = selectedFilter === 'waiting' && publicRooms.length > 0;
 
     let shownRooms = publicRooms;
     if (selectedFilter === 'waiting') {
         shownRooms = waitingRooms;
     }
-    if (selectedFilter === 'friends') {
+    if (isFriendsFilter) {
         shownRooms = friendsRooms;
     }
+    if (isPrivateFilter) {
+        shownRooms = privateRooms;
+    }
 
-    const isFriendsFilter = selectedFilter === 'friends';
-    const isEveryRoomPlaying = selectedFilter === 'waiting' && publicRooms.length > 0;
+    const isOneRoom = shownRooms.length === 1;
+    let countLabel = isOneRoom ? 'ROOM' : 'ROOMS';
+    if (selectedFilter === 'waiting') {
+        countLabel = isOneRoom ? 'WAITING ROOM' : 'WAITING ROOMS';
+    }
+    if (isFriendsFilter) {
+        countLabel = isOneRoom ? "FRIEND'S ROOM" : "FRIENDS' ROOMS";
+    }
+    if (isPrivateFilter) {
+        countLabel = isOneRoom ? 'PRIVATE ROOM' : 'PRIVATE ROOMS';
+    }
+
+    const countText = `${shownRooms.length} ${countLabel}`;
 
     let emptyTitle = 'No rooms yet';
     let emptyText = 'Even the dog is asleep. Be the first — create a room and invite your friends.';
     if (isFriendsFilter) {
         emptyTitle = "No friends' rooms";
         emptyText = 'None of your friends are hosting right now. Tap + to create a room and invite them.';
+    }
+    if (isPrivateFilter) {
+        emptyTitle = 'No private rooms';
+        emptyText = 'Private rooms your friends host show up here. Got a code? Use Find a room.';
     }
     if (isEveryRoomPlaying) {
         emptyTitle = 'No waiting rooms';
@@ -152,7 +174,7 @@ export default function RoomsScreen({ navigation }) {
                 room={item}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
-                isFriend={!isFriendsFilter && friends.includes(item.host.name)}
+                isFriend={!isFriendsFilter && !isPrivateFilter && friends.includes(item.host.name)}
                 onPress={() => handlePressRoom(item)}
                 onPressDetails={() => handlePressDetails(item)}
             />
@@ -195,19 +217,25 @@ export default function RoomsScreen({ navigation }) {
                 <View style={styles.panelInner}>
                     <View style={styles.chips}>
                         <FilterChip
-                            label={`All · ${publicRooms.length}`}
+                            label='All'
                             selected={selectedFilter === 'all'}
                             onPress={() => setSelectedFilter('all')}
                         />
                         <FilterChip
-                            label={`Waiting · ${waitingRooms.length}`}
+                            label='Waiting'
                             selected={selectedFilter === 'waiting'}
                             onPress={() => setSelectedFilter('waiting')}
                         />
                         <FilterChip
-                            label={friendsLabel}
-                            selected={selectedFilter === 'friends'}
+                            label='Friends'
+                            selected={isFriendsFilter}
                             onPress={() => setSelectedFilter('friends')}
+                        />
+                        <FilterChip
+                            label='Private'
+                            icon='lock'
+                            selected={isPrivateFilter}
+                            onPress={() => setSelectedFilter('private')}
                         />
                     </View>
                     {isFirstLoad && (
@@ -241,6 +269,9 @@ export default function RoomsScreen({ navigation }) {
                             renderItem={renderRoom}
                             refreshing={isLoading}
                             onRefresh={reloadData}
+                            ListHeaderComponent={
+                                shownRooms.length > 0 && <Text style={styles.count}>{countText}</Text>
+                            }
                             ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
                         />
                     )}
@@ -392,7 +423,7 @@ const styles = StyleSheet.create({
     },
     chips: {
         flexDirection: 'row',
-        gap: 8,
+        gap: 6,
         paddingTop: 14,
         paddingHorizontal: 12,
         paddingBottom: 10,
@@ -448,6 +479,13 @@ const styles = StyleSheet.create({
         paddingTop: 2,
         paddingHorizontal: 12,
         paddingBottom: 12,
+    },
+    count: {
+        paddingHorizontal: 4,
+        fontFamily: fonts.extraBold,
+        fontSize: 12,
+        letterSpacing: 0.6,
+        color: colors.muted,
     },
     bottomBar: {
         paddingTop: 10,

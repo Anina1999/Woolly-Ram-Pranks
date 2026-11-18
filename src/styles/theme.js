@@ -49,6 +49,9 @@ export const colors = {
     disabledBorder: '#D6CBB6',
     lockedSurface: '#EDE6D8',
     lockedEdge: '#8F8676',
+    privateSurface: '#F1EAF9',
+    privateSurfacePressed: '#E2D6F0',
+    privateBorder: '#A684CF',
     openSlotBorder: '#C9B48A',
     openSlotCircle: '#F3E4C3',
     closedSlotSurface: '#EDE4D2',
@@ -93,6 +96,7 @@ export const colors = {
     detailsCornerIcon: '#FBF3E2',
     searchIcon: '#5E3A1E',
     privateIcon: '#5E3A1E',
+    privateLock: '#6B4A9A',
 
     shadow: '#0A140C',
     sky: '#8FCDEE',
