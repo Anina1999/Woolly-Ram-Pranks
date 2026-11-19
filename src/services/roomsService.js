@@ -67,6 +67,21 @@ export async function updateRoomHost(roomId, hostId) {
     }
 }
 
+export async function updateRoomSettings(roomId, settings) {
+    const { error } = await supabase
+        .from('rooms')
+        .update({
+            is_private: settings.isPrivate,
+            max_players: settings.maxPlayers,
+            difficulty: settings.difficulty,
+        })
+        .eq('id', roomId);
+
+    if (error) {
+        throw error;
+    }
+}
+
 export async function leaveRoom(roomId, profileId, isHost) {
     if (isHost) {
         const nextHost = await getNextHost(roomId, profileId);

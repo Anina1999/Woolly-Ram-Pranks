@@ -23,7 +23,7 @@ import SlotRow from '../components/SlotRow';
 
 import { RoomsContext } from '../contexts/RoomsContext';
 
-import { leaveRoom } from '../services/roomsService';
+import { leaveRoom, updateRoomSettings } from '../services/roomsService';
 
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';
@@ -36,21 +36,40 @@ const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
-    const { rooms, setRooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
+    const { rooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
     const [isLeaving, setIsLeaving] = useState(false);
     const [leaveError, setLeaveError] = useState('');
     const [isCopied, setIsCopied] = useState(false);
+    const [isSaving, setIsSaving] = useState(false);
+    const [settingsError, setSettingsError] = useState('');
 
     const room = rooms.find((item) => item.id === roomId);
     const roomPlayers = getRoomPlayers(players, roomId);
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
 
-    const updateRoom = (changes) => {
-        setRooms(rooms.map((item) =>
-            item.id === roomId ? { ...item, ...changes } : item
-        ));
+    const handleChangeSettings = async (changes) => {
+        if (isSaving) {
+            return;
+        }
+
+        setIsSaving(true);
+        setSettingsError('');
+
+        try {
+            await updateRoomSettings(roomId, {
+                isPrivate: room.isPrivate,
+                maxPlayers: room.maxPlayers,
+                difficulty: room.difficulty,
+                ...changes,
+            });
+        } catch {
+            setSettingsError("Couldn't save the settings. Try again.");
+        } finally {
+            await reloadData();
+            setIsSaving(false);
+        }
     };
 
     const handlePressBack = () => {
@@ -192,19 +211,20 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     <Panel style={[styles.panel, styles.hostPanel]}>
                         <PrivacySetting
                             isPrivate={room.isPrivate}
-                            onChange={(value) => updateRoom({ isPrivate: value })}
+                            onChange={(value) => handleChangeSettings({ isPrivate: value })}
                         />
                         <View style={styles.divider} />
                         <MaxPlayersSetting
                             maxPlayers={room.maxPlayers}
                             playerCount={roomPlayers.length}
-                            onChange={(value) => updateRoom({ maxPlayers: value })}
+                            onChange={(value) => handleChangeSettings({ maxPlayers: value })}
                         />
                         <View style={styles.divider} />
                         <DifficultySetting
                             difficulty={room.difficulty}
-                            onChange={(value) => updateRoom({ difficulty: value })}
+                            onChange={(value) => handleChangeSettings({ difficulty: value })}
                         />
+                        {settingsError !== '' && <FormError message={settingsError} />}
                     </Panel>
                 ) : (
                     <Panel style={[styles.panel, styles.guestPanel]}>

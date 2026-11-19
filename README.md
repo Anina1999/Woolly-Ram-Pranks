@@ -267,6 +267,7 @@
 - [x] Let the host change Max players and difficulty
 - [x] Add the Private room setting to the host panel
 - [x] Add style to the Private room setting
+- [x] Save the room settings on the server
 
 </details>
 
