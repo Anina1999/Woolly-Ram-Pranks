@@ -45,6 +45,9 @@ alter table profiles enable row level security;
 alter table rooms enable row level security;
 alter table room_players enable row level security;
 
+-- Supabase gives anon and authenticated all rights on new tables, so take them back and grant only what is needed
+revoke all on profiles, rooms, room_players from anon, authenticated;
+
 grant select on profiles, rooms, room_players to anon, authenticated;
 
 create policy "Everyone can read profiles"
@@ -64,7 +67,7 @@ create policy "Everyone can read room players"
 
 -- Temporary write rights for anon, tightened when auth is added
 grant insert, delete on rooms to anon;
-grant update (host_id) on rooms to anon;
+grant update (host_id, is_private, max_players, difficulty) on rooms to anon;
 grant insert, delete on room_players to anon;
 
 create policy "Temporary: anon can create rooms"
@@ -88,15 +91,19 @@ create policy "Temporary: anon can remove room players"
     to anon
     using (true);
 
--- The new host must already be a player of the room
-create policy "Temporary: anon can change the host of a room"
+-- One update policy for the host and the room settings (policies are joined with OR).
+-- The host must be a player of the room and max players can't go below the player count.
+create policy "Temporary: anon can update a room"
     on rooms for update
     to anon
     using (true)
-    with check (exists (
-        select 1 from room_players
-        where room_players.room_id = rooms.id and room_players.profile_id = rooms.host_id
-    ));
+    with check (
+        exists (
+            select 1 from room_players
+            where room_players.room_id = rooms.id and room_players.profile_id = rooms.host_id
+        )
+        and (select count(*) from room_players where room_players.room_id = rooms.id) <= rooms.max_players
+    );
 
 -- Joins a room by id (public rooms) or by code (private rooms) and returns the room id.
 -- Temporary: p_profile_id comes from the app until auth, then it becomes auth.uid().
