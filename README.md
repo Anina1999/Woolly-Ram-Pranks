@@ -180,6 +180,7 @@
 - [x] Add style to the Code tab
 - [x] Show the room code field in red on an error
 - [x] Disable Join room until the room code is complete
+- [x] Keep the Find a room window above the keyboard
 
 </details>
 
@@ -243,6 +244,7 @@
 - [x] Check the Room name length on Create
 - [x] Ask to leave the current room first on Create
 - [x] Create a private room with the Private room switch
+- [x] Scroll the form above the keyboard to reach Create
 
 </details>
 

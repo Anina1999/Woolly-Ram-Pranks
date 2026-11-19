@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -87,45 +87,49 @@ export default function CreateRoomScreen({ navigation }) {
             <BackHeader onBack={handlePressBack}>
                 <Text style={styles.title}>Create room</Text>
             </BackHeader>
-            <Panel style={styles.panel}>
-                <View style={styles.levelCard}>
-                    <View style={styles.levelIcon}>
-                        <BarnIcon />
-                    </View>
-                    <View>
-                        <Text style={styles.levelLabel}>{newRoom.mode} · Level {newRoom.level}</Text>
-                        <Text style={styles.levelName}>{newRoom.map}</Text>
-                    </View>
-                </View>
-                <View style={styles.field}>
-                    <Text style={[styles.fieldLabel, isNameErrorVisible && styles.fieldLabelError]}>Room name</Text>
-                    <View style={[styles.fieldBox, isNameErrorVisible && styles.fieldBoxError]}>
-                        <TextInput
-                            value={roomName}
-                            onChangeText={setRoomName}
-                            maxLength={MAX_NAME_LENGTH}
-                            placeholder='e.g. Woolly Rebels'
-                            placeholderTextColor={colors.placeholder}
-                            style={styles.fieldInput}
-                        />
-                        <Text style={styles.fieldCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
-                    </View>
-                    {isNameErrorVisible && (
-                        <FormError message={`Name must be ${MIN_NAME_LENGTH}–${MAX_NAME_LENGTH} characters.`} />
-                    )}
-                </View>
-                <View style={styles.privateRow}>
-                    <View style={styles.privateTexts}>
-                        <Text style={styles.privateTitle}>Private room</Text>
-                        <Text style={styles.privateSubtitle}>Hidden from the list. Friends join with a room code.</Text>
-                    </View>
-                    <ToggleSwitch value={isPrivate} accessibilityLabel='Private room' onValueChange={setIsPrivate} />
-                </View>
-                <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
-                <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
-                <GameButton title='Create' isDisabled={isSubmitting} onPress={handlePressCreate} />
-                {submitError !== '' && <FormError message={submitError} />}
-            </Panel>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.keyboardView}>
+                <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps='handled'>
+                    <Panel style={styles.panel}>
+                        <View style={styles.levelCard}>
+                            <View style={styles.levelIcon}>
+                                <BarnIcon />
+                            </View>
+                            <View>
+                                <Text style={styles.levelLabel}>{newRoom.mode} · Level {newRoom.level}</Text>
+                                <Text style={styles.levelName}>{newRoom.map}</Text>
+                            </View>
+                        </View>
+                        <View style={styles.field}>
+                            <Text style={[styles.fieldLabel, isNameErrorVisible && styles.fieldLabelError]}>Room name</Text>
+                            <View style={[styles.fieldBox, isNameErrorVisible && styles.fieldBoxError]}>
+                                <TextInput
+                                    value={roomName}
+                                    onChangeText={setRoomName}
+                                    maxLength={MAX_NAME_LENGTH}
+                                    placeholder='e.g. Woolly Rebels'
+                                    placeholderTextColor={colors.placeholder}
+                                    style={styles.fieldInput}
+                                />
+                                <Text style={styles.fieldCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
+                            </View>
+                            {isNameErrorVisible && (
+                                <FormError message={`Name must be ${MIN_NAME_LENGTH}–${MAX_NAME_LENGTH} characters.`} />
+                            )}
+                        </View>
+                        <View style={styles.privateRow}>
+                            <View style={styles.privateTexts}>
+                                <Text style={styles.privateTitle}>Private room</Text>
+                                <Text style={styles.privateSubtitle}>Hidden from the list. Friends join with a room code.</Text>
+                            </View>
+                            <ToggleSwitch value={isPrivate} accessibilityLabel='Private room' onValueChange={setIsPrivate} />
+                        </View>
+                        <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
+                        <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
+                        <GameButton title='Create' isDisabled={isSubmitting} onPress={handlePressCreate} />
+                        {submitError !== '' && <FormError message={submitError} />}
+                    </Panel>
+                </ScrollView>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }
@@ -143,6 +147,12 @@ const styles = StyleSheet.create({
         textShadowColor: colors.text,
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
+    },
+    keyboardView: {
+        flex: 1,
+    },
+    content: {
+        paddingBottom: 16,
     },
     panel: {
         gap: 16,

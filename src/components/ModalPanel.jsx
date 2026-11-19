@@ -1,4 +1,4 @@
-import { Modal, Pressable, StyleSheet, View } from 'react-native';
+import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet } from 'react-native';
 
 import Panel from './Panel';
 
@@ -7,7 +7,7 @@ import { colors } from '../styles/theme';
 export default function ModalPanel({ visible, onClose, style, children }) {
     return (
         <Modal visible={visible} transparent animationType='fade' onRequestClose={onClose}>
-            <View style={styles.overlay}>
+            <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.overlay}>
                 <Pressable
                     style={StyleSheet.absoluteFill}
                     accessibilityRole='button'
@@ -15,7 +15,7 @@ export default function ModalPanel({ visible, onClose, style, children }) {
                     onPress={onClose}
                 />
                 <Panel style={[styles.panel, style]}>{children}</Panel>
-            </View>
+            </KeyboardAvoidingView>
         </Modal>
     );
 }

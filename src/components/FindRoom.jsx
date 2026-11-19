@@ -118,6 +118,7 @@ export default function FindRoom({
                                     data={foundRooms}
                                     keyExtractor={(room) => room.id}
                                     contentContainerStyle={styles.list}
+                                    keyboardShouldPersistTaps='handled'
                                     renderItem={renderRoom}
                                 />
                             )}
