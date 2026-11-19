@@ -23,6 +23,34 @@ export async function addRoomPlayer(roomId, profileId) {
     }
 }
 
+export async function getNextHost(roomId, profileId) {
+    const { data, error } = await supabase
+        .from('room_players')
+        .select('profileId:profile_id')
+        .eq('room_id', roomId)
+        .neq('profile_id', profileId)
+        .order('joined_at')
+        .limit(1)
+        .maybeSingle();
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
+
+export async function deleteRoomPlayer(profileId) {
+    const { error } = await supabase
+        .from('room_players')
+        .delete()
+        .eq('profile_id', profileId);
+
+    if (error) {
+        throw error;
+    }
+}
+
 export async function joinRoom(roomId, profileId) {
     const { data, error } = await supabase
         .rpc('join_room', { p_profile_id: profileId, p_room_id: roomId });

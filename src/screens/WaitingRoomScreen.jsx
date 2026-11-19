@@ -6,6 +6,7 @@ import * as Clipboard from 'expo-clipboard';
 import BackHeader from '../components/BackHeader';
 import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
+import FormError from '../components/FormError';
 import GameButton from '../components/GameButton';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
@@ -20,6 +21,8 @@ import SlotRow from '../components/SlotRow';
 
 import { RoomsContext } from '../contexts/RoomsContext';
 
+import { leaveRoom } from '../services/roomsService';
+
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';
 import getRoomPlayers from '../utils/getRoomPlayers';
@@ -33,6 +36,8 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
     const { rooms, setRooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
+    const [isLeaving, setIsLeaving] = useState(false);
+    const [leaveError, setLeaveError] = useState('');
     const [isCopied, setIsCopied] = useState(false);
 
     const room = rooms.find((item) => item.id === roomId);
@@ -56,23 +61,23 @@ export default function WaitingRoomScreen({ route, navigation }) {
 
     const handleCloseLeaveModal = () => {
         setIsLeaveModalVisible(false);
+        setLeaveError('');
     };
 
-    const handleConfirmLeave = () => {
-        const nextHost = roomPlayers.find((player) => !player.you);
+    const handleConfirmLeave = async () => {
+        setIsLeaving(true);
+        setLeaveError('');
 
-        setIsLeaveModalVisible(false);
-        setPlayers(players
-            .filter((player) => player.id !== me?.id)
-            .map((player) =>
-                isHost && player.id === nextHost?.id ? { ...player, host: true } : player
-            ));
-
-        if (isHost && !nextHost) {
-            setRooms(rooms.filter((item) => item.id !== roomId));
+        try {
+            await leaveRoom(roomId, me.profileId, isHost);
+            await reloadData();
+            setIsLeaveModalVisible(false);
+            navigation.popTo('App', { screen: 'Rooms' });
+        } catch {
+            setLeaveError("Couldn't leave the room. Try again.");
+        } finally {
+            setIsLeaving(false);
         }
-
-        navigation.popTo('App', { screen: 'Rooms' });
     };
 
     const handlePressCopy = async () => {
@@ -227,9 +232,10 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
                 <Text style={styles.dialogTitle}>{leaveTitle}</Text>
                 <View style={styles.dialogButtons}>
-                    <GameButton title='Leave' variant='danger' onPress={handleConfirmLeave} />
+                    <GameButton title='Leave' variant='danger' isDisabled={isLeaving} onPress={handleConfirmLeave} />
                     <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
                 </View>
+                {leaveError !== '' && <FormError message={leaveError} />}
             </ModalPanel>
         </SafeAreaView>
     );

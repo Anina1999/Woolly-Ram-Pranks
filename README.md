@@ -301,6 +301,7 @@
 - [x] Go back after confirming Leave
 - [x] Remove the player from the room after confirming Leave
 - [x] Pass the host to the next player or delete the room when the host leaves if no other players
+- [x] Leave the room on the server and pass the host on there
 
 </details>
 

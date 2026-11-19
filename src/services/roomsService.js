@@ -1,6 +1,6 @@
 import supabase from './supabase';
 
-import { addRoomPlayer } from './roomPlayersService';
+import { addRoomPlayer, deleteRoomPlayer, getNextHost } from './roomPlayersService';
 
 const ROOM_FIELDS = `
     id, name, maxPlayers:max_players, difficulty, status, mode, map, isPrivate:is_private, code, hostId:host_id,
@@ -71,4 +71,30 @@ export async function deleteRoom(roomId) {
     if (error) {
         throw error;
     }
+}
+
+export async function updateRoomHost(roomId, hostId) {
+    const { error } = await supabase
+        .from('rooms')
+        .update({ host_id: hostId })
+        .eq('id', roomId);
+
+    if (error) {
+        throw error;
+    }
+}
+
+export async function leaveRoom(roomId, profileId, isHost) {
+    if (isHost) {
+        const nextHost = await getNextHost(roomId, profileId);
+
+        if (nextHost === null) {
+            await deleteRoom(roomId);
+            return;
+        }
+
+        await updateRoomHost(roomId, nextHost.profileId);
+    }
+
+    await deleteRoomPlayer(profileId);
 }
