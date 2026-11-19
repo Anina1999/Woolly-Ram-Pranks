@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { StyleSheet, Switch, Text, TextInput, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -9,6 +9,7 @@ import FormError from '../components/FormError';
 import GameButton from '../components/GameButton';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
 import Panel from '../components/Panel';
+import ToggleSwitch from '../components/ToggleSwitch';
 
 import newRoom from '../data/newRoom';
 import profile from '../data/profile';
@@ -113,12 +114,12 @@ export default function CreateRoomScreen({ navigation }) {
                         <FormError message={`Name must be ${MIN_NAME_LENGTH}–${MAX_NAME_LENGTH} characters.`} />
                     )}
                 </View>
-                <View>
-                    <View>
-                        <Text>Private room</Text>
-                        <Text>Hidden from the list. Friends join with a room code.</Text>
+                <View style={styles.privateRow}>
+                    <View style={styles.privateTexts}>
+                        <Text style={styles.privateTitle}>Private room</Text>
+                        <Text style={styles.privateSubtitle}>Hidden from the list. Friends join with a room code.</Text>
                     </View>
-                    <Switch value={isPrivate} accessibilityLabel='Private room' onValueChange={setIsPrivate} />
+                    <ToggleSwitch value={isPrivate} accessibilityLabel='Private room' onValueChange={setIsPrivate} />
                 </View>
                 <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                 <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
@@ -218,6 +219,27 @@ const styles = StyleSheet.create({
     fieldCounter: {
         fontFamily: fonts.bold,
         fontSize: 12,
+        color: colors.muted,
+    },
+    privateRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+        minHeight: 52,
+    },
+    privateTexts: {
+        flex: 1,
+        gap: 2,
+    },
+    privateTitle: {
+        fontFamily: fonts.extraBold,
+        fontSize: 16,
+        color: colors.text,
+    },
+    privateSubtitle: {
+        fontFamily: fonts.regular,
+        fontSize: 13,
+        lineHeight: 18,
         color: colors.muted,
     },
 });

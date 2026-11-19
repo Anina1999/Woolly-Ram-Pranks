@@ -232,6 +232,7 @@
 - [x] Add style to the Room name field
 - [x] Add the error state with ErrorIcon to the Room name field
 - [x] Style the error message under Create
+- [x] Add style to the Private room switch with own ToggleSwitch
 - [x] Count the Room name characters up to 24
 - [x] Check the Room name length on Create
 - [x] Ask to leave the current room first on Create
