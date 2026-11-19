@@ -14,7 +14,7 @@ import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomDetails({ room, players, isMyRoom, onClose, onPressGoToMyRoom, onPressJoin }) {
+export default function RoomDetails({ room, players, isMyRoom, isJoining, onClose, onPressGoToMyRoom, onPressJoin }) {
     const roomPlayers = getRoomPlayers(players, room.id);
     const difficulty = getDifficulty(room.difficulty);
     const statusColors = getStatusColors(room.status);
@@ -73,7 +73,7 @@ export default function RoomDetails({ room, players, isMyRoom, onClose, onPressG
             );
         }
 
-        return <GameButton title='Join room' onPress={onPressJoin} />;
+        return <GameButton title='Join room' isLoading={isJoining} loadingTitle='Joining…' onPress={onPressJoin} />;
     };
 
     return (

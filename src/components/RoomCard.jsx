@@ -6,21 +6,23 @@ import DifficultyPips from './DifficultyPips';
 import LockIcon from './LockIcon';
 import PlayersIcon from './PlayersIcon';
 import RamAvatar from './RamAvatar';
+import Spinner from './Spinner';
 
 import getDifficulty from '../utils/getDifficulty';
 import getStatusColors from '../utils/getStatusColors';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function RoomCard({ room, playerCount, isMyRoom, isFriend, onPress, onPressDetails }) {
+export default function RoomCard({ room, playerCount, isMyRoom, isFriend, isJoining, onPress, onPressDetails }) {
     const isPlaying = room.status === 'PLAYING';
     const isFull = playerCount === room.maxPlayers;
     const isPrivate = !isMyRoom && room.isPrivate;
     const isClosed = !isMyRoom && (isPlaying || isFull);
     const canJoin = !isClosed && !isPrivate;
     const difficulty = getDifficulty(room.difficulty);
-    const badgeLabel = isMyRoom ? "YOU'RE IN" : room.status;
-    const statusColors = getStatusColors(badgeLabel);
+    const status = isMyRoom ? "YOU'RE IN" : room.status;
+    const statusColors = getStatusColors(status);
+    const badgeLabel = isJoining ? 'JOINING' : status;
 
     return (
         <View style={[styles.wrapper, isClosed && styles.wrapperClosed]}>
@@ -73,7 +75,11 @@ export default function RoomCard({ room, playerCount, isMyRoom, isFriend, onPres
                         </Text>
                     </View>
                     <Badge label={badgeLabel} backgroundColor={statusColors.background} color={statusColors.text}>
-                        <View style={[styles.statusDot, { backgroundColor: statusColors.dot }]} />
+                        {isJoining ? (
+                            <Spinner size={10} />
+                        ) : (
+                            <View style={[styles.statusDot, { backgroundColor: statusColors.dot }]} />
+                        )}
                     </Badge>
                 </View>
             </Pressable>

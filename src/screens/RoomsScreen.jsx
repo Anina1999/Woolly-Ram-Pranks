@@ -41,6 +41,7 @@ export default function RoomsScreen({ navigation }) {
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
     const [isJoining, setIsJoining] = useState(false);
+    const [joiningRoomId, setJoiningRoomId] = useState(null);
     const [joinError, setJoinError] = useState('');
     const [detailsRoom, setDetailsRoom] = useState(null);
     const [isSearchVisible, setIsSearchVisible] = useState(false);
@@ -159,29 +160,30 @@ export default function RoomsScreen({ navigation }) {
     };
 
     const handleJoinRoom = async (room) => {
-        setDetailsRoom(null);
-
-        if (isJoining) {
+        if (joiningRoomId !== null) {
             return;
         }
 
         if (isInRoom) {
+            setDetailsRoom(null);
             setBlockedRoom(room);
             return;
         }
 
-        setIsJoining(true);
+        setJoiningRoomId(room.id);
 
         try {
             const player = await getProfileByUsername(profile.name);
             await joinRoom(room.id, player.id);
             await reloadData();
+            setDetailsRoom(null);
             navigation.navigate('WaitingRoom', { roomId: room.id });
         } catch (requestError) {
+            setDetailsRoom(null);
             setJoinError(getJoinErrorText(requestError));
             await reloadData();
         } finally {
-            setIsJoining(false);
+            setJoiningRoomId(null);
         }
     };
 
@@ -223,6 +225,7 @@ export default function RoomsScreen({ navigation }) {
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
                 isFriend={!isFriendsFilter && friends.includes(item.host.name)}
+                isJoining={item.id === joiningRoomId}
                 onPress={() => handlePressRoom(item)}
                 onPressDetails={() => handlePressDetails(item)}
             />
@@ -377,6 +380,7 @@ export default function RoomsScreen({ navigation }) {
                         room={detailsRoom}
                         players={players}
                         isMyRoom={detailsRoom.id === me?.roomId}
+                        isJoining={detailsRoom.id === joiningRoomId}
                         onClose={handleCloseDetails}
                         onPressGoToMyRoom={handlePressGoToMyRoom}
                         onPressJoin={() => handleJoinRoom(detailsRoom)}

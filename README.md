@@ -157,6 +157,7 @@
 - [x] Join a room with Join room in Room details
 - [x] Join a room by tapping its card, or open its details when it can't be joined
 - [x] Save the player in the room on Join and show Couldn't join on error
+- [x] Show Joining on the room card and in Room details while joining
 - [x] Check on the server that the room can be joined
 - [x] Reload the rooms after the server refuses a join
 
