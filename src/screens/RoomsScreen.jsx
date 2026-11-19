@@ -52,7 +52,7 @@ export default function RoomsScreen({ navigation }) {
     const publicRooms = rooms.filter((room) => !room.isPrivate);
     const waitingRooms = publicRooms.filter((room) => room.status === 'WAITING');
     const friendsRooms = publicRooms.filter((room) => friends.includes(room.host.name));
-    const privateRooms = rooms.filter((room) => room.isPrivate && friends.includes(room.host.name));
+    const privateRooms = rooms.filter((room) => room.isPrivate);
 
     const isFriendsFilter = selectedFilter === 'friends';
     const isPrivateFilter = selectedFilter === 'private';
@@ -91,7 +91,7 @@ export default function RoomsScreen({ navigation }) {
     }
     if (isPrivateFilter) {
         emptyTitle = 'No private rooms';
-        emptyText = 'Private rooms your friends host show up here. Got a code? Use Find a room.';
+        emptyText = 'Private rooms show up here. Got a code? Use Find a room.';
     }
     if (isEveryRoomPlaying) {
         emptyTitle = 'No waiting rooms';
@@ -217,7 +217,7 @@ export default function RoomsScreen({ navigation }) {
                 room={item}
                 playerCount={roomPlayers.length}
                 isMyRoom={item.id === me?.roomId}
-                isFriend={!isFriendsFilter && !isPrivateFilter && friends.includes(item.host.name)}
+                isFriend={!isFriendsFilter && friends.includes(item.host.name)}
                 onPress={() => handlePressRoom(item)}
                 onPressDetails={() => handlePressDetails(item)}
             />

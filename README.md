@@ -189,6 +189,7 @@
 - [x] Make the private room cards light purple
 - [x] Players cannot join private rooms
 - [x] Show friends' private rooms only in the Private tab, not in Friends
+- [x] Show all private rooms in the Private tab, mine included
 
 </details>
 
