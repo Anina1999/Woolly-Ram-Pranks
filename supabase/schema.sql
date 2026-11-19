@@ -64,7 +64,8 @@ create policy "Everyone can read room players"
 
 -- Temporary write rights for anon, tightened when auth is added
 grant insert, delete on rooms to anon;
-grant insert on room_players to anon;
+grant update (host_id) on rooms to anon;
+grant insert, delete on room_players to anon;
 
 create policy "Temporary: anon can create rooms"
     on rooms for insert
@@ -81,6 +82,21 @@ create policy "Temporary: anon can add the host of a room"
     on room_players for insert
     to anon
     with check (exists (select 1 from rooms where rooms.id = room_id and rooms.host_id = profile_id));
+
+create policy "Temporary: anon can remove room players"
+    on room_players for delete
+    to anon
+    using (true);
+
+-- The new host must already be a player of the room
+create policy "Temporary: anon can change the host of a room"
+    on rooms for update
+    to anon
+    using (true)
+    with check (exists (
+        select 1 from room_players
+        where room_players.room_id = rooms.id and room_players.profile_id = rooms.host_id
+    ));
 
 -- Joins a room by id (public rooms) or by code (private rooms) and returns the room id.
 -- Temporary: p_profile_id comes from the app until auth, then it becomes auth.uid().
