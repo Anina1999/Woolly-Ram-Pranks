@@ -16,6 +16,7 @@ import ModalPanel from '../components/ModalPanel';
 import Panel from '../components/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/PlusIcon';
+import PrivacySetting from '../components/PrivacySetting';
 import RefreshButton from '../components/RefreshButton';
 import RefreshError from '../components/RefreshError';
 import SlotRow from '../components/SlotRow';
@@ -189,6 +190,11 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 </Panel>
                 {isHost ? (
                     <Panel style={[styles.panel, styles.hostPanel]}>
+                        <PrivacySetting
+                            isPrivate={room.isPrivate}
+                            onChange={(value) => updateRoom({ isPrivate: value })}
+                        />
+                        <View style={styles.divider} />
                         <MaxPlayersSetting
                             maxPlayers={room.maxPlayers}
                             playerCount={roomPlayers.length}
@@ -347,6 +353,7 @@ const styles = StyleSheet.create({
     },
     hostPanel: {
         gap: 8,
+        marginTop: 12,
         paddingVertical: 10,
         paddingHorizontal: 12,
     },
@@ -381,6 +388,7 @@ const styles = StyleSheet.create({
     footer: {
         gap: 8,
         marginTop: 'auto',
+        paddingTop: 16,
         paddingHorizontal: 16,
         paddingBottom: 18,
     },

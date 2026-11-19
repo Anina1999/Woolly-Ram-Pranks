@@ -265,6 +265,8 @@
 - [x] Add style to the Max players and Difficulty settings
 - [x] Add style to the host and guest panels
 - [x] Let the host change Max players and difficulty
+- [x] Add the Private room setting to the host panel
+- [x] Add style to the Private room setting
 
 </details>
 
