@@ -7,6 +7,7 @@ import IconButton from './IconButton';
 import RamAvatar from './RamAvatar';
 
 import getDifficulty from '../utils/getDifficulty';
+import { JOIN_ERROR_TEXTS } from '../utils/getJoinErrorText';
 import getPlayerSlots from '../utils/getPlayerSlots';
 import getRoomPlayers from '../utils/getRoomPlayers';
 import getStatusColors from '../utils/getStatusColors';
@@ -21,12 +22,12 @@ export default function RoomDetails({ room, players, isMyRoom, onClose, onPressG
     const isPlaying = room.status === 'PLAYING';
     const isFull = roomPlayers.length === room.maxPlayers;
 
-    let cantJoinReason = 'This room is full.';
+    let cantJoinReason = JOIN_ERROR_TEXTS.ROOM_FULL;
     if (room.isPrivate) {
-        cantJoinReason = 'This room is private.';
+        cantJoinReason = JOIN_ERROR_TEXTS.ROOM_PRIVATE;
     }
     if (isPlaying) {
-        cantJoinReason = 'This game is already running. You can join when it ends.';
+        cantJoinReason = JOIN_ERROR_TEXTS.ROOM_PLAYING;
     }
 
     const renderSlot = ({ item }) => {

@@ -22,3 +22,14 @@ export async function addRoomPlayer(roomId, profileId) {
         throw error;
     }
 }
+
+export async function joinRoom(roomId, profileId) {
+    const { data, error } = await supabase
+        .rpc('join_room', { p_profile_id: profileId, p_room_id: roomId });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}

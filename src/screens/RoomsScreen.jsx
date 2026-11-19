@@ -26,11 +26,12 @@ import profile from '../data/profile';
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import { getProfileByUsername } from '../services/profilesService';
-import { addRoomPlayer } from '../services/roomPlayersService';
+import { joinRoom } from '../services/roomPlayersService';
 import { getRoomByCode } from '../services/roomsService';
 
 import { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';
 import getDifficulty from '../utils/getDifficulty';
+import getJoinErrorText from '../utils/getJoinErrorText';
 import getRoomPlayers from '../utils/getRoomPlayers';
 
 import { colors, fonts } from '../styles/theme';
@@ -165,15 +166,11 @@ export default function RoomsScreen({ navigation }) {
 
         try {
             const player = await getProfileByUsername(profile.name);
-            await addRoomPlayer(room.id, player.id);
+            await joinRoom(room.id, player.id);
             await reloadData();
             navigation.navigate('WaitingRoom', { roomId: room.id });
         } catch (requestError) {
-            if (requestError.code === '23505') {
-                setJoinError("You're already in a room. Leave it first, then try again.");
-            } else {
-                setJoinError("Couldn't reach the farm. Check your connection and try again.");
-            }
+            setJoinError(getJoinErrorText(requestError));
         } finally {
             setIsJoining(false);
         }

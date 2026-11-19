@@ -76,10 +76,11 @@ create policy "Temporary: anon can delete rooms"
     to anon
     using (true);
 
-create policy "Temporary: anon can add room players"
+-- Only the host is added directly (Create room), everyone else joins with join_room
+create policy "Temporary: anon can add the host of a room"
     on room_players for insert
     to anon
-    with check (true);
+    with check (exists (select 1 from rooms where rooms.id = room_id and rooms.host_id = profile_id));
 
 -- Joins a room by id (public rooms) or by code (private rooms) and returns the room id.
 -- Temporary: p_profile_id comes from the app until auth, then it becomes auth.uid().
