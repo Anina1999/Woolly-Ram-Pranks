@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
@@ -45,6 +45,7 @@ export default function CreateRoomScreen({ navigation }) {
     };
 
     const handlePressCreate = async () => {
+        Keyboard.dismiss();
         setIsSubmitted(true);
         setSubmitError('');
 
