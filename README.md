@@ -183,6 +183,7 @@
 - [x] Disable Join room until the room code is complete
 - [x] Keep the Find a room window above the keyboard
 - [x] While the code is checked make the Join room button gray
+- [x] Show a spinner on Join room while the code is checked
 
 </details>
 
@@ -247,6 +248,8 @@
 - [x] Ask to leave the current room first on Create
 - [x] Create a private room with the Private room switch
 - [x] Scroll the form above the keyboard to reach Create
+- [x] Show a spinner on Create while the room is created
+- [x] Hide the keyboard on Create so the error is not covered
 
 </details>
 
@@ -321,6 +324,7 @@
 - [x] Remove the player from the room after confirming Leave
 - [x] Pass the host to the next player or delete the room when the host leaves if no other players
 - [x] Leave the room on the server and pass the host on there
+- [x] Show a spinner on Leave while leaving the room
 
 </details>
 

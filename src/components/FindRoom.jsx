@@ -92,7 +92,9 @@ export default function FindRoom({
                     {hasCodeError && <FormError message={codeError} />}
                     <GameButton
                         title='Join room'
-                        isDisabled={isJoining || code.length < ROOM_CODE_LENGTH}
+                        isDisabled={code.length < ROOM_CODE_LENGTH}
+                        isLoading={isJoining}
+                        loadingTitle='Joining…'
                         onPress={() => onJoinByCode(code)}
                     />
                 </View>

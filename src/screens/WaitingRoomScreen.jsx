@@ -288,7 +288,13 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
                 <Text style={styles.dialogTitle}>{leaveTitle}</Text>
                 <View style={styles.dialogButtons}>
-                    <GameButton title='Leave' variant='danger' isDisabled={isLeaving} onPress={handleConfirmLeave} />
+                    <GameButton
+                        title='Leave'
+                        variant='danger'
+                        isLoading={isLeaving}
+                        loadingTitle='Leaving…'
+                        onPress={handleConfirmLeave}
+                    />
                     <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
                 </View>
                 {leaveError !== '' && <FormError message={leaveError} />}
