@@ -157,6 +157,7 @@
 - [x] Join a room by tapping its card, or open its details when it can't be joined
 - [x] Save the player in the room on Join and show Couldn't join on error
 - [x] Check on the server that the room can be joined
+- [x] Reload the rooms after the server refuses a join
 
 </details>
 
@@ -175,6 +176,7 @@
 - [x] Disable Find a room while I am in a room
 - [x] Change the room code to the ABC-1234 format
 - [x] Check the room code on the server
+- [x] Hide the code error as soon as I type or change the tab
 
 </details>
 

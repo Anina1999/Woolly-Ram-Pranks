@@ -22,6 +22,7 @@ export default function FindRoom({
     onPressRoom,
     onPressDetails,
     onJoinByCode,
+    onClearCodeError,
 }) {
     const [searchMode, setSearchMode] = useState('name');
     const [searchText, setSearchText] = useState('');
@@ -32,6 +33,16 @@ export default function FindRoom({
     const hasQuery = query !== '';
     const foundRooms = rooms.filter((room) => room.name.toLowerCase().startsWith(query));
     const roomWord = foundRooms.length === 1 ? 'ROOM' : 'ROOMS';
+
+    const handleSelectMode = (mode) => {
+        setSearchMode(mode);
+        onClearCodeError();
+    };
+
+    const handleChangeCode = (text) => {
+        setCode(formatRoomCode(text));
+        onClearCodeError();
+    };
 
     const renderRoom = ({ item }) => {
         const roomPlayers = getRoomPlayers(players, item.id);
@@ -54,8 +65,8 @@ export default function FindRoom({
                 <IconButton icon='x' size='small' accessibilityLabel='Close' onPress={onClose} />
             </View>
             <View style={styles.tabs}>
-                <SearchTab label='By name' selected={!isCodeMode} onPress={() => setSearchMode('name')} />
-                <SearchTab label='Code' selected={isCodeMode} onPress={() => setSearchMode('code')} />
+                <SearchTab label='By name' selected={!isCodeMode} onPress={() => handleSelectMode('name')} />
+                <SearchTab label='Code' selected={isCodeMode} onPress={() => handleSelectMode('code')} />
             </View>
             {isCodeMode ? (
                 <View>
@@ -69,7 +80,7 @@ export default function FindRoom({
                         autoCorrect={false}
                         maxLength={ROOM_CODE_LENGTH}
                         value={code}
-                        onChangeText={(text) => setCode(formatRoomCode(text))}
+                        onChangeText={handleChangeCode}
                     />
                     {codeError !== '' && <FormError message={codeError} />}
                     <GameButton title='Join room' onPress={() => onJoinByCode(code)} />

@@ -139,6 +139,10 @@ export default function RoomsScreen({ navigation }) {
         setCodeError('');
     };
 
+    const handleClearCodeError = () => {
+        setCodeError('');
+    };
+
     const handlePressReturn = () => {
         navigation.navigate('WaitingRoom', { roomId: myRoom.id });
     };
@@ -170,6 +174,7 @@ export default function RoomsScreen({ navigation }) {
             navigation.navigate('WaitingRoom', { roomId: room.id });
         } catch (requestError) {
             setJoinError(getJoinErrorText(requestError));
+            await reloadData();
         } finally {
             setIsJoining(false);
         }
@@ -342,6 +347,7 @@ export default function RoomsScreen({ navigation }) {
                     onPressRoom={handlePressRoom}
                     onPressDetails={handlePressDetails}
                     onJoinByCode={handleJoinByCode}
+                    onClearCodeError={handleClearCodeError}
                 />
             </ModalPanel>
             <ModalPanel visible={blockedRoom !== null} onClose={handleCloseBlockedModal}>
