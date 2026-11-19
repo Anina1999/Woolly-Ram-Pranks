@@ -69,19 +69,24 @@ export default function FindRoom({
                 <SearchTab label='Code' selected={isCodeMode} onPress={() => handleSelectMode('code')} />
             </View>
             {isCodeMode ? (
-                <View>
-                    <Text>Got a code from a friend? Type it in to jump straight into their private room.</Text>
-                    <Text>ROOM CODE</Text>
-                    <TextInput
-                        placeholder='ABC-1234'
-                        placeholderTextColor={colors.placeholder}
-                        accessibilityLabel='Room code'
-                        autoCapitalize='characters'
-                        autoCorrect={false}
-                        maxLength={ROOM_CODE_LENGTH}
-                        value={code}
-                        onChangeText={handleChangeCode}
-                    />
+                <View style={styles.codeView}>
+                    <Text style={styles.codeText}>
+                        Got a code from a friend? Type it in to jump straight into their private room.
+                    </Text>
+                    <View style={styles.codeField}>
+                        <Text style={styles.label}>ROOM CODE</Text>
+                        <TextInput
+                            placeholder='ABC-1234'
+                            placeholderTextColor={colors.placeholder}
+                            accessibilityLabel='Room code'
+                            autoCapitalize='characters'
+                            autoCorrect={false}
+                            maxLength={ROOM_CODE_LENGTH}
+                            value={code}
+                            onChangeText={handleChangeCode}
+                            style={styles.codeInput}
+                        />
+                    </View>
                     {codeError !== '' && <FormError message={codeError} />}
                     <GameButton title='Join room' onPress={() => onJoinByCode(code)} />
                 </View>
@@ -100,9 +105,9 @@ export default function FindRoom({
                     </View>
                     {hasQuery && (
                         <View style={styles.results}>
-                            <Text style={styles.resultsLabel}>{foundRooms.length} {roomWord} FOUND</Text>
+                            <Text style={styles.label}>{foundRooms.length} {roomWord} FOUND</Text>
                             {foundRooms.length === 0 ? (
-                                <Text style={styles.emptyText}>No rooms match that name. Try another one.</Text>
+                                <Text style={styles.hint}>No rooms match that name. Try another one.</Text>
                             ) : (
                                 <FlatList
                                     data={foundRooms}
@@ -111,7 +116,7 @@ export default function FindRoom({
                                     renderItem={renderRoom}
                                 />
                             )}
-                            <Text>Private rooms don't show up here — use Code.</Text>
+                            <Text style={styles.hint}>Private rooms don't show up here — use Code.</Text>
                         </View>
                     )}
                 </>
@@ -162,16 +167,43 @@ const styles = StyleSheet.create({
         flexShrink: 1,
         gap: 8,
     },
-    resultsLabel: {
+    label: {
         fontFamily: fonts.extraBold,
         fontSize: 12,
         letterSpacing: 0.6,
         color: colors.muted,
     },
+    codeView: {
+        gap: 12,
+    },
+    codeText: {
+        fontFamily: fonts.regular,
+        fontSize: 14,
+        lineHeight: 20,
+        color: colors.modalText,
+    },
+    codeField: {
+        gap: 6,
+    },
+    codeInput: {
+        height: 60,
+        paddingVertical: 0,
+        paddingHorizontal: 12,
+        borderRadius: 14,
+        borderWidth: 2,
+        borderBottomWidth: 4,
+        borderColor: colors.searchFieldBorder,
+        backgroundColor: colors.card,
+        textAlign: 'center',
+        fontFamily: fonts.display,
+        fontSize: 28,
+        letterSpacing: 6,
+        color: colors.text,
+    },
     list: {
         gap: 8,
     },
-    emptyText: {
+    hint: {
         textAlign: 'center',
         fontFamily: fonts.regular,
         fontSize: 12,

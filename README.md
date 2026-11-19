@@ -177,6 +177,7 @@
 - [x] Change the room code to the ABC-1234 format
 - [x] Check the room code on the server
 - [x] Hide the code error as soon as I type or change the tab
+- [x] Add style to the Code tab
 
 </details>
 
