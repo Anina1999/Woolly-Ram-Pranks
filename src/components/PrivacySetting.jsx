@@ -5,7 +5,7 @@ import LockIcon from './LockIcon';
 
 import { colors, fonts } from '../styles/theme';
 
-export default function PrivacySetting({ isPrivate, onChange }) {
+export default function PrivacySetting({ isPrivate, isDisabled, onChange }) {
     const handlePress = () => {
         onChange(!isPrivate);
     };
@@ -19,10 +19,11 @@ export default function PrivacySetting({ isPrivate, onChange }) {
                 </Text>
             </View>
             <Pressable
-                style={styles.switch}
+                style={[styles.switch, isDisabled && styles.switchDisabled]}
+                disabled={isDisabled}
                 accessibilityRole='switch'
                 accessibilityLabel='Private room'
-                accessibilityState={{ checked: isPrivate }}
+                accessibilityState={{ checked: isPrivate, disabled: isDisabled }}
                 onPress={handlePress}
             >
                 <GlobeIcon size={20} color={colors.privacyIcon} />
@@ -71,6 +72,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.border,
         backgroundColor: colors.card,
+    },
+    switchDisabled: {
+        opacity: 0.6,
     },
     knob: {
         position: 'absolute',

@@ -211,17 +211,20 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     <Panel style={[styles.panel, styles.hostPanel]}>
                         <PrivacySetting
                             isPrivate={room.isPrivate}
+                            isDisabled={isSaving}
                             onChange={(value) => handleChangeSettings({ isPrivate: value })}
                         />
                         <View style={styles.divider} />
                         <MaxPlayersSetting
                             maxPlayers={room.maxPlayers}
                             playerCount={roomPlayers.length}
+                            isDisabled={isSaving}
                             onChange={(value) => handleChangeSettings({ maxPlayers: value })}
                         />
                         <View style={styles.divider} />
                         <DifficultySetting
                             difficulty={room.difficulty}
+                            isDisabled={isSaving}
                             onChange={(value) => handleChangeSettings({ difficulty: value })}
                         />
                         {settingsError !== '' && <FormError message={settingsError} />}

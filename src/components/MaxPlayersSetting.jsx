@@ -7,7 +7,7 @@ import { colors, fonts } from '../styles/theme';
 const MIN_PLAYERS = 2;
 const MAX_PLAYERS = 5;
 
-export default function MaxPlayersSetting({ maxPlayers, playerCount = 0, onChange }) {
+export default function MaxPlayersSetting({ maxPlayers, playerCount = 0, isDisabled, onChange }) {
     const minPlayers = Math.max(MIN_PLAYERS, playerCount);
 
     const handlePressDecrease = () => {
@@ -25,8 +25,8 @@ export default function MaxPlayersSetting({ maxPlayers, playerCount = 0, onChang
                 <Text style={styles.hint}>Up to 5 players</Text>
             </View>
             <Stepper
-                isDecreaseDisabled={maxPlayers <= minPlayers}
-                isIncreaseDisabled={maxPlayers >= MAX_PLAYERS}
+                isDecreaseDisabled={isDisabled || maxPlayers <= minPlayers}
+                isIncreaseDisabled={isDisabled || maxPlayers >= MAX_PLAYERS}
                 onDecrease={handlePressDecrease}
                 onIncrease={handlePressIncrease}
             >

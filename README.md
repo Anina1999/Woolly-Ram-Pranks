@@ -268,6 +268,7 @@
 - [x] Add the Private room setting to the host panel
 - [x] Add style to the Private room setting
 - [x] Save the room settings on the server
+- [x] Disable the room settings while they are saved
 
 </details>
 

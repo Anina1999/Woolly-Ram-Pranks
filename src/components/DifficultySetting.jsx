@@ -11,7 +11,7 @@ import { colors, fonts } from '../styles/theme';
 const MIN_LEVEL = 1;
 const MAX_LEVEL = 5;
 
-export default function DifficultySetting({ difficulty, onChange }) {
+export default function DifficultySetting({ difficulty, isDisabled, onChange }) {
     const { name, level, text } = getDifficulty(difficulty);
 
     const handlePressEasier = () => {
@@ -27,8 +27,8 @@ export default function DifficultySetting({ difficulty, onChange }) {
             <Text style={styles.title}>Difficulty</Text>
             <Stepper
                 variant='arrows'
-                isDecreaseDisabled={level === MIN_LEVEL}
-                isIncreaseDisabled={level === MAX_LEVEL}
+                isDecreaseDisabled={isDisabled || level === MIN_LEVEL}
+                isIncreaseDisabled={isDisabled || level === MAX_LEVEL}
                 onDecrease={handlePressEasier}
                 onIncrease={handlePressHarder}
             >
