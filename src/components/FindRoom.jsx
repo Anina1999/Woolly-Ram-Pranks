@@ -29,6 +29,7 @@ export default function FindRoom({
     const [code, setCode] = useState('');
 
     const isCodeMode = searchMode === 'code';
+    const hasCodeError = codeError !== '';
     const query = searchText.trim().toLowerCase();
     const hasQuery = query !== '';
     const foundRooms = rooms.filter((room) => room.name.toLowerCase().startsWith(query));
@@ -84,10 +85,10 @@ export default function FindRoom({
                             maxLength={ROOM_CODE_LENGTH}
                             value={code}
                             onChangeText={handleChangeCode}
-                            style={styles.codeInput}
+                            style={[styles.codeInput, hasCodeError && styles.codeInputError]}
                         />
                     </View>
-                    {codeError !== '' && <FormError message={codeError} />}
+                    {hasCodeError && <FormError message={codeError} />}
                     <GameButton title='Join room' onPress={() => onJoinByCode(code)} />
                 </View>
             ) : (
@@ -199,6 +200,10 @@ const styles = StyleSheet.create({
         fontSize: 28,
         letterSpacing: 6,
         color: colors.text,
+    },
+    codeInputError: {
+        borderColor: colors.errorBorder,
+        backgroundColor: colors.errorSurface,
     },
     list: {
         gap: 8,

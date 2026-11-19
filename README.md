@@ -178,6 +178,7 @@
 - [x] Check the room code on the server
 - [x] Hide the code error as soon as I type or change the tab
 - [x] Add style to the Code tab
+- [x] Show the room code field in red on an error
 
 </details>
 
