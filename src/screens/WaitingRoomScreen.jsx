@@ -23,6 +23,7 @@ import SlotRow from '../components/SlotRow';
 
 import { RoomsContext } from '../contexts/RoomsContext';
 
+import { updateRoomPlayerReady } from '../services/roomPlayersService';
 import { leaveRoom, updateRoomSettings } from '../services/roomsService';
 
 import getDifficulty from '../utils/getDifficulty';
@@ -36,13 +37,15 @@ const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
-    const { rooms, players, setPlayers, isLoading, error, reloadData } = useContext(RoomsContext);
+    const { rooms, players, isLoading, error, reloadData } = useContext(RoomsContext);
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
     const [isLeaving, setIsLeaving] = useState(false);
     const [leaveError, setLeaveError] = useState('');
     const [isCopied, setIsCopied] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [settingsError, setSettingsError] = useState('');
+    const [isSavingReady, setIsSavingReady] = useState(false);
+    const [readyError, setReadyError] = useState('');
 
     const room = rooms.find((item) => item.id === roomId);
     const roomPlayers = getRoomPlayers(players, roomId);
@@ -107,10 +110,22 @@ export default function WaitingRoomScreen({ route, navigation }) {
         setTimeout(() => setIsCopied(false), 2000);
     };
 
-    const handlePressReady = () => {
-        setPlayers(players.map((player) =>
-            player.you ? { ...player, ready: !player.ready } : player
-        ));
+    const handlePressReady = async () => {
+        if (isSavingReady) {
+            return;
+        }
+
+        setIsSavingReady(true);
+        setReadyError('');
+
+        try {
+            await updateRoomPlayerReady(me.profileId, !me.ready);
+        } catch {
+            setReadyError("Couldn't save Ready. Try again.");
+        } finally {
+            await reloadData();
+            setIsSavingReady(false);
+        }
     };
 
     if (!room) {
@@ -265,6 +280,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                             </GameButton>
                         )}
                     </View>
+                    {readyError !== '' && <FormError message={readyError} />}
                     <Text style={styles.status}>{status}</Text>
                 </View>
             </ScrollView>

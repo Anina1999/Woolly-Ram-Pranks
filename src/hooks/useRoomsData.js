@@ -40,5 +40,5 @@ export default function useRoomsData() {
         reloadData();
     }, []);
 
-    return { rooms, setRooms, players, setPlayers, isLoading, error, reloadData };
+    return { rooms, players, isLoading, error, reloadData };
 }

@@ -296,6 +296,7 @@
 - [x] Toggle ready with the Ready button
 - [x] Show room status from the players
 - [x] Disable Start game until everyone is ready
+- [x] Save Ready on the server
 
 </details>
 

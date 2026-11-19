@@ -51,6 +51,17 @@ export async function deleteRoomPlayer(profileId) {
     }
 }
 
+export async function updateRoomPlayerReady(profileId, isReady) {
+    const { error } = await supabase
+        .from('room_players')
+        .update({ is_ready: isReady })
+        .eq('profile_id', profileId);
+
+    if (error) {
+        throw error;
+    }
+}
+
 export async function joinRoom(roomId, profileId) {
     const { data, error } = await supabase
         .rpc('join_room', { p_profile_id: profileId, p_room_id: roomId });
