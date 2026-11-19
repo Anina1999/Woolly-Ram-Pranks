@@ -69,6 +69,7 @@ create policy "Everyone can read room players"
 grant insert, delete on rooms to anon;
 grant update (host_id, is_private, max_players, difficulty) on rooms to anon;
 grant insert, delete on room_players to anon;
+grant update (is_ready) on room_players to anon;
 
 create policy "Temporary: anon can create rooms"
     on rooms for insert
@@ -90,6 +91,20 @@ create policy "Temporary: anon can remove room players"
     on room_players for delete
     to anon
     using (true);
+
+-- Only a guest's Ready, and only while the room is waiting (the host's is_ready is not used)
+create policy "Temporary: anon can change ready"
+    on room_players for update
+    to anon
+    using (true)
+    with check (
+        exists (
+            select 1 from rooms
+            where rooms.id = room_players.room_id
+                and rooms.status = 'WAITING'
+                and rooms.host_id <> room_players.profile_id
+        )
+    );
 
 -- One update policy for the host and the room settings (policies are joined with OR).
 -- The host must be a player of the room and max players can't go below the player count.
