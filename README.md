@@ -179,6 +179,7 @@
 - [x] Hide the code error as soon as I type or change the tab
 - [x] Add style to the Code tab
 - [x] Show the room code field in red on an error
+- [x] Disable Join room until the room code is complete
 
 </details>
 

@@ -89,7 +89,11 @@ export default function FindRoom({
                         />
                     </View>
                     {hasCodeError && <FormError message={codeError} />}
-                    <GameButton title='Join room' onPress={() => onJoinByCode(code)} />
+                    <GameButton
+                        title='Join room'
+                        isDisabled={code.length < ROOM_CODE_LENGTH}
+                        onPress={() => onJoinByCode(code)}
+                    />
                 </View>
             ) : (
                 <>

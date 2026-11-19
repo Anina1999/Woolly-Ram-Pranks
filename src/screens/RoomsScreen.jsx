@@ -28,7 +28,6 @@ import { RoomsContext } from '../contexts/RoomsContext';
 import { getProfileByUsername } from '../services/profilesService';
 import { joinRoom, joinRoomByCode } from '../services/roomPlayersService';
 
-import { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';
 import getDifficulty from '../utils/getDifficulty';
 import getJoinErrorText from '../utils/getJoinErrorText';
 import getRoomPlayers from '../utils/getRoomPlayers';
@@ -182,11 +181,6 @@ export default function RoomsScreen({ navigation }) {
 
     const handleJoinByCode = async (code) => {
         if (isJoining) {
-            return;
-        }
-
-        if (code.length < ROOM_CODE_LENGTH) {
-            setCodeError('Enter the full room code, like ABC-1234.');
             return;
         }
 
