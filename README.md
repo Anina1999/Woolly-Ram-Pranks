@@ -143,6 +143,7 @@
 - [x] Keep the card of my room open when it is full
 - [x] Go to my room from the Already in a room window
 - [x] Disable Create room while in a room
+- [x] Hide the create and join hints in empty tabs while I'm in a room
 
 </details>
 

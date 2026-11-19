@@ -82,21 +82,6 @@ export default function RoomsScreen({ navigation }) {
 
     const countText = `${shownRooms.length} ${countLabel}`;
 
-    let emptyTitle = 'No rooms yet';
-    let emptyText = 'Even the dog is asleep. Be the first — create a room and invite your friends.';
-    if (isFriendsFilter) {
-        emptyTitle = "No friends' rooms";
-        emptyText = 'None of your friends are hosting right now. Tap + to create a room and invite them.';
-    }
-    if (isPrivateFilter) {
-        emptyTitle = 'No private rooms';
-        emptyText = 'Private rooms show up here. Got a code? Use Find a room.';
-    }
-    if (isEveryRoomPlaying) {
-        emptyTitle = 'No waiting rooms';
-        emptyText = 'Every room is already playing. Tap + to create a room and invite your friends.';
-    }
-
     const me = players.find((player) => player.you);
     const myRoom = rooms.find((room) => room.id === me?.roomId);
     const myRoomPlayers = getRoomPlayers(players, me?.roomId);
@@ -104,6 +89,27 @@ export default function RoomsScreen({ navigation }) {
     const isInRoom = me !== undefined;
     const plusIconColor = isInRoom ? colors.disabledButtonText : colors.textOnPrimary;
     const searchIconColor = isInRoom ? colors.disabledButtonText : colors.textOnAccent;
+
+    let emptyTitle = 'No rooms yet';
+    let emptyText = 'Even the dog is asleep.';
+    let emptyAction = 'Be the first — create a room and invite your friends.';
+    if (isFriendsFilter) {
+        emptyTitle = "No friends' rooms";
+        emptyText = 'None of your friends are hosting right now.';
+        emptyAction = 'Tap + to create a room and invite them.';
+    }
+    if (isPrivateFilter) {
+        emptyTitle = 'No private rooms';
+        emptyText = 'Private rooms show up here.';
+        emptyAction = 'Got a code? Use Find a room.';
+    }
+    if (isEveryRoomPlaying) {
+        emptyTitle = 'No waiting rooms';
+        emptyText = 'Every room is already playing.';
+        emptyAction = 'Tap + to create a room and invite your friends.';
+    }
+
+    const shownEmptyText = isInRoom ? emptyText : `${emptyText} ${emptyAction}`;
 
     const handlePressRoom = (room) => {
         setIsSearchVisible(false);
@@ -314,7 +320,7 @@ export default function RoomsScreen({ navigation }) {
                             ListHeaderComponent={
                                 shownRooms.length > 0 && <Text style={styles.count}>{countText}</Text>
                             }
-                            ListEmptyComponent={<EmptyRooms title={emptyTitle} text={emptyText} />}
+                            ListEmptyComponent={<EmptyRooms title={emptyTitle} text={shownEmptyText} />}
                         />
                     )}
                     {!error && (

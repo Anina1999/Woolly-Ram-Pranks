@@ -1,13 +1,36 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
+import Spinner from './Spinner';
+
 import { colors, fonts } from '../styles/theme';
 
-export default function GameButton({ title, onPress, size, variant, isDisabled, style, children }) {
+export default function GameButton({
+    title,
+    onPress,
+    size,
+    variant,
+    isDisabled,
+    isLoading,
+    loadingTitle,
+    style,
+    children,
+}) {
     const isLarge = size === 'large';
     const isSecondary = variant === 'secondary';
     const isDanger = variant === 'danger';
     const isReady = variant === 'ready';
     const isAccent = variant === 'accent';
+
+    let spinnerColor = colors.textOnPrimary;
+    let spinnerTrackColor = colors.spinnerTrackOnPrimary;
+    if (isSecondary) {
+        spinnerColor = colors.actionText;
+        spinnerTrackColor = colors.spinnerTrackOnSecondary;
+    }
+    if (isAccent) {
+        spinnerColor = colors.textOnAccent;
+        spinnerTrackColor = colors.spinnerTrackOnAccent;
+    }
 
     return (
         <Pressable
@@ -20,7 +43,8 @@ export default function GameButton({ title, onPress, size, variant, isDisabled, 
                 pressed && styles.buttonPressed,
                 style,
             ]}
-            disabled={isDisabled}
+            disabled={isDisabled || isLoading}
+            accessibilityState={{ disabled: isDisabled || isLoading, busy: isLoading }}
             onPress={onPress}
         >
             <View
@@ -34,10 +58,10 @@ export default function GameButton({ title, onPress, size, variant, isDisabled, 
                     isDisabled && styles.faceDisabled,
                 ]}
             >
-                {!isSecondary && !isDisabled && (
+                {!isSecondary && !isDisabled && !isLoading && (
                     <View style={[styles.shine, isLarge && styles.shineLarge, isAccent && styles.shineAccent]} />
                 )}
-                {children}
+                {isLoading ? <Spinner size={22} color={spinnerColor} trackColor={spinnerTrackColor} /> : children}
                 <Text
                     style={[
                         styles.title,
@@ -47,7 +71,7 @@ export default function GameButton({ title, onPress, size, variant, isDisabled, 
                         isDisabled && styles.titleDisabled,
                     ]}
                 >
-                    {title}
+                    {isLoading ? loadingTitle : title}
                 </Text>
             </View>
         </Pressable>

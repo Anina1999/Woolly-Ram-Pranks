@@ -125,7 +125,12 @@ export default function CreateRoomScreen({ navigation }) {
                         </View>
                         <MaxPlayersSetting maxPlayers={maxPlayers} onChange={setMaxPlayers} />
                         <DifficultySetting difficulty={difficulty} onChange={setDifficulty} />
-                        <GameButton title='Create' isDisabled={isSubmitting} onPress={handlePressCreate} />
+                        <GameButton
+                            title='Create'
+                            isLoading={isSubmitting}
+                            loadingTitle='Creating…'
+                            onPress={handlePressCreate}
+                        />
                         {submitError !== '' && <FormError message={submitError} />}
                     </Panel>
                 </ScrollView>
