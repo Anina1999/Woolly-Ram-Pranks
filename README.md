@@ -181,6 +181,7 @@
 - [x] Show the room code field in red on an error
 - [x] Disable Join room until the room code is complete
 - [x] Keep the Find a room window above the keyboard
+- [x] While the code is checked make the Join room button gray
 
 </details>
 

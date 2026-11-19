@@ -337,6 +337,7 @@ export default function RoomsScreen({ navigation }) {
                     players={players}
                     myRoomId={me?.roomId}
                     codeError={codeError}
+                    isJoining={isJoining}
                     onClose={handleCloseSearch}
                     onPressRoom={handlePressRoom}
                     onPressDetails={handlePressDetails}
