@@ -61,3 +61,14 @@ export async function joinRoom(roomId, profileId) {
 
     return data;
 }
+
+export async function joinRoomByCode(code, profileId) {
+    const { data, error } = await supabase
+        .rpc('join_room', { p_profile_id: profileId, p_code: code });
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}

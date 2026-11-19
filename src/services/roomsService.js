@@ -2,31 +2,14 @@ import supabase from './supabase';
 
 import { addRoomPlayer, deleteRoomPlayer, getNextHost } from './roomPlayersService';
 
-const ROOM_FIELDS = `
-    id, name, maxPlayers:max_players, difficulty, status, mode, map, isPrivate:is_private, code, hostId:host_id,
-    host:profiles!host_id(name:username, wool, bandana)
-`;
-
 export async function getRooms() {
     const { data, error } = await supabase
         .from('rooms')
-        .select(ROOM_FIELDS)
+        .select(`
+            id, name, maxPlayers:max_players, difficulty, status, mode, map, isPrivate:is_private, code, hostId:host_id,
+            host:profiles!host_id(name:username, wool, bandana)
+        `)
         .order('created_at');
-
-    if (error) {
-        throw error;
-    }
-
-    return data;
-}
-
-export async function getRoomByCode(code) {
-    const { data, error } = await supabase
-        .from('rooms')
-        .select(ROOM_FIELDS)
-        .eq('code', code)
-        .eq('is_private', true)
-        .maybeSingle();
 
     if (error) {
         throw error;

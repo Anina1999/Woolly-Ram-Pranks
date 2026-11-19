@@ -26,8 +26,7 @@ import profile from '../data/profile';
 import { RoomsContext } from '../contexts/RoomsContext';
 
 import { getProfileByUsername } from '../services/profilesService';
-import { joinRoom } from '../services/roomPlayersService';
-import { getRoomByCode } from '../services/roomsService';
+import { joinRoom, joinRoomByCode } from '../services/roomPlayersService';
 
 import { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';
 import getDifficulty from '../utils/getDifficulty';
@@ -189,33 +188,17 @@ export default function RoomsScreen({ navigation }) {
         setCodeError('');
         setIsJoining(true);
 
-        let room = null;
-
         try {
-            room = await getRoomByCode(code);
-        } catch {
-            setCodeError("Couldn't reach the farm. Check your connection and try again.");
-            return;
+            const player = await getProfileByUsername(profile.name);
+            const roomId = await joinRoomByCode(code, player.id);
+            await reloadData();
+            setIsSearchVisible(false);
+            navigation.navigate('WaitingRoom', { roomId: roomId });
+        } catch (requestError) {
+            setCodeError(getJoinErrorText(requestError));
         } finally {
             setIsJoining(false);
         }
-
-        if (room === null) {
-            setCodeError('No room with that code. Check it and try again.');
-            return;
-        }
-
-        if (room.status === 'PLAYING') {
-            setCodeError('This game is already running. You can join when it ends.');
-            return;
-        }
-
-        if (getRoomPlayers(players, room.id).length >= room.maxPlayers) {
-            setCodeError('This room is full.');
-            return;
-        }
-
-        handlePressRoom(room);
     };
 
     const handleCloseJoinError = () => {
