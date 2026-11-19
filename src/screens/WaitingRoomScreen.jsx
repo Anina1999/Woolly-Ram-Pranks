@@ -8,6 +8,7 @@ import CheckIcon from '../components/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import FormError from '../components/FormError';
 import GameButton from '../components/GameButton';
+import GlobeIcon from '../components/GlobeIcon';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
@@ -150,19 +151,29 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={reloadData} />}
             >
                 {error && <RefreshError />}
-                {room.isPrivate && (
-                    <View>
-                        <LockIcon />
-                        <Text>Private · code {room.code}</Text>
-                        <Pressable
-                            accessibilityRole='button'
-                            accessibilityLabel='Copy room code'
-                            onPress={handlePressCopy}
-                        >
-                            <Text>{isCopied ? 'Copied' : 'Copy'}</Text>
-                        </Pressable>
-                    </View>
-                )}
+                <View style={styles.codeBar}>
+                    {room.isPrivate ? (
+                        <>
+                            <LockIcon color={colors.codeBarLock} />
+                            <Text style={styles.codeText}>
+                                Private · code <Text style={styles.roomCode}>{room.code}</Text>
+                            </Text>
+                            <Pressable
+                                style={styles.copyButton}
+                                accessibilityRole='button'
+                                accessibilityLabel='Copy room code'
+                                onPress={handlePressCopy}
+                            >
+                                <Text style={styles.copyText}>{isCopied ? 'Copied' : 'Copy'}</Text>
+                            </Pressable>
+                        </>
+                    ) : (
+                        <>
+                            <GlobeIcon color={colors.codeBarGlobe} />
+                            <Text style={styles.codeText}>Public · listed in Rooms</Text>
+                        </>
+                    )}
+                </View>
                 <Panel style={[styles.panel, styles.playersPanel]}>
                     <View style={styles.playersHeader}>
                         <Text style={styles.playersTitle}>Players</Text>
@@ -270,9 +281,47 @@ const styles = StyleSheet.create({
         marginTop: 24,
         marginHorizontal: 16,
     },
+    codeBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10,
+        minHeight: 56,
+        marginTop: 12,
+        marginHorizontal: 16,
+        paddingVertical: 6,
+        paddingRight: 6,
+        paddingLeft: 14,
+        borderRadius: 16,
+        borderWidth: 2,
+        borderColor: colors.codeBarBorder,
+        backgroundColor: colors.codeBar,
+    },
+    codeText: {
+        flex: 1,
+        fontFamily: fonts.bold,
+        fontSize: 14,
+        color: colors.textOnScene,
+    },
+    roomCode: {
+        fontFamily: fonts.display,
+        fontSize: 18,
+        letterSpacing: 2,
+        color: colors.roomCode,
+    },
+    copyButton: {
+        justifyContent: 'center',
+        height: 40,
+        paddingHorizontal: 14,
+        borderRadius: 12,
+        backgroundColor: colors.copyButton,
+    },
+    copyText: {
+        fontFamily: fonts.extraBold,
+        fontSize: 14,
+        color: colors.actionText,
+    },
     playersPanel: {
-        // room for the Private code bar, it comes after the MVP
-        marginTop: 84,
+        marginTop: 4,
         gap: 6,
         padding: 10,
     },

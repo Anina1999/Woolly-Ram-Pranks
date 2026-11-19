@@ -252,6 +252,8 @@
 - [x] Add difficulty pips to both Waiting room and RoomCard
 - [x] Install the clipboard "npx expo install expo-clipboard"
 - [x] Show the code of a private room with a Copy button
+- [x] Add style to the private room code bar
+- [x] Show a Public bar in public rooms
 
 </details>
 
