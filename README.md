@@ -251,6 +251,7 @@
 - [x] Scroll the form above the keyboard to reach Create
 - [x] Show a spinner on Create while the room is created
 - [x] Hide the keyboard on Create so the error is not covered
+- [x] Make the Private room switch easier to tap
 
 </details>
 
@@ -311,6 +312,7 @@
 - [x] Show room status from the players
 - [x] Disable Start game until everyone is ready
 - [x] Save Ready on the server
+- [x] Show only the connection error in the Waiting room when offline
 
 </details>
 

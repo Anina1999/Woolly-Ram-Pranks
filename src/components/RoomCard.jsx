@@ -45,9 +45,7 @@ export default function RoomCard({ room, playerCount, isMyRoom, isFriend, isJoin
                                 <LockIcon size={18} color={isPrivate ? colors.privateLock : colors.privateIcon} />
                             </View>
                         )}
-                        <Text style={styles.name} numberOfLines={1} adjustsFontSizeToFit={isPrivate}>
-                            {room.name}
-                        </Text>
+                        <Text style={styles.name} numberOfLines={1}>{room.name}</Text>
                     </View>
                     <View style={styles.hostRow}>
                         <Text style={styles.host} numberOfLines={1}>Host: {room.host.name}</Text>

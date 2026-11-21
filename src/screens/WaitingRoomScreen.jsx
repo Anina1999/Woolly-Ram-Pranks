@@ -67,8 +67,10 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 difficulty: room.difficulty,
                 ...changes,
             });
-        } catch {
-            setSettingsError("Couldn't save the settings. Try again.");
+        } catch (saveError) {
+            if (saveError.code) {
+                setSettingsError("Couldn't save the settings. Try again.");
+            }
         } finally {
             await reloadData();
             setIsSaving(false);
@@ -84,6 +86,10 @@ export default function WaitingRoomScreen({ route, navigation }) {
     };
 
     const handleCloseLeaveModal = () => {
+        if (isLeaving) {
+            return;
+        }
+
         setIsLeaveModalVisible(false);
         setLeaveError('');
     };
@@ -120,8 +126,10 @@ export default function WaitingRoomScreen({ route, navigation }) {
 
         try {
             await updateRoomPlayerReady(me.profileId, !me.ready);
-        } catch {
-            setReadyError("Couldn't save Ready. Try again.");
+        } catch (saveError) {
+            if (saveError.code) {
+                setReadyError("Couldn't save Ready. Try again.");
+            }
         } finally {
             await reloadData();
             setIsSavingReady(false);
@@ -242,7 +250,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                             isDisabled={isSaving}
                             onChange={(value) => handleChangeSettings({ difficulty: value })}
                         />
-                        {settingsError !== '' && <FormError message={settingsError} />}
+                        {settingsError !== '' && !error && <FormError message={settingsError} />}
                     </Panel>
                 ) : (
                     <Panel style={[styles.panel, styles.guestPanel]}>
@@ -280,7 +288,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                             </GameButton>
                         )}
                     </View>
-                    {readyError !== '' && <FormError message={readyError} />}
+                    {readyError !== '' && !error && <FormError message={readyError} />}
                     <Text style={styles.status}>{status}</Text>
                 </View>
             </ScrollView>
@@ -295,7 +303,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         loadingTitle='Leaving…'
                         onPress={handleConfirmLeave}
                     />
-                    <GameButton title='Stay' variant='secondary' onPress={handleCloseLeaveModal} />
+                    <GameButton title='Stay' variant='secondary' isDisabled={isLeaving} onPress={handleCloseLeaveModal} />
                 </View>
                 {leaveError !== '' && <FormError message={leaveError} />}
             </ModalPanel>

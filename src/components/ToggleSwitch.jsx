@@ -13,6 +13,7 @@ export default function ToggleSwitch({ value, accessibilityLabel, onValueChange 
             accessibilityRole='switch'
             accessibilityLabel={accessibilityLabel}
             accessibilityState={{ checked: value }}
+            hitSlop={10}
             onPress={handlePress}
         >
             <View style={styles.thumb} />
