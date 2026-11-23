@@ -3,7 +3,7 @@ import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text,
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/BackHeader';
-import BarnIcon from '../components/BarnIcon';
+import BarnIcon from '../components/icons/BarnIcon';
 import DifficultySetting from '../components/DifficultySetting';
 import FormError from '../components/FormError';
 import GameButton from '../components/GameButton';

@@ -1,6 +1,6 @@
 import Svg, { Path } from 'react-native-svg';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function RefreshIcon({ size = 20, color = colors.textOnPrimary }) {
     return (

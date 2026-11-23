@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import Badge from './Badge';
-import CrownIcon from './CrownIcon';
+import CrownIcon from './icons/CrownIcon';
 import RamAvatar from './RamAvatar';
 
 import { colors, fonts } from '../styles/theme';

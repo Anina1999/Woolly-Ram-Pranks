@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from 'react-native';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function TabIcon({ source, focused, color }) {
     return (

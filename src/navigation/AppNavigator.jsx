@@ -1,7 +1,7 @@
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import TabIcon from '../components/TabIcon';
+import TabIcon from '../components/icons/TabIcon';
 import LobbyScreen from '../screens/LobbyScreen';
 import RoomsScreen from '../screens/RoomsScreen';
 import ProfileScreen from '../screens/ProfileScreen';

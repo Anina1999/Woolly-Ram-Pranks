@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
 import Badge from './Badge';
-import CrownIcon from './CrownIcon';
+import CrownIcon from './icons/CrownIcon';
 import GameButton from './GameButton';
 import IconButton from './IconButton';
 import RamAvatar from './RamAvatar';

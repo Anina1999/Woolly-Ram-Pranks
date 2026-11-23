@@ -1,6 +1,6 @@
 import Svg, { Path } from 'react-native-svg';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function PlusIcon({ size = 20, color = colors.textOnPrimary, strokeWidth = 3.2 }) {
     return (

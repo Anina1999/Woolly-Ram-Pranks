@@ -3,8 +3,8 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Badge from './Badge';
 import DetailsCornerButton from './DetailsCornerButton';
 import DifficultyPips from './DifficultyPips';
-import LockIcon from './LockIcon';
-import PlayersIcon from './PlayersIcon';
+import LockIcon from './icons/LockIcon';
+import PlayersIcon from './icons/PlayersIcon';
 import RamAvatar from './RamAvatar';
 import Spinner from './Spinner';
 

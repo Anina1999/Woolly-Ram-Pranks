@@ -1,6 +1,6 @@
 import Svg, { Path, Rect } from 'react-native-svg';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function LockIcon({ size = 18, color = colors.textOnDark }) {
     return (

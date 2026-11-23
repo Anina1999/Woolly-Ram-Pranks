@@ -5,7 +5,7 @@ import FormError from './FormError';
 import GameButton from './GameButton';
 import IconButton from './IconButton';
 import RoomRow from './RoomRow';
-import SearchIcon from './SearchIcon';
+import SearchIcon from './icons/SearchIcon';
 import SearchTab from './SearchTab';
 
 import formatRoomCode, { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';

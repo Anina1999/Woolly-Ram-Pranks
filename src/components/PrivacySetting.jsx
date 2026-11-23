@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import GlobeIcon from './GlobeIcon';
-import LockIcon from './LockIcon';
+import GlobeIcon from './icons/GlobeIcon';
+import LockIcon from './icons/LockIcon';
 
 import { colors, fonts } from '../styles/theme';
 

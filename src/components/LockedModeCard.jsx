@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import Badge from './Badge';
-import LockIcon from './LockIcon';
+import LockIcon from './icons/LockIcon';
 
 import { colors, fonts } from '../styles/theme';
 

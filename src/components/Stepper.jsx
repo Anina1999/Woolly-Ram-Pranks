@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import BackIcon from './BackIcon';
-import ForwardIcon from './ForwardIcon';
-import MinusIcon from './MinusIcon';
-import PlusIcon from './PlusIcon';
+import BackIcon from './icons/BackIcon';
+import ForwardIcon from './icons/ForwardIcon';
+import MinusIcon from './icons/MinusIcon';
+import PlusIcon from './icons/PlusIcon';
 
 import { colors } from '../styles/theme';
 

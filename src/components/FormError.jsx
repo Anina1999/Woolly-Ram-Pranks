@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import ErrorIcon from './ErrorIcon';
+import ErrorIcon from './icons/ErrorIcon';
 
 import { colors, fonts } from '../styles/theme';
 

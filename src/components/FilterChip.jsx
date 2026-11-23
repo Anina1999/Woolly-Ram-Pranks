@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-import LockIcon from './LockIcon';
+import LockIcon from './icons/LockIcon';
 
 import { colors, fonts } from '../styles/theme';
 

@@ -6,7 +6,7 @@ import Badge from '../components/Badge';
 import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
 import LockedModeCard from '../components/LockedModeCard';
-import PlayIcon from '../components/PlayIcon';
+import PlayIcon from '../components/icons/PlayIcon';
 import Ram from '../components/Ram';
 import RamAvatar from '../components/RamAvatar';
 import Sheep from '../components/Sheep';
