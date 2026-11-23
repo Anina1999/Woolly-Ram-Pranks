@@ -4,7 +4,7 @@ import Badge from './Badge';
 import CrownIcon from './icons/CrownIcon';
 import GameButton from './GameButton';
 import IconButton from './IconButton';
-import RamAvatar from './RamAvatar';
+import RamAvatar from './characters/RamAvatar';
 
 import getDifficulty from '../utils/getDifficulty';
 import { JOIN_ERROR_TEXTS } from '../utils/getJoinErrorText';

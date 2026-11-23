@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import Badge from './Badge';
 import DetailsCornerButton from './DetailsCornerButton';
-import RamAvatar from './RamAvatar';
+import RamAvatar from './characters/RamAvatar';
 
 import getDifficulty from '../utils/getDifficulty';
 import getStatusColors from '../utils/getStatusColors';

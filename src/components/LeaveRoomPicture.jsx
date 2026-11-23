@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import Svg, { Ellipse, Path, Rect } from 'react-native-svg';
 
-import Ram from './Ram';
+import Ram from './characters/Ram';
 
 import { fonts } from '../styles/theme';
 

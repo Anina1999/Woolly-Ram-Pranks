@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import Dog from './Dog';
+import Dog from './characters/Dog';
 
 import { colors, fonts } from '../styles/theme';
 

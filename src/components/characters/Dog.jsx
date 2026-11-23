@@ -1,6 +1,6 @@
 import Svg, { Circle, Defs, Ellipse, G, Path, RadialGradient, Rect, Stop, Text } from 'react-native-svg';
 
-import { fonts } from '../styles/theme';
+import { fonts } from '../../styles/theme';
 
 export default function Dog({ size }) {
     const height = Math.round(size * 140 / 160);

@@ -5,7 +5,7 @@ import DetailsCornerButton from './DetailsCornerButton';
 import DifficultyPips from './DifficultyPips';
 import LockIcon from './icons/LockIcon';
 import PlayersIcon from './icons/PlayersIcon';
-import RamAvatar from './RamAvatar';
+import RamAvatar from './characters/RamAvatar';
 import Spinner from './Spinner';
 
 import getDifficulty from '../utils/getDifficulty';

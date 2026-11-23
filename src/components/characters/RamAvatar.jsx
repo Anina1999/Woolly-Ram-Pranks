@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import Ram from './Ram';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function RamAvatar({ wool, bandana, size, crop, style }) {
     const isWhole = crop === 'whole';

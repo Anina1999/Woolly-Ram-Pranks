@@ -7,9 +7,9 @@ import GameButton from '../components/GameButton';
 import IconButton from '../components/IconButton';
 import LockedModeCard from '../components/LockedModeCard';
 import PlayIcon from '../components/icons/PlayIcon';
-import Ram from '../components/Ram';
-import RamAvatar from '../components/RamAvatar';
-import Sheep from '../components/Sheep';
+import Ram from '../components/characters/Ram';
+import RamAvatar from '../components/characters/RamAvatar';
+import Sheep from '../components/characters/Sheep';
 
 import profile from '../data/profile';
 
