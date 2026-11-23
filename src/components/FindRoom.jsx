@@ -73,7 +73,7 @@ export default function FindRoom({
             {isCodeMode ? (
                 <View style={styles.codeView}>
                     <Text style={styles.codeText}>
-                        Got a code from a friend? Type it in to jump straight into their private room.
+                        Got a code from a friend? Type it in to jump straight into their room.
                     </Text>
                     <View style={styles.codeField}>
                         <Text style={styles.label}>ROOM CODE</Text>

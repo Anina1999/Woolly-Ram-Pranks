@@ -185,6 +185,7 @@
 - [x] Keep the Find a room window above the keyboard
 - [x] While the code is checked make the Join room button gray
 - [x] Show a spinner on Join room while the code is checked
+- [x] Join any room with its code, not only a private one
 
 </details>
 
