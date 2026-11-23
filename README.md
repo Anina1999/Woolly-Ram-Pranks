@@ -352,5 +352,7 @@
 - [x] Install expo-constants for the app version "npx expo install expo-constants"
 - [x] Add the Sound, Gameplay and General sections and the app version to Settings
 - [x] Add Vibration and Notifications switches to Settings
+- [x] Install the slider "npx expo install @react-native-community/slider"
+- [x] Add Music and Sound effects sliders to Settings
 
 </details>

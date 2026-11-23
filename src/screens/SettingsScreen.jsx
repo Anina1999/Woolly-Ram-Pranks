@@ -2,12 +2,15 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
+import Slider from '@react-native-community/slider';
 
 import BackHeader from '../components/BackHeader';
 import SettingsSection from '../components/SettingsSection';
 import ToggleSwitch from '../components/ToggleSwitch';
 
 export default function SettingsScreen({ navigation }) {
+    const [musicVolume, setMusicVolume] = useState(70);
+    const [soundEffectsVolume, setSoundEffectsVolume] = useState(85);
     const [isVibrationOn, setIsVibrationOn] = useState(true);
     const [isNotificationsOn, setIsNotificationsOn] = useState(false);
 
@@ -22,8 +25,34 @@ export default function SettingsScreen({ navigation }) {
             </BackHeader>
             <ScrollView>
                 <SettingsSection title='SOUND'>
-                    <Text>Music</Text>
-                    <Text>Sound effects</Text>
+                    <View>
+                        <View>
+                            <Text>Music</Text>
+                            <Text>{musicVolume}%</Text>
+                        </View>
+                        <Slider
+                            value={musicVolume}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            accessibilityLabel='Music'
+                            onValueChange={setMusicVolume}
+                        />
+                    </View>
+                    <View>
+                        <View>
+                            <Text>Sound effects</Text>
+                            <Text>{soundEffectsVolume}%</Text>
+                        </View>
+                        <Slider
+                            value={soundEffectsVolume}
+                            minimumValue={0}
+                            maximumValue={100}
+                            step={1}
+                            accessibilityLabel='Sound effects'
+                            onValueChange={setSoundEffectsVolume}
+                        />
+                    </View>
                 </SettingsSection>
                 <SettingsSection title='GAMEPLAY'>
                     <View>
