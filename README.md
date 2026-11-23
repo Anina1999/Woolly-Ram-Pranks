@@ -354,5 +354,6 @@
 - [x] Add Vibration and Notifications switches to Settings
 - [x] Install the slider "npx expo install @react-native-community/slider"
 - [x] Add Music and Sound effects sliders to Settings
+- [x] Add style and icons to Settings
 
 </details>

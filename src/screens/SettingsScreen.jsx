@@ -2,11 +2,23 @@ import { useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
-import Slider from '@react-native-community/slider';
 
 import BackHeader from '../components/BackHeader';
+import BellIcon from '../components/BellIcon';
+import ForwardIcon from '../components/ForwardIcon';
+import GlobeIcon from '../components/GlobeIcon';
+import HelpIcon from '../components/HelpIcon';
+import MusicIcon from '../components/MusicIcon';
+import ScreenPanel from '../components/ScreenPanel';
+import SettingRow from '../components/SettingRow';
 import SettingsSection from '../components/SettingsSection';
+import ShieldIcon from '../components/ShieldIcon';
+import SoundIcon from '../components/SoundIcon';
 import ToggleSwitch from '../components/ToggleSwitch';
+import VibrationIcon from '../components/VibrationIcon';
+import VolumeSetting from '../components/VolumeSetting';
+
+import { colors, fonts } from '../styles/theme';
 
 export default function SettingsScreen({ navigation }) {
     const [musicVolume, setMusicVolume] = useState(70);
@@ -21,73 +33,61 @@ export default function SettingsScreen({ navigation }) {
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
             <BackHeader onBack={handlePressBack}>
-                <Text>Settings</Text>
+                <Text style={styles.title}>Settings</Text>
             </BackHeader>
-            <ScrollView>
-                <SettingsSection title='SOUND'>
-                    <View>
-                        <View>
-                            <Text>Music</Text>
-                            <Text>{musicVolume}%</Text>
-                        </View>
-                        <Slider
+            <ScreenPanel style={styles.panel}>
+                <ScrollView contentContainerStyle={styles.content}>
+                    <SettingsSection title='SOUND'>
+                        <VolumeSetting
+                            icon={<MusicIcon />}
+                            label='Music'
                             value={musicVolume}
-                            minimumValue={0}
-                            maximumValue={100}
-                            step={1}
-                            accessibilityLabel='Music'
-                            onValueChange={setMusicVolume}
+                            onChange={setMusicVolume}
                         />
-                    </View>
-                    <View>
-                        <View>
-                            <Text>Sound effects</Text>
-                            <Text>{soundEffectsVolume}%</Text>
-                        </View>
-                        <Slider
+                        <View style={styles.divider} />
+                        <VolumeSetting
+                            icon={<SoundIcon />}
+                            label='Sound effects'
                             value={soundEffectsVolume}
-                            minimumValue={0}
-                            maximumValue={100}
-                            step={1}
-                            accessibilityLabel='Sound effects'
-                            onValueChange={setSoundEffectsVolume}
+                            onChange={setSoundEffectsVolume}
                         />
-                    </View>
-                </SettingsSection>
-                <SettingsSection title='GAMEPLAY'>
-                    <View>
-                        <Text>Vibration</Text>
-                        <ToggleSwitch
-                            value={isVibrationOn}
-                            size='small'
-                            accessibilityLabel='Vibration'
-                            onValueChange={setIsVibrationOn}
-                        />
-                    </View>
-                    <View>
-                        <Text>Notifications</Text>
-                        <ToggleSwitch
-                            value={isNotificationsOn}
-                            size='small'
-                            accessibilityLabel='Notifications'
-                            onValueChange={setIsNotificationsOn}
-                        />
-                    </View>
-                </SettingsSection>
-                <SettingsSection title='GENERAL'>
-                    <View>
-                        <Text>Language</Text>
-                        <Text>English</Text>
-                    </View>
-                    <View>
-                        <Text>Help & support</Text>
-                    </View>
-                    <View>
-                        <Text>Privacy & terms</Text>
-                    </View>
-                </SettingsSection>
-                <Text>Version {Constants.expoConfig.version}</Text>
-            </ScrollView>
+                    </SettingsSection>
+                    <SettingsSection title='GAMEPLAY'>
+                        <SettingRow icon={<VibrationIcon />} label='Vibration' style={styles.switchRow}>
+                            <ToggleSwitch
+                                value={isVibrationOn}
+                                size='small'
+                                accessibilityLabel='Vibration'
+                                onValueChange={setIsVibrationOn}
+                            />
+                        </SettingRow>
+                        <View style={styles.divider} />
+                        <SettingRow icon={<BellIcon />} label='Notifications' style={styles.switchRow}>
+                            <ToggleSwitch
+                                value={isNotificationsOn}
+                                size='small'
+                                accessibilityLabel='Notifications'
+                                onValueChange={setIsNotificationsOn}
+                            />
+                        </SettingRow>
+                    </SettingsSection>
+                    <SettingsSection title='GENERAL'>
+                        <SettingRow icon={<GlobeIcon size={22} color={colors.actionText} />} label='Language'>
+                            <Text style={styles.language}>English</Text>
+                            <ForwardIcon size={18} color={colors.muted} />
+                        </SettingRow>
+                        <View style={styles.divider} />
+                        <SettingRow icon={<HelpIcon />} label='Help & support'>
+                            <ForwardIcon size={18} color={colors.muted} />
+                        </SettingRow>
+                        <View style={styles.divider} />
+                        <SettingRow icon={<ShieldIcon />} label='Privacy & terms'>
+                            <ForwardIcon size={18} color={colors.muted} />
+                        </SettingRow>
+                    </SettingsSection>
+                    <Text style={styles.version}>Version {Constants.expoConfig.version}</Text>
+                </ScrollView>
+            </ScreenPanel>
         </SafeAreaView>
     );
 }
@@ -95,5 +95,43 @@ export default function SettingsScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.sky,
+    },
+    title: {
+        fontFamily: fonts.display,
+        fontSize: 32,
+        lineHeight: 36,
+        color: colors.textOnScene,
+        textShadowColor: colors.text,
+        textShadowOffset: { width: 0, height: 2 },
+        textShadowRadius: 1,
+    },
+    panel: {
+        marginTop: 24,
+    },
+    content: {
+        gap: 16,
+        paddingTop: 20,
+        paddingHorizontal: 12,
+        paddingBottom: 16,
+    },
+    divider: {
+        height: 2,
+        marginHorizontal: 14,
+        backgroundColor: colors.settingsDivider,
+    },
+    switchRow: {
+        minHeight: 56,
+    },
+    language: {
+        fontFamily: fonts.bold,
+        fontSize: 14,
+        color: colors.muted,
+    },
+    version: {
+        textAlign: 'center',
+        fontFamily: fonts.bold,
+        fontSize: 12,
+        color: colors.muted,
     },
 });
