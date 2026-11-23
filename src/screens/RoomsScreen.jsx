@@ -93,24 +93,22 @@ export default function RoomsScreen({ navigation }) {
 
     let emptyTitle = 'No rooms yet';
     let emptyText = 'Even the dog is asleep.';
-    let emptyAction = 'Be the first — create a room and invite your friends.';
+    let emptyAction = '';
     if (isFriendsFilter) {
         emptyTitle = "No friends' rooms";
         emptyText = 'None of your friends are hosting right now.';
-        emptyAction = 'Tap + to create a room and invite them.';
     }
     if (isPrivateFilter) {
         emptyTitle = 'No private rooms';
         emptyText = 'Private rooms show up here.';
-        emptyAction = 'Got a code? Use Find a room.';
+        emptyAction = 'Got a code? Use Find a room below.';
     }
     if (isEveryRoomPlaying) {
         emptyTitle = 'No waiting rooms';
         emptyText = 'Every room is already playing.';
-        emptyAction = 'Tap + to create a room and invite your friends.';
     }
 
-    const shownEmptyText = isInRoom ? emptyText : `${emptyText} ${emptyAction}`;
+    const shownEmptyText = !isInRoom && emptyAction !== '' ? `${emptyText} ${emptyAction}` : emptyText;
 
     const handlePressRoom = (room) => {
         setIsSearchVisible(false);
@@ -322,7 +320,15 @@ export default function RoomsScreen({ navigation }) {
                         ListHeaderComponent={
                             shownRooms.length > 0 && <Text style={styles.count}>{countText}</Text>
                         }
-                        ListEmptyComponent={<EmptyRooms title={emptyTitle} text={shownEmptyText} />}
+                        ListEmptyComponent={
+                            <EmptyRooms title={emptyTitle} text={shownEmptyText}>
+                                {!isInRoom && !isPrivateFilter && (
+                                    <GameButton title='Create a room' onPress={handlePressCreateRoom}>
+                                        <PlusIcon strokeWidth={3.6} />
+                                    </GameButton>
+                                )}
+                            </EmptyRooms>
+                        }
                     />
                 )}
                 {!error && (

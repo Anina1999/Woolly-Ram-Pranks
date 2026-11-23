@@ -4,12 +4,13 @@ import Dog from '../characters/Dog';
 
 import { colors, fonts } from '../../styles/theme';
 
-export default function EmptyRooms({ title, text }) {
+export default function EmptyRooms({ title, text, children }) {
     return (
         <View style={styles.container}>
             <Dog size={180} />
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.text}>{text}</Text>
+            {children && <View style={styles.action}>{children}</View>}
         </View>
     );
 }
@@ -36,5 +37,9 @@ const styles = StyleSheet.create({
         fontSize: 15,
         lineHeight: 22,
         color: colors.muted,
+    },
+    action: {
+        width: 200,
+        marginTop: 6,
     },
 });

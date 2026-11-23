@@ -215,6 +215,8 @@
 - [x] Add sleeping dog to the empty state
 - [x] Add a spinner and skeleton cards to the loading state
 - [x] Add style to the error state with dizzy ram and Try again
+- [x] Add a Create a room button to the empty tabs
+- [x] Add style to the Create a room button in the empty tabs
 
 </details>
 
