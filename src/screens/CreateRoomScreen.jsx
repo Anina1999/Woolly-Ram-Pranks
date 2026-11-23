@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -14,7 +14,7 @@ import ToggleSwitch from '../components/ToggleSwitch';
 import newRoom from '../data/newRoom';
 import profile from '../data/profile';
 
-import { RoomsContext } from '../contexts/RoomsContext';
+import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
 import { getProfileByUsername } from '../services/profilesService';
 import { createRoom } from '../services/roomsService';
@@ -26,7 +26,7 @@ const MAX_NAME_LENGTH = 24;
 const LEAVE_ROOM_MESSAGE = 'Leave your room first';
 
 export default function CreateRoomScreen({ navigation }) {
-    const { players, reloadData } = useContext(RoomsContext);
+    const { players, reloadData } = useRoomsContext();
     const [roomName, setRoomName] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isPrivate, setIsPrivate] = useState(false);

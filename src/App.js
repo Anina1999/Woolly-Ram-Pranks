@@ -3,7 +3,7 @@ import { StatusBar } from 'expo-status-bar';
 
 import RootNavigator from './navigation/RootNavigator';
 
-import RoomsProvider from './contexts/RoomsContext';
+import RoomsProvider from './contexts/rooms-context/RoomsProvider';
 
 import useGameFonts from './hooks/useGameFonts';
 

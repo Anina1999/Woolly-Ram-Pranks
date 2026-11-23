@@ -1,8 +1,6 @@
-import { createContext } from 'react';
+import RoomsContext from './RoomsContext';
 
-import useRoomsData from '../hooks/useRoomsData';
-
-export const RoomsContext = createContext();
+import useRoomsData from '../../hooks/useRoomsData';
 
 export default function RoomsProvider({ children }) {
     const roomsData = useRoomsData();

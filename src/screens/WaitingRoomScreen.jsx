@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { FlatList, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Clipboard from 'expo-clipboard';
@@ -21,7 +21,7 @@ import RefreshButton from '../components/RefreshButton';
 import RefreshError from '../components/RefreshError';
 import SlotRow from '../components/SlotRow';
 
-import { RoomsContext } from '../contexts/RoomsContext';
+import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
 import { updateRoomPlayerReady } from '../services/roomPlayersService';
 import { leaveRoom, updateRoomSettings } from '../services/roomsService';
@@ -37,7 +37,7 @@ const MIN_PLAYERS = 2;
 
 export default function WaitingRoomScreen({ route, navigation }) {
     const { roomId } = route.params;
-    const { rooms, players, isLoading, error, reloadData } = useContext(RoomsContext);
+    const { rooms, players, isLoading, error, reloadData } = useRoomsContext();
     const [isLeaveModalVisible, setIsLeaveModalVisible] = useState(false);
     const [isLeaving, setIsLeaving] = useState(false);
     const [leaveError, setLeaveError] = useState('');

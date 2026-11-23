@@ -1,4 +1,3 @@
-import { useContext } from 'react';
 import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
@@ -14,14 +13,14 @@ import Sheep from '../components/Sheep';
 
 import profile from '../data/profile';
 
-import { RoomsContext } from '../contexts/RoomsContext';
+import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
 import useCardPulse from '../hooks/useCardPulse';
 
 import { colors, fonts } from '../styles/theme';
 
 export default function LobbyScreen({ navigation }) {
-    const { players } = useContext(RoomsContext);
+    const { players } = useRoomsContext();
     const { borderColor, scale } = useCardPulse();
 
     const me = players.find((player) => player.you);

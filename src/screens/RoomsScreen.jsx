@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -24,7 +24,7 @@ import Spinner from '../components/Spinner';
 import friends from '../data/friends';
 import profile from '../data/profile';
 
-import { RoomsContext } from '../contexts/RoomsContext';
+import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
 import { getProfileByUsername } from '../services/profilesService';
 import { joinRoom, joinRoomByCode } from '../services/roomPlayersService';
@@ -38,7 +38,7 @@ import { colors, fonts } from '../styles/theme';
 const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
 
 export default function RoomsScreen({ navigation }) {
-    const { rooms, players, isLoading, error, reloadData } = useContext(RoomsContext);
+    const { rooms, players, isLoading, error, reloadData } = useRoomsContext();
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
     const [isJoining, setIsJoining] = useState(false);
