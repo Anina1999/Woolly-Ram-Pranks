@@ -9,17 +9,17 @@ import DifficultySetting from '../components/room-settings/DifficultySetting';
 import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
 import GlobeIcon from '../components/icons/GlobeIcon';
-import LeaveRoomPicture from '../components/LeaveRoomPicture';
+import LeaveRoomPicture from '../components/waiting-room/LeaveRoomPicture';
 import LockIcon from '../components/icons/LockIcon';
 import MaxPlayersSetting from '../components/room-settings/MaxPlayersSetting';
 import ModalPanel from '../components/common/ModalPanel';
 import Panel from '../components/common/Panel';
-import PlayerRow from '../components/PlayerRow';
+import PlayerRow from '../components/waiting-room/PlayerRow';
 import PlusIcon from '../components/icons/PlusIcon';
 import PrivacySetting from '../components/room-settings/PrivacySetting';
 import RefreshButton from '../components/common/RefreshButton';
 import RefreshError from '../components/common/RefreshError';
-import SlotRow from '../components/SlotRow';
+import SlotRow from '../components/waiting-room/SlotRow';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 

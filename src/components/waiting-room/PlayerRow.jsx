@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import Badge from './common/Badge';
-import CrownIcon from './icons/CrownIcon';
-import RamAvatar from './characters/RamAvatar';
+import Badge from '../common/Badge';
+import CrownIcon from '../icons/CrownIcon';
+import RamAvatar from '../characters/RamAvatar';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function PlayerRow({ player }) {
     return (
