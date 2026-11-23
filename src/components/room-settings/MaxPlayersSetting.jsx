@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import Stepper from './common/Stepper';
+import Stepper from '../common/Stepper';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 const MIN_PLAYERS = 2;
 const MAX_PLAYERS = 5;

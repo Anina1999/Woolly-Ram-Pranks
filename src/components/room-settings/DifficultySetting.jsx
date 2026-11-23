@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import DifficultyPips from './rooms/DifficultyPips';
-import Stepper from './common/Stepper';
+import DifficultyPips from '../rooms/DifficultyPips';
+import Stepper from '../common/Stepper';
 
-import getDifficulty from '../utils/getDifficulty';
-import getNextDifficulty from '../utils/getNextDifficulty';
+import getDifficulty from '../../utils/getDifficulty';
+import getNextDifficulty from '../../utils/getNextDifficulty';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 const MIN_LEVEL = 1;
 const MAX_LEVEL = 5;

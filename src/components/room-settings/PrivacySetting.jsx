@@ -1,9 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import GlobeIcon from './icons/GlobeIcon';
-import LockIcon from './icons/LockIcon';
+import GlobeIcon from '../icons/GlobeIcon';
+import LockIcon from '../icons/LockIcon';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function PrivacySetting({ isPrivate, isDisabled, onChange }) {
     const handlePress = () => {

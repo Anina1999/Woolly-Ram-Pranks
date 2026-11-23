@@ -4,10 +4,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/common/BackHeader';
 import BarnIcon from '../components/icons/BarnIcon';
-import DifficultySetting from '../components/DifficultySetting';
+import DifficultySetting from '../components/room-settings/DifficultySetting';
 import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
-import MaxPlayersSetting from '../components/MaxPlayersSetting';
+import MaxPlayersSetting from '../components/room-settings/MaxPlayersSetting';
 import Panel from '../components/common/Panel';
 import ToggleSwitch from '../components/common/ToggleSwitch';
 
