@@ -77,6 +77,12 @@ export default function WaitingRoomScreen({ route, navigation }) {
         }
     };
 
+    const handleRefresh = () => {
+        setSettingsError('');
+        setReadyError('');
+        reloadData();
+    };
+
     const handlePressBack = () => {
         navigation.popTo('App', { screen: 'Rooms' });
     };
@@ -187,11 +193,11 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players ·{difficultyInfo.name}
                     </Text>
                 </View>
-                <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh room' onPress={reloadData} />
+                <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh room' onPress={handleRefresh} />
             </BackHeader>
             <ScrollView
                 contentContainerStyle={styles.content}
-                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={reloadData} />}
+                refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh} />}
             >
                 {error && <RefreshError />}
                 <View style={styles.codeBar}>
