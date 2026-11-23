@@ -160,6 +160,7 @@
 - [x] Show Joining on the room card and in Room details while joining
 - [x] Check on the server that the room can be joined
 - [x] Reload the rooms after the server refuses a join
+- [x] Show a room code field in Room details of a private room
 
 </details>
 

@@ -5,6 +5,7 @@ import CrownIcon from '../icons/CrownIcon';
 import GameButton from '../common/GameButton';
 import IconButton from '../common/IconButton';
 import RamAvatar from '../characters/RamAvatar';
+import RoomCodeEntry from './RoomCodeEntry';
 
 import getDifficulty from '../../utils/getDifficulty';
 import { JOIN_ERROR_TEXTS } from '../../utils/getJoinErrorText';
@@ -14,7 +15,19 @@ import getStatusColors from '../../utils/getStatusColors';
 
 import { colors, fonts } from '../../styles/theme';
 
-export default function RoomDetails({ room, players, isMyRoom, isJoining, onClose, onPressGoToMyRoom, onPressJoin }) {
+export default function RoomDetails({
+    room,
+    players,
+    isMyRoom,
+    isJoining,
+    isJoiningByCode,
+    codeError,
+    onClose,
+    onPressGoToMyRoom,
+    onPressJoin,
+    onJoinByCode,
+    onClearCodeError,
+}) {
     const roomPlayers = getRoomPlayers(players, room.id);
     const difficulty = getDifficulty(room.difficulty);
     const statusColors = getStatusColors(room.status);
@@ -23,9 +36,6 @@ export default function RoomDetails({ room, players, isMyRoom, isJoining, onClos
     const isFull = roomPlayers.length === room.maxPlayers;
 
     let cantJoinReason = JOIN_ERROR_TEXTS.ROOM_FULL;
-    if (room.isPrivate) {
-        cantJoinReason = JOIN_ERROR_TEXTS.ROOM_PRIVATE;
-    }
     if (isPlaying) {
         cantJoinReason = JOIN_ERROR_TEXTS.ROOM_PLAYING;
     }
@@ -64,12 +74,23 @@ export default function RoomDetails({ room, players, isMyRoom, isJoining, onClos
             return <GameButton title='Go to my room' onPress={onPressGoToMyRoom} />;
         }
 
-        if (isPlaying || isFull || room.isPrivate) {
+        if (isPlaying || isFull) {
             return (
                 <View style={styles.cantJoin}>
                     <GameButton title="Can't join right now" isDisabled />
                     <Text style={styles.reason}>{cantJoinReason}</Text>
                 </View>
+            );
+        }
+
+        if (room.isPrivate) {
+            return (
+                <RoomCodeEntry
+                    codeError={codeError}
+                    isJoining={isJoiningByCode}
+                    onJoin={onJoinByCode}
+                    onClearCodeError={onClearCodeError}
+                />
             );
         }
 

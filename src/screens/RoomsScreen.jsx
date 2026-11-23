@@ -127,11 +127,13 @@ export default function RoomsScreen({ navigation }) {
 
     const handlePressDetails = (room) => {
         setIsSearchVisible(false);
+        setCodeError('');
         setDetailsRoom(room);
     };
 
     const handleCloseDetails = () => {
         setDetailsRoom(null);
+        setCodeError('');
     };
 
     const handlePressFindRoom = () => {
@@ -385,9 +387,13 @@ export default function RoomsScreen({ navigation }) {
                         players={players}
                         isMyRoom={detailsRoom.id === me?.roomId}
                         isJoining={detailsRoom.id === joiningRoomId}
+                        isJoiningByCode={isJoining}
+                        codeError={codeError}
                         onClose={handleCloseDetails}
                         onPressGoToMyRoom={handlePressGoToMyRoom}
                         onPressJoin={() => handleJoinRoom(detailsRoom)}
+                        onJoinByCode={(code) => handleJoinByCode(code, detailsRoom.id)}
+                        onClearCodeError={handleClearCodeError}
                     />
                 )}
             </ModalPanel>
