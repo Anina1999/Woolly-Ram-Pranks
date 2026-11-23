@@ -2,7 +2,7 @@ import { KeyboardAvoidingView, Modal, Platform, Pressable, StyleSheet } from 're
 
 import Panel from './Panel';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function ModalPanel({ visible, onClose, style, children }) {
     return (

@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import BackHeader from '../components/BackHeader';
+import BackHeader from '../components/common/BackHeader';
 import BarnIcon from '../components/icons/BarnIcon';
 import DifficultySetting from '../components/DifficultySetting';
-import FormError from '../components/FormError';
-import GameButton from '../components/GameButton';
+import FormError from '../components/common/FormError';
+import GameButton from '../components/common/GameButton';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
-import Panel from '../components/Panel';
-import ToggleSwitch from '../components/ToggleSwitch';
+import Panel from '../components/common/Panel';
+import ToggleSwitch from '../components/common/ToggleSwitch';
 
 import newRoom from '../data/newRoom';
 import profile from '../data/profile';

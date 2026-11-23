@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet } from 'react-native';
 
-import InfoCornerIcon from './icons/InfoCornerIcon';
+import InfoCornerIcon from '../icons/InfoCornerIcon';
 
 export default function DetailsCornerButton({ roomName, onPress }) {
     return (

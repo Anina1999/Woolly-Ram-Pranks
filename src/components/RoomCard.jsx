@@ -1,12 +1,12 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import Badge from './Badge';
-import DetailsCornerButton from './DetailsCornerButton';
+import Badge from './common/Badge';
+import DetailsCornerButton from './common/DetailsCornerButton';
 import DifficultyPips from './DifficultyPips';
 import LockIcon from './icons/LockIcon';
 import PlayersIcon from './icons/PlayersIcon';
 import RamAvatar from './characters/RamAvatar';
-import Spinner from './Spinner';
+import Spinner from './common/Spinner';
 
 import getDifficulty from '../utils/getDifficulty';
 import getStatusColors from '../utils/getStatusColors';

@@ -1,11 +1,11 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 
-import BackIcon from './icons/BackIcon';
-import ForwardIcon from './icons/ForwardIcon';
-import MinusIcon from './icons/MinusIcon';
-import PlusIcon from './icons/PlusIcon';
+import BackIcon from '../icons/BackIcon';
+import ForwardIcon from '../icons/ForwardIcon';
+import MinusIcon from '../icons/MinusIcon';
+import PlusIcon from '../icons/PlusIcon';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function Stepper({
     variant,

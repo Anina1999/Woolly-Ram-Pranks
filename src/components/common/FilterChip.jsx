@@ -1,8 +1,8 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-import LockIcon from './icons/LockIcon';
+import LockIcon from '../icons/LockIcon';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function FilterChip({ label, icon, selected, onPress }) {
     const isLock = icon === 'lock';

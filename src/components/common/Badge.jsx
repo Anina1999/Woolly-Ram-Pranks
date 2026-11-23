@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { fonts } from '../styles/theme';
+import { fonts } from '../../styles/theme';
 
 export default function Badge({ label, backgroundColor, color, style, labelStyle, children }) {
     return (

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import DifficultyPips from './DifficultyPips';
-import Stepper from './Stepper';
+import Stepper from './common/Stepper';
 
 import getDifficulty from '../utils/getDifficulty';
 import getNextDifficulty from '../utils/getNextDifficulty';

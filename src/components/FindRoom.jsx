@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import FormError from './FormError';
-import GameButton from './GameButton';
-import IconButton from './IconButton';
+import FormError from './common/FormError';
+import GameButton from './common/GameButton';
+import IconButton from './common/IconButton';
 import RoomRow from './RoomRow';
 import SearchIcon from './icons/SearchIcon';
 import SearchTab from './SearchTab';

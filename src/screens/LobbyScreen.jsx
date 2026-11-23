@@ -2,9 +2,9 @@ import { Animated, Pressable, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
 
-import Badge from '../components/Badge';
-import GameButton from '../components/GameButton';
-import IconButton from '../components/IconButton';
+import Badge from '../components/common/Badge';
+import GameButton from '../components/common/GameButton';
+import IconButton from '../components/common/IconButton';
 import LockedModeCard from '../components/LockedModeCard';
 import PlayIcon from '../components/icons/PlayIcon';
 import Ram from '../components/characters/Ram';

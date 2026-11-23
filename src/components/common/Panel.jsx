@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function Panel({ style, children }) {
     return <View style={[styles.panel, style]}>{children}</View>;

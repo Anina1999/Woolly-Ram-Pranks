@@ -3,20 +3,20 @@ import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Constants from 'expo-constants';
 
-import BackHeader from '../components/BackHeader';
+import BackHeader from '../components/common/BackHeader';
 import BellIcon from '../components/icons/BellIcon';
 import ForwardIcon from '../components/icons/ForwardIcon';
 import GlobeIcon from '../components/icons/GlobeIcon';
 import HelpIcon from '../components/icons/HelpIcon';
 import MusicIcon from '../components/icons/MusicIcon';
 import MusicOffIcon from '../components/icons/MusicOffIcon';
-import ScreenPanel from '../components/ScreenPanel';
+import ScreenPanel from '../components/common/ScreenPanel';
 import SettingRow from '../components/SettingRow';
 import SettingsSection from '../components/SettingsSection';
 import ShieldIcon from '../components/icons/ShieldIcon';
 import SoundIcon from '../components/icons/SoundIcon';
 import SoundOffIcon from '../components/icons/SoundOffIcon';
-import ToggleSwitch from '../components/ToggleSwitch';
+import ToggleSwitch from '../components/common/ToggleSwitch';
 import VibrationIcon from '../components/icons/VibrationIcon';
 import VolumeSetting from '../components/VolumeSetting';
 

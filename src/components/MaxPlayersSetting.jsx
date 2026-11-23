@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import Stepper from './Stepper';
+import Stepper from './common/Stepper';
 
 import { colors, fonts } from '../styles/theme';
 

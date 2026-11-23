@@ -1,9 +1,9 @@
 import { Animated } from 'react-native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
-import useSpin from '../hooks/useSpin';
+import useSpin from '../../hooks/useSpin';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function Spinner({ size = 18, color = colors.spinnerArc, trackColor = colors.spinnerTrack }) {
     const rotate = useSpin();

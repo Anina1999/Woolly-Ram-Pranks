@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native';
 
 import FormError from './FormError';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function RefreshError() {
     return (

@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function IconButton({ icon, size, variant, isDisabled, accessibilityLabel, onPress, children }) {
     const isSmall = size === 'small';

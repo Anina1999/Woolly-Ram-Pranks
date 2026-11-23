@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-import BackIcon from './icons/BackIcon';
+import BackIcon from '../icons/BackIcon';
 import IconButton from './IconButton';
 
 export default function BackHeader({ onBack, children }) {

@@ -3,22 +3,22 @@ import { FlatList, Pressable, RefreshControl, ScrollView, StyleSheet, Text, View
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Clipboard from 'expo-clipboard';
 
-import BackHeader from '../components/BackHeader';
+import BackHeader from '../components/common/BackHeader';
 import CheckIcon from '../components/icons/CheckIcon';
 import DifficultySetting from '../components/DifficultySetting';
-import FormError from '../components/FormError';
-import GameButton from '../components/GameButton';
+import FormError from '../components/common/FormError';
+import GameButton from '../components/common/GameButton';
 import GlobeIcon from '../components/icons/GlobeIcon';
 import LeaveRoomPicture from '../components/LeaveRoomPicture';
 import LockIcon from '../components/icons/LockIcon';
 import MaxPlayersSetting from '../components/MaxPlayersSetting';
-import ModalPanel from '../components/ModalPanel';
-import Panel from '../components/Panel';
+import ModalPanel from '../components/common/ModalPanel';
+import Panel from '../components/common/Panel';
 import PlayerRow from '../components/PlayerRow';
 import PlusIcon from '../components/icons/PlusIcon';
 import PrivacySetting from '../components/PrivacySetting';
-import RefreshButton from '../components/RefreshButton';
-import RefreshError from '../components/RefreshError';
+import RefreshButton from '../components/common/RefreshButton';
+import RefreshError from '../components/common/RefreshError';
 import SlotRow from '../components/SlotRow';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
