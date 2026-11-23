@@ -2,21 +2,23 @@ import { Pressable, StyleSheet, View } from 'react-native';
 
 import { colors } from '../styles/theme';
 
-export default function ToggleSwitch({ value, accessibilityLabel, onValueChange }) {
+export default function ToggleSwitch({ value, size, accessibilityLabel, onValueChange }) {
+    const isSmall = size === 'small';
+
     const handlePress = () => {
         onValueChange(!value);
     };
 
     return (
         <Pressable
-            style={[styles.track, value && styles.trackOn]}
+            style={[styles.track, isSmall && styles.trackSmall, value && styles.trackOn]}
             accessibilityRole='switch'
             accessibilityLabel={accessibilityLabel}
             accessibilityState={{ checked: value }}
             hitSlop={10}
             onPress={handlePress}
         >
-            <View style={styles.thumb} />
+            <View style={[styles.thumb, isSmall && styles.thumbSmall]} />
         </Pressable>
     );
 }
@@ -33,6 +35,11 @@ const styles = StyleSheet.create({
         borderColor: colors.switchOffEdge,
         backgroundColor: colors.switchOff,
     },
+    trackSmall: {
+        width: 52,
+        height: 30,
+        borderRadius: 15,
+    },
     trackOn: {
         justifyContent: 'flex-end',
         borderColor: colors.primaryEdge,
@@ -48,5 +55,10 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3,
         elevation: 2,
+    },
+    thumbSmall: {
+        width: 22,
+        height: 22,
+        borderRadius: 11,
     },
 });
