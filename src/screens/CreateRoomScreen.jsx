@@ -16,8 +16,7 @@ import profile from '../data/profile';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
-import { getProfileByUsername } from '../services/profilesService';
-import { createRoom } from '../services/roomsService';
+import { createRoom, getProfileByUsername } from '../services';
 
 import { colors, fonts } from '../styles/theme';
 

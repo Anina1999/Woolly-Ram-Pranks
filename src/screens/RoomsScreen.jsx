@@ -26,8 +26,7 @@ import profile from '../data/profile';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
-import { getProfileByUsername } from '../services/profilesService';
-import { joinRoom, joinRoomByCode } from '../services/roomPlayersService';
+import { getProfileByUsername, joinRoom, joinRoomByCode } from '../services';
 
 import getDifficulty from '../utils/getDifficulty';
 import getJoinErrorText from '../utils/getJoinErrorText';

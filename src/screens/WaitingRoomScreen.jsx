@@ -23,8 +23,7 @@ import SlotRow from '../components/SlotRow';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
-import { updateRoomPlayerReady } from '../services/roomPlayersService';
-import { leaveRoom, updateRoomSettings } from '../services/roomsService';
+import { leaveRoom, updateRoomPlayerReady, updateRoomSettings } from '../services';
 
 import getDifficulty from '../utils/getDifficulty';
 import getPlayerSlots from '../utils/getPlayerSlots';

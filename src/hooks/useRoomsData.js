@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 
 import profile from '../data/profile';
 
-import { getPlayers } from '../services/roomPlayersService';
-import { getRooms } from '../services/roomsService';
+import { getPlayers, getRooms } from '../services';
 
 export default function useRoomsData() {
     const [rooms, setRooms] = useState([]);
