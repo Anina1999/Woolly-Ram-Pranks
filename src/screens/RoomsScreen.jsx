@@ -17,6 +17,7 @@ import RefreshIcon from '../components/RefreshIcon';
 import RoomCard from '../components/RoomCard';
 import RoomCardSkeleton from '../components/RoomCardSkeleton';
 import RoomDetails from '../components/RoomDetails';
+import ScreenPanel from '../components/ScreenPanel';
 import SearchIcon from '../components/SearchIcon';
 import Spinner from '../components/Spinner';
 
@@ -264,82 +265,80 @@ export default function RoomsScreen({ navigation }) {
                     </Pressable>
                 </View>
             )}
-            <View style={styles.panel}>
-                <View style={styles.panelInner}>
-                    <View style={styles.chips}>
-                        <FilterChip
-                            label='All'
-                            selected={selectedFilter === 'all'}
-                            onPress={() => setSelectedFilter('all')}
-                        />
-                        <FilterChip
-                            label='Waiting'
-                            selected={selectedFilter === 'waiting'}
-                            onPress={() => setSelectedFilter('waiting')}
-                        />
-                        <FilterChip
-                            label='Friends'
-                            selected={isFriendsFilter}
-                            onPress={() => setSelectedFilter('friends')}
-                        />
-                        <FilterChip
-                            label='Private'
-                            icon='lock'
-                            selected={isPrivateFilter}
-                            onPress={() => setSelectedFilter('private')}
-                        />
-                    </View>
-                    {isFirstLoad && (
-                        <View style={styles.loading}>
-                            <View style={styles.loadingMessage}>
-                                <Spinner />
-                                <Text style={styles.loadingText}>Rounding up rooms…</Text>
-                            </View>
-                            {SKELETON_OPACITIES.map((opacity) => (
-                                <RoomCardSkeleton key={opacity} opacity={opacity} />
-                            ))}
-                        </View>
-                    )}
-                    {error && (
-                        <View style={styles.error}>
-                            <Ram wool={profile.wool} bandana={profile.bandana} pose='dizzy' size={150} />
-                            <Text style={styles.errorTitle}>Couldn't load rooms</Text>
-                            <Text style={styles.errorText}>
-                                The farm's signal got tangled in a fence. Check your connection.
-                            </Text>
-                            <GameButton title='Try again' style={styles.tryAgain} onPress={reloadData}>
-                                <RefreshIcon />
-                            </GameButton>
-                        </View>
-                    )}
-                    {!isFirstLoad && !error && (
-                        <FlatList
-                            data={shownRooms}
-                            keyExtractor={(room) => room.id}
-                            contentContainerStyle={styles.list}
-                            renderItem={renderRoom}
-                            refreshing={isLoading}
-                            onRefresh={reloadData}
-                            ListHeaderComponent={
-                                shownRooms.length > 0 && <Text style={styles.count}>{countText}</Text>
-                            }
-                            ListEmptyComponent={<EmptyRooms title={emptyTitle} text={shownEmptyText} />}
-                        />
-                    )}
-                    {!error && (
-                        <View style={styles.bottomBar}>
-                            <GameButton
-                                title='Find a room'
-                                variant='accent'
-                                isDisabled={isInRoom}
-                                onPress={handlePressFindRoom}
-                            >
-                                <SearchIcon color={searchIconColor} />
-                            </GameButton>
-                        </View>
-                    )}
+            <ScreenPanel style={styles.panel}>
+                <View style={styles.chips}>
+                    <FilterChip
+                        label='All'
+                        selected={selectedFilter === 'all'}
+                        onPress={() => setSelectedFilter('all')}
+                    />
+                    <FilterChip
+                        label='Waiting'
+                        selected={selectedFilter === 'waiting'}
+                        onPress={() => setSelectedFilter('waiting')}
+                    />
+                    <FilterChip
+                        label='Friends'
+                        selected={isFriendsFilter}
+                        onPress={() => setSelectedFilter('friends')}
+                    />
+                    <FilterChip
+                        label='Private'
+                        icon='lock'
+                        selected={isPrivateFilter}
+                        onPress={() => setSelectedFilter('private')}
+                    />
                 </View>
-            </View>
+                {isFirstLoad && (
+                    <View style={styles.loading}>
+                        <View style={styles.loadingMessage}>
+                            <Spinner />
+                            <Text style={styles.loadingText}>Rounding up rooms…</Text>
+                        </View>
+                        {SKELETON_OPACITIES.map((opacity) => (
+                            <RoomCardSkeleton key={opacity} opacity={opacity} />
+                        ))}
+                    </View>
+                )}
+                {error && (
+                    <View style={styles.error}>
+                        <Ram wool={profile.wool} bandana={profile.bandana} pose='dizzy' size={150} />
+                        <Text style={styles.errorTitle}>Couldn't load rooms</Text>
+                        <Text style={styles.errorText}>
+                            The farm's signal got tangled in a fence. Check your connection.
+                        </Text>
+                        <GameButton title='Try again' style={styles.tryAgain} onPress={reloadData}>
+                            <RefreshIcon />
+                        </GameButton>
+                    </View>
+                )}
+                {!isFirstLoad && !error && (
+                    <FlatList
+                        data={shownRooms}
+                        keyExtractor={(room) => room.id}
+                        contentContainerStyle={styles.list}
+                        renderItem={renderRoom}
+                        refreshing={isLoading}
+                        onRefresh={reloadData}
+                        ListHeaderComponent={
+                            shownRooms.length > 0 && <Text style={styles.count}>{countText}</Text>
+                        }
+                        ListEmptyComponent={<EmptyRooms title={emptyTitle} text={shownEmptyText} />}
+                    />
+                )}
+                {!error && (
+                    <View style={styles.bottomBar}>
+                        <GameButton
+                            title='Find a room'
+                            variant='accent'
+                            isDisabled={isInRoom}
+                            onPress={handlePressFindRoom}
+                        >
+                            <SearchIcon color={searchIconColor} />
+                        </GameButton>
+                    </View>
+                )}
+            </ScreenPanel>
             <ModalPanel visible={isSearchVisible} onClose={handleCloseSearch} style={styles.searchPanel}>
                 <FindRoom
                     rooms={publicRooms}
@@ -475,20 +474,7 @@ const styles = StyleSheet.create({
         color: colors.textOnAccent,
     },
     panel: {
-        flex: 1,
         marginTop: 16,
-        paddingTop: 4,
-        paddingHorizontal: 4,
-        borderTopLeftRadius: 28,
-        borderTopRightRadius: 28,
-        backgroundColor: colors.frame,
-    },
-    panelInner: {
-        flex: 1,
-        overflow: 'hidden',
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
-        backgroundColor: colors.surface,
     },
     chips: {
         flexDirection: 'row',
