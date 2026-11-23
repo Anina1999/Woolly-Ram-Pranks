@@ -11,14 +11,14 @@ import HelpIcon from '../components/icons/HelpIcon';
 import MusicIcon from '../components/icons/MusicIcon';
 import MusicOffIcon from '../components/icons/MusicOffIcon';
 import ScreenPanel from '../components/common/ScreenPanel';
-import SettingRow from '../components/SettingRow';
-import SettingsSection from '../components/SettingsSection';
+import SettingRow from '../components/settings/SettingRow';
+import SettingsSection from '../components/settings/SettingsSection';
 import ShieldIcon from '../components/icons/ShieldIcon';
 import SoundIcon from '../components/icons/SoundIcon';
 import SoundOffIcon from '../components/icons/SoundOffIcon';
 import ToggleSwitch from '../components/common/ToggleSwitch';
 import VibrationIcon from '../components/icons/VibrationIcon';
-import VolumeSetting from '../components/VolumeSetting';
+import VolumeSetting from '../components/settings/VolumeSetting';
 
 import { colors, fonts } from '../styles/theme';
 

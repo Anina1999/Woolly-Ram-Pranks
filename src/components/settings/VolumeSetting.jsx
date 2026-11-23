@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Slider from '@react-native-community/slider';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function VolumeSetting({ icon, mutedIcon, label, value, onChange }) {
     const [lastVolume, setLastVolume] = useState(value);
