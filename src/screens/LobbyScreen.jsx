@@ -5,7 +5,7 @@ import { Feather } from '@expo/vector-icons';
 import Badge from '../components/common/Badge';
 import GameButton from '../components/common/GameButton';
 import IconButton from '../components/common/IconButton';
-import LockedModeCard from '../components/LockedModeCard';
+import LockedModeCard from '../components/lobby/LockedModeCard';
 import PlayIcon from '../components/icons/PlayIcon';
 import Ram from '../components/characters/Ram';
 import RamAvatar from '../components/characters/RamAvatar';

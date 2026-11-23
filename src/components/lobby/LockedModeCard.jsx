@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import Badge from './common/Badge';
-import LockIcon from './icons/LockIcon';
+import Badge from '../common/Badge';
+import LockIcon from '../icons/LockIcon';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function LockedModeCard({ title, description }) {
     return (
