@@ -28,6 +28,7 @@ export default function RootNavigator() {
             <Stack.Screen
                 name='Settings'
                 component={SettingsScreen}
+                options={{ headerShown: false }}
             />
         </Stack.Navigator>
     );
