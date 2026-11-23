@@ -356,5 +356,6 @@
 - [x] Add Music and Sound effects sliders to Settings
 - [x] Add style and icons to Settings
 - [x] Mute and unmute Music and Sound effects with their icon
+- [x] Add style to muted Music and Sound effects
 
 </details>

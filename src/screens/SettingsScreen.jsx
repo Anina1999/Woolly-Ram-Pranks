@@ -9,11 +9,13 @@ import ForwardIcon from '../components/ForwardIcon';
 import GlobeIcon from '../components/GlobeIcon';
 import HelpIcon from '../components/HelpIcon';
 import MusicIcon from '../components/MusicIcon';
+import MusicOffIcon from '../components/MusicOffIcon';
 import ScreenPanel from '../components/ScreenPanel';
 import SettingRow from '../components/SettingRow';
 import SettingsSection from '../components/SettingsSection';
 import ShieldIcon from '../components/ShieldIcon';
 import SoundIcon from '../components/SoundIcon';
+import SoundOffIcon from '../components/SoundOffIcon';
 import ToggleSwitch from '../components/ToggleSwitch';
 import VibrationIcon from '../components/VibrationIcon';
 import VolumeSetting from '../components/VolumeSetting';
@@ -40,6 +42,7 @@ export default function SettingsScreen({ navigation }) {
                     <SettingsSection title='SOUND'>
                         <VolumeSetting
                             icon={<MusicIcon />}
+                            mutedIcon={<MusicOffIcon />}
                             label='Music'
                             value={musicVolume}
                             onChange={setMusicVolume}
@@ -47,6 +50,7 @@ export default function SettingsScreen({ navigation }) {
                         <View style={styles.divider} />
                         <VolumeSetting
                             icon={<SoundIcon />}
+                            mutedIcon={<SoundOffIcon />}
                             label='Sound effects'
                             value={soundEffectsVolume}
                             onChange={setSoundEffectsVolume}
