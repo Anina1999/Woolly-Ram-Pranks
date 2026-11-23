@@ -1,6 +1,6 @@
 export const JOIN_ERROR_TEXTS = {
     ROOM_NOT_FOUND: 'This room is gone. Refresh the list and pick another one.',
-    CODE_NOT_FOUND: 'No room with that code. Check it and try again.',
+    CODE_NOT_FOUND: 'Wrong code. Check with the host and try again.',
     ROOM_PRIVATE: 'This room is private.',
     ROOM_PLAYING: 'This game is already running. You can join when it ends.',
     ROOM_FULL: 'This room is full.',

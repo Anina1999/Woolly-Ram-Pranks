@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
+import * as Clipboard from 'expo-clipboard';
 
 import FormError from '../common/FormError';
 import GameButton from '../common/GameButton';
@@ -11,10 +12,26 @@ import { colors } from '../../styles/theme';
 
 export default function RoomCodeEntry({ codeError, isJoining, onJoin, onClearCodeError }) {
     const [code, setCode] = useState('');
+    const inputRef = useRef(null);
 
     const handleChangeCode = (text) => {
         setCode(formatRoomCode(text));
         onClearCodeError();
+    };
+
+    const handlePressPaste = async () => {
+        try {
+            const text = await Clipboard.getStringAsync();
+
+            if (text === '') {
+                inputRef.current.focus();
+                return;
+            }
+
+            handleChangeCode(text);
+        } catch {
+            inputRef.current.focus();
+        }
     };
 
     return (
@@ -22,12 +39,17 @@ export default function RoomCodeEntry({ codeError, isJoining, onJoin, onClearCod
             <View>
                 <LockIcon size={14} color={colors.privateLock} />
                 <Text>ENTER OR</Text>
-                <Pressable accessibilityRole='button' accessibilityLabel='Paste code from clipboard'>
+                <Pressable
+                    accessibilityRole='button'
+                    accessibilityLabel='Paste code from clipboard'
+                    onPress={handlePressPaste}
+                >
                     <Text>PASTE</Text>
                 </Pressable>
                 <Text>CODE</Text>
             </View>
             <TextInput
+                ref={inputRef}
                 placeholder='ABC-1234'
                 placeholderTextColor={colors.placeholder}
                 accessibilityLabel='Enter or paste room code'

@@ -161,6 +161,7 @@
 - [x] Check on the server that the room can be joined
 - [x] Reload the rooms after the server refuses a join
 - [x] Show a room code field in Room details of a private room
+- [x] Paste the code and join a private room from Room details
 
 </details>
 

@@ -187,7 +187,7 @@ export default function RoomsScreen({ navigation }) {
         }
     };
 
-    const handleJoinByCode = async (code) => {
+    const handleJoinByCode = async (code, roomId) => {
         if (isJoining) {
             return;
         }
@@ -197,10 +197,11 @@ export default function RoomsScreen({ navigation }) {
 
         try {
             const player = await getProfileByUsername(profile.name);
-            const roomId = await joinRoomByCode(code, player.id);
+            const joinedRoomId = await joinRoomByCode(code, player.id, roomId);
             await reloadData();
             setIsSearchVisible(false);
-            navigation.navigate('WaitingRoom', { roomId: roomId });
+            setDetailsRoom(null);
+            navigation.navigate('WaitingRoom', { roomId: joinedRoomId });
         } catch (requestError) {
             setCodeError(getJoinErrorText(requestError));
         } finally {
