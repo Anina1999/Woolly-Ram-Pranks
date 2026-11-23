@@ -52,6 +52,7 @@ export const colors = {
     privateSurface: '#F1EAF9',
     privateSurfacePressed: '#E2D6F0',
     privateBorder: '#A684CF',
+    codeDivider: '#EADBBD',
     openSlotBorder: '#C9B48A',
     openSlotCircle: '#F3E4C3',
     closedSlotSurface: '#EDE4D2',
@@ -127,6 +128,7 @@ export const colors = {
     searchIcon: '#5E3A1E',
     privateIcon: '#5E3A1E',
     privateLock: '#6B4A9A',
+    pasteText: '#5A3B86',
 
     shadow: '#0A140C',
     sky: '#8FCDEE',

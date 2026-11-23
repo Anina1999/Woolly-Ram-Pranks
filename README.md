@@ -162,6 +162,7 @@
 - [x] Reload the rooms after the server refuses a join
 - [x] Show a room code field in Room details of a private room
 - [x] Paste the code and join a private room from Room details
+- [x] Add style to the room code field in Room details
 
 </details>
 
