@@ -120,7 +120,7 @@ create policy "Temporary: anon can update a room"
         and (select count(*) from room_players where room_players.room_id = rooms.id) <= rooms.max_players
     );
 
--- Joins a room by id (public rooms) or by code (any room) and returns the room id.
+-- Joins a room by id (public rooms) or by code (any room; with p_room_id the code must be that room's) and returns the room id.
 -- Temporary: p_profile_id comes from the app until auth, then it becomes auth.uid().
 create function join_room(p_profile_id uuid, p_room_id uuid default null, p_code text default null)
 returns uuid
@@ -135,7 +135,9 @@ begin
     if p_code is null then
         select * into target_room from public.rooms where id = p_room_id for update;
     else
-        select * into target_room from public.rooms where code = p_code for update;
+        select * into target_room from public.rooms
+        where code = p_code and (p_room_id is null or id = p_room_id)
+        for update;
     end if;
 
     if not found then
