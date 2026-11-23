@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import DifficultyPips from './DifficultyPips';
+import DifficultyPips from './rooms/DifficultyPips';
 import Stepper from './common/Stepper';
 
 import getDifficulty from '../utils/getDifficulty';

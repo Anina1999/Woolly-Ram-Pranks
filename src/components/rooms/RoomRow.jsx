@@ -1,13 +1,13 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import Badge from './common/Badge';
-import DetailsCornerButton from './common/DetailsCornerButton';
-import RamAvatar from './characters/RamAvatar';
+import Badge from '../common/Badge';
+import DetailsCornerButton from '../common/DetailsCornerButton';
+import RamAvatar from '../characters/RamAvatar';
 
-import getDifficulty from '../utils/getDifficulty';
-import getStatusColors from '../utils/getStatusColors';
+import getDifficulty from '../../utils/getDifficulty';
+import getStatusColors from '../../utils/getStatusColors';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function RoomRow({ room, playerCount, isMyRoom, onPress, onPressDetails }) {
     const badgeLabel = isMyRoom ? "YOU'RE IN" : room.status;

@@ -1,17 +1,17 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import Badge from './common/Badge';
-import DetailsCornerButton from './common/DetailsCornerButton';
+import Badge from '../common/Badge';
+import DetailsCornerButton from '../common/DetailsCornerButton';
 import DifficultyPips from './DifficultyPips';
-import LockIcon from './icons/LockIcon';
-import PlayersIcon from './icons/PlayersIcon';
-import RamAvatar from './characters/RamAvatar';
-import Spinner from './common/Spinner';
+import LockIcon from '../icons/LockIcon';
+import PlayersIcon from '../icons/PlayersIcon';
+import RamAvatar from '../characters/RamAvatar';
+import Spinner from '../common/Spinner';
 
-import getDifficulty from '../utils/getDifficulty';
-import getStatusColors from '../utils/getStatusColors';
+import getDifficulty from '../../utils/getDifficulty';
+import getStatusColors from '../../utils/getStatusColors';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function RoomCard({ room, playerCount, isMyRoom, isFriend, isJoining, onPress, onPressDetails }) {
     const isPlaying = room.status === 'PLAYING';

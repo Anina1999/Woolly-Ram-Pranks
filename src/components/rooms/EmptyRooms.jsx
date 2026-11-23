@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import Dog from './characters/Dog';
+import Dog from '../characters/Dog';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function EmptyRooms({ title, text }) {
     return (

@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function SearchTab({ label, selected, onPress }) {
     return (

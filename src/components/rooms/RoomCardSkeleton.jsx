@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 export default function RoomCardSkeleton({ opacity }) {
     return (

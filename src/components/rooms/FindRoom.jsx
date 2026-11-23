@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import FormError from './common/FormError';
-import GameButton from './common/GameButton';
-import IconButton from './common/IconButton';
+import FormError from '../common/FormError';
+import GameButton from '../common/GameButton';
+import IconButton from '../common/IconButton';
 import RoomRow from './RoomRow';
-import SearchIcon from './icons/SearchIcon';
+import SearchIcon from '../icons/SearchIcon';
 import SearchTab from './SearchTab';
 
-import formatRoomCode, { ROOM_CODE_LENGTH } from '../utils/formatRoomCode';
-import getRoomPlayers from '../utils/getRoomPlayers';
+import formatRoomCode, { ROOM_CODE_LENGTH } from '../../utils/formatRoomCode';
+import getRoomPlayers from '../../utils/getRoomPlayers';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function FindRoom({
     rooms,

@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 
-import getDifficulty from '../utils/getDifficulty';
+import getDifficulty from '../../utils/getDifficulty';
 
-import { colors } from '../styles/theme';
+import { colors } from '../../styles/theme';
 
 const PIPS = 5;
 

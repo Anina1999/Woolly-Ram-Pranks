@@ -1,18 +1,18 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 
-import Badge from './common/Badge';
-import CrownIcon from './icons/CrownIcon';
-import GameButton from './common/GameButton';
-import IconButton from './common/IconButton';
-import RamAvatar from './characters/RamAvatar';
+import Badge from '../common/Badge';
+import CrownIcon from '../icons/CrownIcon';
+import GameButton from '../common/GameButton';
+import IconButton from '../common/IconButton';
+import RamAvatar from '../characters/RamAvatar';
 
-import getDifficulty from '../utils/getDifficulty';
-import { JOIN_ERROR_TEXTS } from '../utils/getJoinErrorText';
-import getPlayerSlots from '../utils/getPlayerSlots';
-import getRoomPlayers from '../utils/getRoomPlayers';
-import getStatusColors from '../utils/getStatusColors';
+import getDifficulty from '../../utils/getDifficulty';
+import { JOIN_ERROR_TEXTS } from '../../utils/getJoinErrorText';
+import getPlayerSlots from '../../utils/getPlayerSlots';
+import getRoomPlayers from '../../utils/getRoomPlayers';
+import getStatusColors from '../../utils/getStatusColors';
 
-import { colors, fonts } from '../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
 export default function RoomDetails({ room, players, isMyRoom, isJoining, onClose, onPressGoToMyRoom, onPressJoin }) {
     const roomPlayers = getRoomPlayers(players, room.id);
