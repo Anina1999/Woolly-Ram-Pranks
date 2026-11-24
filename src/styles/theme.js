@@ -10,6 +10,7 @@ export const colors = {
     dangerButton: '#C2412D',
     dangerButtonEdge: '#7E2416',
     readyBorder: '#A8E0B6',
+    readyButtonEdge: '#163D13',
     disabledButton: '#CFC4AF',
     disabledButtonEdge: '#B3A78F',
 

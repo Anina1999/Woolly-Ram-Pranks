@@ -333,6 +333,7 @@
 - [x] Save Ready on the server
 - [x] Show only the connection error in the Waiting room when offline
 - [x] Show I’m ready or Ready! on the guest button with the ReadyButton component
+- [x] Add style to the ReadyButton
 
 </details>
 
