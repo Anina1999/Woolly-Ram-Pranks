@@ -316,6 +316,7 @@
 <summary>Steps to add the room chat</summary>
 
 - [x] Add the Room chat with a Coming soon note
+- [x] Add style and icons to the Room chat
 
 </details>
 

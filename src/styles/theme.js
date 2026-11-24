@@ -86,6 +86,7 @@ export const colors = {
     privateBadge: '#FCEFD2',
     privateBadgeBorder: '#C98A12',
     privateBadgeIcon: '#7A5300',
+    chatOverlay: 'rgba(251, 243, 226, 0.86)',
     copyButton: '#FBF3E2',
     privacyIcon: '#8F836C',
     privacyKnob: '#F2B33D',

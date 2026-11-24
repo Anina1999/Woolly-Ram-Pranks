@@ -294,7 +294,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         scrollEnabled={false}
                     />
                 </Panel>
-                <RoomChat />
+                <RoomChat style={[styles.panel, styles.chat]} />
                 <View style={styles.footer}>
                     <View style={styles.buttons}>
                         <GameButton
@@ -491,6 +491,11 @@ const styles = StyleSheet.create({
     },
     slots: {
         gap: 6,
+    },
+    chat: {
+        flex: 1,
+        minHeight: 150,
+        marginTop: 12,
     },
     divider: {
         height: 2,
