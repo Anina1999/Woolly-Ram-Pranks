@@ -294,6 +294,7 @@
 - [x] Disable the room settings while they are saved
 - [x] Move the room settings into a Room settings window opened with the gear button
 - [x] Save the room settings only after Done
+- [x] Add style to the Room settings window
 
 </details>
 

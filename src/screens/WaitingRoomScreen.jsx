@@ -318,9 +318,9 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     <Text style={styles.status}>{status}</Text>
                 </View>
             </ScrollView>
-            <ModalPanel visible={isSettingsVisible} onClose={handleCloseSettings}>
+            <ModalPanel visible={isSettingsVisible} variant='sheet' onClose={handleCloseSettings}>
                 <View style={styles.settingsHeader}>
-                    <Text style={styles.dialogTitle}>Room settings</Text>
+                    <Text style={styles.settingsTitle}>Room settings</Text>
                     <IconButton icon='x' size='small' accessibilityLabel='Close settings' onPress={handleCloseSettings} />
                 </View>
                 {settingsDraft && (
@@ -350,7 +350,6 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     title='Done'
                     isLoading={isSaving}
                     loadingTitle='Saving…'
-                    style={styles.doneButton}
                     onPress={handlePressDone}
                 />
             </ModalPanel>
@@ -537,12 +536,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        alignSelf: 'stretch',
+        gap: 10,
+    },
+    settingsTitle: {
+        paddingLeft: 4,
+        fontFamily: fonts.display,
+        fontSize: 24,
+        lineHeight: 28,
+        color: colors.text,
     },
     settingsCard: {
-        alignSelf: 'stretch',
-    },
-    doneButton: {
-        alignSelf: 'stretch',
+        gap: 8,
+        paddingVertical: 10,
+        paddingHorizontal: 12,
+        borderRadius: 18,
+        borderWidth: 2,
+        borderColor: colors.rowBorder,
+        backgroundColor: colors.card,
     },
 });
