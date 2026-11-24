@@ -42,6 +42,8 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const [isLeaving, setIsLeaving] = useState(false);
     const [leaveError, setLeaveError] = useState('');
     const [isCopied, setIsCopied] = useState(false);
+    const [isSettingsVisible, setIsSettingsVisible] = useState(false);
+    const [settingsDraft, setSettingsDraft] = useState(null);
     const [isSaving, setIsSaving] = useState(false);
     const [settingsError, setSettingsError] = useState('');
     const [isSavingReady, setIsSavingReady] = useState(false);
@@ -52,8 +54,22 @@ export default function WaitingRoomScreen({ route, navigation }) {
     const me = roomPlayers.find((player) => player.you);
     const isHost = me?.host;
 
-    const handleChangeSettings = async (changes) => {
+    const handleChangeDraft = (changes) => {
+        setSettingsDraft({ ...settingsDraft, ...changes });
+    };
+
+    const handlePressDone = async () => {
         if (isSaving) {
+            return;
+        }
+
+        const hasChanges =
+            settingsDraft.isPrivate !== room.isPrivate ||
+            settingsDraft.maxPlayers !== room.maxPlayers ||
+            settingsDraft.difficulty !== room.difficulty;
+
+        if (!hasChanges) {
+            setIsSettingsVisible(false);
             return;
         }
 
@@ -61,15 +77,13 @@ export default function WaitingRoomScreen({ route, navigation }) {
         setSettingsError('');
 
         try {
-            await updateRoomSettings(roomId, {
-                isPrivate: room.isPrivate,
-                maxPlayers: room.maxPlayers,
-                difficulty: room.difficulty,
-                ...changes,
-            });
+            await updateRoomSettings(roomId, settingsDraft);
+            setIsSettingsVisible(false);
         } catch (saveError) {
             if (saveError.code) {
                 setSettingsError("Couldn't save the settings. Try again.");
+            } else {
+                setIsSettingsVisible(false);
             }
         } finally {
             await reloadData();
@@ -85,6 +99,24 @@ export default function WaitingRoomScreen({ route, navigation }) {
 
     const handlePressBack = () => {
         navigation.popTo('App', { screen: 'Rooms' });
+    };
+
+    const handlePressSettings = () => {
+        setSettingsDraft({
+            isPrivate: room.isPrivate,
+            maxPlayers: room.maxPlayers,
+            difficulty: room.difficulty,
+        });
+        setSettingsError('');
+        setIsSettingsVisible(true);
+    };
+
+    const handleCloseSettings = () => {
+        if (isSaving) {
+            return;
+        }
+
+        setIsSettingsVisible(false);
     };
 
     const handlePressLeave = () => {
@@ -243,7 +275,14 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         </View>
                         <View style={styles.playersActions}>
                             <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
-                            {isHost && <IconButton icon='settings' size='small' accessibilityLabel='Room settings' />}
+                            {isHost && (
+                                <IconButton
+                                    icon='settings'
+                                    size='small'
+                                    accessibilityLabel='Room settings'
+                                    onPress={handlePressSettings}
+                                />
+                            )}
                         </View>
                     </View>
                     <FlatList
@@ -254,43 +293,6 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         scrollEnabled={false}
                     />
                 </Panel>
-                {isHost ? (
-                    <Panel style={[styles.panel, styles.hostPanel]}>
-                        <PrivacySetting
-                            isPrivate={room.isPrivate}
-                            isDisabled={isSaving}
-                            onChange={(value) => handleChangeSettings({ isPrivate: value })}
-                        />
-                        <View style={styles.divider} />
-                        <MaxPlayersSetting
-                            maxPlayers={room.maxPlayers}
-                            playerCount={roomPlayers.length}
-                            isDisabled={isSaving}
-                            onChange={(value) => handleChangeSettings({ maxPlayers: value })}
-                        />
-                        <View style={styles.divider} />
-                        <DifficultySetting
-                            difficulty={room.difficulty}
-                            isDisabled={isSaving}
-                            onChange={(value) => handleChangeSettings({ difficulty: value })}
-                        />
-                        {settingsError !== '' && !error && <FormError message={settingsError} />}
-                    </Panel>
-                ) : (
-                    <Panel style={[styles.panel, styles.guestPanel]}>
-                        <View style={styles.guestRow}>
-                            <Text style={styles.guestLabel}>Max players</Text>
-                            <Text style={styles.guestValue}>{room.maxPlayers}</Text>
-                        </View>
-                        <View style={styles.divider} />
-                        <View style={styles.guestRow}>
-                            <Text style={styles.guestLabel}>Difficulty</Text>
-                            <Text style={[styles.guestValue, styles.guestDifficulty, { color: difficultyInfo.text }]}>
-                                {difficultyInfo.name}
-                            </Text>
-                        </View>
-                    </Panel>
-                )}
                 <View style={styles.footer}>
                     <View style={styles.buttons}>
                         <GameButton
@@ -316,6 +318,42 @@ export default function WaitingRoomScreen({ route, navigation }) {
                     <Text style={styles.status}>{status}</Text>
                 </View>
             </ScrollView>
+            <ModalPanel visible={isSettingsVisible} onClose={handleCloseSettings}>
+                <View style={styles.settingsHeader}>
+                    <Text style={styles.dialogTitle}>Room settings</Text>
+                    <IconButton icon='x' size='small' accessibilityLabel='Close settings' onPress={handleCloseSettings} />
+                </View>
+                {settingsDraft && (
+                    <View style={styles.settingsCard}>
+                        <PrivacySetting
+                            isPrivate={settingsDraft.isPrivate}
+                            isDisabled={isSaving}
+                            onChange={(value) => handleChangeDraft({ isPrivate: value })}
+                        />
+                        <View style={styles.divider} />
+                        <MaxPlayersSetting
+                            maxPlayers={settingsDraft.maxPlayers}
+                            playerCount={roomPlayers.length}
+                            isDisabled={isSaving}
+                            onChange={(value) => handleChangeDraft({ maxPlayers: value })}
+                        />
+                        <View style={styles.divider} />
+                        <DifficultySetting
+                            difficulty={settingsDraft.difficulty}
+                            isDisabled={isSaving}
+                            onChange={(value) => handleChangeDraft({ difficulty: value })}
+                        />
+                    </View>
+                )}
+                {settingsError !== '' && !error && <FormError message={settingsError} />}
+                <GameButton
+                    title='Done'
+                    isLoading={isSaving}
+                    loadingTitle='Saving…'
+                    style={styles.doneButton}
+                    onPress={handlePressDone}
+                />
+            </ModalPanel>
             <ModalPanel visible={isLeaveModalVisible} onClose={handleCloseLeaveModal}>
                 {me && <LeaveRoomPicture wool={me.wool} bandana={me.bandana} />}
                 <Text style={styles.dialogTitle}>{leaveTitle}</Text>
@@ -453,36 +491,6 @@ const styles = StyleSheet.create({
     slots: {
         gap: 6,
     },
-    hostPanel: {
-        gap: 8,
-        marginTop: 12,
-        paddingVertical: 10,
-        paddingHorizontal: 12,
-    },
-    guestPanel: {
-        marginTop: 56,
-        paddingVertical: 4,
-        paddingHorizontal: 16,
-    },
-    guestRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: 44,
-    },
-    guestLabel: {
-        fontFamily: fonts.extraBold,
-        fontSize: 15,
-        color: colors.text,
-    },
-    guestValue: {
-        fontFamily: fonts.display,
-        fontSize: 20,
-        color: colors.text,
-    },
-    guestDifficulty: {
-        fontSize: 18,
-    },
     divider: {
         height: 2,
         backgroundColor: colors.divider,
@@ -524,5 +532,17 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         gap: 10,
         marginTop: 6,
+    },
+    settingsHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        alignSelf: 'stretch',
+    },
+    settingsCard: {
+        alignSelf: 'stretch',
+    },
+    doneButton: {
+        alignSelf: 'stretch',
     },
 });
