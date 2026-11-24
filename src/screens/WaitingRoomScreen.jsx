@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Clipboard from 'expo-clipboard';
 
 import BackHeader from '../components/common/BackHeader';
-import CheckIcon from '../components/icons/CheckIcon';
 import DifficultySetting from '../components/room-settings/DifficultySetting';
 import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
@@ -18,6 +17,7 @@ import Panel from '../components/common/Panel';
 import PlayerRow from '../components/waiting-room/PlayerRow';
 import PlusIcon from '../components/icons/PlusIcon';
 import PrivacySetting from '../components/room-settings/PrivacySetting';
+import ReadyButton from '../components/waiting-room/ReadyButton';
 import RefreshButton from '../components/common/RefreshButton';
 import RefreshError from '../components/common/RefreshError';
 import RoomChat from '../components/waiting-room/RoomChat';
@@ -306,14 +306,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         {isHost ? (
                             <GameButton title='Start game' isDisabled={!canStart} style={styles.mainButton} />
                         ) : (
-                            <GameButton
-                                title='Ready!'
-                                variant='ready'
-                                style={styles.mainButton}
-                                onPress={handlePressReady}
-                            >
-                                <CheckIcon />
-                            </GameButton>
+                            <ReadyButton isReady={me?.ready} style={styles.mainButton} onPress={handlePressReady} />
                         )}
                     </View>
                     {readyError !== '' && !error && <FormError message={readyError} />}

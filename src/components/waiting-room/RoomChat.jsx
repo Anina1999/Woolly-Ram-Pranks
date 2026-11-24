@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.primary,
     },
     overlay: {
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
         justifyContent: 'center',
         alignItems: 'center',
         gap: 8,

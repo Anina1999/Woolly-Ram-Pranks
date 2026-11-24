@@ -332,6 +332,7 @@
 - [x] Disable Start game until everyone is ready
 - [x] Save Ready on the server
 - [x] Show only the connection error in the Waiting room when offline
+- [x] Show I’m ready or Ready! on the guest button with the ReadyButton component
 
 </details>
 

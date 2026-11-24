@@ -18,7 +18,6 @@ export default function GameButton({
     const isLarge = size === 'large';
     const isSecondary = variant === 'secondary';
     const isDanger = variant === 'danger';
-    const isReady = variant === 'ready';
     const isAccent = variant === 'accent';
 
     let spinnerColor = colors.textOnPrimary;
@@ -53,7 +52,6 @@ export default function GameButton({
                     isLarge && styles.faceLarge,
                     isSecondary && styles.faceSecondary,
                     isDanger && styles.faceDanger,
-                    isReady && styles.faceReady,
                     isAccent && styles.faceAccent,
                     isDisabled && styles.faceDisabled,
                 ]}
@@ -121,11 +119,6 @@ const styles = StyleSheet.create({
     },
     faceDanger: {
         backgroundColor: colors.dangerButton,
-    },
-    faceReady: {
-        borderWidth: 3,
-        borderColor: colors.readyBorder,
-        backgroundColor: colors.success,
     },
     faceAccent: {
         gap: 10,
