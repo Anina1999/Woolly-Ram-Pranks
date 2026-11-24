@@ -221,13 +221,23 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         <View style={styles.playersTitleRow}>
                             <Text style={styles.playersTitle}>Players</Text>
                             {!room.isPrivate && (
-                                <View accessible accessibilityRole='image' accessibilityLabel='Public room, listed in Rooms'>
-                                    <GlobeIcon color={colors.text} />
+                                <View
+                                    style={[styles.roomBadge, styles.publicBadge]}
+                                    accessible
+                                    accessibilityRole='image'
+                                    accessibilityLabel='Public room, listed in Rooms'
+                                >
+                                    <GlobeIcon size={16} color={colors.publicBadgeIcon} />
                                 </View>
                             )}
                             {room.isPrivate && !isHost && (
-                                <View accessible accessibilityRole='image' accessibilityLabel='Private room, join by code'>
-                                    <LockIcon color={colors.text} />
+                                <View
+                                    style={[styles.roomBadge, styles.privateBadge]}
+                                    accessible
+                                    accessibilityRole='image'
+                                    accessibilityLabel='Private room, join by code'
+                                >
+                                    <LockIcon size={14} color={colors.privateBadgeIcon} />
                                 </View>
                             )}
                         </View>
@@ -377,7 +387,7 @@ const styles = StyleSheet.create({
     roomCode: {
         fontFamily: fonts.display,
         fontSize: 18,
-        letterSpacing: 2,
+        letterSpacing: 1,
         color: colors.roomCode,
     },
     copyButton: {
@@ -413,6 +423,22 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 8,
+    },
+    roomBadge: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 26,
+        height: 26,
+        borderRadius: 999,
+        borderWidth: 2,
+    },
+    publicBadge: {
+        borderColor: colors.publicBadgeBorder,
+        backgroundColor: colors.publicBadge,
+    },
+    privateBadge: {
+        borderColor: colors.privateBadgeBorder,
+        backgroundColor: colors.privateBadge,
     },
     playersTitle: {
         fontFamily: fonts.display,

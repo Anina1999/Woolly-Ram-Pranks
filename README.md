@@ -276,6 +276,7 @@
 - [x] Add style to the private room code bar
 - [x] Show a Public bar in public rooms
 - [x] Show the code bar only to the host and add the room type badge and the settings button to Players
+- [x] Add style to the room type badge and make the player rows lower
 
 </details>
 
