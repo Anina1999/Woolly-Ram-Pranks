@@ -80,7 +80,6 @@ export const colors = {
     codeBar: 'rgba(24, 36, 27, 0.78)',
     codeBarBorder: 'rgba(255, 255, 255, 0.2)',
     codeBarLock: '#F2B33D',
-    codeBarGlobe: '#A8E0B6',
     copyButton: '#FBF3E2',
     privacyIcon: '#8F836C',
     privacyKnob: '#F2B33D',

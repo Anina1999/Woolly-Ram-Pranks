@@ -275,6 +275,7 @@
 - [x] Show the code of a private room with a Copy button
 - [x] Add style to the private room code bar
 - [x] Show a Public bar in public rooms
+- [x] Show the code bar only to the host and add the room type badge and the settings button to Players
 
 </details>
 

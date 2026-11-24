@@ -9,6 +9,7 @@ import DifficultySetting from '../components/room-settings/DifficultySetting';
 import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
 import GlobeIcon from '../components/icons/GlobeIcon';
+import IconButton from '../components/common/IconButton';
 import LeaveRoomPicture from '../components/waiting-room/LeaveRoomPicture';
 import LockIcon from '../components/icons/LockIcon';
 import MaxPlayersSetting from '../components/room-settings/MaxPlayersSetting';
@@ -189,7 +190,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
                     <Text style={styles.subtitle}>
-                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players ·{difficultyInfo.name}
+                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players · {difficultyInfo.name}
                     </Text>
                 </View>
                 <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh room' onPress={handleRefresh} />
@@ -199,33 +200,41 @@ export default function WaitingRoomScreen({ route, navigation }) {
                 refreshControl={<RefreshControl refreshing={isLoading} onRefresh={handleRefresh} />}
             >
                 {error && <RefreshError />}
-                <View style={styles.codeBar}>
-                    {room.isPrivate ? (
-                        <>
-                            <LockIcon color={colors.codeBarLock} />
-                            <Text style={styles.codeText}>
-                                Private · code <Text style={styles.roomCode}>{room.code}</Text>
-                            </Text>
-                            <Pressable
-                                style={styles.copyButton}
-                                accessibilityRole='button'
-                                accessibilityLabel='Copy room code'
-                                onPress={handlePressCopy}
-                            >
-                                <Text style={styles.copyText}>{isCopied ? 'Copied' : 'Copy'}</Text>
-                            </Pressable>
-                        </>
-                    ) : (
-                        <>
-                            <GlobeIcon color={colors.codeBarGlobe} />
-                            <Text style={styles.codeText}>Public · listed in Rooms</Text>
-                        </>
-                    )}
-                </View>
+                {room.isPrivate && isHost && (
+                    <View style={styles.codeBar}>
+                        <LockIcon color={colors.codeBarLock} />
+                        <Text style={styles.codeText}>
+                            Private · code <Text style={styles.roomCode}>{room.code}</Text>
+                        </Text>
+                        <Pressable
+                            style={styles.copyButton}
+                            accessibilityRole='button'
+                            accessibilityLabel='Copy room code'
+                            onPress={handlePressCopy}
+                        >
+                            <Text style={styles.copyText}>{isCopied ? 'Copied' : 'Copy'}</Text>
+                        </Pressable>
+                    </View>
+                )}
                 <Panel style={[styles.panel, styles.playersPanel]}>
                     <View style={styles.playersHeader}>
-                        <Text style={styles.playersTitle}>Players</Text>
-                        <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
+                        <View style={styles.playersTitleRow}>
+                            <Text style={styles.playersTitle}>Players</Text>
+                            {!room.isPrivate && (
+                                <View accessible accessibilityRole='image' accessibilityLabel='Public room, listed in Rooms'>
+                                    <GlobeIcon color={colors.text} />
+                                </View>
+                            )}
+                            {room.isPrivate && !isHost && (
+                                <View accessible accessibilityRole='image' accessibilityLabel='Private room, join by code'>
+                                    <LockIcon color={colors.text} />
+                                </View>
+                            )}
+                        </View>
+                        <View style={styles.playersActions}>
+                            <Text style={styles.playersReady}>{readyCount} of {roomPlayers.length} ready</Text>
+                            {isHost && <IconButton icon='settings' size='small' accessibilityLabel='Room settings' />}
+                        </View>
                     </View>
                     <FlatList
                         data={slots}
@@ -349,7 +358,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
-        minHeight: 56,
         marginTop: 12,
         marginHorizontal: 16,
         paddingVertical: 6,
@@ -395,6 +403,16 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         paddingHorizontal: 4,
         paddingBottom: 2,
+    },
+    playersTitleRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+    playersActions: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
     },
     playersTitle: {
         fontFamily: fonts.display,
