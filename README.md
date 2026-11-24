@@ -334,6 +334,7 @@
 - [x] Show only the connection error in the Waiting room when offline
 - [x] Show I’m ready or Ready! on the guest button with the ReadyButton component
 - [x] Add style to the ReadyButton
+- [x] Ask the guest to tap I’m ready in the room status
 
 </details>
 

@@ -1,4 +1,8 @@
-export default function getRoomStatus(players, host, isHost, hasEnoughPlayers) {
+export default function getRoomStatus(players, host, isHost, isReady, hasEnoughPlayers) {
+    if (!isHost && !isReady) {
+        return 'Tap “I’m ready” when you’re set.';
+    }
+
     if (!hasEnoughPlayers) {
         return 'Invite at least one friend to start.';
     }
