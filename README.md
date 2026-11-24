@@ -313,6 +313,13 @@
 </details>
 
 <details>
+<summary>Steps to add the room chat</summary>
+
+- [x] Add the Room chat with a Coming soon note
+
+</details>
+
+<details>
 <summary>Steps to add Ready and Start game</summary>
 
 - [x] Add Leave room, Ready and Start game buttons

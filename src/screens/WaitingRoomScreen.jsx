@@ -20,6 +20,7 @@ import PlusIcon from '../components/icons/PlusIcon';
 import PrivacySetting from '../components/room-settings/PrivacySetting';
 import RefreshButton from '../components/common/RefreshButton';
 import RefreshError from '../components/common/RefreshError';
+import RoomChat from '../components/waiting-room/RoomChat';
 import SlotRow from '../components/waiting-room/SlotRow';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
@@ -293,6 +294,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
                         scrollEnabled={false}
                     />
                 </Panel>
+                <RoomChat />
                 <View style={styles.footer}>
                     <View style={styles.buttons}>
                         <GameButton
