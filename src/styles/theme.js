@@ -94,6 +94,8 @@ export const colors = {
     privacyKnobEdge: '#8A5A34',
     privacyKnobLock: '#2E2117',
     privacyKnobGlobe: '#FFFFFF',
+    avatarRing: '#5E3A1E',
+    cameraBadgeBorder: '#5E3A1E',
     errorSurface: '#FFF4F1',
     errorBorder: '#C8352B',
     myRoomBar: 'rgba(24, 36, 27, 0.9)',
@@ -138,6 +140,7 @@ export const colors = {
     pasteText: '#5A3B86',
 
     shadow: '#0A140C',
+    avatarShadow: '#2E2117',
     sky: '#8FCDEE',
     grass: '#8CC152',
     dryGrass: '#A9C95B',

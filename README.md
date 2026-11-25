@@ -381,3 +381,13 @@
 - [x] Add style to muted Music and Sound effects
 
 </details>
+
+### Profile
+
+<details>
+<summary>Steps to add the Profile screen</summary>
+
+- [x] Show the ram, name, email and stats in Profile
+- [x] Add style to the Profile avatar and name
+
+</details>
