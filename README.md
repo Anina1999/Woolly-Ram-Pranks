@@ -415,5 +415,6 @@
 <summary>Steps to style the Leaderboard</summary>
 
 - [x] Add style to the Leaderboard header and tabs
+- [x] Add style to the podium
 
 </details>

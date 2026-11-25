@@ -26,7 +26,7 @@ export default function LeaderboardScreen() {
                 <SegmentTab label='Best time' variant='dark' selected={true} />
                 <SegmentTab label='Most wins' variant='dark' selected={false} />
             </View>
-            <View>
+            <View style={styles.podium}>
                 <PodiumPlace player={second} place={2} value={formatTime(second.bestTimeSeconds)} />
                 <PodiumPlace player={first} place={1} value={formatTime(first.bestTimeSeconds)} />
                 <PodiumPlace player={third} place={3} value={formatTime(third.bestTimeSeconds)} />
@@ -87,5 +87,13 @@ const styles = StyleSheet.create({
         padding: 4,
         borderRadius: 16,
         backgroundColor: colors.surfaceDark,
+    },
+    podium: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'flex-end',
+        height: 210,
+        marginTop: 22,
+        marginHorizontal: 16,
     },
 });
