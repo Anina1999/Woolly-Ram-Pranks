@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -21,10 +21,19 @@ import getBandanaName from '../utils/getBandanaName';
 
 import { colors, fonts } from '../styles/theme';
 
+const PHOTO_OPTIONS = {
+    mediaTypes: ['images'],
+    allowsEditing: true,
+    aspect: [1, 1],
+    quality: 0.5,
+};
+
 export default function ProfileScreen({ navigation }) {
     const [isPhotoSheetVisible, setIsPhotoSheetVisible] = useState(false);
     const [photoUri, setPhotoUri] = useState(null);
     const [photoError, setPhotoError] = useState('');
+    const [canOpenSettings, setCanOpenSettings] = useState(false);
+    const [isCameraInfoVisible, setIsCameraInfoVisible] = useState(false);
 
     const winRate = profile.gamesPlayed > 0 ? Math.round((profile.wins / profile.gamesPlayed) * 100) : 0;
 
@@ -34,29 +43,92 @@ export default function ProfileScreen({ navigation }) {
 
     const handleClosePhotoSheet = () => {
         setIsPhotoSheetVisible(false);
+        setIsCameraInfoVisible(false);
         setPhotoError('');
+        setCanOpenSettings(false);
+    };
+
+    const savePickedPhoto = (result) => {
+        if (result.canceled) {
+            return;
+        }
+
+        setPhotoUri(result.assets[0].uri);
+        setIsPhotoSheetVisible(false);
+    };
+
+    const showCameraDenied = (canAskAgain) => {
+        if (canAskAgain) {
+            setPhotoError('Camera access was denied. Tap Take a photo to try again.');
+        } else {
+            setPhotoError('Camera access is off. Allow it in your phone settings to take a photo.');
+        }
+
+        setCanOpenSettings(!canAskAgain);
+    };
+
+    const askForCameraAndOpen = async () => {
+        try {
+            const permission = await ImagePicker.requestCameraPermissionsAsync();
+
+            if (!permission.granted) {
+                showCameraDenied(permission.canAskAgain);
+                return;
+            }
+
+            const result = await ImagePicker.launchCameraAsync(PHOTO_OPTIONS);
+            savePickedPhoto(result);
+        } catch {
+            setPhotoError("Couldn't open the camera. Try again.");
+        }
+    };
+
+    const handlePressTakePhoto = async () => {
+        setPhotoError('');
+        setCanOpenSettings(false);
+
+        try {
+            const permission = await ImagePicker.getCameraPermissionsAsync();
+
+            if (!permission.granted && !permission.canAskAgain) {
+                showCameraDenied(false);
+                return;
+            }
+
+            if (permission.status === ImagePicker.PermissionStatus.DENIED) {
+                setIsCameraInfoVisible(true);
+                return;
+            }
+
+            await askForCameraAndOpen();
+        } catch {
+            setPhotoError("Couldn't open the camera. Try again.");
+        }
+    };
+
+    const handlePressContinue = async () => {
+        setIsCameraInfoVisible(false);
+        await askForCameraAndOpen();
+    };
+
+    const handlePressNotNow = () => {
+        setIsCameraInfoVisible(false);
     };
 
     const handlePressChooseFromGallery = async () => {
         setPhotoError('');
+        setCanOpenSettings(false);
 
         try {
-            const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: ['images'],
-                allowsEditing: true,
-                aspect: [1, 1],
-                quality: 0.5,
-            });
-
-            if (result.canceled) {
-                return;
-            }
-
-            setPhotoUri(result.assets[0].uri);
-            setIsPhotoSheetVisible(false);
+            const result = await ImagePicker.launchImageLibraryAsync(PHOTO_OPTIONS);
+            savePickedPhoto(result);
         } catch {
             setPhotoError("Couldn't open the gallery. Try again.");
         }
+    };
+
+    const handlePressOpenSettings = () => {
+        Linking.openSettings();
     };
 
     const handlePressLogOut = () => {
@@ -127,7 +199,13 @@ export default function ProfileScreen({ navigation }) {
             <ChangePhotoSheet
                 visible={isPhotoSheetVisible}
                 error={photoError}
+                canOpenSettings={canOpenSettings}
+                isCameraInfoVisible={isCameraInfoVisible}
+                onTakePhoto={handlePressTakePhoto}
                 onChooseFromGallery={handlePressChooseFromGallery}
+                onOpenSettings={handlePressOpenSettings}
+                onContinue={handlePressContinue}
+                onNotNow={handlePressNotNow}
                 onClose={handleClosePhotoSheet}
             />
         </SafeAreaView>

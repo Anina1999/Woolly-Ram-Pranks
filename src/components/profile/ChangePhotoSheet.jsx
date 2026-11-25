@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import CameraIcon from '../icons/CameraIcon';
 import FormError from '../common/FormError';
@@ -9,24 +9,58 @@ import PhotoOption from './PhotoOption';
 
 import { colors, fonts } from '../../styles/theme';
 
-export default function ChangePhotoSheet({ visible, error, onChooseFromGallery, onClose }) {
+export default function ChangePhotoSheet({
+    visible,
+    error,
+    canOpenSettings,
+    isCameraInfoVisible,
+    onTakePhoto,
+    onChooseFromGallery,
+    onOpenSettings,
+    onContinue,
+    onNotNow,
+    onClose,
+}) {
     return (
         <ModalPanel visible={visible} variant='sheet' onClose={onClose} style={styles.sheet}>
             <View style={styles.handle} />
-            <Text style={styles.title}>Change photo</Text>
-            <View style={styles.options}>
-                <PhotoOption icon={<CameraIcon />} title='Take a photo' subtitle='Use your camera' />
-                <View style={styles.divider} />
-                <PhotoOption
-                    icon={<GalleryIcon />}
-                    variant='accent'
-                    title='Choose from gallery'
-                    subtitle='Pick a photo from your phone'
-                    onPress={onChooseFromGallery}
-                />
-            </View>
-            {error !== '' && <FormError message={error} />}
-            <GameButton title='Cancel' variant='danger' onPress={onClose} />
+            {isCameraInfoVisible ? (
+                <>
+                    <Text style={styles.title}>Camera access</Text>
+                    <Text>
+                        Woolly Ram Pranks needs access to your camera to take your profile photo. Allow access?
+                    </Text>
+                    <GameButton title='Continue' onPress={onContinue} />
+                    <GameButton title='Not now' variant='secondary' onPress={onNotNow} />
+                </>
+            ) : (
+                <>
+                    <Text style={styles.title}>Change photo</Text>
+                    <View style={styles.options}>
+                        <PhotoOption
+                            icon={<CameraIcon />}
+                            title='Take a photo'
+                            subtitle='Use your camera'
+                            onPress={onTakePhoto}
+                        />
+                        <View style={styles.divider} />
+                        <PhotoOption
+                            icon={<GalleryIcon />}
+                            variant='accent'
+                            title='Choose from gallery'
+                            subtitle='Pick a photo from your phone'
+                            onPress={onChooseFromGallery}
+                        />
+                    </View>
+                    {error !== '' && <FormError message={error} />}
+                    {canOpenSettings && (
+                        <Pressable accessibilityRole='button' onPress={onOpenSettings}>
+                            <Text>Open settings</Text>
+                        </Pressable>
+                    )}
+                    <GameButton title='Cancel' variant='danger' onPress={onClose} />
+                </>
+            )}
         </ModalPanel>
     );
 }

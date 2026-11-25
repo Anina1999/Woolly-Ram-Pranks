@@ -394,5 +394,7 @@
 - [x] Style change photo window
 - [x] Install the image picker "npx expo install expo-image-picker"
 - [x] Choose a profile photo from the gallery
+- [x] Take a profile photo with the camera and show a message when camera access is off
+- [x] Explain why the camera is needed before asking again
 
 </details>
