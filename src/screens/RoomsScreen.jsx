@@ -17,6 +17,7 @@ import RefreshIcon from '../components/icons/RefreshIcon';
 import RoomCard from '../components/rooms/RoomCard';
 import RoomCardSkeleton from '../components/rooms/RoomCardSkeleton';
 import RoomDetails from '../components/rooms/RoomDetails';
+import SceneBackground from '../components/common/SceneBackground';
 import ScreenPanel from '../components/common/ScreenPanel';
 import SearchIcon from '../components/icons/SearchIcon';
 import Spinner from '../components/common/Spinner';
@@ -235,6 +236,7 @@ export default function RoomsScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
+            <SceneBackground />
             <View style={styles.header}>
                 <Text style={styles.title}>Rooms</Text>
                 <View style={styles.headerButtons}>

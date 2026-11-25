@@ -91,6 +91,7 @@
 - [x] Use Lilita One and Nunito Sans
 - [x] Add style to the LockedModeCard
 - [x] Add style to the Play Co-op and Create a room buttons
+- [x] Add the scene background to the Lobby
 
 </details>
 

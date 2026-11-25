@@ -10,6 +10,7 @@ import GameButton from '../components/common/GameButton';
 import GamepadIcon from '../components/icons/GamepadIcon';
 import LogOutIcon from '../components/icons/LogOutIcon';
 import RamAvatar from '../components/characters/RamAvatar';
+import SceneBackground from '../components/common/SceneBackground';
 import ScreenPanel from '../components/common/ScreenPanel';
 import StatCard from '../components/profile/StatCard';
 import TrophyIcon from '../components/icons/TrophyIcon';
@@ -139,6 +140,7 @@ export default function ProfileScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
+            <SceneBackground />
             <ScrollView contentContainerStyle={styles.content}>
                 <ScreenPanel style={styles.panel} />
                 <Text style={styles.title}>Profile</Text>

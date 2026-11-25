@@ -10,6 +10,7 @@ import GlobeIcon from '../components/icons/GlobeIcon';
 import HelpIcon from '../components/icons/HelpIcon';
 import MusicIcon from '../components/icons/MusicIcon';
 import MusicOffIcon from '../components/icons/MusicOffIcon';
+import SceneBackground from '../components/common/SceneBackground';
 import ScreenPanel from '../components/common/ScreenPanel';
 import SettingRow from '../components/settings/SettingRow';
 import SettingsSection from '../components/settings/SettingsSection';
@@ -34,6 +35,7 @@ export default function SettingsScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
+            <SceneBackground />
             <BackHeader onBack={handlePressBack}>
                 <Text style={styles.title}>Settings</Text>
             </BackHeader>

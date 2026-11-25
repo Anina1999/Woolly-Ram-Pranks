@@ -169,6 +169,9 @@ export const colors = {
     dryGrass: '#A9C95B',
     meadow: '#7DBB4C',
     meadowDark: '#5FA445',
+    meadowScrim: 'rgba(31, 59, 42, 0.55)',
+    createRoomScrim: 'rgba(31, 59, 42, 0.35)',
+    waitingRoomScrim: 'rgba(31, 59, 42, 0.4)',
 };
 
 export const fonts = {

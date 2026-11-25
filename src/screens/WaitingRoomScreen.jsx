@@ -21,6 +21,7 @@ import ReadyButton from '../components/waiting-room/ReadyButton';
 import RefreshButton from '../components/common/RefreshButton';
 import RefreshError from '../components/common/RefreshError';
 import RoomChat from '../components/waiting-room/RoomChat';
+import SceneBackground from '../components/common/SceneBackground';
 import SlotRow from '../components/waiting-room/SlotRow';
 
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
@@ -178,6 +179,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
     if (!room) {
         return (
             <SafeAreaView style={styles.container} edges={['top']}>
+                <SceneBackground scrimColor={colors.waitingRoomScrim} />
                 <BackHeader onBack={handlePressBack}>
                     <View style={styles.headerText}>
                         {!error && <Text>Room not found</Text>}
@@ -219,6 +221,7 @@ export default function WaitingRoomScreen({ route, navigation }) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
+            <SceneBackground scrimColor={colors.waitingRoomScrim} />
             <BackHeader onBack={handlePressBack}>
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>

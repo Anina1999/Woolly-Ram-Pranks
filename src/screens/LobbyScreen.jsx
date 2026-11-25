@@ -9,6 +9,7 @@ import LockedModeCard from '../components/lobby/LockedModeCard';
 import PlayIcon from '../components/icons/PlayIcon';
 import Ram from '../components/characters/Ram';
 import RamAvatar from '../components/characters/RamAvatar';
+import SceneBackground from '../components/common/SceneBackground';
 import Sheep from '../components/characters/Sheep';
 
 import profile from '../data/profile';
@@ -44,6 +45,7 @@ export default function LobbyScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container}>
+            <SceneBackground scrimColor={colors.meadowScrim} scrimTop={380} />
             <View style={styles.header}>
                 <Pressable style={styles.profileChip} onPress={handlePressProfile}>
                     <RamAvatar wool={profile.wool} bandana={profile.bandana} size={38} />
@@ -119,7 +121,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        marginTop: 8,
+        marginTop: 2,
     },
     profileChip: {
         flexDirection: 'row',
@@ -149,7 +151,7 @@ const styles = StyleSheet.create({
         textShadowRadius: 1,
     },
     modeCard: {
-        marginTop: 16,
+        marginTop: 12,
         padding: 4,
         paddingBottom: 8,
         borderRadius: 24,
@@ -227,6 +229,7 @@ const styles = StyleSheet.create({
     modeTitle: {
         fontFamily: fonts.display,
         fontSize: 26,
+        lineHeight: 30,
         color: colors.text,
     },
     modePlayers: {

@@ -9,6 +9,7 @@ import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
 import MaxPlayersSetting from '../components/room-settings/MaxPlayersSetting';
 import Panel from '../components/common/Panel';
+import SceneBackground from '../components/common/SceneBackground';
 import ToggleSwitch from '../components/common/ToggleSwitch';
 
 import newRoom from '../data/newRoom';
@@ -84,6 +85,7 @@ export default function CreateRoomScreen({ navigation }) {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
+            <SceneBackground scrimColor={colors.createRoomScrim} />
             <BackHeader onBack={handlePressBack}>
                 <Text style={styles.title}>Create room</Text>
             </BackHeader>
