@@ -18,6 +18,7 @@ export default function GameButton({
     const isLarge = size === 'large';
     const isSecondary = variant === 'secondary';
     const isDanger = variant === 'danger';
+    const isDangerSecondary = variant === 'dangerSecondary';
     const isAccent = variant === 'accent';
 
     let spinnerColor = colors.textOnPrimary;
@@ -37,6 +38,7 @@ export default function GameButton({
                 styles.button,
                 isSecondary && styles.buttonSecondary,
                 isDanger && styles.buttonDanger,
+                isDangerSecondary && styles.buttonDangerSecondary,
                 isAccent && styles.buttonAccent,
                 isDisabled && styles.buttonDisabled,
                 pressed && styles.buttonPressed,
@@ -52,11 +54,12 @@ export default function GameButton({
                     isLarge && styles.faceLarge,
                     isSecondary && styles.faceSecondary,
                     isDanger && styles.faceDanger,
+                    isDangerSecondary && styles.faceDangerSecondary,
                     isAccent && styles.faceAccent,
                     isDisabled && styles.faceDisabled,
                 ]}
             >
-                {!isSecondary && !isDisabled && !isLoading && (
+                {!isSecondary && !isDangerSecondary && !isDisabled && !isLoading && (
                     <View style={[styles.shine, isLarge && styles.shineLarge, isAccent && styles.shineAccent]} />
                 )}
                 {isLoading ? <Spinner size={22} color={spinnerColor} trackColor={spinnerTrackColor} /> : children}
@@ -65,6 +68,7 @@ export default function GameButton({
                         styles.title,
                         isLarge && styles.titleLarge,
                         isSecondary && styles.titleSecondary,
+                        isDangerSecondary && styles.titleDangerSecondary,
                         isAccent && styles.titleAccent,
                         isDisabled && styles.titleDisabled,
                     ]}
@@ -87,6 +91,9 @@ const styles = StyleSheet.create({
     },
     buttonDanger: {
         backgroundColor: colors.dangerButtonEdge,
+    },
+    buttonDangerSecondary: {
+        backgroundColor: colors.dangerSecondaryEdge,
     },
     buttonAccent: {
         backgroundColor: colors.accentButtonEdge,
@@ -119,6 +126,11 @@ const styles = StyleSheet.create({
     },
     faceDanger: {
         backgroundColor: colors.dangerButton,
+    },
+    faceDangerSecondary: {
+        borderWidth: 2,
+        borderColor: colors.dangerSecondaryEdge,
+        backgroundColor: colors.surface,
     },
     faceAccent: {
         gap: 10,
@@ -156,6 +168,11 @@ const styles = StyleSheet.create({
     },
     titleSecondary: {
         color: colors.actionText,
+        textShadowOffset: { width: 0, height: 0 },
+        textShadowRadius: 0,
+    },
+    titleDangerSecondary: {
+        color: colors.dangerSecondaryText,
         textShadowOffset: { width: 0, height: 0 },
         textShadowRadius: 0,
     },

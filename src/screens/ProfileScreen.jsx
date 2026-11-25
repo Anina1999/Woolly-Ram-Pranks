@@ -2,9 +2,14 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CameraIcon from '../components/icons/CameraIcon';
+import ClockIcon from '../components/icons/ClockIcon';
+import GameButton from '../components/common/GameButton';
+import GamepadIcon from '../components/icons/GamepadIcon';
+import LogOutIcon from '../components/icons/LogOutIcon';
 import RamAvatar from '../components/characters/RamAvatar';
 import ScreenPanel from '../components/common/ScreenPanel';
 import StatCard from '../components/profile/StatCard';
+import TrophyIcon from '../components/icons/TrophyIcon';
 
 import profile from '../data/profile';
 
@@ -44,24 +49,31 @@ export default function ProfileScreen({ navigation }) {
                         <Text style={styles.email}>{profile.email}</Text>
                     </View>
                 </View>
-                <View>
-                    <StatCard value={profile.gamesPlayed} label='Games played' />
-                    <StatCard value={profile.wins} label='Wins' />
-                    <StatCard value={formatTime(profile.bestTimeSeconds)} label='Best time' />
+                <View style={styles.stats}>
+                    <StatCard icon={<GamepadIcon />} value={profile.gamesPlayed} label='Games played' />
+                    <StatCard icon={<TrophyIcon />} value={profile.wins} label='Wins' />
+                    <StatCard icon={<ClockIcon />} value={formatTime(profile.bestTimeSeconds)} label='Best time' />
                 </View>
-                <View>
-                    <View>
-                        <Text>Win rate</Text>
-                        <Text>{winRate}%</Text>
+                <View style={styles.infoCard}>
+                    <View style={styles.infoRow}>
+                        <Text style={styles.infoLabel}>Win rate</Text>
+                        <View style={styles.winRateTrack}>
+                            <View style={[styles.winRateFill, { width: `${winRate}%` }]} />
+                        </View>
+                        <Text style={styles.winRate}>{winRate}%</Text>
                     </View>
-                    <View>
-                        <Text>Favourite bandana</Text>
-                        <Text>{getBandanaName(profile.bandana)}</Text>
+                    <View style={styles.divider} />
+                    <View style={styles.infoRow}>
+                        <Text style={styles.infoLabel}>Favourite bandana</Text>
+                        <View style={[styles.bandanaDot, { backgroundColor: profile.bandana }]} />
+                        <Text style={styles.bandanaName}>{getBandanaName(profile.bandana)}</Text>
                     </View>
                 </View>
-                <Pressable onPress={handlePressLogOut}>
-                    <Text style={styles.logOutText}>Log out</Text>
-                </Pressable>
+                <View style={styles.logOut}>
+                    <GameButton title='Log out' variant='dangerSecondary' onPress={handlePressLogOut}>
+                        <LogOutIcon />
+                    </GameButton>
+                </View>
             </ScrollView>
         </SafeAreaView>
     );
@@ -141,7 +153,71 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.muted,
     },
-    logOutText: {
-        color: colors.danger,
+    stats: {
+        flexDirection: 'row',
+        gap: 10,
+        marginTop: 58,
+        marginHorizontal: 16,
+    },
+    infoCard: {
+        marginTop: 40,
+        marginHorizontal: 16,
+        borderRadius: 18,
+        borderWidth: 2,
+        borderColor: colors.cardBorder,
+        backgroundColor: colors.card,
+    },
+    infoRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 12,
+        minHeight: 52,
+        paddingHorizontal: 14,
+    },
+    infoLabel: {
+        flex: 1,
+        fontFamily: fonts.bold,
+        fontSize: 15,
+        color: colors.text,
+    },
+    winRateTrack: {
+        width: 90,
+        height: 10,
+        overflow: 'hidden',
+        borderRadius: 5,
+        backgroundColor: colors.winRateTrack,
+    },
+    winRateFill: {
+        height: 10,
+        borderRadius: 5,
+        backgroundColor: colors.primary,
+    },
+    winRate: {
+        fontFamily: fonts.display,
+        fontSize: 18,
+        color: colors.text,
+    },
+    divider: {
+        height: 2,
+        marginHorizontal: 14,
+        backgroundColor: colors.cardDivider,
+    },
+    bandanaDot: {
+        width: 24,
+        height: 24,
+        borderRadius: 12,
+        borderWidth: 2,
+        borderColor: 'rgba(0, 0, 0, 0.3)',
+    },
+    bandanaName: {
+        fontFamily: fonts.extraBold,
+        fontSize: 14,
+        color: colors.text,
+    },
+    logOut: {
+        marginTop: 'auto',
+        paddingTop: 24,
+        paddingHorizontal: 16,
+        paddingBottom: 16,
     },
 });
