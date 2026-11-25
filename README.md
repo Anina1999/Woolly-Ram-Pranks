@@ -406,5 +406,6 @@
 <summary>Steps to add the Leaderboard screen</summary>
 
 - [x] Add the Leaderboard header and tabs
+- [x] Show the top three on the podium
 
 </details>
