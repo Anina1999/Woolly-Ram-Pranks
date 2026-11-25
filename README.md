@@ -416,5 +416,6 @@
 
 - [x] Add style to the Leaderboard header and tabs
 - [x] Add style to the podium
+- [x] Add style to the players list and my row
 
 </details>

@@ -3,6 +3,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import LeaderboardRow from '../components/leaderboard/LeaderboardRow';
 import PodiumPlace from '../components/leaderboard/PodiumPlace';
+import ScreenPanel from '../components/common/ScreenPanel';
 import SegmentTab from '../components/common/SegmentTab';
 
 import leaderboard from '../data/leaderboard';
@@ -31,19 +32,23 @@ export default function LeaderboardScreen() {
                 <PodiumPlace player={first} place={1} value={formatTime(first.bestTimeSeconds)} />
                 <PodiumPlace player={third} place={3} value={formatTime(third.bestTimeSeconds)} />
             </View>
-            <FlatList
-                data={otherPlayers}
-                keyExtractor={(player) => player.id}
-                renderItem={({ item, index }) => (
-                    <LeaderboardRow rank={index + 4} player={item} value={formatTime(item.bestTimeSeconds)} />
-                )}
-            />
-            <LeaderboardRow
-                rank={leaderboard.myRank}
-                player={profile}
-                value={formatTime(profile.bestTimeSeconds)}
-                isMe={true}
-            />
+            <ScreenPanel>
+                <FlatList
+                    data={otherPlayers}
+                    keyExtractor={(player) => player.id}
+                    contentContainerStyle={styles.list}
+                    renderItem={({ item, index }) => (
+                        <LeaderboardRow rank={index + 4} player={item} value={formatTime(item.bestTimeSeconds)} />
+                    )}
+                />
+                <LeaderboardRow
+                    rank={leaderboard.myRank}
+                    player={profile}
+                    value={formatTime(profile.bestTimeSeconds)}
+                    isMe={true}
+                    style={styles.myRow}
+                />
+            </ScreenPanel>
         </SafeAreaView>
     );
 }
@@ -95,5 +100,15 @@ const styles = StyleSheet.create({
         height: 210,
         marginTop: 22,
         marginHorizontal: 16,
+    },
+    list: {
+        gap: 8,
+        paddingTop: 12,
+        paddingHorizontal: 10,
+        paddingBottom: 12,
+    },
+    myRow: {
+        marginHorizontal: 8,
+        marginBottom: 10,
     },
 });

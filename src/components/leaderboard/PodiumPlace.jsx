@@ -34,18 +34,26 @@ export default function PodiumPlace({ player, place, value }) {
                     isThird && styles.blockThird,
                 ]}
             >
-                {isThird ? (
-                    <Text style={[styles.number, styles.textThird]}>{place} · {value}</Text>
-                ) : (
-                    <>
-                        <Text style={[styles.number, isFirst && styles.numberFirst, isSecond && styles.numberSecond]}>
-                            {place}
-                        </Text>
-                        <Text style={[styles.value, isFirst && styles.valueFirst, isSecond && styles.valueSecond]}>
-                            {value}
-                        </Text>
-                    </>
-                )}
+                <Text
+                    style={[
+                        styles.number,
+                        isFirst && styles.numberFirst,
+                        isSecond && styles.numberSecond,
+                        isThird && styles.textThird,
+                    ]}
+                >
+                    {place}
+                </Text>
+                <Text
+                    style={[
+                        styles.value,
+                        isFirst && styles.valueFirst,
+                        isSecond && styles.valueSecond,
+                        isThird && styles.textThird,
+                    ]}
+                >
+                    {value}
+                </Text>
             </View>
         </View>
     );
@@ -92,7 +100,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.secondPlace,
     },
     blockThird: {
-        height: 40,
+        height: 46,
         borderColor: colors.thirdPlaceEdge,
         backgroundColor: colors.thirdPlace,
     },
