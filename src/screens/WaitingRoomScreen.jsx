@@ -222,9 +222,13 @@ export default function WaitingRoomScreen({ route, navigation }) {
             <BackHeader onBack={handlePressBack}>
                 <View style={styles.headerText}>
                     <Text style={styles.title}>{room.name}</Text>
-                    <Text style={styles.subtitle}>
-                        {room.mode} · {room.map} · {roomPlayers.length}/{room.maxPlayers} players · {difficultyInfo.name}
-                    </Text>
+                    <View style={styles.subtitleRow}>
+                        <Text style={[styles.subtitle, styles.modeAndMap]} numberOfLines={1}>
+                            {room.mode} · {room.map}
+                        </Text>
+                        <Text style={styles.subtitle} accessibilityElementsHidden importantForAccessibility='no'>·</Text>
+                        <Text style={styles.subtitle}>{difficultyInfo.name}</Text>
+                    </View>
                 </View>
                 <RefreshButton isDisabled={isLoading} accessibilityLabel='Refresh room' onPress={handleRefresh} />
             </BackHeader>
@@ -374,6 +378,7 @@ const styles = StyleSheet.create({
     },
     headerText: {
         flex: 1,
+        minWidth: 0,
     },
     title: {
         fontFamily: fonts.display,
@@ -384,10 +389,19 @@ const styles = StyleSheet.create({
         textShadowOffset: { width: 0, height: 2 },
         textShadowRadius: 1,
     },
+    subtitleRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+    },
     subtitle: {
         fontFamily: fonts.bold,
         fontSize: 13,
+        lineHeight: 18,
         color: colors.textOnDark,
+    },
+    modeAndMap: {
+        flexShrink: 1,
     },
     content: {
         flexGrow: 1,
