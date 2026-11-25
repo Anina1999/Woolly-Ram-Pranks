@@ -112,6 +112,7 @@
 - [x] Move Create room to the header and add Find a room at the bottom
 - [x] Add the green round Create room button to the header
 - [x] Fit the four tabs on one row and show the rooms count above the list
+- [x] Add the scene background to Rooms
 
 </details>
 
@@ -239,6 +240,7 @@
 - [x] Change Max players with the stepper
 - [x] Change the difficulty with the arrows
 - [x] Disable the stepper buttons at the end of the range
+- [x] Add the scene background to Create room
 
 </details>
 
@@ -278,6 +280,7 @@
 - [x] Show a Public bar in public rooms
 - [x] Show the code bar only to the host and add the room type badge and the settings button to Players
 - [x] Add style to the room type badge and make the player rows lower
+- [x] Add the scene background to the Waiting room
 
 </details>
 
@@ -380,6 +383,7 @@
 - [x] Add style and icons to Settings
 - [x] Mute and unmute Music and Sound effects with their icon
 - [x] Add style to muted Music and Sound effects
+- [x] Add the scene background to Settings
 
 </details>
 
@@ -398,6 +402,7 @@
 - [x] Take a profile photo with the camera and show a message when camera access is off
 - [x] Explain why the camera is needed before asking again
 - [x] Add style to the camera access message and Open settings
+- [x] Add the scene background to Profile
 
 </details>
 
