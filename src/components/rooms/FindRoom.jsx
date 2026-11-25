@@ -6,7 +6,7 @@ import GameButton from '../common/GameButton';
 import IconButton from '../common/IconButton';
 import RoomRow from './RoomRow';
 import SearchIcon from '../icons/SearchIcon';
-import SearchTab from './SearchTab';
+import SegmentTab from '../common/SegmentTab';
 
 import formatRoomCode, { ROOM_CODE_LENGTH } from '../../utils/formatRoomCode';
 import getRoomPlayers from '../../utils/getRoomPlayers';
@@ -67,8 +67,8 @@ export default function FindRoom({
                 <IconButton icon='x' size='small' accessibilityLabel='Close' onPress={onClose} />
             </View>
             <View style={styles.tabs}>
-                <SearchTab label='By name' selected={!isCodeMode} onPress={() => handleSelectMode('name')} />
-                <SearchTab label='Code' selected={isCodeMode} onPress={() => handleSelectMode('code')} />
+                <SegmentTab label='By name' selected={!isCodeMode} onPress={() => handleSelectMode('name')} />
+                <SegmentTab label='Code' selected={isCodeMode} onPress={() => handleSelectMode('code')} />
             </View>
             {isCodeMode ? (
                 <View style={styles.codeView}>
