@@ -27,7 +27,7 @@ export default function ChangePhotoSheet({
             {isCameraInfoVisible ? (
                 <>
                     <Text style={styles.title}>Camera access</Text>
-                    <Text>
+                    <Text style={styles.cameraInfo}>
                         Woolly Ram Pranks needs access to your camera to take your profile photo. Allow access?
                     </Text>
                     <GameButton title='Continue' onPress={onContinue} />
@@ -52,11 +52,22 @@ export default function ChangePhotoSheet({
                             onPress={onChooseFromGallery}
                         />
                     </View>
-                    {error !== '' && <FormError message={error} />}
-                    {canOpenSettings && (
-                        <Pressable accessibilityRole='button' onPress={onOpenSettings}>
-                            <Text>Open settings</Text>
-                        </Pressable>
+                    {error !== '' && (
+                        <View>
+                            <FormError message={error} />
+                            {canOpenSettings && (
+                                <Pressable
+                                    style={({ pressed }) => [
+                                        styles.settingsLink,
+                                        pressed && styles.settingsLinkPressed,
+                                    ]}
+                                    accessibilityRole='button'
+                                    onPress={onOpenSettings}
+                                >
+                                    <Text style={styles.settingsLinkText}>Open settings</Text>
+                                </Pressable>
+                            )}
+                        </View>
                     )}
                     <GameButton title='Cancel' variant='danger' onPress={onClose} />
                 </>
@@ -83,6 +94,27 @@ const styles = StyleSheet.create({
         fontSize: 24,
         lineHeight: 28,
         color: colors.text,
+    },
+    cameraInfo: {
+        fontFamily: fonts.regular,
+        fontSize: 15,
+        lineHeight: 22,
+        color: colors.modalText,
+    },
+    settingsLink: {
+        alignSelf: 'flex-start',
+        justifyContent: 'center',
+        minHeight: 44,
+        marginLeft: 22,
+    },
+    settingsLinkPressed: {
+        opacity: 0.6,
+    },
+    settingsLinkText: {
+        fontFamily: fonts.extraBold,
+        fontSize: 14,
+        color: colors.linkText,
+        textDecorationLine: 'underline',
     },
     options: {
         overflow: 'hidden',

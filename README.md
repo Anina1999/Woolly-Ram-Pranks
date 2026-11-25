@@ -396,5 +396,6 @@
 - [x] Choose a profile photo from the gallery
 - [x] Take a profile photo with the camera and show a message when camera access is off
 - [x] Explain why the camera is needed before asking again
+- [x] Add style to the camera access message and Open settings
 
 </details>

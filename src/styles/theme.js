@@ -145,6 +145,7 @@ export const colors = {
     privateLock: '#6B4A9A',
     pasteText: '#5A3B86',
     dangerSecondaryText: '#A12A1F',
+    linkText: '#24601F',
 
     shadow: '#0A140C',
     avatarShadow: '#2E2117',
