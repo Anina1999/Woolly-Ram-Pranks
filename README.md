@@ -399,3 +399,12 @@
 - [x] Add style to the camera access message and Open settings
 
 </details>
+
+### Leaderboard
+
+<details>
+<summary>Steps to add the Leaderboard screen</summary>
+
+- [x] Add the Leaderboard header and tabs
+
+</details>
