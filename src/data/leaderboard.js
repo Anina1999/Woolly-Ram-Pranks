@@ -9,11 +9,11 @@ const leaderboard = {
         { id: '6', name: 'Shearlock', wool: 'beige', bandana: '#3B7DDD', wins: 33, bestTimeSeconds: 161 },
         { id: '7', name: 'Woolverine', wool: 'rust', bandana: '#9558D3', wins: 30, bestTimeSeconds: 164 },
         { id: '8', name: 'Baabara', wool: 'grey', bandana: '#E04436', wins: 28, bestTimeSeconds: 165 },
-        { id: '9', name: 'Ramsey', wool: 'brown', bandana: '#4DAE45', wins: 25, bestTimeSeconds: 165 },
+        { id: '9', name: 'Ramsey', wool: 'brown', bandana: '#4DAE45', wins: 36, bestTimeSeconds: 165 },
         { id: '10', name: 'Wooliam', wool: 'black', bandana: '#F2C12E', wins: 31, bestTimeSeconds: 166 },
-        { id: '11', name: 'Haybale', wool: 'beige', bandana: '#9558D3', wins: 22, bestTimeSeconds: 166 },
-        { id: '12', name: 'Cottonball', wool: 'rust', bandana: '#3B7DDD', wins: 24, bestTimeSeconds: 167 },
-        { id: '13', name: 'Tumbleweed', wool: 'grey', bandana: '#F2C12E', wins: 19, bestTimeSeconds: 167 },
+        { id: '11', name: 'Haybale', wool: 'beige', bandana: '#9558D3', wins: 29, bestTimeSeconds: 166 },
+        { id: '12', name: 'Cottonball', wool: 'rust', bandana: '#3B7DDD', wins: 35, bestTimeSeconds: 167 },
+        { id: '13', name: 'Tumbleweed', wool: 'grey', bandana: '#F2C12E', wins: 32, bestTimeSeconds: 167 },
     ],
 };
 

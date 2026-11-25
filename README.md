@@ -419,3 +419,10 @@
 - [x] Add style to the players list and my row
 
 </details>
+
+<details>
+<summary>Steps to add the Leaderboard behaviour</summary>
+
+- [x] Sort the players by best time or by wins with the tabs
+
+</details>

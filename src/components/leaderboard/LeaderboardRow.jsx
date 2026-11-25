@@ -4,7 +4,7 @@ import RamAvatar from '../characters/RamAvatar';
 
 import { colors, fonts } from '../../styles/theme';
 
-export default function LeaderboardRow({ rank, player, value, isMe, style }) {
+export default function LeaderboardRow({ rank, player, value, detail, isMe, style }) {
     return (
         <View style={[styles.row, isMe && styles.rowMe, style]}>
             <Text style={[styles.rank, isMe && styles.rankMe]}>{rank}</Text>
@@ -14,7 +14,7 @@ export default function LeaderboardRow({ rank, player, value, isMe, style }) {
                     {player.name}
                     {isMe && <Text style={styles.you}> (you)</Text>}
                 </Text>
-                <Text style={styles.wins}>{player.wins} wins</Text>
+                <Text style={styles.detail}>{detail}</Text>
             </View>
             <Text style={styles.value}>{value}</Text>
         </View>
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
         fontFamily: fonts.bold,
         color: colors.muted,
     },
-    wins: {
+    detail: {
         fontFamily: fonts.regular,
         fontSize: 12,
         color: colors.muted,

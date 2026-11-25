@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -10,12 +11,20 @@ import leaderboard from '../data/leaderboard';
 import profile from '../data/profile';
 
 import formatTime from '../utils/formatTime';
+import getSortedPlayers from '../utils/getSortedPlayers';
 
 import { colors, fonts } from '../styles/theme';
 
 export default function LeaderboardScreen() {
-    const [first, second, third] = leaderboard.players;
-    const otherPlayers = leaderboard.players.slice(3);
+    const [sortBy, setSortBy] = useState('time');
+
+    const isWins = sortBy === 'wins';
+    const sortedPlayers = getSortedPlayers(leaderboard.players, sortBy);
+    const [first, second, third] = sortedPlayers;
+    const otherPlayers = sortedPlayers.slice(3);
+
+    const getValue = (player) => (isWins ? `${player.wins} wins` : formatTime(player.bestTimeSeconds));
+    const getDetail = (player) => (isWins ? `Best ${formatTime(player.bestTimeSeconds)}` : `${player.wins} wins`);
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -24,13 +33,23 @@ export default function LeaderboardScreen() {
                 <Text style={styles.levelChip}>Meadow Farm</Text>
             </View>
             <View style={styles.tabs}>
-                <SegmentTab label='Best time' variant='dark' selected={true} />
-                <SegmentTab label='Most wins' variant='dark' selected={false} />
+                <SegmentTab
+                    label='Best time'
+                    variant='dark'
+                    selected={!isWins}
+                    onPress={() => setSortBy('time')}
+                />
+                <SegmentTab
+                    label='Most wins'
+                    variant='dark'
+                    selected={isWins}
+                    onPress={() => setSortBy('wins')}
+                />
             </View>
             <View style={styles.podium}>
-                <PodiumPlace player={second} place={2} value={formatTime(second.bestTimeSeconds)} />
-                <PodiumPlace player={first} place={1} value={formatTime(first.bestTimeSeconds)} />
-                <PodiumPlace player={third} place={3} value={formatTime(third.bestTimeSeconds)} />
+                <PodiumPlace player={second} place={2} value={getValue(second)} />
+                <PodiumPlace player={first} place={1} value={getValue(first)} />
+                <PodiumPlace player={third} place={3} value={getValue(third)} />
             </View>
             <ScreenPanel>
                 <FlatList
@@ -38,13 +57,19 @@ export default function LeaderboardScreen() {
                     keyExtractor={(player) => player.id}
                     contentContainerStyle={styles.list}
                     renderItem={({ item, index }) => (
-                        <LeaderboardRow rank={index + 4} player={item} value={formatTime(item.bestTimeSeconds)} />
+                        <LeaderboardRow
+                            rank={index + 4}
+                            player={item}
+                            value={getValue(item)}
+                            detail={getDetail(item)}
+                        />
                     )}
                 />
                 <LeaderboardRow
                     rank={leaderboard.myRank}
                     player={profile}
-                    value={formatTime(profile.bestTimeSeconds)}
+                    value={getValue(profile)}
+                    detail={getDetail(profile)}
                     isMe={true}
                     style={styles.myRow}
                 />
