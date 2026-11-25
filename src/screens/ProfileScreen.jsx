@@ -46,14 +46,14 @@ export default function ProfileScreen({ navigation }) {
                 <Text style={styles.title}>Profile</Text>
                 <View style={styles.hero}>
                     <View style={styles.avatarWrap}>
-                        <Pressable style={styles.avatarButton} accessibilityRole='button' accessibilityLabel='View photo'>
+                        <View style={styles.avatarFrame}>
                             <RamAvatar
                                 wool={profile.wool}
                                 bandana={profile.bandana}
                                 size={136}
                                 style={styles.avatar}
                             />
-                        </Pressable>
+                        </View>
                         <Pressable
                             style={styles.cameraBadge}
                             accessibilityRole='button'
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         width: 136,
         height: 136,
     },
-    avatarButton: {
+    avatarFrame: {
         width: 136,
         height: 136,
         borderRadius: 68,

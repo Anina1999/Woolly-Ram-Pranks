@@ -101,6 +101,7 @@ export const colors = {
     cardBorder: '#E2CFA6',
     cardDivider: '#EFE3C8',
     winRateTrack: '#EADBB8',
+    sheetHandle: '#D9C39A',
     errorSurface: '#FFF4F1',
     errorBorder: '#C8352B',
     myRoomBar: 'rgba(24, 36, 27, 0.9)',
