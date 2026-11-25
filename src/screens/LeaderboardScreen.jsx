@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import LeaderboardRow from '../components/leaderboard/LeaderboardRow';
@@ -10,19 +10,21 @@ import profile from '../data/profile';
 
 import formatTime from '../utils/formatTime';
 
+import { colors, fonts } from '../styles/theme';
+
 export default function LeaderboardScreen() {
     const [first, second, third] = leaderboard.players;
     const otherPlayers = leaderboard.players.slice(3);
 
     return (
-        <SafeAreaView>
-            <View>
-                <Text>Leaderboard</Text>
-                <Text>Meadow Farm</Text>
+        <SafeAreaView style={styles.container} edges={['top']}>
+            <View style={styles.header}>
+                <Text style={styles.title}>Leaderboard</Text>
+                <Text style={styles.levelChip}>Meadow Farm</Text>
             </View>
-            <View>
-                <SegmentTab label='Best time' selected={true} />
-                <SegmentTab label='Most wins' selected={false} />
+            <View style={styles.tabs}>
+                <SegmentTab label='Best time' variant='dark' selected={true} />
+                <SegmentTab label='Most wins' variant='dark' selected={false} />
             </View>
             <View>
                 <PodiumPlace player={second} place={2} value={formatTime(second.bestTimeSeconds)} />
@@ -45,3 +47,45 @@ export default function LeaderboardScreen() {
         </SafeAreaView>
     );
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: colors.sky,
+    },
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginTop: 8,
+        marginHorizontal: 16,
+    },
+    title: {
+        fontFamily: fonts.display,
+        fontSize: 32,
+        lineHeight: 36,
+        color: colors.textOnScene,
+        textShadowColor: colors.text,
+        textShadowOffset: { width: 0, height: 2 },
+        textShadowRadius: 1,
+    },
+    levelChip: {
+        overflow: 'hidden',
+        paddingVertical: 6,
+        paddingHorizontal: 12,
+        borderRadius: 999,
+        fontFamily: fonts.extraBold,
+        fontSize: 13,
+        color: colors.textOnScene,
+        backgroundColor: colors.levelChip,
+    },
+    tabs: {
+        flexDirection: 'row',
+        gap: 4,
+        marginTop: 16,
+        marginHorizontal: 16,
+        padding: 4,
+        borderRadius: 16,
+        backgroundColor: colors.surfaceDark,
+    },
+});

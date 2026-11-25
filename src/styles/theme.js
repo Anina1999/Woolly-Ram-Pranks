@@ -83,6 +83,7 @@ export const colors = {
     codeBar: 'rgba(24, 36, 27, 0.78)',
     codeBarBorder: 'rgba(255, 255, 255, 0.2)',
     codeBarLock: '#F2B33D',
+    levelChip: 'rgba(24, 36, 27, 0.78)',
     publicBadge: '#E3F2E1',
     publicBadgeBorder: '#3C8C35',
     publicBadgeIcon: '#24601F',

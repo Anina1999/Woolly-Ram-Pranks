@@ -410,3 +410,10 @@
 - [x] Show the other players and my row
 
 </details>
+
+<details>
+<summary>Steps to style the Leaderboard</summary>
+
+- [x] Add style to the Leaderboard header and tabs
+
+</details>
