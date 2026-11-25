@@ -390,5 +390,6 @@
 - [x] Show the ram, name, email and stats in Profile
 - [x] Add style to the Profile avatar and name
 - [x] Style profile stats, log out and add icons 
+- [x] Open the Change photo window from the camera button on the avatar
 
 </details>

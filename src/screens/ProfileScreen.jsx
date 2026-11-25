@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import CameraIcon from '../components/icons/CameraIcon';
+import ChangePhotoSheet from '../components/profile/ChangePhotoSheet';
 import ClockIcon from '../components/icons/ClockIcon';
 import GameButton from '../components/common/GameButton';
 import GamepadIcon from '../components/icons/GamepadIcon';
@@ -19,7 +21,17 @@ import getBandanaName from '../utils/getBandanaName';
 import { colors, fonts } from '../styles/theme';
 
 export default function ProfileScreen({ navigation }) {
+    const [isPhotoSheetVisible, setIsPhotoSheetVisible] = useState(false);
+
     const winRate = profile.gamesPlayed > 0 ? Math.round((profile.wins / profile.gamesPlayed) * 100) : 0;
+
+    const handlePressChangePhoto = () => {
+        setIsPhotoSheetVisible(true);
+    };
+
+    const handleClosePhotoSheet = () => {
+        setIsPhotoSheetVisible(false);
+    };
 
     const handlePressLogOut = () => {
         // simulates log out by leading to lobby cause we don't have auth screens and logic yet
@@ -33,17 +45,24 @@ export default function ProfileScreen({ navigation }) {
                 <ScreenPanel style={styles.panel} />
                 <Text style={styles.title}>Profile</Text>
                 <View style={styles.hero}>
-                    <Pressable style={styles.avatarButton} accessibilityRole='button' accessibilityLabel='Change photo'>
-                        <RamAvatar
-                            wool={profile.wool}
-                            bandana={profile.bandana}
-                            size={136}
-                            style={styles.avatar}
-                        />
-                        <View style={styles.cameraBadge}>
+                    <View style={styles.avatarWrap}>
+                        <Pressable style={styles.avatarButton} accessibilityRole='button' accessibilityLabel='View photo'>
+                            <RamAvatar
+                                wool={profile.wool}
+                                bandana={profile.bandana}
+                                size={136}
+                                style={styles.avatar}
+                            />
+                        </Pressable>
+                        <Pressable
+                            style={styles.cameraBadge}
+                            accessibilityRole='button'
+                            accessibilityLabel='Change photo'
+                            onPress={handlePressChangePhoto}
+                        >
                             <CameraIcon />
-                        </View>
-                    </Pressable>
+                        </Pressable>
+                    </View>
                     <View style={styles.nameBlock}>
                         <Text style={styles.name}>{profile.name}</Text>
                         <Text style={styles.email}>{profile.email}</Text>
@@ -75,6 +94,7 @@ export default function ProfileScreen({ navigation }) {
                     </GameButton>
                 </View>
             </ScrollView>
+            <ChangePhotoSheet visible={isPhotoSheetVisible} onClose={handleClosePhotoSheet} />
         </SafeAreaView>
     );
 }
@@ -109,6 +129,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 8,
         marginTop: 28,
+    },
+    avatarWrap: {
+        width: 136,
+        height: 136,
     },
     avatarButton: {
         width: 136,
