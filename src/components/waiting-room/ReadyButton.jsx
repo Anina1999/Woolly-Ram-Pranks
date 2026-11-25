@@ -21,7 +21,10 @@ export default function ReadyButton({ isReady, style, onPress }) {
             <View style={[styles.face, isReady && styles.faceReady]}>
                 {isReady && <View style={styles.innerShadow} />}
                 <View style={[styles.circle, isReady && styles.circleReady]}>
-                    {isReady && <CheckIcon color={colors.primaryEdge} />}
+                    <CheckIcon
+                        color={isReady ? colors.primaryEdge : colors.surface}
+                        opacity={isReady ? 1 : 0.4}
+                    />
                 </View>
                 <Text style={[styles.title, isReady && styles.titleReady]}>{isReady ? 'Ready!' : 'I’m ready'}</Text>
             </View>
@@ -68,15 +71,14 @@ const styles = StyleSheet.create({
     circle: {
         justifyContent: 'center',
         alignItems: 'center',
-        width: 24,
-        height: 24,
+        width: 26,
+        height: 26,
         borderRadius: 999,
-        borderWidth: 3,
-        borderColor: colors.text,
-        backgroundColor: colors.surface,
+        backgroundColor: colors.text,
     },
     circleReady: {
-        borderWidth: 0,
+        width: 24,
+        height: 24,
         backgroundColor: colors.readyBorder,
     },
     title: {
