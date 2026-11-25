@@ -407,5 +407,6 @@
 
 - [x] Add the Leaderboard header and tabs
 - [x] Show the top three on the podium
+- [x] Show the other players and my row
 
 </details>
