@@ -392,5 +392,7 @@
 - [x] Style profile stats, log out and add icons 
 - [x] Open the Change photo window from the camera button on the avatar
 - [x] Style change photo window
+- [x] Install the image picker "npx expo install expo-image-picker"
+- [x] Choose a profile photo from the gallery
 
 </details>

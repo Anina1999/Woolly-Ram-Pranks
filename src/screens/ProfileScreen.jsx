@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import * as ImagePicker from 'expo-image-picker';
 
 import CameraIcon from '../components/icons/CameraIcon';
 import ChangePhotoSheet from '../components/profile/ChangePhotoSheet';
@@ -22,6 +23,8 @@ import { colors, fonts } from '../styles/theme';
 
 export default function ProfileScreen({ navigation }) {
     const [isPhotoSheetVisible, setIsPhotoSheetVisible] = useState(false);
+    const [photoUri, setPhotoUri] = useState(null);
+    const [photoError, setPhotoError] = useState('');
 
     const winRate = profile.gamesPlayed > 0 ? Math.round((profile.wins / profile.gamesPlayed) * 100) : 0;
 
@@ -31,6 +34,29 @@ export default function ProfileScreen({ navigation }) {
 
     const handleClosePhotoSheet = () => {
         setIsPhotoSheetVisible(false);
+        setPhotoError('');
+    };
+
+    const handlePressChooseFromGallery = async () => {
+        setPhotoError('');
+
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ['images'],
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.5,
+            });
+
+            if (result.canceled) {
+                return;
+            }
+
+            setPhotoUri(result.assets[0].uri);
+            setIsPhotoSheetVisible(false);
+        } catch {
+            setPhotoError("Couldn't open the gallery. Try again.");
+        }
     };
 
     const handlePressLogOut = () => {
@@ -47,12 +73,16 @@ export default function ProfileScreen({ navigation }) {
                 <View style={styles.hero}>
                     <View style={styles.avatarWrap}>
                         <View style={styles.avatarFrame}>
-                            <RamAvatar
-                                wool={profile.wool}
-                                bandana={profile.bandana}
-                                size={136}
-                                style={styles.avatar}
-                            />
+                            {photoUri ? (
+                                <Image source={{ uri: photoUri }} style={[styles.photo, styles.avatar]} />
+                            ) : (
+                                <RamAvatar
+                                    wool={profile.wool}
+                                    bandana={profile.bandana}
+                                    size={136}
+                                    style={styles.avatar}
+                                />
+                            )}
                         </View>
                         <Pressable
                             style={styles.cameraBadge}
@@ -94,7 +124,12 @@ export default function ProfileScreen({ navigation }) {
                     </GameButton>
                 </View>
             </ScrollView>
-            <ChangePhotoSheet visible={isPhotoSheetVisible} onClose={handleClosePhotoSheet} />
+            <ChangePhotoSheet
+                visible={isPhotoSheetVisible}
+                error={photoError}
+                onChooseFromGallery={handlePressChooseFromGallery}
+                onClose={handleClosePhotoSheet}
+            />
         </SafeAreaView>
     );
 }
@@ -144,6 +179,11 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.35,
         shadowRadius: 12,
         elevation: 6,
+    },
+    photo: {
+        width: 136,
+        height: 136,
+        borderRadius: 68,
     },
     avatar: {
         borderWidth: 5,
