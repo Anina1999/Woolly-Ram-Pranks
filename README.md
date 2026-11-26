@@ -423,6 +423,7 @@
 - [x] Add style to the Leaderboard header and tabs
 - [x] Add style to the podium
 - [x] Add style to the players list and my row
+- [x] Add the farm background to the Leaderboard
 
 </details>
 
@@ -430,5 +431,14 @@
 <summary>Steps to add the Leaderboard behaviour</summary>
 
 - [x] Sort the players by best time or by wins with the tabs
+
+</details>
+
+### Auth
+
+<details>
+<summary>Steps to add the auth screens</summary>
+
+- [x] Add the Welcome screen and open Login and Register from it
 
 </details>
