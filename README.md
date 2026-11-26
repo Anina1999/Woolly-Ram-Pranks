@@ -440,5 +440,7 @@
 <summary>Steps to add the auth screens</summary>
 
 - [x] Add the Welcome screen and open Login and Register from it
+- [x] Add Login form
+- [x] Add Register form
 
 </details>
