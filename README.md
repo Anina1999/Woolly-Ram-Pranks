@@ -444,3 +444,10 @@
 - [x] Add Register form
 
 </details>
+
+<details>
+<summary>Steps to style the auth screens</summary>
+
+- [x] Style Welcome screen
+
+</details>

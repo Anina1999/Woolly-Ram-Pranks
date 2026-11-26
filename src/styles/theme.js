@@ -13,6 +13,8 @@ export const colors = {
     readyButtonEdge: '#163D13',
     disabledButton: '#CFC4AF',
     disabledButtonEdge: '#B3A78F',
+    ribbon: '#C2412D',
+    ribbonEdge: '#7E2416',
 
     success: '#2F8F4E',
     warning: '#E39B17',
@@ -161,6 +163,8 @@ export const colors = {
     pasteText: '#5A3B86',
     dangerSecondaryText: '#A12A1F',
     linkText: '#24601F',
+    signText: '#FBF3E2',
+    ribbonText: '#FFFFFF',
 
     shadow: '#0A140C',
     avatarShadow: '#2E2117',

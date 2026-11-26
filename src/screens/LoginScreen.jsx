@@ -41,7 +41,6 @@ export default function LoginScreen({ navigation }) {
                     autoComplete='password'
                 />
             </View>
-            <Text>Forgot password?</Text>
             <GameButton title='Log in' />
             <AuthFooter question='New here?' linkTitle='Register' onPress={handlePressRegister} />
         </AuthLayout>
