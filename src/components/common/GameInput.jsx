@@ -1,15 +1,21 @@
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
+import FormError from './FormError';
+
 import { colors, fonts } from '../../styles/theme';
 
-export default function GameInput({ label, icon, ...inputProps }) {
+export default function GameInput({ label, icon, error, children, ...inputProps }) {
+    const hasError = Boolean(error);
+
     return (
         <View style={styles.field}>
-            <Text style={styles.label}>{label}</Text>
-            <View style={styles.box}>
+            <Text style={[styles.label, hasError && styles.labelError]}>{label}</Text>
+            <View style={[styles.box, hasError && styles.boxError]}>
                 {icon}
                 <TextInput placeholderTextColor={colors.placeholder} style={styles.input} {...inputProps} />
+                {children}
             </View>
+            {hasError && <FormError message={error} />}
         </View>
     );
 }
@@ -23,6 +29,9 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.text,
     },
+    labelError: {
+        color: colors.errorText,
+    },
     box: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -33,6 +42,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: colors.border,
         backgroundColor: colors.card,
+    },
+    boxError: {
+        borderColor: colors.errorBorder,
+        backgroundColor: colors.errorSurface,
     },
     input: {
         flex: 1,

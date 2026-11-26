@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
         fontFamily: fonts.extraBold,
         fontSize: 15,
         color: colors.authLink,
+        textDecorationLine: 'underline',
     },
 });

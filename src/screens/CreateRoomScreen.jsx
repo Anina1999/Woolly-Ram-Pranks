@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Keyboard, KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../components/common/BackHeader';
@@ -7,6 +7,7 @@ import BarnIcon from '../components/icons/BarnIcon';
 import DifficultySetting from '../components/room-settings/DifficultySetting';
 import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
+import GameInput from '../components/common/GameInput';
 import MaxPlayersSetting from '../components/room-settings/MaxPlayersSetting';
 import Panel from '../components/common/Panel';
 import SceneBackground from '../components/common/SceneBackground';
@@ -39,6 +40,7 @@ export default function CreateRoomScreen({ navigation }) {
     const isInRoom = me !== undefined;
     const isNameValid = roomName.trim().length >= MIN_NAME_LENGTH;
     const isNameErrorVisible = isSubmitted && !isNameValid;
+    const nameError = isNameErrorVisible ? `Name must be ${MIN_NAME_LENGTH}–${MAX_NAME_LENGTH} characters.` : '';
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -101,23 +103,16 @@ export default function CreateRoomScreen({ navigation }) {
                                 <Text style={styles.levelName}>{newRoom.map}</Text>
                             </View>
                         </View>
-                        <View style={styles.field}>
-                            <Text style={[styles.fieldLabel, isNameErrorVisible && styles.fieldLabelError]}>Room name</Text>
-                            <View style={[styles.fieldBox, isNameErrorVisible && styles.fieldBoxError]}>
-                                <TextInput
-                                    value={roomName}
-                                    onChangeText={setRoomName}
-                                    maxLength={MAX_NAME_LENGTH}
-                                    placeholder='e.g. Woolly Rebels'
-                                    placeholderTextColor={colors.placeholder}
-                                    style={styles.fieldInput}
-                                />
-                                <Text style={styles.fieldCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
-                            </View>
-                            {isNameErrorVisible && (
-                                <FormError message={`Name must be ${MIN_NAME_LENGTH}–${MAX_NAME_LENGTH} characters.`} />
-                            )}
-                        </View>
+                        <GameInput
+                            label='Room name'
+                            error={nameError}
+                            value={roomName}
+                            onChangeText={setRoomName}
+                            maxLength={MAX_NAME_LENGTH}
+                            placeholder='e.g. Woolly Rebels'
+                        >
+                            <Text style={styles.nameCounter}>{roomName.length}/{MAX_NAME_LENGTH}</Text>
+                        </GameInput>
                         <View style={styles.privateRow}>
                             <View style={styles.privateTexts}>
                                 <Text style={styles.privateTitle}>Private room</Text>
@@ -201,39 +196,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
         color: colors.text,
     },
-    field: {
-        gap: 6,
-    },
-    fieldLabel: {
-        fontFamily: fonts.bold,
-        fontSize: 14,
-        color: colors.text,
-    },
-    fieldLabelError: {
-        color: colors.errorText,
-    },
-    fieldBox: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        height: 52,
-        paddingHorizontal: 14,
-        borderRadius: 14,
-        borderWidth: 2,
-        borderColor: colors.border,
-        backgroundColor: colors.card,
-    },
-    fieldBoxError: {
-        borderColor: colors.errorBorder,
-        backgroundColor: colors.errorSurface,
-    },
-    fieldInput: {
-        flex: 1,
-        padding: 0,
-        fontFamily: fonts.regular,
-        fontSize: 16,
-        color: colors.text,
-    },
-    fieldCounter: {
+    nameCounter: {
         fontFamily: fonts.bold,
         fontSize: 12,
         color: colors.muted,
