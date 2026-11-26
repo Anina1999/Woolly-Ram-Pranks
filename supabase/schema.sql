@@ -168,3 +168,25 @@ end;
 $$;
 
 grant execute on function join_room(uuid, uuid, text) to anon;
+
+-- Creates the profile when a player registers in the app (the username comes from signUp options.data).
+-- Users added by hand in the Dashboard have no username, so they are skipped and seed.sql adds their profiles.
+create function handle_new_user()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+    if new.raw_user_meta_data ->> 'username' is not null then
+        insert into public.profiles (id, username)
+        values (new.id, new.raw_user_meta_data ->> 'username');
+    end if;
+
+    return new;
+end;
+$$;
+
+create trigger on_auth_user_created
+    after insert on auth.users
+    for each row execute function handle_new_user();

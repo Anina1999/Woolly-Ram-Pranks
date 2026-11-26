@@ -29,7 +29,8 @@
           "cameraPermission": "Allow Woolly Ram Pranks to use your camera so you can take a profile photo.",
           "microphonePermission": false
         }
-      ]
+      ],
+      "expo-secure-store"
     ]
   }
 }
