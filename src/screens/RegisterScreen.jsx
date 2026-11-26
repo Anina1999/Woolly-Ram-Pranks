@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { Keyboard, StyleSheet } from 'react-native';
 
 import AuthFooter from '../components/auth/AuthFooter';
 import AuthLayout from '../components/auth/AuthLayout';
@@ -7,11 +7,16 @@ import BarnBackground from '../components/auth/BarnBackground';
 import GameButton from '../components/common/GameButton';
 import GameInput from '../components/common/GameInput';
 
+import validateRegister, { MAX_USERNAME_LENGTH } from '../utils/validateRegister';
+
 export default function RegisterScreen({ navigation }) {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const errors = validateRegister({ username, email, password, confirmPassword });
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -19,6 +24,11 @@ export default function RegisterScreen({ navigation }) {
 
     const handlePressLogIn = () => {
         navigation.replace('Login');
+    };
+
+    const handlePressCreateAccount = () => {
+        Keyboard.dismiss();
+        setIsSubmitted(true);
     };
 
     return (
@@ -30,14 +40,17 @@ export default function RegisterScreen({ navigation }) {
         >
             <GameInput
                 label='Username'
+                error={isSubmitted ? errors.username : ''}
                 value={username}
                 onChangeText={setUsername}
+                maxLength={MAX_USERNAME_LENGTH}
                 placeholder='Your player name'
                 autoCapitalize='none'
                 autoComplete='username'
             />
             <GameInput
                 label='Email'
+                error={isSubmitted ? errors.email : ''}
                 value={email}
                 onChangeText={setEmail}
                 placeholder='you@example.com'
@@ -47,15 +60,17 @@ export default function RegisterScreen({ navigation }) {
             />
             <GameInput
                 label='Password'
+                error={isSubmitted ? errors.password : ''}
                 value={password}
                 onChangeText={setPassword}
-                placeholder='At least 8 characters'
+                placeholder='8+ characters, no spaces'
                 secureTextEntry
                 autoCapitalize='none'
                 autoComplete='new-password'
             />
             <GameInput
                 label='Confirm password'
+                error={isSubmitted ? errors.confirmPassword : ''}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 placeholder='Repeat password'
@@ -63,7 +78,7 @@ export default function RegisterScreen({ navigation }) {
                 autoCapitalize='none'
                 autoComplete='new-password'
             />
-            <GameButton title='Create account' />
+            <GameButton title='Create account' onPress={handlePressCreateAccount} />
             <AuthFooter question='Already have a ram?' linkTitle='Log in' onPress={handlePressLogIn} />
         </AuthLayout>
     );

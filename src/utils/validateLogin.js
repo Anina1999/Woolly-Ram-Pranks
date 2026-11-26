@@ -1,18 +1,10 @@
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+import getEmailError from './getEmailError';
+
 const SPACE_PATTERN = /\s/;
 const MIN_PASSWORD_LENGTH = 8;
 
 export default function validateLogin({ email, password }) {
-    const errors = { email: '', password: '' };
-    const trimmedEmail = email.trim();
-
-    if (trimmedEmail === '') {
-        errors.email = 'Enter your email address.';
-    } else if (SPACE_PATTERN.test(trimmedEmail)) {
-        errors.email = "Email can't contain spaces.";
-    } else if (!EMAIL_PATTERN.test(trimmedEmail)) {
-        errors.email = 'Enter a valid email address.';
-    }
+    const errors = { email: getEmailError(email), password: '' };
 
     if (SPACE_PATTERN.test(password)) {
         errors.password = "Password can't contain spaces.";
