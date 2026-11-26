@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import { Text, TextInput, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 import AuthFooter from '../components/auth/AuthFooter';
 import AuthLayout from '../components/auth/AuthLayout';
+import BarnBackground from '../components/auth/BarnBackground';
 import GameButton from '../components/common/GameButton';
+import GameInput from '../components/common/GameInput';
 
 export default function RegisterScreen({ navigation }) {
     const [username, setUsername] = useState('');
@@ -20,53 +22,57 @@ export default function RegisterScreen({ navigation }) {
     };
 
     return (
-        <AuthLayout title='Join the farm' subtitle='Make a ram. Cause trouble.' onBack={handlePressBack}>
-            <View>
-                <Text>Username</Text>
-                <TextInput
-                    value={username}
-                    onChangeText={setUsername}
-                    placeholder='Your player name'
-                    autoCapitalize='none'
-                    autoComplete='username'
-                />
-                <Text>3–16 letters, numbers or _</Text>
-            </View>
-            <View>
-                <Text>Email</Text>
-                <TextInput
-                    value={email}
-                    onChangeText={setEmail}
-                    placeholder='you@example.com'
-                    keyboardType='email-address'
-                    autoCapitalize='none'
-                    autoComplete='email'
-                />
-            </View>
-            <View>
-                <Text>Password</Text>
-                <TextInput
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder='At least 8 characters'
-                    secureTextEntry
-                    autoCapitalize='none'
-                    autoComplete='new-password'
-                />
-            </View>
-            <View>
-                <Text>Confirm password</Text>
-                <TextInput
-                    value={confirmPassword}
-                    onChangeText={setConfirmPassword}
-                    placeholder='Repeat password'
-                    secureTextEntry
-                    autoCapitalize='none'
-                    autoComplete='new-password'
-                />
-            </View>
+        <AuthLayout
+            title='Join the Flock'
+            background={<BarnBackground door='closed' />}
+            style={styles.panel}
+            onBack={handlePressBack}
+        >
+            <GameInput
+                label='Username'
+                value={username}
+                onChangeText={setUsername}
+                placeholder='Your player name'
+                autoCapitalize='none'
+                autoComplete='username'
+            />
+            <GameInput
+                label='Email'
+                value={email}
+                onChangeText={setEmail}
+                placeholder='you@example.com'
+                keyboardType='email-address'
+                autoCapitalize='none'
+                autoComplete='email'
+            />
+            <GameInput
+                label='Password'
+                value={password}
+                onChangeText={setPassword}
+                placeholder='At least 8 characters'
+                secureTextEntry
+                autoCapitalize='none'
+                autoComplete='new-password'
+            />
+            <GameInput
+                label='Confirm password'
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
+                placeholder='Repeat password'
+                secureTextEntry
+                autoCapitalize='none'
+                autoComplete='new-password'
+            />
             <GameButton title='Create account' />
-            <AuthFooter question='Already a player?' linkTitle='Log in' onPress={handlePressLogIn} />
+            <AuthFooter question='Already have a ram?' linkTitle='Log in' onPress={handlePressLogIn} />
         </AuthLayout>
     );
 }
+
+const styles = StyleSheet.create({
+    panel: {
+        gap: 10,
+        paddingTop: 14,
+        paddingBottom: 14,
+    },
+});

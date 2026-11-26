@@ -151,6 +151,7 @@ export const colors = {
     lockedText: '#5E5242',
     levelLabel: '#24601F',
     placeholder: '#8A7F6C',
+    fieldIcon: '#6E5D49',
     errorText: '#C8352B',
     errorTitle: '#8E2116',
     stepperIconDisabled: '#B3A78F',
@@ -165,6 +166,8 @@ export const colors = {
     linkText: '#24601F',
     signText: '#FBF3E2',
     ribbonText: '#FFFFFF',
+    authLink: '#8A5A34',
+    taglineAccent: '#8A5A34',
 
     shadow: '#0A140C',
     avatarShadow: '#2E2117',
@@ -182,5 +185,6 @@ export const fonts = {
     display: 'LilitaOne_400Regular',
     regular: 'NunitoSans_400Regular',
     bold: 'NunitoSans_700Bold',
+    boldItalic: 'NunitoSans_700Bold_Italic',
     extraBold: 'NunitoSans_800ExtraBold',
 };

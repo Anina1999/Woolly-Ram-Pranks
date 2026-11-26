@@ -2,7 +2,8 @@ import Svg, { Circle, Defs, Ellipse, G, Path, RadialGradient, Rect, Stop, Text }
 
 import { fonts } from '../../styles/theme';
 
-export default function Dog({ size }) {
+export default function Dog({ pose, size }) {
+    const isStunned = pose === 'stunned';
     const height = Math.round(size * 140 / 160);
 
     return (
@@ -24,8 +25,16 @@ export default function Dog({ size }) {
                 </RadialGradient>
             </Defs>
             <Ellipse cx={84} cy={122} rx={66} ry={13} fill='url(#dogShadow)' />
-            <G transform='translate(0, 12)'>
-                <G transform='rotate(40 26 62)'>
+            <G transform={isStunned ? 'translate(0, 12)' : undefined}>
+                {!isStunned && (
+                    <G>
+                        <Rect x={52} y={84} width={13} height={30} rx={5} fill='#5E3A1E' />
+                        <Ellipse cx={58.5} cy={113} rx={8} ry={4.5} fill='#E9DFCC' />
+                        <Rect x={100} y={84} width={13} height={30} rx={5} fill='#5E3A1E' />
+                        <Ellipse cx={106.5} cy={113} rx={8} ry={4.5} fill='#E9DFCC' />
+                    </G>
+                )}
+                <G transform={isStunned ? 'rotate(40 26 62)' : undefined}>
                     <Path d='M28 60 Q10 54 7 36 Q6 28 11 22 Q12 34 18 41 Q24 48 36 50 Z' fill='url(#dogFur)' />
                     <Path d='M11 22 Q6 28 7 34 Q10 30 12 27 Z' fill='#F4EDE0' />
                 </G>
@@ -49,21 +58,34 @@ export default function Dog({ size }) {
                     <Path d='M104 80 q2 8 -1 14' />
                 </G>
                 <Path d='M60 94 Q90 100 116 84' fill='none' stroke='#BFE3F2' strokeWidth={2} opacity={0.3} />
-                <Ellipse cx={34} cy={94} rx={16} ry={9} fill='#7A4E2C' />
-                <Ellipse cx={22} cy={100} rx={10} ry={5} fill='#F4EDE0' />
-                <Rect x={60} y={94} width={30} height={10} rx={5} fill='#6B4426' />
-                <Ellipse cx={62} cy={99} rx={6} ry={5} fill='#E9DFCC' />
-                <Rect x={98} y={96} width={44} height={11} rx={5.5} fill='#7A4E2C' />
-                <Rect x={108} y={104} width={40} height={11} rx={5.5} fill='#8A5A30' />
-                <Ellipse cx={141} cy={101} rx={7} ry={5.5} fill='#F4EDE0' />
-                <Ellipse cx={147} cy={109.5} rx={7} ry={5.5} fill='#F4EDE0' />
-                <Path
-                    d='M138 99 v4 M141 98.5 v4.5 M144 99 v4'
-                    stroke='#C9BBA2'
-                    strokeWidth={0.9}
-                    strokeLinecap='round'
-                />
-                <G transform='translate(-2, 6) rotate(8 126 70)'>
+                {isStunned ? (
+                    <G>
+                        <Ellipse cx={34} cy={94} rx={16} ry={9} fill='#7A4E2C' />
+                        <Ellipse cx={22} cy={100} rx={10} ry={5} fill='#F4EDE0' />
+                        <Rect x={60} y={94} width={30} height={10} rx={5} fill='#6B4426' />
+                        <Ellipse cx={62} cy={99} rx={6} ry={5} fill='#E9DFCC' />
+                        <Rect x={98} y={96} width={44} height={11} rx={5.5} fill='#7A4E2C' />
+                        <Rect x={108} y={104} width={40} height={11} rx={5.5} fill='#8A5A30' />
+                        <Ellipse cx={141} cy={101} rx={7} ry={5.5} fill='#F4EDE0' />
+                        <Ellipse cx={147} cy={109.5} rx={7} ry={5.5} fill='#F4EDE0' />
+                        <Path
+                            d='M138 99 v4 M141 98.5 v4.5 M144 99 v4'
+                            stroke='#C9BBA2'
+                            strokeWidth={0.9}
+                            strokeLinecap='round'
+                        />
+                    </G>
+                ) : (
+                    <G>
+                        <Rect x={40} y={90} width={14} height={30} rx={5} fill='#7A4E2C' />
+                        <Rect x={40} y={106} width={14} height={10} fill='#F4EDE0' />
+                        <Ellipse cx={47} cy={119} rx={8.5} ry={4.8} fill='#F4EDE0' />
+                        <Rect x={90} y={92} width={14} height={30} rx={5} fill='#7A4E2C' />
+                        <Rect x={90} y={108} width={14} height={10} fill='#F4EDE0' />
+                        <Ellipse cx={97} cy={121} rx={8.5} ry={4.8} fill='#F4EDE0' />
+                    </G>
+                )}
+                <G transform={isStunned ? 'translate(-2, 6) rotate(8 126 70)' : undefined}>
                     <Path d='M102 54 Q118 52 128 70 Q132 90 124 100 Q112 104 104 98 Q98 80 102 54 Z' fill='url(#dogFur)' />
                     <Path d='M142 50 Q158 52 159 70 Q157 80 150 76 Q148 64 138 54 Z' fill='#4E2F17' />
                     <Path
@@ -100,10 +122,21 @@ export default function Dog({ size }) {
                         strokeLinecap='round'
                         opacity={0.7}
                     />
-                    <G fill='none' stroke='#2A1408' strokeWidth={1.5} strokeLinecap='round'>
-                        <Path d='M116 65 q3 2.5 6 0' />
-                        <Path d='M134 63 q3 2.5 6 0' />
-                    </G>
+                    {isStunned ? (
+                        <G fill='none' stroke='#2A1408' strokeWidth={1.5} strokeLinecap='round'>
+                            <Path d='M116 65 q3 2.5 6 0' />
+                            <Path d='M134 63 q3 2.5 6 0' />
+                        </G>
+                    ) : (
+                        <G>
+                            <Circle cx={119} cy={65} r={2.8} fill='#2A1408' />
+                            <Circle cx={119.6} cy={65.5} r={1.2} fill='#000000' />
+                            <Circle cx={118.3} cy={64.1} r={0.8} fill='#FFFFFF' />
+                            <Circle cx={137} cy={63} r={2.6} fill='#2A1408' />
+                            <Circle cx={137.6} cy={63.5} r={1.1} fill='#000000' />
+                            <Circle cx={136.3} cy={62.1} r={0.8} fill='#FFFFFF' />
+                        </G>
+                    )}
                     <Path
                         d='M109 57 Q112 46 125 44.5 Q140 44 147 53 Q144 57.5 140 55.5 Q137 60 132.5 56.5 Q128.5 60.5 125 56.5 Q121 60 117.5 56 Q113.5 59.5 109 57 Z'
                         fill='#6B4426'
@@ -122,17 +155,27 @@ export default function Dog({ size }) {
                         strokeWidth={1.4}
                         strokeLinecap='round'
                     />
+                    {!isStunned && (
+                        <G>
+                            <Path d='M134 86 Q135 96 140 95 Q144 93 141 85 Z' fill='#E26F80' />
+                            <Path d='M137.5 87 L138.5 93' stroke='#B94A5C' strokeWidth={0.8} />
+                        </G>
+                    )}
                 </G>
             </G>
-            <G fontFamily={fonts.display} fill='#FFFFFF' stroke='#2E2117' strokeWidth={0.8}>
-                <Text x={148} y={38} fontSize={14}>z</Text>
-                <Text x={140} y={26} fontSize={11}>z</Text>
-                <Text x={152} y={18} fontSize={9}>z</Text>
-            </G>
-            <G fill='#F7D24A' stroke='#B9851A' strokeWidth={0.7}>
-                <Path d='M112 34 l1.4 2.8 3.1 0.5 -2.3 2.1 0.6 3.1 -2.8 -1.5 -2.8 1.5 0.6 -3.1 -2.3 -2.1 3.1 -0.5 Z' />
-                <Path d='M128 28 l1.2 2.4 2.6 0.4 -1.9 1.8 0.5 2.6 -2.4 -1.3 -2.4 1.3 0.5 -2.6 -1.9 -1.8 2.6 -0.4 Z' />
-            </G>
+            {isStunned && (
+                <G>
+                    <G fontFamily={fonts.display} fill='#FFFFFF' stroke='#2E2117' strokeWidth={0.8}>
+                        <Text x={148} y={38} fontSize={14}>z</Text>
+                        <Text x={140} y={26} fontSize={11}>z</Text>
+                        <Text x={152} y={18} fontSize={9}>z</Text>
+                    </G>
+                    <G fill='#F7D24A' stroke='#B9851A' strokeWidth={0.7}>
+                        <Path d='M112 34 l1.4 2.8 3.1 0.5 -2.3 2.1 0.6 3.1 -2.8 -1.5 -2.8 1.5 0.6 -3.1 -2.3 -2.1 3.1 -0.5 Z' />
+                        <Path d='M128 28 l1.2 2.4 2.6 0.4 -1.9 1.8 0.5 2.6 -2.4 -1.3 -2.4 1.3 0.5 -2.6 -1.9 -1.8 2.6 -0.4 Z' />
+                    </G>
+                </G>
+            )}
         </Svg>
     );
 }

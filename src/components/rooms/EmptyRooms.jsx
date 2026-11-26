@@ -7,7 +7,7 @@ import { colors, fonts } from '../../styles/theme';
 export default function EmptyRooms({ title, text, children }) {
     return (
         <View style={styles.container}>
-            <Dog size={180} />
+            <Dog pose='stunned' size={180} />
             <Text style={styles.title}>{title}</Text>
             <Text style={styles.text}>{text}</Text>
             {children && <View style={styles.action}>{children}</View>}

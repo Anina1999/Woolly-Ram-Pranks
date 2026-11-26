@@ -449,5 +449,8 @@
 <summary>Steps to style the auth screens</summary>
 
 - [x] Style Welcome screen
+- [x] Style Login screen
+- [x] Add backgrounds to Login and Register
+- [x] Style Register screen
 
 </details>
