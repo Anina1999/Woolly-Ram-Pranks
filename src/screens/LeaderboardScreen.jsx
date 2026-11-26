@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import LeaderboardBackground from '../components/leaderboard/LeaderboardBackground';
 import LeaderboardRow from '../components/leaderboard/LeaderboardRow';
 import PodiumPlace from '../components/leaderboard/PodiumPlace';
 import ScreenPanel from '../components/common/ScreenPanel';
@@ -28,6 +29,7 @@ export default function LeaderboardScreen() {
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
+            <LeaderboardBackground />
             <View style={styles.header}>
                 <Text style={styles.title}>Leaderboard</Text>
                 <Text style={styles.levelChip}>Meadow Farm</Text>
