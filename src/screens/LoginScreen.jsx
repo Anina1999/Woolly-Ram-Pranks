@@ -38,7 +38,7 @@ export default function LoginScreen({ navigation }) {
                 icon={<MailIcon />}
                 value={email}
                 onChangeText={setEmail}
-                placeholder='bramble@farm.io'
+                placeholder='you@example.com'
                 keyboardType='email-address'
                 autoCapitalize='none'
                 autoComplete='email'
