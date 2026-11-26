@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Keyboard } from 'react-native';
 
 import AuthFooter from '../components/auth/AuthFooter';
 import AuthLayout from '../components/auth/AuthLayout';
@@ -8,9 +9,14 @@ import GameInput from '../components/common/GameInput';
 import MailIcon from '../components/icons/MailIcon';
 import PasswordIcon from '../components/icons/PasswordIcon';
 
+import validateLogin from '../utils/validateLogin';
+
 export default function LoginScreen({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    const errors = validateLogin({ email, password });
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -18,6 +24,11 @@ export default function LoginScreen({ navigation }) {
 
     const handlePressRegister = () => {
         navigation.replace('Register');
+    };
+
+    const handlePressLogIn = () => {
+        Keyboard.dismiss();
+        setIsSubmitted(true);
     };
 
     return (
@@ -30,6 +41,7 @@ export default function LoginScreen({ navigation }) {
             <GameInput
                 label='Email'
                 icon={<MailIcon />}
+                error={isSubmitted ? errors.email : ''}
                 value={email}
                 onChangeText={setEmail}
                 placeholder='you@example.com'
@@ -40,6 +52,7 @@ export default function LoginScreen({ navigation }) {
             <GameInput
                 label='Password'
                 icon={<PasswordIcon />}
+                error={isSubmitted ? errors.password : ''}
                 value={password}
                 onChangeText={setPassword}
                 placeholder='Your password'
@@ -47,7 +60,7 @@ export default function LoginScreen({ navigation }) {
                 autoCapitalize='none'
                 autoComplete='password'
             />
-            <GameButton title='Log in' />
+            <GameButton title='Log in' onPress={handlePressLogIn} />
             <AuthFooter question='New here?' linkTitle='Register' onPress={handlePressRegister} />
         </AuthLayout>
     );
