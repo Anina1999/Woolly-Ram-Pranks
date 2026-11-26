@@ -1,12 +1,12 @@
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import BackHeader from '../common/BackHeader';
 import Panel from '../common/Panel';
 
-import { colors } from '../../styles/theme';
+import { colors, fonts } from '../../styles/theme';
 
-export default function AuthLayout({ title, background, onBack, style, children }) {
+export default function AuthLayout({ title, subtitle, background, onBack, style, children }) {
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
             {background}
@@ -14,7 +14,10 @@ export default function AuthLayout({ title, background, onBack, style, children 
             <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} style={styles.keyboardView}>
                 <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps='handled'>
                     <Panel style={[styles.panel, style]}>
-                        <Text accessibilityRole='header' style={styles.hiddenTitle}>{title}</Text>
+                        <View style={styles.titles}>
+                            <Text accessibilityRole='header' style={styles.title}>{title}</Text>
+                            {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
+                        </View>
                         {children}
                     </Panel>
                 </ScrollView>
@@ -43,10 +46,19 @@ const styles = StyleSheet.create({
         paddingBottom: 18,
         borderRadius: 24,
     },
-    hiddenTitle: {
-        position: 'absolute',
-        width: 1,
-        height: 1,
-        overflow: 'hidden',
+    titles: {
+        gap: 2,
+    },
+    title: {
+        fontFamily: fonts.display,
+        fontSize: 28,
+        lineHeight: 32,
+        color: colors.text,
+    },
+    subtitle: {
+        fontFamily: fonts.regular,
+        fontSize: 14,
+        lineHeight: 20,
+        color: colors.muted,
     },
 });

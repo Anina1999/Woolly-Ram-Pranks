@@ -18,6 +18,7 @@ const SCENE_COLORS = {
     barnRoof: '#5B4636',
     roofMoss: '#6E8B3D',
     barnTrim: '#F3E4C3',
+    doorSill: '#5E3A1E',
 
     meadowTop: '#93C656',
     meadowMiddle: '#6FB24A',
@@ -111,9 +112,10 @@ export default function SceneBackground({ scrimColor, scrimTop = 0 }) {
                 />
                 <Rect x='226' y='318' width='30' height='38' fill={SCENE_COLORS.barnShade} />
                 <Path
-                    d='M226 318 L256 356 M256 318 L226 356'
+                    d='M227.5 319.5 L254.5 354.5 M254.5 319.5 L227.5 354.5'
                     stroke={SCENE_COLORS.barnTrim}
                     strokeWidth='2.5'
+                    strokeLinecap='butt'
                 />
                 <Rect
                     x='226'
@@ -150,26 +152,14 @@ export default function SceneBackground({ scrimColor, scrimTop = 0 }) {
             </G>
 
             <Path
-                d='M206 1400 L200 800 Q170 640 230 520 Q260 450 250 372'
-                fill='none'
-                stroke='url(#road)'
-                strokeWidth='46'
-                strokeLinecap='round'
+                d='M170 1400 L170 800 Q145.4 640 209.5 520 Q242.2 440 226 356 L256 356 Q277.8 440 250.5 520 Q194.6 640 230 800 L230 1400 Z'
+                fill='url(#road)'
             />
-            <Path
-                d='M194 1400 L188 800 Q158 650 216 530'
-                fill='none'
-                stroke={SCENE_COLORS.wheelRut}
-                strokeWidth='3'
-                opacity='0.55'
-            />
-            <Path
-                d='M220 1400 L214 800 Q186 650 240 530'
-                fill='none'
-                stroke={SCENE_COLORS.wheelRut}
-                strokeWidth='3'
-                opacity='0.55'
-            />
+            <Rect x='221' y='355' width='40' height='5' rx='1' fill={SCENE_COLORS.doorSill} />
+            <G fill='none' stroke={SCENE_COLORS.wheelRut} strokeWidth='2.5' opacity='0.5'>
+                <Path d='M185 1400 L185 800 Q157.7 640 219.7 520 Q229.5 495.2 234.5 470' />
+                <Path d='M215 1400 L215 800 Q182.3 640 240.3 520 Q249.2 495.2 253.3 470' />
+            </G>
 
             <G>
                 <Circle cx='320' cy='420' r='20' fill={SCENE_COLORS.hay} />

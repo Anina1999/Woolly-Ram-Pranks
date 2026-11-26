@@ -167,7 +167,6 @@ export const colors = {
     signText: '#FBF3E2',
     ribbonText: '#FFFFFF',
     authLink: '#8A5A34',
-    taglineAccent: '#8A5A34',
 
     shadow: '#0A140C',
     avatarShadow: '#2E2117',

@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
         borderRadius: 24,
     },
     text: {
-        fontFamily: fonts.regular,
+        fontFamily: fonts.boldItalic,
         fontSize: 15,
         lineHeight: 21,
         textAlign: 'center',

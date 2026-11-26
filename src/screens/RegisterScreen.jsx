@@ -23,7 +23,7 @@ export default function RegisterScreen({ navigation }) {
 
     return (
         <AuthLayout
-            title='Join the Flock'
+            title='Register'
             background={<BarnBackground door='closed' />}
             style={styles.panel}
             onBack={handlePressBack}
