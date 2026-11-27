@@ -31,6 +31,10 @@ export default function GameButton({
         spinnerColor = colors.textOnAccent;
         spinnerTrackColor = colors.spinnerTrackOnAccent;
     }
+    if (isDangerSecondary) {
+        spinnerColor = colors.dangerSecondaryText;
+        spinnerTrackColor = colors.spinnerTrackOnDangerSecondary;
+    }
 
     return (
         <Pressable

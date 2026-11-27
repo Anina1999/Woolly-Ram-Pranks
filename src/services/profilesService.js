@@ -15,10 +15,13 @@ export async function getProfileByUsername(username) {
 }
 
 export async function isUsernameTaken(username) {
+    // In ilike _ means "any character", so it is escaped to match only a real _
+    const pattern = username.replace(/_/g, '\\_');
+
     const { data, error } = await supabase
         .from('profiles')
         .select('id')
-        .eq('username', username)
+        .ilike('username', pattern)
         .maybeSingle();
 
     if (error) {

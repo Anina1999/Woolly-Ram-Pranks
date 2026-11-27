@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import CameraIcon from '../components/icons/CameraIcon';
 import ChangePhotoSheet from '../components/profile/ChangePhotoSheet';
 import ClockIcon from '../components/icons/ClockIcon';
+import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
 import GamepadIcon from '../components/icons/GamepadIcon';
 import LogOutIcon from '../components/icons/LogOutIcon';
@@ -16,6 +17,8 @@ import StatCard from '../components/profile/StatCard';
 import TrophyIcon from '../components/icons/TrophyIcon';
 
 import profile from '../data/profile';
+
+import useAuthContext from '../contexts/auth-context/useAuthContext';
 
 import formatTime from '../utils/formatTime';
 import getBandanaName from '../utils/getBandanaName';
@@ -29,12 +32,15 @@ const PHOTO_OPTIONS = {
     quality: 0.5,
 };
 
-export default function ProfileScreen({ navigation }) {
+export default function ProfileScreen() {
+    const { logout } = useAuthContext();
     const [isPhotoSheetVisible, setIsPhotoSheetVisible] = useState(false);
     const [photoUri, setPhotoUri] = useState(null);
     const [photoError, setPhotoError] = useState('');
     const [canOpenSettings, setCanOpenSettings] = useState(false);
     const [isCameraInfoVisible, setIsCameraInfoVisible] = useState(false);
+    const [isLoggingOut, setIsLoggingOut] = useState(false);
+    const [logOutError, setLogOutError] = useState('');
 
     const winRate = profile.gamesPlayed > 0 ? Math.round((profile.wins / profile.gamesPlayed) * 100) : 0;
 
@@ -132,10 +138,17 @@ export default function ProfileScreen({ navigation }) {
         Linking.openSettings();
     };
 
-    const handlePressLogOut = () => {
-        // simulates log out by leading to lobby cause we don't have auth screens and logic yet
-        //TODO auth screens and logic
-        navigation.navigate('Lobby');
+    const handlePressLogOut = async () => {
+        setLogOutError('');
+        setIsLoggingOut(true);
+
+        try {
+            await logout();
+        } catch {
+            setLogOutError("Couldn't log out. Check your connection and try again.");
+        } finally {
+            setIsLoggingOut(false);
+        }
     };
 
     return (
@@ -193,9 +206,16 @@ export default function ProfileScreen({ navigation }) {
                     </View>
                 </View>
                 <View style={styles.logOut}>
-                    <GameButton title='Log out' variant='dangerSecondary' onPress={handlePressLogOut}>
+                    <GameButton
+                        title='Log out'
+                        variant='dangerSecondary'
+                        isLoading={isLoggingOut}
+                        loadingTitle='Logging out…'
+                        onPress={handlePressLogOut}
+                    >
                         <LogOutIcon />
                     </GameButton>
+                    {logOutError !== '' && <FormError message={logOutError} />}
                 </View>
             </ScrollView>
             <ChangePhotoSheet
@@ -359,6 +379,7 @@ const styles = StyleSheet.create({
         color: colors.text,
     },
     logOut: {
+        gap: 8,
         marginTop: 'auto',
         paddingTop: 24,
         paddingHorizontal: 16,

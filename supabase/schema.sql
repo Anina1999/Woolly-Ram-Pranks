@@ -7,6 +7,9 @@ create table profiles (
     created_at timestamptz not null default now()
 );
 
+-- A player name is taken in any letter case (Bramble = bramble)
+create unique index profiles_username_lower_key on profiles (lower(username));
+
 create function generate_room_code()
 returns text
 language sql

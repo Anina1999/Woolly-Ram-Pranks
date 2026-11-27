@@ -137,6 +137,7 @@ export const colors = {
     spinnerTrackOnPrimary: 'rgba(255, 255, 255, 0.3)',
     spinnerTrackOnSecondary: 'rgba(94, 58, 30, 0.25)',
     spinnerTrackOnAccent: 'rgba(46, 33, 23, 0.25)',
+    spinnerTrackOnDangerSecondary: 'rgba(161, 42, 31, 0.25)',
 
     text: '#2E2117',
     muted: '#6E5D49',

@@ -471,5 +471,6 @@
 - [x] Log in with Supabase
 - [x] Go to the next field and send the auth forms from the keyboard
 - [x] Register with Supabase
+- [x] Log out from Profile
 
 </details>
