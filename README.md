@@ -468,5 +468,7 @@
 
 - [x] Install "npx expo install expo-secure-store @react-native-async-storage/async-storage aes-js react-native-get-random-values"
 - [x] Show the app only to logged-in players and keep them logged in
+- [x] Log in with Supabase
+- [x] Go to the next field and send the auth forms from the keyboard
 
 </details>

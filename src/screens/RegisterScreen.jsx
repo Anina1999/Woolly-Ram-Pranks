@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 
 import AuthFooter from '../components/auth/AuthFooter';
@@ -15,6 +15,9 @@ export default function RegisterScreen({ navigation }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const emailInputRef = useRef(null);
+    const passwordInputRef = useRef(null);
+    const confirmPasswordInputRef = useRef(null);
 
     const errors = validateRegister({ username, email, password, confirmPassword });
 
@@ -24,6 +27,18 @@ export default function RegisterScreen({ navigation }) {
 
     const handlePressLogIn = () => {
         navigation.replace('Login');
+    };
+
+    const handleSubmitUsername = () => {
+        emailInputRef.current.focus();
+    };
+
+    const handleSubmitEmail = () => {
+        passwordInputRef.current.focus();
+    };
+
+    const handleSubmitPassword = () => {
+        confirmPasswordInputRef.current.focus();
     };
 
     const handlePressCreateAccount = () => {
@@ -47,8 +62,12 @@ export default function RegisterScreen({ navigation }) {
                 placeholder='Your player name'
                 autoCapitalize='none'
                 autoComplete='username'
+                returnKeyType='next'
+                submitBehavior='submit'
+                onSubmitEditing={handleSubmitUsername}
             />
             <GameInput
+                ref={emailInputRef}
                 label='Email'
                 error={isSubmitted ? errors.email : ''}
                 value={email}
@@ -57,8 +76,12 @@ export default function RegisterScreen({ navigation }) {
                 keyboardType='email-address'
                 autoCapitalize='none'
                 autoComplete='email'
+                returnKeyType='next'
+                submitBehavior='submit'
+                onSubmitEditing={handleSubmitEmail}
             />
             <GameInput
+                ref={passwordInputRef}
                 label='Password'
                 error={isSubmitted ? errors.password : ''}
                 value={password}
@@ -67,8 +90,12 @@ export default function RegisterScreen({ navigation }) {
                 secureTextEntry
                 autoCapitalize='none'
                 autoComplete='new-password'
+                returnKeyType='next'
+                submitBehavior='submit'
+                onSubmitEditing={handleSubmitPassword}
             />
             <GameInput
+                ref={confirmPasswordInputRef}
                 label='Confirm password'
                 error={isSubmitted ? errors.confirmPassword : ''}
                 value={confirmPassword}
@@ -77,6 +104,8 @@ export default function RegisterScreen({ navigation }) {
                 secureTextEntry
                 autoCapitalize='none'
                 autoComplete='new-password'
+                returnKeyType='go'
+                onSubmitEditing={handlePressCreateAccount}
             />
             <GameButton title='Create account' onPress={handlePressCreateAccount} />
             <AuthFooter question='Already have a ram?' linkTitle='Log in' onPress={handlePressLogIn} />

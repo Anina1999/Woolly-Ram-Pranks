@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Keyboard } from 'react-native';
 
 import AuthFooter from '../components/auth/AuthFooter';
@@ -23,6 +23,7 @@ export default function LoginScreen({ navigation }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitError, setSubmitError] = useState('');
     const [isServerErrorVisible, setIsServerErrorVisible] = useState(false);
+    const passwordInputRef = useRef(null);
 
     const errors = validateLogin({ email, password });
 
@@ -34,7 +35,15 @@ export default function LoginScreen({ navigation }) {
         navigation.replace('Register');
     };
 
+    const handleSubmitEmail = () => {
+        passwordInputRef.current.focus();
+    };
+
     const handlePressLogIn = async () => {
+        if (isSubmitting) {
+            return;
+        }
+
         Keyboard.dismiss();
         setIsSubmitted(true);
         setSubmitError('');
@@ -77,8 +86,12 @@ export default function LoginScreen({ navigation }) {
                 keyboardType='email-address'
                 autoCapitalize='none'
                 autoComplete='email'
+                returnKeyType='next'
+                submitBehavior='submit'
+                onSubmitEditing={handleSubmitEmail}
             />
             <GameInput
+                ref={passwordInputRef}
                 label='Password'
                 icon={<PasswordIcon />}
                 error={isSubmitted ? errors.password : ''}
@@ -88,6 +101,8 @@ export default function LoginScreen({ navigation }) {
                 secureTextEntry
                 autoCapitalize='none'
                 autoComplete='password'
+                returnKeyType='go'
+                onSubmitEditing={handlePressLogIn}
             />
             <GameButton
                 title={isServerErrorVisible ? 'Try again' : 'Log in'}
