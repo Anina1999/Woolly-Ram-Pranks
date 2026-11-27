@@ -454,3 +454,19 @@
 - [x] Style Register screen
 
 </details>
+
+<details>
+<summary>Steps to validate the auth forms</summary>
+
+- [x] Validate Login form
+- [x] Validate Register form
+
+</details>
+
+<details>
+<summary>Steps to log in with Supabase</summary>
+
+- [x] Install "npx expo install expo-secure-store @react-native-async-storage/async-storage aes-js react-native-get-random-values"
+- [x] Show the app only to logged-in players and keep them logged in
+
+</details>
