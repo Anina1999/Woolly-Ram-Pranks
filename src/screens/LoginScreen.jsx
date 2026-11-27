@@ -4,17 +4,25 @@ import { Keyboard } from 'react-native';
 import AuthFooter from '../components/auth/AuthFooter';
 import AuthLayout from '../components/auth/AuthLayout';
 import BarnBackground from '../components/auth/BarnBackground';
+import FormError from '../components/common/FormError';
 import GameButton from '../components/common/GameButton';
 import GameInput from '../components/common/GameInput';
 import MailIcon from '../components/icons/MailIcon';
 import PasswordIcon from '../components/icons/PasswordIcon';
+import ServerError from '../components/auth/ServerError';
+
+import useAuthContext from '../contexts/auth-context/useAuthContext';
 
 import validateLogin from '../utils/validateLogin';
 
 export default function LoginScreen({ navigation }) {
+    const { login } = useAuthContext();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState('');
+    const [isServerErrorVisible, setIsServerErrorVisible] = useState(false);
 
     const errors = validateLogin({ email, password });
 
@@ -26,9 +34,29 @@ export default function LoginScreen({ navigation }) {
         navigation.replace('Register');
     };
 
-    const handlePressLogIn = () => {
+    const handlePressLogIn = async () => {
         Keyboard.dismiss();
         setIsSubmitted(true);
+        setSubmitError('');
+        setIsServerErrorVisible(false);
+
+        if (errors.email || errors.password) {
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            await login(email.trim(), password);
+        } catch (loginError) {
+            if (loginError.code === 'invalid_credentials') {
+                setSubmitError('Wrong email or password.');
+            } else {
+                setIsServerErrorVisible(true);
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -38,6 +66,7 @@ export default function LoginScreen({ navigation }) {
             background={<BarnBackground door='open' />}
             onBack={handlePressBack}
         >
+            {isServerErrorVisible && <ServerError />}
             <GameInput
                 label='Email'
                 icon={<MailIcon />}
@@ -60,7 +89,13 @@ export default function LoginScreen({ navigation }) {
                 autoCapitalize='none'
                 autoComplete='password'
             />
-            <GameButton title='Log in' onPress={handlePressLogIn} />
+            <GameButton
+                title={isServerErrorVisible ? 'Try again' : 'Log in'}
+                isLoading={isSubmitting}
+                loadingTitle='Logging in…'
+                onPress={handlePressLogIn}
+            />
+            {submitError !== '' && <FormError message={submitError} />}
             <AuthFooter question='New here?' linkTitle='Register' onPress={handlePressRegister} />
         </AuthLayout>
     );
