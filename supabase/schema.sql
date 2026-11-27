@@ -65,37 +65,37 @@ create policy "Everyone can read room players"
     to anon, authenticated
     using (true);
 
--- Temporary write rights for anon, tightened when auth is added
-grant insert, delete on rooms to anon;
-grant update (host_id, is_private, max_players, difficulty) on rooms to anon;
-grant insert, delete on room_players to anon;
-grant update (is_ready) on room_players to anon;
+-- Temporary write rights only for logged-in players (anon can only read), tightened later with auth.uid()
+grant insert, delete on rooms to authenticated;
+grant update (host_id, is_private, max_players, difficulty) on rooms to authenticated;
+grant insert, delete on room_players to authenticated;
+grant update (is_ready) on room_players to authenticated;
 
-create policy "Temporary: anon can create rooms"
+create policy "Temporary: logged-in players can create rooms"
     on rooms for insert
-    to anon
+    to authenticated
     with check (true);
 
-create policy "Temporary: anon can delete rooms"
+create policy "Temporary: logged-in players can delete rooms"
     on rooms for delete
-    to anon
+    to authenticated
     using (true);
 
 -- Only the host is added directly (Create room), everyone else joins with join_room
-create policy "Temporary: anon can add the host of a room"
+create policy "Temporary: logged-in players can add the host of a room"
     on room_players for insert
-    to anon
+    to authenticated
     with check (exists (select 1 from rooms where rooms.id = room_id and rooms.host_id = profile_id));
 
-create policy "Temporary: anon can remove room players"
+create policy "Temporary: logged-in players can remove room players"
     on room_players for delete
-    to anon
+    to authenticated
     using (true);
 
 -- Only a guest's Ready, and only while the room is waiting (the host's is_ready is not used)
-create policy "Temporary: anon can change ready"
+create policy "Temporary: logged-in players can change ready"
     on room_players for update
-    to anon
+    to authenticated
     using (true)
     with check (
         exists (
@@ -108,9 +108,9 @@ create policy "Temporary: anon can change ready"
 
 -- One update policy for the host and the room settings (policies are joined with OR).
 -- The host must be a player of the room and max players can't go below the player count.
-create policy "Temporary: anon can update a room"
+create policy "Temporary: logged-in players can update a room"
     on rooms for update
-    to anon
+    to authenticated
     using (true)
     with check (
         exists (
@@ -167,7 +167,8 @@ begin
 end;
 $$;
 
-grant execute on function join_room(uuid, uuid, text) to anon;
+revoke execute on function join_room(uuid, uuid, text) from public, anon;
+grant execute on function join_room(uuid, uuid, text) to authenticated;
 
 -- Creates the profile when a player registers in the app (the username comes from signUp options.data).
 -- Users added by hand in the Dashboard have no username, so they are skipped and seed.sql adds their profiles.
