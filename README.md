@@ -470,5 +470,6 @@
 - [x] Show the app only to logged-in players and keep them logged in
 - [x] Log in with Supabase
 - [x] Go to the next field and send the auth forms from the keyboard
+- [x] Register with Supabase
 
 </details>

@@ -2,9 +2,10 @@ import { Dimensions, StyleSheet, useWindowDimensions, View } from 'react-native'
 import Svg from 'react-native-svg';
 
 export default function SceneCanvas({ children }) {
-    const { width } = useWindowDimensions();
+    const { width: screenWidth } = useWindowDimensions();
+    const width = Math.ceil(screenWidth) + 2;
     const height = Dimensions.get('screen').height;
-    const left = (360 - width) / 2;
+    const left = (360 - screenWidth) / 2;
 
     return (
         <View style={[styles.background, { height: height }]} pointerEvents='none'>

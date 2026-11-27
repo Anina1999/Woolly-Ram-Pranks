@@ -6,20 +6,34 @@ import AuthLayout from '../components/auth/AuthLayout';
 import BarnBackground from '../components/auth/BarnBackground';
 import GameButton from '../components/common/GameButton';
 import GameInput from '../components/common/GameInput';
+import ServerError from '../components/auth/ServerError';
+
+import useAuthContext from '../contexts/auth-context/useAuthContext';
+
+import { isUsernameTaken } from '../services';
 
 import validateRegister, { MAX_USERNAME_LENGTH } from '../utils/validateRegister';
 
 export default function RegisterScreen({ navigation }) {
+    const { register } = useAuthContext();
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isServerErrorVisible, setIsServerErrorVisible] = useState(false);
+    const [takenUsername, setTakenUsername] = useState('');
+    const [takenEmail, setTakenEmail] = useState('');
     const emailInputRef = useRef(null);
     const passwordInputRef = useRef(null);
     const confirmPasswordInputRef = useRef(null);
 
     const errors = validateRegister({ username, email, password, confirmPassword });
+    const trimmedUsername = username.trim();
+    const trimmedEmail = email.trim();
+    const usernameError = errors.username || (trimmedUsername === takenUsername ? 'That name is taken.' : '');
+    const emailError = errors.email || (trimmedEmail === takenEmail ? 'That email already has an account.' : '');
 
     const handlePressBack = () => {
         navigation.goBack();
@@ -41,9 +55,41 @@ export default function RegisterScreen({ navigation }) {
         confirmPasswordInputRef.current.focus();
     };
 
-    const handlePressCreateAccount = () => {
+    const handlePressCreateAccount = async () => {
+        if (isSubmitting) {
+            return;
+        }
+
         Keyboard.dismiss();
         setIsSubmitted(true);
+        setIsServerErrorVisible(false);
+
+        if (usernameError || emailError || errors.password || errors.confirmPassword) {
+            return;
+        }
+
+        setIsSubmitting(true);
+
+        try {
+            const isTaken = await isUsernameTaken(trimmedUsername);
+
+            if (isTaken) {
+                setTakenUsername(trimmedUsername);
+                return;
+            }
+
+            await register({ username: trimmedUsername, email: trimmedEmail, password });
+        } catch (registerError) {
+            if (registerError.code === 'user_already_exists') {
+                setTakenEmail(trimmedEmail);
+            } else if (registerError.code === 'unexpected_failure') {
+                setTakenUsername(trimmedUsername);
+            } else {
+                setIsServerErrorVisible(true);
+            }
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -53,9 +99,10 @@ export default function RegisterScreen({ navigation }) {
             style={styles.panel}
             onBack={handlePressBack}
         >
+            {isServerErrorVisible && <ServerError />}
             <GameInput
                 label='Username'
-                error={isSubmitted ? errors.username : ''}
+                error={isSubmitted ? usernameError : ''}
                 value={username}
                 onChangeText={setUsername}
                 maxLength={MAX_USERNAME_LENGTH}
@@ -69,7 +116,7 @@ export default function RegisterScreen({ navigation }) {
             <GameInput
                 ref={emailInputRef}
                 label='Email'
-                error={isSubmitted ? errors.email : ''}
+                error={isSubmitted ? emailError : ''}
                 value={email}
                 onChangeText={setEmail}
                 placeholder='you@example.com'
@@ -107,7 +154,12 @@ export default function RegisterScreen({ navigation }) {
                 returnKeyType='go'
                 onSubmitEditing={handlePressCreateAccount}
             />
-            <GameButton title='Create account' onPress={handlePressCreateAccount} />
+            <GameButton
+                title={isServerErrorVisible ? 'Try again' : 'Create account'}
+                isLoading={isSubmitting}
+                loadingTitle='Creating…'
+                onPress={handlePressCreateAccount}
+            />
             <AuthFooter question='Already have a ram?' linkTitle='Log in' onPress={handlePressLogIn} />
         </AuthLayout>
     );

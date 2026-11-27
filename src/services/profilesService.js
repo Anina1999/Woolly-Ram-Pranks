@@ -13,3 +13,17 @@ export async function getProfileByUsername(username) {
 
     return data;
 }
+
+export async function isUsernameTaken(username) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('id')
+        .eq('username', username)
+        .maybeSingle();
+
+    if (error) {
+        throw error;
+    }
+
+    return data !== null;
+}
