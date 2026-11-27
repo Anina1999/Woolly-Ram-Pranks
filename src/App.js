@@ -4,6 +4,7 @@ import { StatusBar } from 'expo-status-bar';
 import RootNavigator from './navigation/RootNavigator';
 
 import AuthProvider from './contexts/auth-context/AuthProvider';
+import ProfileProvider from './contexts/profile-context/ProfileProvider';
 import RoomsProvider from './contexts/rooms-context/RoomsProvider';
 
 import useGameFonts from './hooks/useGameFonts';
@@ -20,11 +21,13 @@ export default function App() {
 		<>
 			<StatusBar style='dark' />
 			<AuthProvider>
-				<RoomsProvider>
-					<NavigationContainer>
-						<RootNavigator />
-					</NavigationContainer>
-				</RoomsProvider>
+				<ProfileProvider>
+					<RoomsProvider>
+						<NavigationContainer>
+							<RootNavigator />
+						</NavigationContainer>
+					</RoomsProvider>
+				</ProfileProvider>
 			</AuthProvider>
 		</>
 	);

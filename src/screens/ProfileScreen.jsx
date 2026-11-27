@@ -18,7 +18,7 @@ import TrophyIcon from '../components/icons/TrophyIcon';
 
 import profile from '../data/profile';
 
-import useAuthContext from '../contexts/auth-context/useAuthContext';
+import useLogOut from '../hooks/useLogOut';
 
 import formatTime from '../utils/formatTime';
 import getBandanaName from '../utils/getBandanaName';
@@ -33,14 +33,12 @@ const PHOTO_OPTIONS = {
 };
 
 export default function ProfileScreen() {
-    const { logout } = useAuthContext();
+    const { isLoggingOut, logOutError, handlePressLogOut } = useLogOut();
     const [isPhotoSheetVisible, setIsPhotoSheetVisible] = useState(false);
     const [photoUri, setPhotoUri] = useState(null);
     const [photoError, setPhotoError] = useState('');
     const [canOpenSettings, setCanOpenSettings] = useState(false);
     const [isCameraInfoVisible, setIsCameraInfoVisible] = useState(false);
-    const [isLoggingOut, setIsLoggingOut] = useState(false);
-    const [logOutError, setLogOutError] = useState('');
 
     const winRate = profile.gamesPlayed > 0 ? Math.round((profile.wins / profile.gamesPlayed) * 100) : 0;
 
@@ -136,19 +134,6 @@ export default function ProfileScreen() {
 
     const handlePressOpenSettings = () => {
         Linking.openSettings();
-    };
-
-    const handlePressLogOut = async () => {
-        setLogOutError('');
-        setIsLoggingOut(true);
-
-        try {
-            await logout();
-        } catch {
-            setLogOutError("Couldn't log out. Check your connection and try again.");
-        } finally {
-            setIsLoggingOut(false);
-        }
     };
 
     return (

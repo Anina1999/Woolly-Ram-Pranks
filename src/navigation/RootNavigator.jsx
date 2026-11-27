@@ -3,23 +3,28 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AppNavigator from './AppNavigator';
 import AuthNavigator from './AuthNavigator';
 import CreateRoomScreen from '../screens/CreateRoomScreen';
+import ProfileErrorScreen from '../screens/ProfileErrorScreen';
 import WaitingRoomScreen from '../screens/WaitingRoomScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 import useAuthContext from '../contexts/auth-context/useAuthContext';
+import useProfileContext from '../contexts/profile-context/useProfileContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function RootNavigator() {
     const { user, isLoading } = useAuthContext();
+    const { profile, error: profileError } = useProfileContext();
 
-    if (isLoading) {
+    const isProfileLoading = user && !profile && !profileError;
+
+    if (isLoading || isProfileLoading) {
         return null;
     }
 
     return (
         <Stack.Navigator>
-            {user ? (
+            {user && profile && (
                 <>
                     <Stack.Screen
                         name='App'
@@ -42,7 +47,15 @@ export default function RootNavigator() {
                         options={{ headerShown: false }}
                     />
                 </>
-            ) : (
+            )}
+            {user && !profile && (
+                <Stack.Screen
+                    name='ProfileError'
+                    component={ProfileErrorScreen}
+                    options={{ headerShown: false }}
+                />
+            )}
+            {!user && (
                 <Stack.Screen
                     name='Auth'
                     component={AuthNavigator}

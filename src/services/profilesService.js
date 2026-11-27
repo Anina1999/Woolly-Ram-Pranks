@@ -1,5 +1,19 @@
 import supabase from './supabase';
 
+export async function getProfile(profileId) {
+    const { data, error } = await supabase
+        .from('profiles')
+        .select('id, name:username, wool, bandana')
+        .eq('id', profileId)
+        .single();
+
+    if (error) {
+        throw error;
+    }
+
+    return data;
+}
+
 export async function getProfileByUsername(username) {
     const { data, error } = await supabase
         .from('profiles')

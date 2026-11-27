@@ -474,3 +474,10 @@
 - [x] Log out from Profile
 
 </details>
+
+<details>
+<summary>Steps to use the logged-in player</summary>
+
+- [x] Load my player profile and show an error when it can't load
+
+</details>
