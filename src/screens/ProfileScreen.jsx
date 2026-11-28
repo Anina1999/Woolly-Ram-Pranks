@@ -16,7 +16,10 @@ import ScreenPanel from '../components/common/ScreenPanel';
 import StatCard from '../components/profile/StatCard';
 import TrophyIcon from '../components/icons/TrophyIcon';
 
-import profile from '../data/profile';
+import profileStats from '../data/profileStats';
+
+import useAuthContext from '../contexts/auth-context/useAuthContext';
+import useProfileContext from '../contexts/profile-context/useProfileContext';
 
 import useLogOut from '../hooks/useLogOut';
 
@@ -33,6 +36,8 @@ const PHOTO_OPTIONS = {
 };
 
 export default function ProfileScreen() {
+    const { user } = useAuthContext();
+    const { profile } = useProfileContext();
     const { isLoggingOut, logOutError, handlePressLogOut } = useLogOut();
     const [isPhotoSheetVisible, setIsPhotoSheetVisible] = useState(false);
     const [photoUri, setPhotoUri] = useState(null);
@@ -40,7 +45,8 @@ export default function ProfileScreen() {
     const [canOpenSettings, setCanOpenSettings] = useState(false);
     const [isCameraInfoVisible, setIsCameraInfoVisible] = useState(false);
 
-    const winRate = profile.gamesPlayed > 0 ? Math.round((profile.wins / profile.gamesPlayed) * 100) : 0;
+    const { gamesPlayed, wins, bestTimeSeconds } = profileStats;
+    const winRate = gamesPlayed > 0 ? Math.round((wins / gamesPlayed) * 100) : 0;
 
     const handlePressChangePhoto = () => {
         setIsPhotoSheetVisible(true);
@@ -167,13 +173,13 @@ export default function ProfileScreen() {
                     </View>
                     <View style={styles.nameBlock}>
                         <Text style={styles.name}>{profile.name}</Text>
-                        <Text style={styles.email}>{profile.email}</Text>
+                        <Text style={styles.email}>{user.email}</Text>
                     </View>
                 </View>
                 <View style={styles.stats}>
-                    <StatCard icon={<GamepadIcon />} value={profile.gamesPlayed} label='Games played' />
-                    <StatCard icon={<TrophyIcon />} value={profile.wins} label='Wins' />
-                    <StatCard icon={<ClockIcon />} value={formatTime(profile.bestTimeSeconds)} label='Best time' />
+                    <StatCard icon={<GamepadIcon />} value={gamesPlayed} label='Games played' />
+                    <StatCard icon={<TrophyIcon />} value={wins} label='Wins' />
+                    <StatCard icon={<ClockIcon />} value={formatTime(bestTimeSeconds)} label='Best time' />
                 </View>
                 <View style={styles.infoCard}>
                     <View style={styles.infoRow}>

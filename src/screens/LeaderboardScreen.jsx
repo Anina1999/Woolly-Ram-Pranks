@@ -9,7 +9,9 @@ import ScreenPanel from '../components/common/ScreenPanel';
 import SegmentTab from '../components/common/SegmentTab';
 
 import leaderboard from '../data/leaderboard';
-import profile from '../data/profile';
+import profileStats from '../data/profileStats';
+
+import useProfileContext from '../contexts/profile-context/useProfileContext';
 
 import formatTime from '../utils/formatTime';
 import getSortedPlayers from '../utils/getSortedPlayers';
@@ -17,8 +19,10 @@ import getSortedPlayers from '../utils/getSortedPlayers';
 import { colors, fonts } from '../styles/theme';
 
 export default function LeaderboardScreen() {
+    const { profile } = useProfileContext();
     const [sortBy, setSortBy] = useState('time');
 
+    const me = { ...profile, ...profileStats };
     const isWins = sortBy === 'wins';
     const sortedPlayers = getSortedPlayers(leaderboard.players, sortBy);
     const [first, second, third] = sortedPlayers;
@@ -69,9 +73,9 @@ export default function LeaderboardScreen() {
                 />
                 <LeaderboardRow
                     rank={leaderboard.myRank}
-                    player={profile}
-                    value={getValue(profile)}
-                    detail={getDetail(profile)}
+                    player={me}
+                    value={getValue(me)}
+                    detail={getDetail(me)}
                     isMe={true}
                     style={styles.myRow}
                 />

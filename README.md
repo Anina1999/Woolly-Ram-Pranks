@@ -480,5 +480,6 @@
 
 - [x] Load my player profile and show an error when it can't load
 - [x] Style the profile error screen
+- [x] Show my own name, ram and email
 
 </details>

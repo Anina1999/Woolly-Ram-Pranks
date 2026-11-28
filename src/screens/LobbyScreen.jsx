@@ -12,8 +12,7 @@ import RamAvatar from '../components/characters/RamAvatar';
 import SceneBackground from '../components/common/SceneBackground';
 import Sheep from '../components/characters/Sheep';
 
-import profile from '../data/profile';
-
+import useProfileContext from '../contexts/profile-context/useProfileContext';
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
 import useCardPulse from '../hooks/useCardPulse';
@@ -21,6 +20,7 @@ import useCardPulse from '../hooks/useCardPulse';
 import { colors, fonts } from '../styles/theme';
 
 export default function LobbyScreen({ navigation }) {
+    const { profile } = useProfileContext();
     const { players } = useRoomsContext();
     const { borderColor, scale } = useCardPulse();
 
