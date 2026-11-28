@@ -31,7 +31,6 @@ create table rooms (
     mode text not null default 'Co-op',
     map text not null default 'Meadow Farm',
     is_private boolean not null default false,
-    code text not null unique default generate_room_code(),
     host_id uuid not null references profiles (id) on delete cascade,
     created_at timestamptz not null default now()
 );
@@ -44,14 +43,22 @@ create table room_players (
     joined_at timestamptz not null default now()
 );
 
+-- Room codes live in their own table, so only the players of a room can read its code
+create table room_codes (
+    room_id uuid primary key references rooms (id) on delete cascade,
+    code text not null unique default generate_room_code()
+);
+
 alter table profiles enable row level security;
 alter table rooms enable row level security;
 alter table room_players enable row level security;
+alter table room_codes enable row level security;
 
 -- Supabase gives anon and authenticated all rights on new tables, so take them back and grant only what is needed
-revoke all on profiles, rooms, room_players from anon, authenticated;
+revoke all on profiles, rooms, room_players, room_codes from anon, authenticated;
 
 grant select on profiles, rooms, room_players to anon, authenticated;
+grant select on room_codes to authenticated;
 
 create policy "Everyone can read profiles"
     on profiles for select
@@ -67,6 +74,16 @@ create policy "Everyone can read room players"
     on room_players for select
     to anon, authenticated
     using (true);
+
+create policy "Players can read the code of their room"
+    on room_codes for select
+    to authenticated
+    using (
+        exists (
+            select 1 from room_players
+            where room_players.room_id = room_codes.room_id and room_players.profile_id = (select auth.uid())
+        )
+    );
 
 -- Write rights only for logged-in players (anon can only read), and only on their own rows.
 -- auth.uid() is the logged-in player; it is wrapped in select so Postgres runs it once per query, not once per row.
@@ -145,9 +162,11 @@ begin
     if p_code is null then
         select * into target_room from public.rooms where id = p_room_id for update;
     else
-        select * into target_room from public.rooms
-        where code = p_code and (p_room_id is null or id = p_room_id)
-        for update;
+        select rooms.* into target_room
+        from public.rooms
+        join public.room_codes on room_codes.room_id = rooms.id
+        where room_codes.code = p_code and (p_room_id is null or rooms.id = p_room_id)
+        for update of rooms;
     end if;
 
     if not found then
@@ -179,6 +198,24 @@ $$;
 
 revoke execute on function join_room(uuid, text) from public, anon;
 grant execute on function join_room(uuid, text) to authenticated;
+
+-- Every new room gets a code (security definer, so players need no insert right on room_codes)
+create function create_room_code()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $$
+begin
+    insert into public.room_codes (room_id) values (new.id);
+
+    return new;
+end;
+$$;
+
+create trigger on_room_created
+    after insert on rooms
+    for each row execute function create_room_code();
 
 -- Creates the profile when a player registers in the app (the username comes from signUp options.data).
 -- Users added by hand in the Dashboard have no username, so they are skipped and seed.sql adds their profiles.

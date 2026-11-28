@@ -6,8 +6,8 @@ export async function getRooms() {
     const { data, error } = await supabase
         .from('rooms')
         .select(`
-            id, name, maxPlayers:max_players, difficulty, status, mode, map, isPrivate:is_private, code, hostId:host_id,
-            host:profiles!host_id(name:username, wool, bandana)
+            id, name, maxPlayers:max_players, difficulty, status, mode, map, isPrivate:is_private, hostId:host_id,
+            host:profiles!host_id(name:username, wool, bandana), ...room_codes(code)
         `)
         .order('created_at');
 
