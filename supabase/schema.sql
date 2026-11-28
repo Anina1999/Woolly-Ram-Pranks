@@ -131,8 +131,8 @@ create policy "Players can change their own ready"
     );
 
 -- Joins a room by id (public rooms) or by code (any room; with p_room_id the code must be that room's) and returns the room id.
--- Temporary: p_profile_id comes from the app until auth, then it becomes auth.uid().
-create function join_room(p_profile_id uuid, p_room_id uuid default null, p_code text default null)
+-- The player is always the logged-in one (auth.uid()), so nobody can add someone else.
+create function join_room(p_room_id uuid default null, p_code text default null)
 returns uuid
 language plpgsql
 security definer
@@ -171,14 +171,14 @@ begin
         raise exception 'ROOM_FULL';
     end if;
 
-    insert into public.room_players (room_id, profile_id) values (target_room.id, p_profile_id);
+    insert into public.room_players (room_id, profile_id) values (target_room.id, auth.uid());
 
     return target_room.id;
 end;
 $$;
 
-revoke execute on function join_room(uuid, uuid, text) from public, anon;
-grant execute on function join_room(uuid, uuid, text) to authenticated;
+revoke execute on function join_room(uuid, text) from public, anon;
+grant execute on function join_room(uuid, text) to authenticated;
 
 -- Creates the profile when a player registers in the app (the username comes from signUp options.data).
 -- Users added by hand in the Dashboard have no username, so they are skipped and seed.sql adds their profiles.

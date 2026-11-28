@@ -24,7 +24,6 @@ import Spinner from '../components/common/Spinner';
 
 import friends from '../data/friends';
 
-import useAuthContext from '../contexts/auth-context/useAuthContext';
 import useProfileContext from '../contexts/profile-context/useProfileContext';
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
@@ -39,7 +38,6 @@ import { colors, fonts } from '../styles/theme';
 const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
 
 export default function RoomsScreen({ navigation }) {
-    const { user } = useAuthContext();
     const { profile } = useProfileContext();
     const { rooms, players, isLoading, error, reloadData } = useRoomsContext();
     const [selectedFilter, setSelectedFilter] = useState('all');
@@ -177,7 +175,7 @@ export default function RoomsScreen({ navigation }) {
         setJoiningRoomId(room.id);
 
         try {
-            await joinRoom(room.id, user.id);
+            await joinRoom(room.id);
             await reloadData();
             setDetailsRoom(null);
             navigation.navigate('WaitingRoom', { roomId: room.id });
@@ -199,7 +197,7 @@ export default function RoomsScreen({ navigation }) {
         setIsJoining(true);
 
         try {
-            const joinedRoomId = await joinRoomByCode(code, user.id, roomId);
+            const joinedRoomId = await joinRoomByCode(code, roomId);
             await reloadData();
             setIsSearchVisible(false);
             setDetailsRoom(null);

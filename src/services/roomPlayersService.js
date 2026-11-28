@@ -62,9 +62,9 @@ export async function updateRoomPlayerReady(profileId, isReady) {
     }
 }
 
-export async function joinRoom(roomId, profileId) {
+export async function joinRoom(roomId) {
     const { data, error } = await supabase
-        .rpc('join_room', { p_profile_id: profileId, p_room_id: roomId });
+        .rpc('join_room', { p_room_id: roomId });
 
     if (error) {
         throw error;
@@ -73,9 +73,9 @@ export async function joinRoom(roomId, profileId) {
     return data;
 }
 
-export async function joinRoomByCode(code, profileId, roomId) {
+export async function joinRoomByCode(code, roomId) {
     const { data, error } = await supabase
-        .rpc('join_room', { p_profile_id: profileId, p_room_id: roomId, p_code: code });
+        .rpc('join_room', { p_room_id: roomId, p_code: code });
 
     if (error) {
         throw error;
