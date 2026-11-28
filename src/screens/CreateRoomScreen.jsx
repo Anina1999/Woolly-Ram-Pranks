@@ -14,11 +14,11 @@ import SceneBackground from '../components/common/SceneBackground';
 import ToggleSwitch from '../components/common/ToggleSwitch';
 
 import newRoom from '../data/newRoom';
-import profile from '../data/profile';
 
+import useAuthContext from '../contexts/auth-context/useAuthContext';
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
-import { createRoom, getProfileByUsername } from '../services';
+import { createRoom } from '../services';
 
 import { colors, fonts } from '../styles/theme';
 
@@ -27,6 +27,7 @@ const MAX_NAME_LENGTH = 24;
 const LEAVE_ROOM_MESSAGE = 'Leave your room first';
 
 export default function CreateRoomScreen({ navigation }) {
+    const { user } = useAuthContext();
     const { players, reloadData } = useRoomsContext();
     const [roomName, setRoomName] = useState('');
     const [isSubmitted, setIsSubmitted] = useState(false);
@@ -63,13 +64,12 @@ export default function CreateRoomScreen({ navigation }) {
         setIsSubmitting(true);
 
         try {
-            const host = await getProfileByUsername(profile.name);
             const createdRoom = await createRoom({
                 name: roomName.trim(),
                 maxPlayers: maxPlayers,
                 difficulty: difficulty,
                 isPrivate: isPrivate,
-                hostId: host.id,
+                hostId: user.id,
             });
 
             await reloadData();

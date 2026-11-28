@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import profile from '../data/profile';
-
 import { getPlayers, getRooms } from '../services';
 
-export default function useRoomsData() {
+export default function useRoomsData(userId) {
     const [rooms, setRooms] = useState([]);
     const [players, setPlayers] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +23,7 @@ export default function useRoomsData() {
                     ...player,
                     host: isHost,
                     ready: isHost || player.ready,
-                    you: player.name === profile.name,
+                    you: player.profileId === userId,
                 };
             }));
         } catch (loadError) {
@@ -36,8 +34,14 @@ export default function useRoomsData() {
     };
 
     useEffect(() => {
-        reloadData();
-    }, []);
+        if (userId) {
+            reloadData();
+        } else {
+            setRooms([]);
+            setPlayers([]);
+            setError(null);
+        }
+    }, [userId]);
 
     return { rooms, players, isLoading, error, reloadData };
 }

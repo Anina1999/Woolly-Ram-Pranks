@@ -23,11 +23,12 @@ import SearchIcon from '../components/icons/SearchIcon';
 import Spinner from '../components/common/Spinner';
 
 import friends from '../data/friends';
-import profile from '../data/profile';
 
+import useAuthContext from '../contexts/auth-context/useAuthContext';
+import useProfileContext from '../contexts/profile-context/useProfileContext';
 import useRoomsContext from '../contexts/rooms-context/useRoomsContext';
 
-import { getProfileByUsername, joinRoom, joinRoomByCode } from '../services';
+import { joinRoom, joinRoomByCode } from '../services';
 
 import getDifficulty from '../utils/getDifficulty';
 import getJoinErrorText from '../utils/getJoinErrorText';
@@ -38,6 +39,8 @@ import { colors, fonts } from '../styles/theme';
 const SKELETON_OPACITIES = [1, 0.85, 0.7, 0.55, 0.4];
 
 export default function RoomsScreen({ navigation }) {
+    const { user } = useAuthContext();
+    const { profile } = useProfileContext();
     const { rooms, players, isLoading, error, reloadData } = useRoomsContext();
     const [selectedFilter, setSelectedFilter] = useState('all');
     const [blockedRoom, setBlockedRoom] = useState(null);
@@ -174,8 +177,7 @@ export default function RoomsScreen({ navigation }) {
         setJoiningRoomId(room.id);
 
         try {
-            const player = await getProfileByUsername(profile.name);
-            await joinRoom(room.id, player.id);
+            await joinRoom(room.id, user.id);
             await reloadData();
             setDetailsRoom(null);
             navigation.navigate('WaitingRoom', { roomId: room.id });
@@ -197,8 +199,7 @@ export default function RoomsScreen({ navigation }) {
         setIsJoining(true);
 
         try {
-            const player = await getProfileByUsername(profile.name);
-            const joinedRoomId = await joinRoomByCode(code, player.id, roomId);
+            const joinedRoomId = await joinRoomByCode(code, user.id, roomId);
             await reloadData();
             setIsSearchVisible(false);
             setDetailsRoom(null);
