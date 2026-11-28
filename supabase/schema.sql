@@ -68,38 +68,59 @@ create policy "Everyone can read room players"
     to anon, authenticated
     using (true);
 
--- Temporary write rights only for logged-in players (anon can only read), tightened later with auth.uid()
+-- Write rights only for logged-in players (anon can only read), and only on their own rows.
+-- auth.uid() is the logged-in player; it is wrapped in select so Postgres runs it once per query, not once per row.
 grant insert, delete on rooms to authenticated;
 grant update (host_id, is_private, max_players, difficulty) on rooms to authenticated;
 grant insert, delete on room_players to authenticated;
 grant update (is_ready) on room_players to authenticated;
 
-create policy "Temporary: logged-in players can create rooms"
+create policy "Players can create rooms they host"
     on rooms for insert
     to authenticated
-    with check (true);
+    with check (host_id = (select auth.uid()));
 
-create policy "Temporary: logged-in players can delete rooms"
+create policy "Hosts can delete their rooms"
     on rooms for delete
     to authenticated
-    using (true);
+    using (host_id = (select auth.uid()));
 
--- Only the host is added directly (Create room), everyone else joins with join_room
-create policy "Temporary: logged-in players can add the host of a room"
+-- One update policy for the host and the room settings (policies are joined with OR), only the host can use it.
+-- The new host must be a player of the room and max players can't go below the player count.
+create policy "Hosts can update their rooms"
+    on rooms for update
+    to authenticated
+    using (host_id = (select auth.uid()))
+    with check (
+        exists (
+            select 1 from room_players
+            where room_players.room_id = rooms.id and room_players.profile_id = rooms.host_id
+        )
+        and (select count(*) from room_players where room_players.room_id = rooms.id) <= rooms.max_players
+    );
+
+-- Only the host adds themselves (Create room), everyone else joins with join_room
+create policy "Hosts can add themselves to their room"
     on room_players for insert
     to authenticated
-    with check (exists (select 1 from rooms where rooms.id = room_id and rooms.host_id = profile_id));
+    with check (
+        room_players.profile_id = (select auth.uid())
+        and exists (
+            select 1 from rooms
+            where rooms.id = room_players.room_id and rooms.host_id = room_players.profile_id
+        )
+    );
 
-create policy "Temporary: logged-in players can remove room players"
+create policy "Players can leave their room"
     on room_players for delete
     to authenticated
-    using (true);
+    using (profile_id = (select auth.uid()));
 
--- Only a guest's Ready, and only while the room is waiting (the host's is_ready is not used)
-create policy "Temporary: logged-in players can change ready"
+-- Only my own Ready, only as a guest and only while the room is waiting (the host's is_ready is not used)
+create policy "Players can change their own ready"
     on room_players for update
     to authenticated
-    using (true)
+    using (profile_id = (select auth.uid()))
     with check (
         exists (
             select 1 from rooms
@@ -107,20 +128,6 @@ create policy "Temporary: logged-in players can change ready"
                 and rooms.status = 'WAITING'
                 and rooms.host_id <> room_players.profile_id
         )
-    );
-
--- One update policy for the host and the room settings (policies are joined with OR).
--- The host must be a player of the room and max players can't go below the player count.
-create policy "Temporary: logged-in players can update a room"
-    on rooms for update
-    to authenticated
-    using (true)
-    with check (
-        exists (
-            select 1 from room_players
-            where room_players.room_id = rooms.id and room_players.profile_id = rooms.host_id
-        )
-        and (select count(*) from room_players where room_players.room_id = rooms.id) <= rooms.max_players
     );
 
 -- Joins a room by id (public rooms) or by code (any room; with p_room_id the code must be that room's) and returns the room id.
